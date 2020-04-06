@@ -22,8 +22,6 @@
 	rel="stylesheet">
 
 
-
-
 </head>
 	
 
@@ -71,7 +69,7 @@
 							<div class="row">
 								<div class="col">
 									<input type="text" class="form-control" placeholder="공부방 제목 입력"
-										name="sgTitle" required>
+										name="sgTitle" value="${sg.sgTitle}" required >
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">공부방 제목 입역</div>
 									<input type="text" class="form-control" value="${loginUser.mId}"
@@ -87,13 +85,13 @@
 							<div class="row">
 								<div class="col">
 									<input type="text" id="from" class="form-control"
-										placeholder="시작 날짜 설정" name="sgStartDate" required>
+										placeholder="시작 날짜 설정" name="sgStartDate" value="${sg.sgStartDate}" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">시작 기간 설정</div>
 								</div>
 								<div class="col">
 									<input type="text" id="to" class="form-control"
-										placeholder="종료 날짜 설정" name="sgEndDate" required>
+										placeholder="종료 날짜 설정" name="sgEndDate" value="${sg.sgEndDate}" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">종료 기간 설정</div>
 								</div>
@@ -103,13 +101,13 @@
 							<div class="row">
 								<div class="col">
 									<input type="text" class="form-control" placeholder="지역 입력"
-										name="sgAddr" required>
+										name="sgAddr" value="${sg.sgAddr}" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">지역입력 예) 서울</div>
 								</div>
 								<div class="col">
 									<input type="text" class="form-control" placeholder="장소 입력"
-										name="sgLocation" required>
+										name="sgLocation" value="${sg.sgLocation}" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">장소입력 예) xxx커피집</div>
 								</div>
@@ -119,13 +117,13 @@
 							<div class="row">
 								<div class="col">
 									<input type="number" min="0" class="form-control"
-										placeholder="보증금 입력" name="sgDeposit" required>
+										placeholder="보증금 입력" name="sgDeposit" value="${sg.sgDeposit}" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">인당 보증급 설정</div>
 								</div>
 								<div class="col">
 									<input type="number" min="1" class="form-control"
-										placeholder="모집 인원" name="sgMaxPeople" required>
+										placeholder="모집 인원" name="sgMaxPeople" value="${sg.sgMaxPeople}" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">모집 인원 설정</div>
 								</div>
@@ -134,7 +132,7 @@
 							<div class="row">
 								<div class="col">
 									<input type="text" id="teg" class="form-control"
-										placeholder="검색어 등록" name="sgTag" required>
+										placeholder="검색어 등록" name="sgTag" value="${sg.sgTag}" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">검색어 입력 예) @JAVA</div>
 								</div>
@@ -157,14 +155,14 @@
 				style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
 				<h2>About Study</h2>
 			</div>
-			<textarea id="summernote" name="sgCon"></textarea>
+			<div id="summernote" name="sgCon">${sg.sgCon}</div>
 			<br>
 			<div style="text-align: center; margin-top: 20px;">
 
 				<button type="submit" class="genric-btn danger circle"
-					style="font-size: 13px; margin-right: 10px;">등록</button>
+					style="font-size: 13px; margin-right: 10px;">수정</button>
 				<button type="reset" class="genric-btn danger circle"
-					style="font-size: 13px;">취소</button>
+					style="font-size: 13px;">삭제</button>
 			</div>
 			</form>
 		</div>
@@ -175,6 +173,7 @@
 					placeholder : '스터디 소개를 입력해 주세요',
 					tabsize : 2,
 					height : 600,
+					focus: true,
 					toolbar : [ [ 'style', [ 'style' ] ],
 							[ 'font', [ 'bold', 'underline', 'clear' ] ],
 							[ 'color', [ 'color' ] ],
@@ -182,8 +181,9 @@
 							[ 'table', [ 'table' ] ],
 							[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
 				});
+		
+		
 
-		var markupStr = $('#summernote').summernote('code');
 	</script>
 	
 	
@@ -201,12 +201,6 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
-	
-	
-	
-	
-	
-
 
 	<script>
 		$(function() {

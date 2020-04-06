@@ -127,6 +127,7 @@ public class MemberController {
 			status.setComplete();
 			
 			return "common/main";
+
 		}
 	
 		@RequestMapping("join.me")

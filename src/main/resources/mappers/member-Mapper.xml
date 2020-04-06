@@ -36,6 +36,26 @@
     	SELECT *
     	FROM MEMBER
     	WHERE M_ID=#{mId}
+    	AND M_STATUS = 'Y'
     </select>
     
+    <update id="memberupdate" parameterType="Member">
+    	UPDATE MEMBER
+    	SET M_PWD=#{mPwd},M_NAME=#{mName},M_ADDR=#{mAddr},M_PHONE=#{mPhone},M_EMAIL=#{mEmail},
+    		M_ORGINAL_FILENAME=#{mOrginalfilename},M_RENAME_FILENAME=#{mRenamefilename},
+    		M_UPDATE_DATE=SYSDATE
+    	WHERE M_ID=#{mId}
+    </update>
+    
+    <select id="selectMember" resultMap="memberResultSet">
+    	SELECT *
+    	FROM MEMBER
+    	WHERE M_ID=#{mId}
+    </select>
+    
+    <update id="deleteMember" parameterType="string">
+    	UPDATE MEMBER
+    	SET M_STATUS='N'
+    	WHERE M_ID=#{mId}
+    </update>
 </mapper>

@@ -85,7 +85,7 @@
                            </div>
                         </li>
                         <li class="nav-item dropdown">
-                           <a class="nav-link" href="#">Event</a>
+                           <a class="nav-link" href="elist.go">Event</a>
                         </li>
                        	<li class="nav-item">
                          	<a class="nav-link" href=""></a>
@@ -163,7 +163,7 @@
                       			<a class="nav-link"><label><span style="color:#d64748 !important;">${ loginUser.mName }</span>&nbsp;님</label></a>
                       		</li>
                       		<li class="nav-item">
-	                         	<a class="nav-link" href="myinfo.me">MYPAGE</a>
+	                         	<a class="nav-link" href="myinfo.me?mId=${ sessionScope.loginUser.mId }">MYPAGE</a>
                       		</li>
                       		<li class="nav-item">
 	                         	<a class="nav-link" href="logout.do">LOGOUT</a>

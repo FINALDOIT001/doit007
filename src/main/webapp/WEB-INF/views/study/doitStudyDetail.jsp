@@ -79,8 +79,11 @@
 							<span class="starR"></span>
 						</div>
 						<br>
+						<c:url var="sgUpview" value="sgUpview.go">
+						<c:param name="sgNo" value="${sg.sgNo}"/>
+						</c:url>
 						<button class="genric-btn danger radius btn-block"
-							style="width: 130px;" onclick="location.href='studyInsertSc.go'">스터디 수정</button>
+							style="width: 130px;" onclick="location.href='${sgUpview}'">스터디 수정</button>
 						팀장만 보이는 버튼 / 스터디 가입한 사람일 경우 (스터디 탈퇴) 버튼 나오기
 					</div>
 					<div class="col-md-4 mt-sm-20">
