@@ -85,7 +85,7 @@
                            </div>
                         </li>
                         <li class="nav-item dropdown">
-                           <a class="nav-link" href="#">Event</a>
+                           <a class="nav-link" href="elist.go">Event</a>
                         </li>
                        	<li class="nav-item">
                          	<a class="nav-link" href=""></a>
