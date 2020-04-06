@@ -26,6 +26,9 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	}
 
 
+	/** 페이지 연결 리스트(정호)
+	 *
+	 */
 	@Override
 	public ArrayList<StudyGroup> selectList(PageInfojung pi) {
 		 
@@ -34,6 +37,9 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 
 
 
+	/**스터디 그룹 인설트(정호)
+	 *
+	 */
 	@Override
 	public int sgInsert(StudyGroup sg) {
 		// TODO Auto-generated method stub
@@ -50,9 +56,32 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	}
 
 
+	/**
+	 * 작성자 : 서정도
+	 */
 	@Override
 	public ArrayList<GroupMember> selectGroupMember(int sgNo) {
 		return sgDao.selectGroupMember(sgNo);
+	}
+
+
+	/**스터디 그룹 수정 (정호)
+	 *
+	 */
+	@Override
+	public int sgUpdate(StudyGroup sg) {
+		// TODO Auto-generated method stub
+		return sgDao.sgUpdate(sg);
+	}
+
+
+	/**
+	 *
+	 */
+	@Override
+	public Object sgUpdateView(int sgNo) {
+		
+		return sgDao.sgUpdateView(sgNo);
 	}
 	
 	

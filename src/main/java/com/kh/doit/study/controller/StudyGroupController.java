@@ -28,6 +28,11 @@ public class StudyGroupController {
 	@Autowired
 	private StudyGroupService sgService;
 
+	/**스터디 리스트 불러오기 (정호)
+	 * @param mv
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("sgList.go")
 	public ModelAndView sgList(ModelAndView mv,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
@@ -49,6 +54,12 @@ public class StudyGroupController {
 		return mv;
 	}
 	
+	/** 스터디그룹 인설트(정호)
+	 * @param sg
+	 * @param request
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping("sgInsert.go")
 	public String sgInsert(StudyGroup sg, HttpServletRequest request,
 				@RequestParam(name="sbul", required=false)MultipartFile file) {
@@ -77,7 +88,7 @@ public class StudyGroupController {
 			}
 			
 		}
-		
+		System.out.println(sg);
 		  int result = sgService.sgInsert(sg);
 		  
 		  if(result > 0) {
@@ -89,6 +100,11 @@ public class StudyGroupController {
 	}
 		  
 		  
+	/** 파일 저장 메소드(정호)
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -119,7 +135,72 @@ public class StudyGroupController {
 		return renameFileName;
 	}
 	
+	/**스터티 그룹 수정 뷰 불러오기 (정호)
+	 * @param mv
+	 * @param sgNo
+	 * @return
+	 */
+	@RequestMapping("sgUpview.go")
+	public ModelAndView sgUpdateView(ModelAndView mv, int sgNo) {
+		
+		mv.addObject("sg", sgService.sgUpdateView(sgNo))
+		.setViewName("study/doitStudyUpdateFrom");
+		
+		return mv;
+		
+	}
 	
+	/**스터티 그룹 수정 하기(정호)
+	 * @param mv
+	 * @param sg
+	 * @param request
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping("sgUdate.go")
+	public ModelAndView sgUpdate(ModelAndView mv, StudyGroup sg, HttpServletRequest request, 
+							@RequestParam(name="fileReLoader", required= false)MultipartFile file) {
+		
+		if(file != null && !file.isEmpty()) {
+			if(sg.getSgRenameFileName() != null) {
+				deleteFile(sg.getSgRenameFileName(), request);
+				
+			}
+			String renameFileName = saveFile(file, request);
+			
+			if(renameFileName != null) {
+				sg.setSgOrginalFileName(file.getOriginalFilename());
+				sg.setSgRenameFileName(renameFileName);
+			}
+		}
+		int result = sgService.sgUpdate(sg);
+		
+		if(result>0) {
+			mv.addObject("sgNo", sg.getSgNo())
+			.setViewName("redirect:studyDetail.go");
+		}else {
+			mv.addObject("msg","수정실패");
+		}
+		return mv;
+	}
+	
+	
+	/** 파일 지우기 메소드 (정호)
+	 * @param sgRenameFileName
+	 * @param request
+	 */
+	private void deleteFile(String sgRenameFileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\sgloadFiles";
+		
+		File f = new File(savePath+"\\"+ sgRenameFileName);
+		
+		if(f.exists()) {
+			f.delete();
+		}
+		
+	}
+
 	/**
 	 * 디테일
 	 * 작성자 : 서정도
