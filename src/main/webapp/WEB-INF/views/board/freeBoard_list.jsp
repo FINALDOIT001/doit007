@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
@@ -41,10 +43,11 @@
                 <thead>
                   <tr>
                     <th>번호</th>
-                    <th>작성자</th>
                     <th>제목</th>
+                    <th>작성자</th>
                     <th>작성일</th>
                     <th>조회수</th>
+           
                   </tr>
                 </thead>
                 <c:forEach var="b" items="${ list }">
@@ -66,17 +69,61 @@
                   	<td align="center">${ b.b_writer }</td>
                   	<td align="center">${ b.b_createdate }</td>
                   	<td align="center">${ b.b_count }</td>
-                  	<td align="center">
+                  <%-- 	<td align="center">
                   		<c:if test="${ !empty b.b_org_filename }">
                   			○
                   		</c:if>
                   		<c:if test="${ b.b_org_filename }">
                   			&nbsp;
                          		</c:if>
-                  	</td>
+                  	</td> --%>
                   </tr>
                 </tbody>
                 </c:forEach>
+                
+                <!-- 페이징 -->
+                <tr align="center" height="20">
+					<td colspan="6">
+			
+					<!-- [이전] -->
+					<c:if test="${ pi_h.currentPage eq 1 }">
+						[이전] &nbsp;
+					</c:if>
+					<c:if test="${ pi_h.currentPage ne 1 }">
+						<c:url var="before" value="fblist.go">
+							<c:param name="currentPage" value="${ pi_h.currentPage - 1 }"/>
+						</c:url>
+						<a href="${ before }">[이전]</a> &nbsp;
+					</c:if>
+					
+					<!-- 페이지 -->
+					<c:forEach var="p" begin="${ pi_h.startPage }" end="${ pi_h.endPage }">
+						<c:if test="${ p eq pi_h.currentPage }">
+							${ p }
+						</c:if>
+						
+						<c:if test="${ p ne pi_h.currentPage }">
+							<c:url var="pagination" value="blist.do">
+								<c:param name="currentPage" value="${ p }"/>
+							</c:url>
+							<a href="${ pagination }">${ p }</a> &nbsp;
+						</c:if>
+					</c:forEach>
+				
+					<!-- [다음] -->
+					<c:if test="${ pi_h.currentPage eq pi_h.maxPage }">
+						&nbsp;[다음]
+					</c:if>
+					<c:if test="${ pi_h.currentPage ne pi_h.maxPage }">
+						<c:url var="after" value="fblist.go">
+							<c:param name="currentPage" value="${ pi_h.currentPage + 1 }"/>
+						</c:url> 
+						<a href="${ after }">[다음]</a>
+					</c:if>
+					</td>
+				</tr>
+		                
+                
               </table>
             </div>
             <!-- /.card-body -->
@@ -86,9 +133,15 @@
             <button onclick="location.href='fbInsertForm.go';" class="genric-btn danger circle" style="font-size: 13px;">작성하기</button>
         </div>
     </div>
+    
+    
+    
+    
+    
+    
 
     <!-- 페이징 부분 -->
-    <nav class="col-md-12 blog-pagination justify-content-center d-flex">
+   <!--  <nav class="col-md-12 blog-pagination justify-content-center d-flex">
         <ul class="pagination">
             <li class="page-item">
                 <a href="#" class="page-link" aria-label="Previous">
@@ -110,7 +163,7 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav> -->
     
    </section>
 	<jsp:include page="../common/footer.jsp"/>

@@ -14,6 +14,16 @@
 		<result property="b_count" column="B_COUNT"/>
 	</resultMap>
 	
+	<resultMap type="BoardComment" id="commentResultSet">
+		<id property="bc_no" column="BC_NO"/>
+		<result property="bc_b_no" column="BC_B_NO"/>
+		<result property="mId" column="M_ID"/>
+		<result property="bc_createdate" column="BC_CREATEDATE"/>
+		<result property="bc_modifydate" column="BC_MODIFYDATE"/>
+		<result property="bc_content" column="BC_CON"/>
+		<result property="bc_status" column="BC_STATUS"/>
+	</resultMap>
+	
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM BOARD
@@ -26,5 +36,51 @@
 		WHERE B_STATUS='Y'
 		ORDER BY B_NO DESC
 	</select>
+	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD
+		VALUES(SEQ_BNO.NEXTVAL,#{b_title},#{b_writer},#{b_content},#{b_org_filename},#{b_re_filename},
+				SYSDATE,SYSDATE,DEFAULT,DEFAULT)
+	</insert>
+	
+	<update id="updateCount" parameterType="_int">
+		UPDATE BOARD
+		SET B_COUNT = B_COUNT+1
+		WHERE B_NO=#{b_no}
+	</update>
+	
+	<select id="selectBoard" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD
+		WHERE B_NO=#{b_no}
+		AND B_STATUS='Y'
+	</select>
+	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE BOARD
+		SET B_TITLE=#{b_title},B_CON=#{b_content},B_ORIGINAL_FILENAME=#{b_org_filename},
+			B_RENAME_FILENAME=#{b_re_filename},B_MODIFYDATE=SYSDATE
+		WHERE B_NO=#{b_no}
+	</update>
+	
+	<update id="deleteBoard" parameterType="_int">
+		UPDATE BOARD
+		SET B_STATUS='N'
+		WHERE B_NO=#{b_no}
+	</update>
+	
+	<select id="selectCommentList" resultMap="commentResultSet" parameterType="_int">
+		SELECT *
+		FROM BOARD_COMMENTS
+		WHERE BC_B_NO=#{bc_b_no}
+		AND BC_STATUS='Y'
+		ORDER BY BC_NO DESC
+	</select>
+	
+	<insert id="insertComment" parameterType="BoardComment">
+		INSERT INTO BOARD_COMMENTS VALUES
+		(SEQ_BCNO.NEXTVAL,#{bc_b_no},#{mId},SYSDATE,SYSDATE,#{bc_content},DEFAULT)
+	</insert>
+	
 
 </mapper>
