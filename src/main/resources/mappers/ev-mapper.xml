@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="evMapper">
+
+	<resultMap type="Event" id="eventResultSet">
+		<id property="eNo" column="E_NO"/>
+		<result property="eIntro" column="E_INTRO"/>
+		<result property="eTitle" column="E_TITLE"/>
+		<result property="eCon" column="E_CON"/>
+		<result property="eTag" column="E_TAG"/>
+		<result property="eOriginalFileName" column="E_ORIGINAL_FILENAME"/>
+		<result property="eRenameFileName" column="E_RENAME_FILENAME"/>
+		<result property="eWriter" column="E_WRITER"/>
+		<result property="eWriterNo" column="E_WRITER_NO"/>
+		<result property="eType" column="E_TYPE"/>
+		<result property="eDate" column="E_DATE"/>
+		<result property="eMonth" column="E_MONTH"/>
+		<result property="eDays" column="E_DAYS"/>
+		<result property="eStatus" column="E_STATUS"/>
+	</resultMap>
+
+	<select id="getListCount" parameterType="_int" resultType="_int">
+		SELECT	COUNT(*)
+		FROM	EVENT
+		WHERE	1=1
+		AND		E_STATUS='Y'
+	</select>
+	
+	<select id="getEventList" parameterType="_int" resultMap="eventResultSet">
+		SELECT	*
+		FROM	EVENT
+		WHERE	1=1
+		AND		E_STATUS='Y'
+	</select>
+
+
+</mapper>

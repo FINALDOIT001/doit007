@@ -266,7 +266,7 @@ function getCommentList(){
                     /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
                     html1 += "</div>";
                     html1 += "<h5>";
-                    html1 += "<a href='#'>"+data[i].bscWriter+"</a> ";
+                    html1 += "<a href=''>"+data[i].bscWriter+"</a> ";
                     html1 += "</h5>";
                     html1 += "<p class='date'>"+data[i].bscDate+"</p><span class='kwon-span202' style='text-align:'>삭제<input type='hidden'></span>";
                     html1 += "</div>";
