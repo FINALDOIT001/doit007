@@ -5,17 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MESSAGE</title>
 </head>
 <body>
 		
-		<nav>
-			<jsp:include page="../message/MsHeader.jsp" />
-		</nav>
+	<jsp:include page="../message/MsHeader.jsp" />
+	
+	<script>
+		var strWidth = $('#container').outerWidth() + (window.outerWidth - window.innerWidth);
+		var strHeight = $('#container').outerHeight() + (window.outerHeight - window.innerHeight);	
 		
-		<div>
-			${ sessionScope.loginUser.mno }	
-		</div>
+		$(window).on('load',function(){
+			window.resizeTo(strWidth, strHeight+900);
+		});
+		
+	</script>
 	
 </body>
 </html>

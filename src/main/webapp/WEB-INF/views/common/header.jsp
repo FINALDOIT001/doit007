@@ -107,7 +107,7 @@
                       	
  							<li class="nav-item dropdown no-arrow mx-1">
 								<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-envelope fa-fw" onclick="openMessage();"></i>
+									<i class="fas fa-envelope fa-fw" id="goMS"></i>
 									<span class="badge badge-danger badge-counter">4+</span>
 								</a>
 								
@@ -213,9 +213,9 @@
 	<script src="${contextPath}/resources/vendor_inseok/jquery/jquery.min.js"></script>
 	<script>
 		/* 쪽지 새창 띄우기 */
-		function openMessage(){
-			window.open("new.ms", "MESSAGE", "width=900px, height=900px, toolbar=no, menubar=no, scrollbars=no, resizable=yes")
-		}
+		$('#goMS').click(function(){
+			window.open("new.ms", "MESSAGE", "width=900, height=900, scrollbars=no;")
+		});w
 	</script>
    
 </body>
