@@ -9,6 +9,8 @@
 		<id property="sgNo" column="SG_NO"/>
 		<result property="sgTitle" column="SG_TITLE"/>
 		<result property="sgWriter" column="SG_WRITER"/>
+		<result property="sgWriterNo" column="SG_WRITER_NO"/>
+		<result property="sgNowPeople" column="SG_NOWPEOPLE"/>
 		<result property="sgMaxPeople" column="SG_MAXPEOPLE"/>
 		<result property="sgAddr" column="SG_ADDR" />
 		<result property="sgDeposit" column="SG_DEPOSIT"/>
@@ -23,6 +25,7 @@
 		<result property="sgTag" column="SG_TAG"/>
 		<result property="sgPayment" column="SG_PAYMENT_YN"/>
 		<result property="sgStatus" column="SG_STATUS_YN"/>
+		<result property="sgConfirm" column="SG_CONFIRM_YN"/>
 	</resultMap>
 	
 	<resultMap id="groupMemberResultSet" type="GroupMember">
@@ -46,6 +49,11 @@
    		<result property="mUserroles" column="M_USERROLES" />
    		<result property="mStatus" column="M_STATUS" />
     </resultMap>
+    
+    
+    
+   
+	
 	
 	<select id="getlistCount" resultType="_int">
 	SELECT COUNT(*)
@@ -53,6 +61,16 @@
 	WHERE SG_STATUS_YN='Y'
 	
 	</select>
+	
+	
+	 <insert id="sgInsert" parameterType="StudyGroup">
+	
+	INSERT INTO STUDY_GROUP
+	VALUES(SEQ_SGNO.NEXTVAL,#{sgTitle},#{sgWriter},#{sgWriterNo},1,#{sgMaxPeople},#{sgAddr},#{sgDeposit},SYSDATE,
+	#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOrginalFileName},#{sgRenameFileName},
+	#{sgTag},DEFAULT,DEFAULT,DEFAULT)
+	
+	</insert>
 	
 	<select id="selectList" resultMap="studyGroupResultSet">
 	SELECT * FROM STUDY_GROUP
@@ -62,28 +80,21 @@
 	</select>
 	
 	
-		<select id="selectSg" resultMap="studyGroupResultSet">
+	<select id="selectSg" resultMap="studyGroupResultSet">
 		SELECT *
 		FROM STUDY_GROUP
 		WHERE SG_NO = #{sgNo}
 	</select>
 	
-	<insert id="sgInsert" parameterType="StudyGroup">
-	
-	INSERT INTO STUDY_GROUP
-	VALUES(SEQ_SGNO.NEXTVAL,#{sgTitle},#{sgWriter},#{sgMaxPeople},#{sgAddr},#{sgDeposit},SYSDATE,
-	#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOrginalFileName},#{sgRenameFileName},
-	#{sgTag},DEFAULT,DEFAULT)
-	
-	</insert>
 	
 	
 	<select id="groupMember" resultMap="groupMemberResultSet">
-		SELECT M.M_NAME, M.M_ORGINAL_FILENAME
+		SELECT M.M_NAME, M.M_ORGINAL_FILENAME, M.M_NO
 		FROM GROUP_MEMBER GM
 		JOIN MEMBER M ON(M.M_NO = GM.GM_M_NO)
 		WHERE GM_SG_NO = #{sgNo} 
 	</select>
+	
 
 
 

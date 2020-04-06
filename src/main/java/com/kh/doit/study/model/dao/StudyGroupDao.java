@@ -58,4 +58,14 @@ public class StudyGroupDao {
 		return (ArrayList)sqlSession.selectList("studyGroupMapper.groupMember",sgNo);
 	}
 
+	public int sgUpdate(StudyGroup sg) {
+		
+		return sqlSession.update("studyGroupMapper.sgUpdate", sg);
+	}
+
+	public Object sgUpdateView(int sgNo) {
+		
+		return sqlSession.selectOne("studyGroupMapper.selectSg",sgNo);
+	}
+
 }

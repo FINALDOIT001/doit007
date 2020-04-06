@@ -13,13 +13,13 @@ public interface StudyGroupService {
 	 */
 	int getlistCount();
 
-	/**학생 그룹 리스트 조회
+	/**학생 그룹 리스트 조회(정호)
 	 * @param pi
 	 * @return
 	 */
 	ArrayList<StudyGroup> selectList(PageInfojung pi);
 
-	/**학생 그룹 리스트 인설트
+	/**학생 그룹 리스트 인설트(정호)
 	 * @param sg
 	 * @return
 	 */
@@ -40,6 +40,20 @@ public interface StudyGroupService {
 	 * @return
 	 */ 
 	ArrayList<GroupMember> selectGroupMember(int sgNo);
+
+	
+	/** 스터디그룹 수정(정호)
+	 * @param sg
+	 * @return
+	 */
+	int sgUpdate(StudyGroup sg);
+
+	/**스터디 그룹 수정 뷰(정호)
+	 * @param sgNo
+	 * @return
+	 */
+	Object sgUpdateView(int sgNo);
+	
 
 	
 	
