@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+    
+   	<resultMap id="memberResultSet" type="Member">
+   		<id property="mno" column="M_NO"/>
+   		<result property="mId" column="M_ID"/>
+   		<result property="mPwd" column="M_PWD" />
+   		<result property="mName" column="M_NAME" />
+   		<result property="mAddr" column="M_ADDR" />
+   		<result property="mPhone" column="M_PHONE" />
+   		<result property="mEmail" column="M_EMAIL" />
+   		<result property="mOrginalfilename" column="M_ORGINAL_FILENAME" />
+   		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
+   		<result property="mEnrolldate" column="M_ENROLL_DATE" />
+   		<result property="mUpdatedate" column="M_UPDATE_DATE" />
+   		<result property="mUserroles" column="M_USERROLES" />
+   		<result property="mStatus" column="M_STATUS" />
+    </resultMap>
+    <select id="idCheck" parameterType="string" resultType="_int">
+    	SELECT COUNT(*)
+    	FROM MEMBER
+    	WHERE M_ID=#{mId}
+    </select> 
+    
+
+    <insert id="insertMember" parameterType="Member">
+    	INSERT INTO MEMBER 
+    	VALUES (SEQ_MNO.NEXTVAL,#{mId}, #{mPwd}, #{mName}, #{mAddr}, #{mPhone}, 
+    			#{mEmail}, default, default, SYSDATE, SYSDATE, default, default)
+    </insert>
+    
+    <select id="memberLogin" parameterType="Member" resultMap="memberResultSet">
+    	SELECT *
+    	FROM MEMBER
+    	WHERE M_ID=#{mId}
+    </select>
+    
+</mapper>

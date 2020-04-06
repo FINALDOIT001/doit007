@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="msMapper">
+    
+   	<resultMap id="BSResultSet" type="BookShare">
+		<id property="bsNo" column="BS_NO"/>
+		<result property="bsLocation" column="BS_LOCATION"/>
+		<result property="bsCategory" column="BS_CATEGORY"/>
+		<result property="bsTitle" column="BS_TITLE"/>
+		<result property="bsCon" column="BS_CON"/>
+		<result property="bsOriginalFileName" column="BS_ORGINAL_FILENAME"/>
+		<result property="bsRenameFileName" column="BS_RENAME_FILENAME"/>
+		<result property="bsWriter" column="BS_WRITER"/>
+		<result property="bsWriterNo" column="BS_WRITER_NO"/>
+		<result property="bsState" column="BS_STATE"/>
+		<result property="bsDate" column="BS_DATE"/>
+		<result property="bsType" column="BS_TYPE"/>
+		<result property="bsStatus" column="BS_STATUS"/>
+    </resultMap>
+    
+    <resultMap id="BSReplyResultSet" type="BookShareReply">
+    	<id property="bscNo" column="BSC_NO"/>
+    	<result property="bscBsNo" column="BSC_BS_NO"/>
+    	<result property="bscWriter" column="BSC_WRITER"/>
+    	<result property="bscDate" column="BSC_DATE"/>
+    	<result property="bscCon" column="BSC_CON"/>
+    	<result property="bscStatus" column="BSC_STATUS"/>
+    </resultMap>
+    
+    <select id="selectBSList" resultMap="BSResultSet">
+    	SELECT	*
+   		FROM	BOOK_SHARE
+   		WHERE	1=1
+   		AND		BS_STATUS='Y'
+    </select>
+    
+    <select id="selectOne" parameterType="_int" resultMap="BSResultSet">
+    	SELECT	*
+    	FROM	BOOK_SHARE
+    	WHERE	1=1
+    	AND		BS_NO=#{bsNo}
+    	AND		BS_STATUS='Y'
+    </select>
+    
+    <select id="selectBSReply" resultMap="BSReplyResultSet">
+    	SELECT	*
+ 		FROM	BOOK_SHARE_COMMENTS
+ 		WHERE	1=1
+ 		AND		BSC_BS_NO=#{bsNo}
+ 		AND		BSC_STATUS='Y'
+    </select>
+    
+    <insert id="insertReply" parameterType="BookShareReply">
+    	INSERT INTO BOOK_SHARE_COMMENTS VALUES(
+    		SEQ_BSCNO.NEXTVAL
+    		,#{bscBsNo}
+    		,#{bscWriter}
+    		,#{bscWriterNo}
+    		,SYSDATE
+    		,#{bscCon}
+    		,DEFAULT
+    	)
+    </insert>
+    
+    <insert id="insertBookShare" parameterType="BookShare">
+		INSERT INTO BOOK_SHARE VALUES(
+			SEQ_BSNO.NEXTVAL
+			,#{bsLocation}
+			,#{bsCategory}
+			,#{bsTitle}
+			,#{bsCon}
+			,#{bsOriginalFileName}
+			,#{bsRenameFileName}
+			,#{bsWriter}
+			,#{bsWriterNo}
+			,'나눔중'
+			,SYSDATE
+			,NULL
+			,DEFAULT
+		)    
+    </insert>
+    
+    <update id="deleteBookShare" parameterType="_int">
+    	UPDATE	BOOK_SHARE
+    	SET		BS_STATUS='N'
+    	WHERE	1=1
+    	AND		BS_NO=#{bsNo}
+    </update>
+    
+    <update id="endBookShare" parameterType="_int">
+    	UPDATE	BOOK_SHARE
+    	SET		BS_STATE='나눔완료'
+    	WHERE	1=1
+    	AND		BS_NO=#{bsNo}
+    </update>
+    
+    <update id="updateBookShare" parameterType="BookShare">
+    	UPDATE 	BOOK_SHARE
+    	SET		BS_LOCATION=#{bsLocation}
+    			,BS_CATEGORY=#{bsCategory}
+    			,BS_TITLE=#{bsTitle}
+    			,BS_CON=#{bsCon}
+    			,BS_ORGINAL_FILENAME=#{bsOriginalFileName}
+    			,BS_RENAME_FILENAME=#{bsRenameFileName}
+    	WHERE	1=1
+    	AND		BS_NO=#{bsNo}
+    </update>
+    
+    
+</mapper>

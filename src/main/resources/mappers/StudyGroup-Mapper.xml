@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="studyGroupMapper">
+
+	<resultMap id="studyGroupResultSet" type="StudyGroup">
+		<id property="sgNo" column="SG_NO"/>
+		<result property="sgTitle" column="SG_TITLE"/>
+		<result property="sgWriter" column="SG_WRITER"/>
+		<result property="sgMaxPeople" column="SG_MAXPEOPLE"/>
+		<result property="sgAddr" column="SG_ADDR" />
+		<result property="sgDeposit" column="SG_DEPOSIT"/>
+		<result property="sgCreateDate" column="SG_CREATE_DATE"/>
+		<result property="sgStartDate" column="SG_START_DATE" />
+		<result property="sgEndDate" column="SG_END_DATE"/>
+		<result property="sgLocation" column="SG_LOCATION" />
+		<result property="sgJoin" column="SG_JOIN_YN" />
+		<result property="sgCon" column="SG_CON" />
+		<result property="sgOrginalFileName" column="SG_ORGINAL_FILENAME" />
+		<result property="sgRenameFileName" column="SG_RENAME_FILENAME" />
+		<result property="sgTag" column="SG_TAG"/>
+		<result property="sgPayment" column="SG_PAYMENT_YN"/>
+		<result property="sgStatus" column="SG_STATUS_YN"/>
+	</resultMap>
+	
+	<resultMap id="groupMemberResultSet" type="GroupMember">
+		<result property="gm_sgNo" column="GM_SG_NO"/>
+		<result property="gm_mNo" column="GM_M_NO"/>
+		<collection property="memberList" javaType="java.util.ArrayList" resultMap="memberResultSet"/>
+	</resultMap>
+	
+	<resultMap id="memberResultSet" type="Member">
+   		<id property="mno" column="M_NO"/>
+   		<result property="mId" column="M_ID"/>
+   		<result property="mPwd" column="M_PWD" />
+   		<result property="mName" column="M_NAME" />
+   		<result property="mAddr" column="M_ADDR" />
+   		<result property="mPhone" column="M_PHONE" />
+   		<result property="mEmail" column="M_EMAIL" />
+   		<result property="mOrginalfilename" column="M_ORGINAL_FILENAME" />
+   		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
+   		<result property="mEnrolldate" column="M_ENROLL_DATE" />
+   		<result property="mUpdatedate" column="M_UPDATE_DATE" />
+   		<result property="mUserroles" column="M_USERROLES" />
+   		<result property="mStatus" column="M_STATUS" />
+    </resultMap>
+	
+	<select id="getlistCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM STUDY_GROUP
+	WHERE SG_STATUS_YN='Y'
+	
+	</select>
+	
+	<select id="selectList" resultMap="studyGroupResultSet">
+	SELECT * FROM STUDY_GROUP
+	WHERE SG_STATUS_YN='Y'
+	ORDER BY SG_NO DESC
+	
+	</select>
+	
+	
+		<select id="selectSg" resultMap="studyGroupResultSet">
+		SELECT *
+		FROM STUDY_GROUP
+		WHERE SG_NO = #{sgNo}
+	</select>
+	
+	<insert id="sgInsert" parameterType="StudyGroup">
+	
+	INSERT INTO STUDY_GROUP
+	VALUES(SEQ_SGNO.NEXTVAL,#{sgTitle},#{sgWriter},#{sgMaxPeople},#{sgAddr},#{sgDeposit},SYSDATE,
+	#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOrginalFileName},#{sgRenameFileName},
+	#{sgTag},DEFAULT,DEFAULT)
+	
+	</insert>
+	
+	
+	<select id="groupMember" resultMap="groupMemberResultSet">
+		SELECT M.M_NAME, M.M_ORGINAL_FILENAME
+		FROM GROUP_MEMBER GM
+		JOIN MEMBER M ON(M.M_NO = GM.GM_M_NO)
+		WHERE GM_SG_NO = #{sgNo} 
+	</select>
+
+
+
+
+</mapper>
+    
+    

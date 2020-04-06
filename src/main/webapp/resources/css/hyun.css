@@ -1,0 +1,153 @@
+body {font-family: 'Noto Sans KR', sans-serif;}
+
+.blog_bg_notice {
+    background-image: url("../img/notice.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+.blog_bg_freeboard {
+	background-image: url("../img/free.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+  /* NOTICE CSS */
+.top_b{
+	width: 1340px;
+	margin: 0 auto;	
+	margin-top: 10px;
+}
+
+.subM{
+	margin-top: -4px;
+}
+
+.mp_menu{
+	text-align: center;
+	border: none;
+	border-bottom: 2px solid #f4f4f4;
+	cursor: pointer;
+}
+
+.mp_menu:hover{
+	background-color: #d38484;
+}
+
+#smenu{
+	background-color: #d38484;
+	
+}
+
+.mp_menu2{
+	color: #5b5b5b;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.mp_menu2:hover{
+	color: #fff;
+}
+
+#connav {
+	float: right;
+	margin-top: 50px;
+	margin-bottom: 20px;
+	
+}
+
+.connav_text a {
+	text-decoration: none;
+	color: #666;
+	font-size: 12px;
+	cursor: default;
+}
+
+.cur_page {
+	padding-left: 5px;
+	padding-right: 5px;
+
+}
+
+.contain{
+	margin-left: 28px;
+	margin-right: 28px;
+}
+
+
+	
+
+/********** 콘텐츠 항목 **********/
+
+
+.title {
+	clear: both;
+	padding-left: 3px;
+	margin-bottom: 9px;
+	font-size: 18px;
+	color: #404040;
+	font-weight: bold;
+	
+}
+
+.btLine{
+	border-top: 2px solid #5b5b5b;
+}
+
+th {
+	font-size: 16px;
+	color: #5b5b5b;
+	text-align: center;
+	background-color: #f9f9f9;
+	border-bottom: 1px solid #ccc;	
+}
+
+td {
+	font-size: 14px;
+	color: #5b5b5b;
+	text-align: left;
+	padding-left: 15px;
+	border-bottom: 1px solid #ccc;
+
+}
+
+.notice_content {
+	width: 1241px;
+	height: 200px;
+	border: none;
+	font-size: 14px;
+	color: #5b5b5b;
+	text-align: left;
+	padding-top: 15px;
+	word-wrap: break-word;
+	overflow-x: hidden;
+}
+
+.freeboard_content {
+	width: 1241px;
+	height: 200px;
+	border: none;
+	font-size: 14px;
+	color: #5b5b5b;
+	text-align: left;
+	padding-top: 15px;
+	word-wrap: break-word;
+	overflow-x: hidden;
+}
+
+.hyun_table01 td {
+	text-align: center;
+}
+
+.comments-area {
+	padding: 20px 0;
+}
+
+.comments-area .comment-list {
+	padding-bottom: 0px;
+  }
+
+.comment-form {
+	border-top: 1px solid #eee;
+ }  

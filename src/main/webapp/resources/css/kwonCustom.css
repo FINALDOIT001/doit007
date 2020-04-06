@@ -1,0 +1,110 @@
+.kwon-thead1 {
+    background-color: rgb(243, 243, 243);
+}
+.kwon-thead101 {
+    background-color: lightgray;
+}
+.kwon-tr1 {
+    max-height: 5%;
+}
+
+/* 게시판에서 텍스트가 길어질 경우 ... 으로 줄어들게 해준다 */
+.td1, .th1 {
+    text-overflow:ellipsis; overflow:hidden; white-space:nowrap;
+    max-width:50px;
+}
+
+.tdtitle1 {
+	color: #5b5b5b !important;
+}
+
+.tdtitle1:hover {
+    color:red !important;
+    font-weight: 900 !important;
+}
+
+.kwon-table1 {
+    margin-right: 5%;
+    margin-left: 5%;
+    padding-left: 20px;
+    width: 1000px;
+    border-collapse: collapse;
+    border-radius: 5cm;
+}
+.th02 {
+    width: auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: right;
+    padding-right: 30px;
+}
+.th03 {
+    width: 200px;
+}
+#kwon-submit01, #kwon-reset01, #kwon-btn02, #kwon-back01, #kwon-back02 {
+    margin-right: 10px;
+}
+
+.td-img01 {
+    padding: 20px;
+    text-align: center;
+}
+.img01 {
+    max-height: 400px;
+    max-width: auto;
+}
+
+.tdin02 {
+    width: 500px;
+}
+#test1 {
+    border: black solid 1px;
+}
+/* 필터링 (검색) */
+/* div.dataTables_filter {
+    text-align : left !important;
+} */
+
+/* 표시 건수수 설정 */
+/* div.dataTables_length {
+    text-align : right !important;
+} */
+#kwon-inst01 {
+    text-align:right;
+    margin-bottom: 20px;
+}
+/* summernote */
+.note-frame {
+    margin: 5%;
+    margin-top: 1%;
+    width: 1000px;
+}
+
+.kwon-btn101 {
+    margin:0 auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.kwon-area101 .kwon-area102{
+    width:800px;
+    height: 400px;
+}
+.kwon-btn102 {
+    background-color: peru !important;
+    border-color: peru !important;
+}
+
+.kwon-section111 {
+    padding: 50px;
+    padding-bottom: 100px;
+    border-bottom: 1px solid gray;
+}
+.kwon-span-prev001 {
+    float: left;
+}
+
+.kwon-span-next001 {
+    float: right;
+}

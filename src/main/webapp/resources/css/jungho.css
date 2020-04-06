@@ -1,0 +1,85 @@
+  /* insert from start */
+
+
+.filebox label {
+    display: inline-block;
+    background-image: url("../img/codedisply.jpg");
+    cursor: pointer;
+    border: 1px solid black; 
+    width:100%;
+    height:500px;
+}
+ 
+.filebox input[type="file"] {  /* 파일 필드 숨기기 */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+   
+}
+
+  .filebox img {
+    width: 100%;
+    height: 498px;
+  }
+  .sizebtn{
+    width: 200px;
+  }
+
+  /* insert from end */
+
+
+   /*Schedule start*/
+  /*detail start*/
+  .subject img{
+    position: absolute; top:0; left: 0;
+    width: 100%;
+    height: 100%;
+   }
+
+   .checkuserdiv{
+       width: 70px;
+       height: 70px ;
+       text-align: center;
+       
+   }
+
+
+    .checkuser li {
+margin: 5px;
+margin-bottom: 30px;
+padding: 0 10px 0 0;
+border : 1px;
+float: left;
+}
+
+ .checkuserscroll{
+    overflow:auto; 
+    width:85%; 
+    height:320px;
+    margin-left: 45px;
+ }
+
+ /*detail end*/
+ /*Schedule end*/
+
+
+.addressmagin{
+  margin-bottom: 5px;
+}
+
+.nav-item a {
+  color: black;
+  text-decoration: none;
+  background-color: transparent;
+ }
+
+ .div_border {
+  position: relative;
+  margin-top: 1.5rem;
+  border: 0.0625rem solid #E9ECF3;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  padding: 1.5rem;
+ }

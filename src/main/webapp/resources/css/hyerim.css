@@ -1,0 +1,155 @@
+/* line 563, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_blog.scss */
+.blog_right_sidebar_h .widget_title {
+    background: white; 
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+  
+  /* line 568, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_blog.scss */
+  .blog_right_sidebar_h .widget_title::after {
+    content: "";
+    display: block;
+    padding-top: 15px;
+    border-bottom: 1px solid #f0e9ff;
+  }
+  
+  /* line 576, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_blog.scss */
+  .blog_right_sidebar_h .single_sidebar_widget {
+  }
+  
+  /* line 585, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_blog.scss */
+  .blog_right_sidebar_h .search_widget .form-control {
+    height: 50px;
+    border-color: #f0e9ff;
+    font-size: 13px;
+    color: #999999;
+    padding-left: 20px;
+    border-radius: 0;
+    border-right: 0;
+  }
+  
+  /* line 594, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_blog.scss */
+  .blog_right_sidebar_h .search_widget .form-control:focus {
+    border-color: #f0e9ff;
+    outline: 0;
+    box-shadow: none;
+  }
+  
+  /* line 603, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_blog.scss */
+  .blog_right_sidebar_h .search_widget .input-group button {
+    background: #fff;
+    border-left: 0;
+    border: 1px solid #f0e9ff;
+    padding: 4px 15px;
+    border-left: 0;
+  }
+  
+  /* line 610, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_blog.scss */
+  .blog_right_sidebar_h .search_widget .input-group button i, .blog_right_sidebar .search_widget .input-group button span {
+    font-size: 14px;
+    color: #999999;
+  }
+
+.study_ul {
+    list-style: none;
+    margin-bottom: 8px;
+}
+
+.study_ul .study_li {
+    font-size: 13px;
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 1.5rem;
+    color: #98A8B9;
+}
+
+.study_ul .study_li img {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.study_tag {
+    font-size: 12px;
+    line-height: 1.5;
+    display: inline-block;
+    margin: 0 0.25rem 0.25rem 0;
+    padding: 0.1875rem 0.5rem;
+    vertical-align: top;
+    border-radius: 0.25rem;
+    font-weight: 500;
+    color: #44576C;
+    background-color: #E9ECF3;
+}
+
+.blog-pagination_h {
+    padding-top: 60px;
+    padding-bottom: 120px; }
+    .blog-pagination_h .page-link {
+      border-radius: 0; }
+    .blog-pagination_h .page-item {
+      border: none; }
+  
+  .page-link {
+    background: transparent;
+    font-weight: 400; }
+  
+  .blog-pagination_h .page-item.active .page-link {
+    background-color: #ff3334;
+    border-color: transparent; }
+  
+  .blog-pagination_h .page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #777777;
+    border: none; }
+  
+  .blog-pagination_h .page-link .lnr {
+    font-weight: 600; }
+  
+  .blog-pagination_h .page-item:last-child .page-link,
+  .blog-pagination_h .page-item:first-child .page-link {
+    border-radius: 0; }
+  
+  .blog-pagination_h .page-link:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #ff3334;
+    border-color: #eee; }
+
+    .dropdown-item_h {
+        /* display: block; */
+        width: 100%;
+        padding: .25rem 1.5rem;
+        clear: both;
+        font-weight: 400;
+        color: #212529;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+    }
+
+    .dropdown-menu.show {
+        display: block;
+        width: 600px;
+    }
+
+    .detail_li{
+        margin-bottom: 8px;
+    }
+
+    .div_border {
+      position: relative;
+      margin-top: 1.5rem;
+      border: 0.0625rem solid #E9ECF3;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      padding: 1.5rem;
+      
+     }
+

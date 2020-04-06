@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- typeAliases -->
+	<typeAliases>
+		<typeAlias type="com.kh.doit.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.doit.study.model.vo.StudyGroup" alias="StudyGroup"/>
+		<typeAlias type="com.kh.doit.bookShare.model.vo.BookShare" alias="BookShare"/>
+		<typeAlias type="com.kh.doit.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.doit.bookShare.model.vo.BookShareReply" alias="BookShareReply"/>
+		<typeAlias type="com.kh.doit.study.model.vo.GroupMember" alias="GroupMember"/>
+
+	</typeAliases>
+	
+	<!-- DB정보를 썼던 부분 
+		environments 엘리먼트로 dataSource 등등의 정보를 썼지만
+		스프링에서는 그 정보를 이 파일에서 쓰지 않는다.
+		기존의 DB연결 설정에 대한 정보를 mybatis-config.xml에서 작성 -> root-context.xml로?
+	-->
+	
+	<!-- mapper 설정 -->
+	
+	<mappers>
+		<mapper resource="mappers/member-Mapper.xml"/>
+		<mapper resource="mappers/StudyGroup-Mapper.xml"/>
+		<mapper resource="mappers/bs-mapper.xml"/>
+		<mapper resource="mappers/board-Mapper.xml"/>
+	</mappers>
+	
+</configuration>
