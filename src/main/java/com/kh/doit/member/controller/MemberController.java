@@ -126,7 +126,8 @@ public class MemberController {
 			// 세션의 상태를 확정지어주는 메소드
 			status.setComplete();
 			
-			return "redirect:index.jsp";
+			return "common/main";
+
 		}
 	
 		@RequestMapping("join.me")
