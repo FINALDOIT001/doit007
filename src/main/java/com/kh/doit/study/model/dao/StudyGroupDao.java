@@ -68,4 +68,8 @@ public class StudyGroupDao {
 		return sqlSession.selectOne("studyGroupMapper.selectSg",sgNo);
 	}
 
+	public int sgDelete(int sgNo) {
+		return sqlSession.update("studyGroupMapper.sgDelete", sgNo);
+	}
+
 }

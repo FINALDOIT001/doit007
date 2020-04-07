@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -173,7 +174,7 @@
 									<li class="study_li"><img
 										src="${contextPath}/resources/img/add_icon2.png">${sg.sgAddr}</li>
 									<li class="study_li"><img
-										src="${contextPath}/resources/img/money_icon3.png">${sg.sgDeposit}</li>
+										src="${contextPath}/resources/img/money_icon3.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 원</li>
 								</ul>
 
 

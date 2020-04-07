@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -141,7 +142,8 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("sgUpview.go")
-	public ModelAndView sgUpdateView(ModelAndView mv, int sgNo) {
+	public ModelAndView sgUpdateView(ModelAndView mv, int sgNo){
+		
 		
 		mv.addObject("sg", sgService.sgUpdateView(sgNo))
 		.setViewName("study/doitStudyUpdateFrom");
@@ -173,6 +175,13 @@ public class StudyGroupController {
 				sg.setSgRenameFileName(renameFileName);
 			}
 		}
+		String join = sg.getSgJoin();
+		if(join==null) {
+			sg.setSgJoin("N");
+			
+		}else {
+			sg.setSgJoin("Y");
+		}
 		int result = sgService.sgUpdate(sg);
 		
 		if(result>0) {
@@ -199,6 +208,26 @@ public class StudyGroupController {
 			f.delete();
 		}
 		
+	}
+	
+	@RequestMapping("sgDelete.go")
+	private String sgDelete(Model model, int sgNo, HttpServletRequest request) {
+		StudyGroup sg = sgService.selectSg(sgNo);
+		
+		System.out.println(sg);
+		
+		if(sg.getSgRenameFileName() != null) {
+			deleteFile(sg.getSgRenameFileName(), request);
+		}
+		
+		int result = sgService.sgDelete(sgNo);
+		
+		if(result > 0) {
+			return "redirect:sgList.go";
+		}else {
+			model.addAttribute("msg","삭제 하기 실패");
+			return "common/errorPage";
+		}
 	}
 
 	/**

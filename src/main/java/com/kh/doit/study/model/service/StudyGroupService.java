@@ -53,6 +53,12 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	Object sgUpdateView(int sgNo);
+
+	/**스터티 그룹 삭제(정호)
+	 * @param sgNo
+	 * @return
+	 */
+	int sgDelete(int sgNo);
 	
 
 	

@@ -75,13 +75,23 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	}
 
 
-	/**
+	/**스터디 그룹 수정 디테일 뷰 (정호)
 	 *
 	 */
 	@Override
 	public Object sgUpdateView(int sgNo) {
 		
 		return sgDao.sgUpdateView(sgNo);
+	}
+
+
+	/**스터디 그룹 지우기 (정호)
+	 *
+	 */
+	@Override
+	public int sgDelete(int sgNo) {
+		
+		return sgDao.sgDelete(sgNo);
 	}
 	
 	
