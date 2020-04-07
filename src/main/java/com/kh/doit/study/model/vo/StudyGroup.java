@@ -29,10 +29,12 @@ public class StudyGroup {
 	private String sgPayment;
 	private String sgStatus;
 	private String sgConfirm;
+	
 	public StudyGroup() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public StudyGroup(int sgNo, String sgTitle, String sgWriter, int sgWriterNo, int sgNowPeople, int sgMaxPeople,
 			String sgAddr, int sgDeposit, Date sgCreateDate, String sgStartDate, String sgEndDate, String sgLocation,
 			String sgJoin, String sgCon, String sgOrginalFileName, String sgRenameFileName, String sgTag,

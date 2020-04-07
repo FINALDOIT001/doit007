@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.common.paginationJung;
 import com.kh.doit.study.model.service.StudyGroupService;
 import com.kh.doit.study.model.vo.GroupMember;
@@ -244,13 +245,13 @@ public class StudyGroupController {
 
 		StudyGroup sg = sgService.selectSg(sgNo);
 		
-		ArrayList<GroupMember> gm = groupMember(sgNo);
+		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
-		System.out.println("Controller gm : " + gm);
+		System.out.println("Controller memberList : " + ml);
 		
 		if (sg != null) {
 			mv.addObject("sg", sg)
-			  .addObject("gm", gm)
+			  .addObject("ml",ml)
 			  .addObject("currentPage", currentPage)
 			  .setViewName("study/doitStudyDetail");
 		} else {
@@ -260,13 +261,4 @@ public class StudyGroupController {
 		return mv;
 	}
 	
-	public ArrayList<GroupMember> groupMember(int sgNo) {
-
-		ArrayList<GroupMember> sgList = sgService.selectGroupMember(sgNo);
-
-		return sgList;
-	} 
-	
-	
-
 }
