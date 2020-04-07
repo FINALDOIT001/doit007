@@ -66,13 +66,13 @@
               <a class="nav-link active" style="width: 200px; text-align: center;" data-toggle="tab" href="#home">내 정보 수정</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu1">위시리스트</a>
+              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu1">나의 스터디</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu2">나의 스터디</a>
+              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu2">위시리스트</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu3">작성 글 내역</a>
+                <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu3">마일리지</a>
               </li>
           </ul>
           
@@ -180,7 +180,7 @@
                      </div>
                      <div class="hyerim_div" style="text-align: center;">
                      		<c:url var="mdelete" value="mdelete.go">
-                     			<c:param name="mId" value="${m.mId }" />
+                     			<c:param name="mId" value="${m.mId}" />
                      		</c:url>
                            <input type="reset" class="btn btn-outline-danger" style="font-weight: 400; width: 150px; margin-right: 10px;" value="취소하기" />
                            <input type="submit" class="btn btn-dark" style="font-weight: 400; width: 150px; margin-right: 10px;" onclick="return validate();" value="수정하기"/>     
@@ -223,36 +223,7 @@
                      <hr>
                   </div>
                   <!-- study list end -->
-                  <!-- study list start -->
-                  <div class="col-md-2" style="text-align: center;">
-                     <img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
-                  </div>
-                  <div class="col-md-9 mt-sm-20">
-                     <a href="studyDetail.go" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">JAVA 스터디 그룹</label>
-                     </a>
-                        <div class="starRev" style="width: 60px; display:inline;">
-                           <span class="starR on" style="margin-left: 20px; width: 20px; height: 20px;"></span> 
-                        </div>
-                     <h5 class="mb-1 text-primary" style="font-weight: bold;">모집 중</h5>
-                     <ul class="study_ul">
-                        <li class="study_li">조장 : 박정호</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">3/8</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">서울시 강남구</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png">20,000</li>
-                     </ul>
-                     <ul class="study_">
-                        <li class="study_tag">Java</li>
-                        <li class="study_tag">오프라인</li>
-                        <li class="study_tag">스터디그룹</li>
-                        
-                     </ul>
 
-                  </div>
-
-                  <div class="col-lg-12">
-                     <hr>
-                  </div>
-                  <!-- study list end -->
                   </div>
                   
                </div>
@@ -290,66 +261,44 @@
                      <hr>
                   </div>
                   <!-- study list end -->
+                  <!-- study list start -->
+                  <div class="col-md-2" style="text-align: center;">
+                     <img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
+                  </div>
+                  <div class="col-md-9 mt-sm-20">
+                     <a href="studyDetail.go" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">JAVA 스터디 그룹</label>
+                     </a>
+                        <div class="starRev" style="width: 60px; display:inline;">
+                           <span class="starR on" style="margin-left: 20px; width: 20px; height: 20px;"></span> 
+                        </div>
+                     <h5 class="mb-1 text-primary" style="font-weight: bold;">모집 중</h5>
+                     <ul class="study_ul">
+                        <li class="study_li">조장 : 박정호</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">3/8</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">서울시 강남구</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png">20,000</li>
+                     </ul>
+                     <ul class="study_">
+                        <li class="study_tag">Java</li>
+                        <li class="study_tag">오프라인</li>
+                        <li class="study_tag">스터디그룹</li>
+                        
+                     </ul>
 
+                  </div>
+
+                  <div class="col-lg-12">
+                     <hr>
+                  </div>
+                  <!-- study list end -->
                      </div>
                </div>
                <!-- tab3 end -->
+               <!-- tab4 start -->
                <div class="tab-pane container fade" id="menu3">
-                  <div class="card" style="margin-top: 20px;">
-                     <!-- /.card-header -->
-                     <div class="card-body table-responsive p-0">
-                       <table class="table table-hover hyun_table01">
-                         <thead>
-                           <tr>
-                             <th>번호</th>
-                             <th>제목</th>
-                             <th>작성자</th>
-                             <th>작성일</th>
-                             <th>조회수</th>
-                           </tr>
-                         </thead>
-                         <tbody>
-                           <tr>
-                             <td>5</td>
-                             <td>admin</td>
-                             <td><a href="hyun_notice_view.html">공지입니당5</a></td>
-                             <td>2020-01-19</td>
-                             <td>10</td>
-                           </tr>
-                           <tr>
-                               <td>4</td>
-                               <td>admin</td>
-                               <td>공지입니다4</td>
-                               <td>2020-01-13</td>
-                               <td>8</td>
-                           </tr>
-                           <tr>
-                               <td>3</td>
-                               <td>admin</td>
-                               <td>공지입니다3</td>
-                               <td>2020-01-12</td>
-                               <td>76</td>
-                           </tr>							
-                           <tr>
-                               <td>2</td>
-                               <td>admin</td>
-                               <td>공지입니다2</td>
-                               <td>2020-01-04</td>
-                               <td>32</td>
-                           </tr>							
-                           <tr>
-                               <td>1</td>
-                               <td>admin</td>
-                               <td>공지입니다1</td>
-                               <td>2020-01-01</td>
-                               <td>5</td>
-                           </tr>
-                         </tbody>
-                       </table>
-                     </div>
-                     <!-- /.card-body -->
-                  </div>
+
                </div>
+               <!-- tab4 end -->
             </div>
             
             

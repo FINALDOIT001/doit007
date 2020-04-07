@@ -40,7 +40,7 @@
                         <div class="form-group">
                            <label><span style="color: red">*</span> 비밀번호</label>
                            <input type="password" class="form-control form-control-user"
-                              id="userPwd" name="mPwd" placeholder="비밀번호를 입력하세요."
+                              id="userPwd" name="mPwd" placeholder="비밀번호"
                               required>
                         </div>
                         <div class="form-group">
