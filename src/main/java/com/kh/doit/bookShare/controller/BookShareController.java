@@ -65,7 +65,6 @@ public class BookShareController {
 		
 		if(bs != null) {
 			mv.addObject("bs",bs);
-//			mv.addObject("rList",rList);
 			mv.setViewName("board/bookShare_view");
 		} else {
 			mv.addObject("msg","게시글 보기 실패");

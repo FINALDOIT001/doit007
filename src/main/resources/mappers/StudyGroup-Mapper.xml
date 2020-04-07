@@ -28,12 +28,6 @@
 		<result property="sgConfirm" column="SG_CONFIRM_YN"/>
 	</resultMap>
 	
-	<resultMap id="groupMemberResultSet" type="GroupMember">
-		<result property="gm_sgNo" column="GM_SG_NO"/>
-		<result property="gm_mNo" column="GM_M_NO"/>
-		<collection property="memberList" javaType="java.util.ArrayList" resultMap="memberResultSet"/>
-	</resultMap>
-	
 	<resultMap id="memberResultSet" type="Member">
    		<id property="mno" column="M_NO"/>
    		<result property="mId" column="M_ID"/>
@@ -48,13 +42,13 @@
    		<result property="mUpdatedate" column="M_UPDATE_DATE" />
    		<result property="mUserroles" column="M_USERROLES" />
    		<result property="mStatus" column="M_STATUS" />
+   		
+   		<association property="gm" javaType="GroupMember">
+   			<result property="gm_sgNo" column="GM_SG_NO"/>
+   			<result property="gm_mNo" column="GM_M_NO"/>
+   		</association>
     </resultMap>
     
-    
-    
-   
-	
-	
 	<select id="getlistCount" resultType="_int">
 	SELECT COUNT(*)
 	FROM STUDY_GROUP
@@ -79,20 +73,10 @@
 	
 	</select>
 	
-	
 	<select id="selectSg" resultMap="studyGroupResultSet">
 		SELECT *
 		FROM STUDY_GROUP
 		WHERE SG_NO = #{sgNo}
-	</select>
-	
-	
-	
-	<select id="groupMember" resultMap="groupMemberResultSet">
-		SELECT M.M_NAME, M.M_ORGINAL_FILENAME, M.M_NO
-		FROM GROUP_MEMBER GM
-		JOIN MEMBER M ON(M.M_NO = GM.GM_M_NO)
-		WHERE GM_SG_NO = #{sgNo} 
 	</select>
 	
 	<update id="sgUpdate" parameterType='StudyGroup'>
@@ -111,7 +95,6 @@
 		SG_RENAME_FILENAME = #{sgRenameFileName},
 		SG_TAG = #{sgTag}
 		WHERE SG_NO = #{sgNo}
-		
 	</update>
 	
 	<update id="sgDelete" parameterType="_int">
@@ -120,7 +103,12 @@
 	WHERE SG_NO = #{sgNo}
 	</update>
 
-
+	<select id="memberList" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER M
+		JOIN GROUP_MEMBER GM ON(GM.GM_M_NO = M.M_NO)
+		WHERE GM_SG_NO = #{sgNo}
+	</select>
 
 
 </mapper>

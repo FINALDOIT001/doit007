@@ -24,6 +24,7 @@
     	<id property="bscNo" column="BSC_NO"/>
     	<result property="bscBsNo" column="BSC_BS_NO"/>
     	<result property="bscWriter" column="BSC_WRITER"/>
+    	<result property="bscWriterNo" column="BSC_WRITER_NO"/>
     	<result property="bscDate" column="BSC_DATE"/>
     	<result property="bscCon" column="BSC_CON"/>
     	<result property="bscStatus" column="BSC_STATUS"/>
