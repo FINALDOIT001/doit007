@@ -16,7 +16,7 @@ public class StudyGroup {
 	private int sgNowPeople;
 	private int sgMaxPeople;
 	private String sgAddr;
-	private String sgDeposit;
+	private int sgDeposit;
 	private Date sgCreateDate;
 	private String sgStartDate;
 	private String sgEndDate;
@@ -34,7 +34,7 @@ public class StudyGroup {
 		// TODO Auto-generated constructor stub
 	}
 	public StudyGroup(int sgNo, String sgTitle, String sgWriter, int sgWriterNo, int sgNowPeople, int sgMaxPeople,
-			String sgAddr, String sgDeposit, Date sgCreateDate, String sgStartDate, String sgEndDate, String sgLocation,
+			String sgAddr, int sgDeposit, Date sgCreateDate, String sgStartDate, String sgEndDate, String sgLocation,
 			String sgJoin, String sgCon, String sgOrginalFileName, String sgRenameFileName, String sgTag,
 			String sgPayment, String sgStatus, String sgConfirm) {
 		super();
@@ -101,10 +101,10 @@ public class StudyGroup {
 	public void setSgAddr(String sgAddr) {
 		this.sgAddr = sgAddr;
 	}
-	public String getSgDeposit() {
+	public int getSgDeposit() {
 		return sgDeposit;
 	}
-	public void setSgDeposit(String sgDeposit) {
+	public void setSgDeposit(int sgDeposit) {
 		this.sgDeposit = sgDeposit;
 	}
 	public Date getSgCreateDate() {
