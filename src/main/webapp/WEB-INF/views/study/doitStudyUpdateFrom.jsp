@@ -55,7 +55,7 @@
 					<c:if test="${!empty sg.sgRenameFileName}">
 					<div class="filebox">
 						<label for="cma_file" class="rounded" style="background-image: url('${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}');"> <input type="file"
-							name="sbul" id="cma_file" accept="image/*" capture="camera"
+							name="fileReLoader" id="cma_file" accept="image/*" capture="camera"
 							onchange="getThumbnailPrivew(this,$('#cma_image'))" />
 							<div id="cma_image"></div>
 					</label>
@@ -65,7 +65,7 @@
 					<c:if test="${empty sg.sgRenameFileName}">
 					<div class="filebox">
 						<label for="cma_file" class="rounded"> <input type="file"
-							name="sbul" id="cma_file" accept="image/*" capture="camera"
+							name="fileReLoader" id="cma_file" accept="image/*" capture="camera"
 							onchange="getThumbnailPrivew(this,$('#cma_image'))" />
 							<div id="cma_image"></div>
 					</label>

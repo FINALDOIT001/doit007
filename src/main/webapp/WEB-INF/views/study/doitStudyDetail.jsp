@@ -52,8 +52,14 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="subject">
+						<c:if test="${!empty sg.sgRenameFileName}">
+							<img src="${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}" class="rounded"
+								style="width: 350px; height: 360px;">	
+						</c:if>
+						<c:if test="${empty sg.sgRenameFileName}">
 							<img src="${contextPath}/resources/img/project-5.png" class="rounded"
-								style="width: 350px; height: 360px;">
+								style="width: 350px; height: 360px;">	
+						</c:if>
 						</div>
 					</div>
 					<div class="col-md-4 mt-sm-30">
@@ -90,20 +96,17 @@
 						<c:url var="sgDelete" value="sgDelete.go">
 						<c:param name="sgNo" value="${sg.sgNo}"/>
 						</c:url>
-						<c:if test="${sessionScope.loginUser.mNo eq sg.sgWriterNo}">
+						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 						<button class="genric-btn danger radius btn-block"
-							style="width: 130px;" onclick="location.href='studyInsertSc.go'">스터디 수정</button>
-						팀장만 보이는 버튼 / 스터디 가입한 사람일 경우 (스터디 탈퇴) 버튼 나오기
+							style="width: 130px;" onclick="location.href='${sgUpview}'">스터디 수정</button>
 						</c:if>
-						<c:if test="${sessionScope.loginUser.mNo eq sg.sgWriterNo}">
+						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 						<button class="genric-btn danger radius btn-block"
-							style="width: 130px;" onclick="location.href='studyInsertSc.go'">스터디 삭제</button>
-						팀장만 보이는 버튼 / 스터디 가입한 사람일 경우 (스터디 탈퇴) 버튼 나오기
+							style="width: 130px;" onclick="location.href='${sgDelete}'">스터디 삭제</button>
 						</c:if>
-						<c:if test="${sessionScope.loginUser.mNo ne sg.sgWriterNo}">
+						<c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
 						<button class="genric-btn danger radius btn-block"
 							style="width: 130px;" onclick="location.href='studyInsertSc.go'">스터디 탈퇴</button>
-						팀장만 보이는 버튼 / 스터디 가입한 사람일 경우 (스터디 탈퇴) 버튼 나오기
 						</c:if>
 					</div>
 					<div class="col-md-4 mt-sm-20">

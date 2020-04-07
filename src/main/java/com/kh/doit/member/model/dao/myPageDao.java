@@ -31,5 +31,4 @@ public class myPageDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectfbList",mId);
 	}
 	
-	
 }
