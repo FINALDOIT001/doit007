@@ -40,6 +40,16 @@ public class EventDao {
 
 		return (ArrayList)sqlSession.selectList("evMapper.getEventList",null, rowBounds);
 	}
+
+	/**
+	 * 2. Event 1개 가져오기 Kwon	
+	 * 2020.04.06 HOME
+	 * @param eNo
+	 * @return
+	 */
+	public Event selectEvent(int eNo) {
+		return sqlSession.selectOne("evMapper.selectEvent",eNo);
+	}
 }
 
 

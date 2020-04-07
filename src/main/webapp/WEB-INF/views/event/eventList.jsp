@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+\<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
@@ -46,7 +46,7 @@
             <article class="blog_item eList001">
           	<input type="hidden" value="${ event.eNo }">
               <div class="blog_item_img">
-                <img class="card-img rounded-0" src="${contextPath}/resources/bsUploadFiles/${ event.eRenameFileName }" alt=""> <!-- 나중에 이미지 넣기 -->
+                <img class="card-img rounded-0" src="${contextPath}/resources/evUploadFiles/${ event.eRenameFileName }" alt=""> <!-- 나중에 이미지 넣기 -->
                 <a href="#" class="blog_item_date">
                   <h3>${ event.eDays }</h3>
                   <p>${ event.eMonth }월</p>

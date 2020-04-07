@@ -215,7 +215,7 @@
 		/* 쪽지 새창 띄우기 */
 		$('#goMS').click(function(){
 			window.open("new.ms", "MESSAGE", "width=900, height=900, scrollbars=no;")
-		});w
+		});
 	</script>
    
 </body>
