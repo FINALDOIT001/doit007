@@ -170,6 +170,11 @@
         <div class="col-lg-4">
           <div class="blog_right_sidebar">
             <aside class="single_sidebar_widget search_widget">
+			<c:if test="${ loginUser != null }">
+			<c:url var="evInsert" value="evInsert.go">
+			</c:url>
+             <a href="${ evInsert }"><button class="button rounded-0 primary-bg text-white w-100" type="button">글 작성하기</button></a>
+             </c:if>
               <form action="#">
                 <div class="form-group">
                   <div class="input-group mb-3">

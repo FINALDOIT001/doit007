@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -89,6 +90,27 @@ public class EnevtController {
 		
 		return mv; // 객체 하나 가져오기
 	}
+	
+	
+	@RequestMapping("addEvReply.do")
+	@ResponseBody
+	public String addEvReply(EventReply er) {
+		System.out.println("Servlet Ev댓글추가 : " + er);
+		int result = eService.insertReply(er);
+		
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+		
+	}
+	
+	@RequestMapping("evInsert.go")
+	public String insertPage() {
+		return "event/eventInsert";
+	}
+	
 	
 
 }

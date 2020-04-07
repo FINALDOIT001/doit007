@@ -181,8 +181,6 @@
          ]
       });
       
-      <%-- var markupStr = '<%=n.getnContent()%>'; --%>
-      var markupStr = '${bs.bsCon}';
 		$('#summernote').summernote("code", markupStr);
 		$('#summernote').summernote('disable');
 		$('#summernote').summernote().css('display','none');

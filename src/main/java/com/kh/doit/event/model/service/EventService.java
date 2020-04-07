@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.kh.doit.bookShare.model.vo.BookShareReply;
 import com.kh.doit.event.model.vo.Event;
 import com.kh.doit.event.model.vo.EventPageInfo;
+import com.kh.doit.event.model.vo.EventReply;
 
 public interface EventService {
 
@@ -39,6 +40,14 @@ public interface EventService {
 	 * @return
 	 */
 	Event selectEvent(int eNo);
+
+	/**
+	 * 3. Add Event Reply Kwon
+	 * 2020.04.07 KH
+	 * @param er
+	 * @return
+	 */
+	int insertReply(EventReply er);
 
 
 }
