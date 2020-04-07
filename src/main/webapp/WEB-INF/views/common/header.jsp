@@ -107,7 +107,7 @@
                       	
  							<li class="nav-item dropdown no-arrow mx-1">
 								<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fas fa-envelope fa-fw" onclick="openMessage();"></i>
+									<i class="fas fa-envelope fa-fw" id="goMS"></i>
 									<span class="badge badge-danger badge-counter">4+</span>
 								</a>
 								
@@ -163,7 +163,7 @@
                       			<a class="nav-link"><label><span style="color:#d64748 !important;">${ loginUser.mName }</span>&nbsp;님</label></a>
                       		</li>
                       		<li class="nav-item">
-	                         	<a class="nav-link" href="myinfo.me">MYPAGE</a>
+	                         	<a class="nav-link" href="myinfo.me?mId=${ sessionScope.loginUser.mId }">MYPAGE</a>
                       		</li>
                       		<li class="nav-item">
 	                         	<a class="nav-link" href="logout.do">LOGOUT</a>
@@ -213,9 +213,9 @@
 	<script src="${contextPath}/resources/vendor_inseok/jquery/jquery.min.js"></script>
 	<script>
 		/* 쪽지 새창 띄우기 */
-		function openMessage(){
-			window.open("new.ms", "MESSAGE", "width=900px, height=900px, toolbar=no, menubar=no, scrollbars=no, resizable=yes")
-		}
+		$('#goMS').click(function(){
+			window.open("new.ms", "MESSAGE", "width=900, height=900, scrollbars=no;")
+		});w
 	</script>
    
 </body>

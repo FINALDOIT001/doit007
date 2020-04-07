@@ -1,21 +1,30 @@
 package com.kh.doit.board.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.doit.board.common.Pagination_ha;
 import com.kh.doit.board.model.service.BoardService;
 import com.kh.doit.board.model.vo.Board;
+import com.kh.doit.board.model.vo.Board_Comments;
 import com.kh.doit.board.model.vo.PageInfo_ha;
 
 @Controller
@@ -24,6 +33,12 @@ public class BoardController {
 	@Autowired
 	private BoardService bService;
    
+	/**
+	 * 현아.자유게시판 리스트
+	 * @param mv
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("fblist.go")
 	public ModelAndView fboardList(ModelAndView mv,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
 		
@@ -41,21 +56,32 @@ public class BoardController {
 		
 	}
 	
+	/**
+	 * 현아.자유게시판 입력하기
+	 * @return
+	 */
 	@RequestMapping("fbInsertForm.go")
 	public String fboardInsert() {
 		return "board/freeBoard_write";
 	}
  
+	/**
+	 * 현아.자유게시판 insert
+	 * @param b
+	 * @param request
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping("fbInsert.go")
 	public String insertfBoard(Board b,HttpServletRequest request,
 						@RequestParam(name="uploadFile",required=false) MultipartFile file) {
 		
 		if(!file.getOriginalFilename().equals("")) {
-			String renameFileName = saveFile(file,request);
+			String b_re_filename = saveFile(file,request);
 			
-			if(renameFileName != null) {
+			if(b_re_filename != null) {
 				b.setB_org_filename(file.getOriginalFilename());
-				b.setB_re_filename(renameFileName);
+				b.setB_re_filename(b_re_filename);
 			}
 		}
 		
@@ -70,29 +96,43 @@ public class BoardController {
 	}
 
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		
 		String root = request.getSession().getServletContext().getRealPath("resources");
+		
 		String savePath = root + "\\buploadFiles";
+		
 		File folder = new File(savePath);
 		
 		if(!folder.exists()) {
-			folder.mkdir(); // 폴더없음 생성하기 
+			folder.mkdir(); // 폴더가 없다면 생성해주세요
 		}
 		
-		String originFileName = file.getOriginalFilename();
+		String b_org_filename = file.getOriginalFilename();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
-				+ originFileName.substring(originFileName.lastIndexOf(".")+1);
-		String renamePath = folder + "\\" + renameFileName;
+		String b_re_filename = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+						+ b_org_filename.substring(b_org_filename.lastIndexOf(".")+1);
+		
+		System.out.println("b_re_filename : " + b_re_filename);
+		
+		String renamePath = folder + "\\"+ b_re_filename;
 		
 		try {
-			file.transferTo(new File(renamePath));
-		}catch(Exception e) {
+			file.transferTo(new File(renamePath)); // 이때 전달받은 file이 rename명으로 저장이된다.
+		}catch (Exception e) {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
-		}
-		return renameFileName;
+		} 
+		
+		return b_re_filename;
 	}
 	
+	/**
+	 * 현아.자유게시판 상세보기 
+	 * @param mv
+	 * @param b_no
+	 * @param currentPage
+	 * @return
+	 */
 	@RequestMapping("fbDetail.go")
 	public ModelAndView fboardDetail(ModelAndView mv,int b_no,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
@@ -104,5 +144,94 @@ public class BoardController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping("fbUpdateForm.go")
+	public ModelAndView fboardUpdate(ModelAndView mv,int b_no) {
+		mv.addObject("b",bService.selectUpdateBoard(b_no)).setViewName("board/freeBoard_upwrite");
+		
+		return mv;
+	}
+	
+	@RequestMapping("fbUpdate.go")
+	public ModelAndView updatefboard(ModelAndView mv,@ModelAttribute Board b,HttpServletRequest request,
+										@RequestParam(value="reloadFile",required=false) MultipartFile file) {
+		if(file != null && !file.isEmpty()) {
+			if(b.getB_re_filename() != null) {
+				deleteFile(b.getB_re_filename(),request);
+			}
+			
+			String b_re_filename = saveFile(file, request);
+			
+			if(b_re_filename != null) {
+				b.setB_org_filename(file.getOriginalFilename());
+				b.setB_re_filename(b_re_filename);
+			}
+		}
+		
+		int result = bService.updateBoard(b);
+		
+		if(result > 0) {
+			mv.addObject("b_no",b.getB_no()).setViewName("redirect:fbDetail.go");
+		}else {
+			mv.addObject("msg","게시글 수정 실패");
+		}
+		
+		return mv;
+	}
+
+	public void deleteFile(String fileName,HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\buploadFiles";
+		
+		File f = new File(savePath + "\\" + fileName);
+		
+		if(f.exists()) {
+			f.delete();
+		}
+	}
+	
+	@RequestMapping("fbdelete.go")
+	public String fboardDelete(Model model,int b_no,HttpServletRequest request) {
+		Board b = bService.selectUpdateBoard(b_no);
+		
+		if(b.getB_re_filename() != null) {
+			deleteFile(b.getB_re_filename(),request);
+		}
+		
+		int result = bService.deleteBoard(b_no);
+		
+		if(result > 0) {
+			return "redirect:fblist.go";
+		}else {
+			model.addAttribute("msg","게시글 삭제 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("bcList.go")
+	public void getCommentList(HttpServletResponse response,int b_no) throws JsonIOException, IOException {
+		
+		ArrayList<Board_Comments> bcList = bService.selectCommentList(b_no);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create(); 
+		gson.toJson(bcList,response.getWriter());
+	}
+	
+		
+	
+	@RequestMapping("addComment.go")
+	@ResponseBody
+	public String addComment(Board_Comments bc) {
+		int result = bService.insertComment(bc);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+
 	
 }

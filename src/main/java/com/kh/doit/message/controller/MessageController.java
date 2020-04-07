@@ -16,8 +16,13 @@ public class MessageController {
 	  * @return
 	  */
 	@RequestMapping("new.ms")
-	public String newMessage() {
+	public String mainpage() {
 		return "message/mainMessage";
+	}
+	
+	@RequestMapping("newMS.ms")
+	public String newMS() {
+		return "message/MsNewmessage";
 	}
 	
 }

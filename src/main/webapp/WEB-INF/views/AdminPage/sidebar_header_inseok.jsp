@@ -30,7 +30,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="sidebar_header_inseok.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="go.ad">
         <div class="sidebar-brand-icon">
         <i class="fas fa-user-cog"></i>
         </div>
@@ -42,7 +42,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="sidebar_header_inseok.html">
+        <a class="nav-link" href="main.go">
           <i class="fas fa-home"></i>
           <span>HOME</span></a>
       </li>
