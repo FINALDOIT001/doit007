@@ -75,6 +75,7 @@ ${ b.b_content }
                           <a href="${ contextPath }/resources/buploadFiles/${ b.b_re_filename}" download="${ b.b_org_filename }">${ b.b_org_filename }</a>
                           </c:if>
                         </div>
+                        <br>
                         <span style="font-size: small;">5MB 이하의 이미지 파일 (JPG, PNG, GIF) 1개를 첨부하실 수 있습니다.</span>
                         
                     </div>

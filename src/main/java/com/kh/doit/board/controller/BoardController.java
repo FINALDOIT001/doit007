@@ -233,5 +233,17 @@ public class BoardController {
 		}
 	}
 
+	@RequestMapping("deleteComment.go")
+	@ResponseBody
+	public String deleteComment(int bc_no) {
+		int result = bService.deleteComment(bc_no);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
 	
 }

@@ -36,6 +36,11 @@
                <h2><span>DO IT</span> &nbsp;FREE BOARD</h2>
             </div>
          </div>
+         <c:if test="${ loginUser == null }">
+		 	<script>
+		 		alert("로그인 하신 후 이용가능합니다.");
+		 	</script>		
+		 </c:if>
          <div class="card">
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">

@@ -51,7 +51,7 @@
 					<td width="208" height="50">${ b.b_writer }</td>
 					<!-- 작성자 -->
 					<th width="134" height="50">작성일</th>
-					<td width="208" height="50">${ b.b_createdate }</td>
+					<td width="208" height="50">${ b.b_modifydate }</td>
 					<!-- 작성일 -->
 					<th width="134" height="50">조회수</th>
 					<td width="208" height="50">${ b.b_count }</td>
@@ -75,6 +75,11 @@ ${ b.b_content }
 					</td>
 				</tr>
 			</table>
+			
+			
+			
+
+
 
 			<!-- comment area start -->
 				<!-- <hr>
@@ -99,33 +104,31 @@ ${ b.b_content }
 					<div class="com" style="margin-left: 15px;">1등,,!!~!</div>
 				</div> -->
 				
-				<table align="center" width="500" border="1" cellspacing="0" id="bctb">
+				
+		
+				<table>
+					<tr>
+						<td><textarea class="form-control placeholder hide-on-focus" id="bc_content" style="width:1050px; height:80px; margin:15px;" placeholder="댓글을 입력해 주세요."></textarea></td>
+						<td><button id="bcSubmit" class="genric-btn danger radius" style="font-size: 13px;width:90px; height:40px;">등록</button></td>
+					</tr>
+				</table>	
+				
+				
+				<table width="1000" cellspacing="0" id="bctb" style="margin:15px;">
 				<thead>
 					<tr>
-						<td colspan="3"><b id="bcCount"></b></td>
+						<td style="padding:10px;" colspan="4"><b id="bcCount" style="color:black; margin-left:7px;"></b></td>
 					</tr>
 				</thead>
 				<tbody>
 				
 				</tbody> <!-- tbody꼭 써주기 안에 넣을것 -->
 				</table>
-				
-				
-				<hr>
-				
-				<table>
-					<tr>
-						<td><textarea class="form-control w-100 placeholder hide-on-focus" id="bc_content" cols="30" rows="4" placeholder="댓글을 입력해 주세요."></textarea></td>
-						<td><button id="bcSubmit" class="genric-btn danger radius" style="font-size: 13px;">등록</button></td>
-					</tr>
-				</table>	
-
 					
 		
 					<!-- comment area end -->
-
-
-					<div class="not_btn" style="margin-top: 20px; text-align: center;">
+					
+					<div class="not_btn" style="margin-top:100px; text-align: center;">
 						
 						<c:url var="fbUpdateForm" value="fbUpdateForm.go">
 							<c:param name="b_no" value="${ b.b_no }"/>
@@ -136,18 +139,20 @@ ${ b.b_content }
 						<c:url var="fblist" value="fblist.go">
 							<c:param name="currentPage" value="${ currentPage }"/>
 						</c:url>
-							
+									
 						<c:if test="${ loginUser.mId eq b.b_writer }">
 							<a href="${ fbUpdateForm }" class="genric-btn danger circle"
-							style="font-size: 13px;">수정</a>
+							style="font-size: 13px;">글수정</a>
 							<a href="${ fbdelete }" class="genric-btn danger circle"
-							style="font-size: 13px;">삭제</a>
+							style="font-size: 13px;">글삭제</a>
 						</c:if>
-						
+								
 						<a href="${ fblist }" class="genric-btn danger circle"
-							style="font-size: 13px;">목록</a>
-						
+								style="font-size: 13px;">목록</a>
+							
 					</div>
+
+
 				</div>
 	</section>
 
@@ -155,9 +160,9 @@ ${ b.b_content }
 		$(function(){
 			getCommentList(); 
 			
-			setInterval(function(){
+			/* setInterval(function(){
 				getCommentList();
-			},3000);
+			},3000); */
 			
 			$("#bcSubmit").on("click",function(){
 				var bc_content = $("#bc_content").val();
@@ -180,6 +185,7 @@ ${ b.b_content }
 				});
 			});
 			
+			
 		});
 	
 		function getCommentList() {
@@ -193,10 +199,12 @@ ${ b.b_content }
 					$tableBody = $("#bctb tbody");
 					$tableBody.html(""); 
 					
+					var $bc_no;
 					var $tr;
 					var $mId;
 					var $bc_content;
 					var $bc_createdate;
+					var $bc_status;
 					
 					$('#bcCount').text("댓글("+data.length+")");
 					
@@ -204,12 +212,17 @@ ${ b.b_content }
 						for(var i in data){
 							$tr = $("<tr>");
 							$mId = $("<td width='100'>").text(data[i].mId);
+							$bc_no = data[i].bc_no;
 							$bc_content = $("<td>").text(data[i].bc_content); 
 							$bc_createdate = $("<td width='100'>").text(data[i].bc_createdate);
+							$bc_status = $("<td width='100'>").text(data[i].bc_status);
 							
+							$tr.append("<input type='hidden' value='"+$bc_no+"'>");
 							$tr.append($mId);
 							$tr.append($bc_content);
 							$tr.append($bc_createdate);
+							$tr.append($bc_status);
+							$tr.append("<td><button class='test1111''>삭제</button></td>");
 							$tableBody.append($tr);
 						}
 					}else {
@@ -220,11 +233,33 @@ ${ b.b_content }
 					}
 				}
 			});
-		}
+		};
+		
+
+		$('.test1111').on('click',function() {
+			console.log($(this).parent().parent().children().eq(0).val());
+		});
+		
+		
+/* 				$.ajax({
+					url:"deleteComment.go",
+					data:{bc_no:bc_no},
+					type:"post",
+					success:function(data) {
+						if(data == "success") {
+							getCommentList(); 
+							
+							
+						}
+					},error:function(){
+						console.log("댓글 삭제에 실패하였습니다"); 
+					}
+				});
+		};  */
 		
 		
 	</script>
-
+	
 	<jsp:include page="../common/footer.jsp" />
 
 </body>

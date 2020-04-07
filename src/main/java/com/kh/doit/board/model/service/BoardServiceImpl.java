@@ -66,4 +66,9 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.insertComment(bc);
 	}
 
+	@Override
+	public int deleteComment(int bc_no) {
+		return bDao.deleteComment(bc_no);
+	}
+
 }
