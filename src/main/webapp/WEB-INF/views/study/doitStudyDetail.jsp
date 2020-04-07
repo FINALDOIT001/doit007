@@ -82,9 +82,14 @@
 						<c:url var="sgUpview" value="sgUpview.go">
 						<c:param name="sgNo" value="${sg.sgNo}"/>
 						</c:url>
+						<c:url var="sgDelete" value="sgDelete.go">
+						<c:param name="sgNo" value="${sg.sgNo}"/>
+						</c:url>
 						<button class="genric-btn danger radius btn-block"
 							style="width: 130px;" onclick="location.href='${sgUpview}'">스터디 수정</button>
 						팀장만 보이는 버튼 / 스터디 가입한 사람일 경우 (스터디 탈퇴) 버튼 나오기
+						<button class="genric-btn danger radius btn-block"
+							style="width: 160px;" onclick="location.href='${sgDelete}'">스터디 그룹 삭제</button>
 					</div>
 					<div class="col-md-4 mt-sm-20">
 						<label class="mb-20"

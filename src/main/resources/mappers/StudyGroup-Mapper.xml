@@ -95,6 +95,30 @@
 		WHERE GM_SG_NO = #{sgNo} 
 	</select>
 	
+	<update id="sgUpdate" parameterType='StudyGroup'>
+		UPDATE STUDY_GROUP SET
+		SG_TITLE = #{sgTitle},
+		SG_MAXPEOPLE = #{sgMaxPeople},
+		SG_ADDR = #{sgAddr},
+		SG_DEPOSIT = #{sgDeposit},
+		SG_CREATE_DATE = SYSDATE,
+		SG_START_DATE = #{sgStartDate},
+		SG_END_DATE = #{sgEndDate},
+		SG_LOCATION = #{sgLocation},
+		SG_JOIN_YN = #{sgJoin},
+		SG_CON = #{sgCon},
+		SG_ORGINAL_FILENAME = #{sgOrginalFileName},
+		SG_RENAME_FILENAME = #{sgRenameFileName},
+		SG_TAG = #{sgTag}
+		WHERE SG_NO = #{sgNo}
+		
+	</update>
+	
+	<update id="sgDelete" parameterType="_int">
+	UPDATE STUDY_GROUP SET
+	SG_STATUS_YN = 'N'
+	WHERE SG_NO = #{sgNo}
+	</update>
 
 
 
