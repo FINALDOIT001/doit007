@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.dao.StudyGroupDao;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -60,8 +61,8 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	 * 작성자 : 서정도
 	 */
 	@Override
-	public ArrayList<GroupMember> selectGroupMember(int sgNo) {
-		return sgDao.selectGroupMember(sgNo);
+	public ArrayList<Member> memberList(int sgNo) {
+		return sgDao.memberList(sgNo);
 	}
 
 

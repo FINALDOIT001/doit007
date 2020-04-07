@@ -162,9 +162,16 @@
                       		<li>
                       			<a class="nav-link"><label><span style="color:#d64748 !important;">${ loginUser.mName }</span>&nbsp;님</label></a>
                       		</li>
-                      		<li class="nav-item">
-	                         	<a class="nav-link" href="myinfo.me?mId=${ sessionScope.loginUser.mId }">MYPAGE</a>
-                      		</li>
+                      		<li class="nav-item dropdown">
+                           		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                              	data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              	<button style="border:none; font-size: 14px; font-weight: 700; background-color:transparent;" 
+                              		onclick="location.href='myinfo.me?mId=${ sessionScope.loginUser.mId }'">MYPAGE</button>
+                           		</a>
+                           		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              		<a class="dropdown-item" href="mylist.me?mId=${ sessionScope.loginUser.mId }">MYLIST</a>
+                           		</div>
+                        	</li>
                       		<li class="nav-item">
 	                         	<a class="nav-link" href="logout.do">LOGOUT</a>
                       		</li>
@@ -216,6 +223,7 @@
 		$('#goMS').click(function(){
 			window.open("new.ms", "MESSAGE", "width=900, height=900, scrollbars=no;")
 		});
+		
 	</script>
    
 </body>

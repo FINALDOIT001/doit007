@@ -2,6 +2,7 @@ package com.kh.doit.member.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.doit.board.model.vo.Board;
 import com.kh.doit.member.model.service.myPageService;
 import com.kh.doit.member.model.vo.Member;
 
@@ -41,6 +44,17 @@ public class myPageController {
 		}
 		return mv;
 		
+	}
+	
+	@RequestMapping("mylist.me")
+	public ModelAndView mylist(ModelAndView mv, @RequestParam String mId) {
+		
+		ArrayList<Board> fblist = null;
+		
+		fblist = mpService.selectfbList(mId);
+		
+		
+		return mv;
 	}
 	
 	@RequestMapping("mupdate.go")
@@ -100,11 +114,12 @@ public class myPageController {
 	}
 	
 	@RequestMapping("mdelete.go")
-	public String deleteMember(String mId, Model model) {
+	public String deleteMember(String mId, Model model, SessionStatus status) {
 		
 		int result = mpService.deleteMember(mId);
 		
 		if(result > 0) {
+			status.setComplete();
 			return "redirect:index.jsp";
 		}else {
 			model.addAttribute("msg","회원 탈퇴 실패!");

@@ -14,6 +14,7 @@
 		<result property="b_count" column="B_COUNT"/>
 	</resultMap>
 	
+	
 	<resultMap type="BoardComment" id="commentResultSet">
 		<id property="bc_no" column="BC_NO"/>
 		<result property="bc_b_no" column="BC_B_NO"/>
@@ -22,6 +23,14 @@
 		<result property="bc_modifydate" column="BC_MODIFYDATE"/>
 		<result property="bc_content" column="BC_CON"/>
 		<result property="bc_status" column="BC_STATUS"/>
+	</resultMap>
+	
+	<!-- 혜림 추가  -->
+	<resultMap type="Board" id="mypageboardSet">
+		<id property="b_no" column="B_NO" />
+		<result property="b_title" column="B_TITLE"/>
+		<result property="b_writer" column="B_WRITER"/>
+		<result property="b_modifydate" column="B_MODIFYDATE"/>
 	</resultMap>
 	
 	<select id="getListCount" resultType="_int">
@@ -87,6 +96,11 @@
 		SET BC_STATUS='N'
 		WHERE BC_NO=#{bc_no}
 	</update>
-	
+
+ 	<select id="selectfbList" resultMap="mypageboardSet">
+		SELECT B.B_NO, B.B_TITLE, B.B_WRITER, B.B_MODIFYDATE
+		FROM BOARD LEFT JOIN MEMBER M
+		ON B.B_WRITER = #{mId};
+	</select> 
 
 </mapper>

@@ -2,6 +2,7 @@ package com.kh.doit.study.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
@@ -39,7 +40,7 @@ public interface StudyGroupService {
 	 * @param sgNo
 	 * @return
 	 */ 
-	ArrayList<GroupMember> selectGroupMember(int sgNo);
+	ArrayList<Member> memberList(int sgNo);
 
 	
 	/** 스터디그룹 수정(정호)
