@@ -34,6 +34,14 @@
 		WHERE	1=1
 		AND		E_STATUS='Y'
 	</select>
+	
+	<select id="selectEvent" parameterType="_int" resultMap="eventResultSet">
+		SELECT	*
+		FROM	EVENT
+		WHERE	1=1
+		AND		E_NO=#{eNo}
+		AND		E_STATUS='Y'
+	</select>
 
 
 </mapper>

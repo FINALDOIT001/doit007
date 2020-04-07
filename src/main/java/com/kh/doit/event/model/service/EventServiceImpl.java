@@ -24,4 +24,9 @@ public class EventServiceImpl implements EventService {
 	public ArrayList<Event> selectList(EventPageInfo epi) {
 		return eDao.getEventList(epi);
 	}
+
+	@Override
+	public Event selectEvent(int eNo) {
+		return eDao.selectEvent(eNo);
+	}
 }
