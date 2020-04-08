@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,18 +67,21 @@
 					<div class="col-md-4 mt-sm-30">
 						<label
 							style="font-size: xx-large; font-weight: bold; margin-bottom: 20px;">
-							JAVA 스터디 그룹 </label> <br>
+							${sg.sgTitle} </label> <br>
 						<ul>
-							<li style="margin-bottom: 3px;"><span>지역 :</span> ${sg.sgAddr}</li>
-							<li style="margin-bottom: 3px;">모집인원 : 3/${sg.sgMaxPeople}</li>
-							<li style="margin-bottom: 3px;">팀장: ${sg.sgWriter}</li>
-							<li style="margin-bottom: 3px;">보증금 : ${sg.sgDeposit}</li>
-							<li style="margin-bottom: 3px;">수업 진행도 : 모집 중</li>
-							<li style="margin-bottom: 3px;">중간 참여 : <c:if test="${ sg.sgJoin eq 'Y' }"><b style="color:blue">참여 가능</b></c:if>
+							<!-- 아이콘 : font Awesome -->
+							<li style="margin-bottom: 3px;"><i class="fas fa-street-view"></i>&nbsp;&nbsp;&nbsp;지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역 &nbsp;:&nbsp; ${sg.sgAddr}</li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-users"></i>&nbsp;&nbsp;모집인원 &nbsp;:&nbsp; ${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-medal"></i>&nbsp;&nbsp;&nbsp;팀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장 &nbsp;:&nbsp; ${sg.sgWriter}</li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;보&nbsp;&nbsp;증&nbsp;&nbsp;금 &nbsp;:&nbsp; <fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/>원</li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-spinner"></i>&nbsp;&nbsp;&nbsp;진&nbsp;&nbsp;행&nbsp;&nbsp;도 &nbsp;:&nbsp; <c:if test="${ sg.sgConfirm eq 'Y'}">모집중</c:if><c:if test="${ sg.sgConfirm ne 'Y'}">모집 종료</c:if>  </li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-user-check"></i>&nbsp;&nbsp;중간참여 &nbsp;:&nbsp; <c:if test="${ sg.sgJoin eq 'Y' }"><b style="color:blue">참여 가능</b></c:if>
 																	 <c:if test="${ sg.sgJoin eq 'N' }"><b>참여 불가능</b></c:if>
 							</li>
 						</ul>
 						<br>
+						<ul>
+							<li>
 						<c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
 						<button class="genric-btn info radius"
 							style="margin-bottom: 10px; width: 130px;">스터디 가입</button>
@@ -85,11 +90,6 @@
 						<button class="genric-btn info radius"
 							style="margin-bottom: 10px; width: 130px;">스터디 시작</button>
 						</c:if>
-						<div class="starRev"
-							style="width: 60px; display: inline; float: right;">
-							<span class="starR"></span>
-						</div>
-						<br>
 						<c:url var="sgUpview" value="sgUpview.go">
 						<c:param name="sgNo" value="${sg.sgNo}"/>
 						</c:url>
@@ -97,22 +97,27 @@
 						<c:param name="sgNo" value="${sg.sgNo}"/>
 						</c:url>
 						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
-						<button class="genric-btn danger radius btn-block"
+						<button class="genric-btn danger radius"
 							style="width: 130px;" onclick="location.href='${sgUpview}'">스터디 수정</button>
 						</c:if>
 						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
-						<button class="genric-btn danger radius btn-block"
+						<button class="genric-btn danger radius"
 							style="width: 130px;" onclick="location.href='${sgDelete}'">스터디 삭제</button>
 						</c:if>
 						<c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
-						<button class="genric-btn danger radius btn-block"
+						<button class="genric-btn danger radius"
 							style="width: 130px;" onclick="location.href='studyInsertSc.go'">스터디 탈퇴</button>
 						</c:if>
+						<div class="starRev"
+							style="width: 60px; display: inline; float: right;">
+							<span class="starR"></span>
+						</div>
+						</li>
+						</ul>
 					</div>
 					<div class="col-md-4 mt-sm-20">
 						<label class="mb-20"
-							style="margin-left: 45px; font-size: large; font-weight: bold;">참석자
-							(3명)</label>
+							style="margin-left: 45px; font-size: large; font-weight: bold;">참석자(${fn:length(ml)}명)</label>
 
 						<div class="checkuserscroll">
 
@@ -143,12 +148,14 @@
 					<li class="nav-item"><a class="nav-link"
 						style="width: 200px; text-align: center; font-weight: bold;"
 						data-toggle="tab" href="#menu1">일정</a></li>
+					<c:if test="${sg.sgPayment eq 'Y'}">
 					<li class="nav-item"><a class="nav-link"
 						style="width: 200px; text-align: center; font-weight: bold;"
 						data-toggle="tab" href="#menu3">자료실</a></li>
 					<li class="nav-item"><a class="nav-link"
 						style="width: 200px; text-align: center; font-weight: bold;"
 						data-toggle="tab" href="#menu2">갤러리</a></li>
+					</c:if>
 				</ul>
 
 				<br>
