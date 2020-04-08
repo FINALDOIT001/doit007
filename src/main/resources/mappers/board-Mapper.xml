@@ -91,7 +91,7 @@
 		(SEQ_BCNO.NEXTVAL,#{bc_b_no},#{mId},SYSDATE,SYSDATE,#{bc_content},DEFAULT)
 	</insert>
 	
-	<update id="deleteCommnet" parameterType="_int">
+	<update id="deleteComment" parameterType="_int">
 		UPDATE BOARD_COMMENTS
 		SET BC_STATUS='N'
 		WHERE BC_NO=#{bc_no}
