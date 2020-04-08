@@ -34,7 +34,19 @@ public class myPageController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
-
+	@RequestMapping("hodu.me")
+	public String hodu() {
+		return "member/hodupay";
+	}
+	
+	
+	/**
+	 * mypage로 이동
+	 * 김혜림
+	 * @param mv
+	 * @param mId
+	 * @return
+	 */
 	@RequestMapping("myinfo.me")
 	public ModelAndView myinfo(ModelAndView mv,@RequestParam String mId) {
 		Member m = mpService.selectOne(mId);
@@ -47,6 +59,14 @@ public class myPageController {
 		
 	}
 	
+	/**
+	 * mylist로 이동 
+	 * 김혜림
+	 * @param mv
+	 * @param mId
+	 * @param mno
+	 * @return
+	 */
 	@RequestMapping("mylist.me")
 	public ModelAndView mylist(ModelAndView mv, @RequestParam String mId, @RequestParam int mno) {
 		
@@ -55,7 +75,7 @@ public class myPageController {
 		ArrayList<Board> fblist = mpService.selectfbList(mId);
 		ArrayList<BookShare> bslist = mpService.selectbsList(mno);
 		
-		if(fblist != null) {
+		if(m != null) {
 			mv.addObject("m", m);
 			mv.addObject("fblist", fblist);
 			mv.addObject("bslist", bslist);
@@ -70,6 +90,24 @@ public class myPageController {
 		return mv;
 	}
 	
+	/**
+	 * 정보수정 
+	 * 김혜림
+	 * @param m
+	 * @param model
+	 * @param request
+	 * @param file
+	 * @param phone1
+	 * @param phone2
+	 * @param phone3
+	 * @param email
+	 * @param selbox
+	 * @param selboxDirect
+	 * @param address1
+	 * @param address2
+	 * @param address3
+	 * @return
+	 */
 	@RequestMapping("mupdate.go")
 	public String memberUpdate(Member m, Model model,HttpServletRequest request, 
 															@RequestParam(name="updatefile", required=false) MultipartFile file, 
@@ -126,6 +164,14 @@ public class myPageController {
 		
 	}
 	
+	/**
+	 * 회원탈퇴
+	 * 김혜림
+	 * @param mId
+	 * @param model
+	 * @param status
+	 * @return
+	 */
 	@RequestMapping("mdelete.go")
 	public String deleteMember(String mId, Model model, SessionStatus status) {
 		
