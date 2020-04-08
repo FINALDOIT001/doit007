@@ -119,7 +119,7 @@
 							<ul class="checkuser">
 								<c:forEach var="m" items="${ml}">
 								<li><div class="checkuserdiv">
-											<img src="${contextPath}/resources/img/${m.mOrginalfilename}" class="rounded-circle "
+											<img src="${contextPath}/resources/img/${m.mOriginalfilename}" class="rounded-circle "
 											style="height: 70px;" alt="Cinque Terre">
 											<c:out value="${m.mName}"/>
 									</div></li>
