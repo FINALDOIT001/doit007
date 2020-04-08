@@ -62,8 +62,8 @@
                   	<td align="left">
                   		<c:if test="${ !empty loginUser }">
                   			<c:url var="fbDetail" value="fbDetail.go">
-                  				<c:param name="b_no" value="${ b.b_no }"></c:param>
-                  				<c:param name="currentPage" value="${ pi_h.currentPage }"></c:param>
+                  				<c:param name="b_no" value="${ b.b_no }"/>
+                  				<c:param name="currentPage" value="${ pi_h.currentPage }"/>
                   			</c:url>
                   			<a href="${ fbDetail }">${ b.b_title }</a>
                   		</c:if>
@@ -108,7 +108,7 @@
 						</c:if>
 						
 						<c:if test="${ p ne pi_h.currentPage }">
-							<c:url var="pagination" value="blist.do">
+							<c:url var="pagination" value="fblist.go">
 								<c:param name="currentPage" value="${ p }"/>
 							</c:url>
 							<a href="${ pagination }">${ p }</a> &nbsp;

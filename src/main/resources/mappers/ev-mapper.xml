@@ -44,6 +44,7 @@
 		FROM	EVENT
 		WHERE	1=1
 		AND		E_STATUS='Y'
+		ORDER BY 1 DESC
 	</select>
 	
 	<select id="selectEvent" parameterType="_int" resultMap="eventResultSet">
@@ -61,6 +62,25 @@
 		AND		EC_E_NO=#{eNo}
 		AND		EC_STATUS='Y'
 	</select>
+	
+	<insert id="insertEvent" parameterType="Event">
+		INSERT INTO EVENT VALUES(
+			SEQ_ENO.NEXTVAL
+			,#{eIntro}
+			,#{eTitle}
+			,#{eCon}
+			,#{eTag}
+			,#{eOriginalFileName}
+			,#{eRenameFileName}
+			,#{eWriter}
+			,#{eWriterNo}
+			,#{eType}
+			,DEFAULT
+			,#{eMonth}
+			,#{eDays}
+			,DEFAULT
+		)
+	</insert>
 	
 	<insert id="insertReply" parameterType="EventReply">
     	INSERT INTO EVENT_COMMENTS VALUES(

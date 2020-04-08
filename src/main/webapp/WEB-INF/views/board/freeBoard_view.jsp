@@ -6,6 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판</title>
+<style>
+	.hyun_del {
+		padding:10px;
+	}
+	.hyun_del img {
+		margin-left:7px;
+		width:18px;
+		height:18px;
+	}
+	.x_comment {
+		padding:10px;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -108,8 +121,12 @@ ${ b.b_content }
 		
 				<table>
 					<tr>
-						<td><textarea class="form-control placeholder hide-on-focus" id="bc_content" style="width:1050px; height:80px; margin:15px;" placeholder="댓글을 입력해 주세요."></textarea></td>
-						<td><button id="bcSubmit" class="genric-btn danger radius" style="font-size: 13px;width:90px; height:40px;">등록</button></td>
+						<td style="border-bottom:none;">
+						<textarea class="form-control placeholder hide-on-focus" id="bc_content" style="width:1050px; height:80px; margin:15px; margin-top:40px;" placeholder="댓글을 입력해 주세요."></textarea>
+						</td>
+						<td style="border-bottom:none;">
+						<button id="bcSubmit" class="genric-btn danger radius" style="font-size:12px;width:87px; height:40px; margin-top:25px;">등록</button>
+						</td>
 					</tr>
 				</table>	
 				
@@ -117,7 +134,7 @@ ${ b.b_content }
 				<table width="1000" cellspacing="0" id="bctb" style="margin:15px;">
 				<thead>
 					<tr>
-						<td style="padding:10px;" colspan="4"><b id="bcCount" style="color:black; margin-left:7px;"></b></td>
+						<td style="padding:10px;" colspan="3"><b id="bcCount" style="color:black; margin-left:7px;"></b></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -177,7 +194,7 @@ ${ b.b_content }
 						if(data == "success"){
 							getCommentList();
 							
-							$('#bc_content').val("");
+							$('#bc_content').val(""); // 초기화 
 						}
 					},error:function(){
 						console.log("댓글 등록에 실패하였습니다"); 
@@ -204,30 +221,30 @@ ${ b.b_content }
 					var $mId;
 					var $bc_content;
 					var $bc_createdate;
-					var $bc_status;
+					/* var $bc_status; */
 					
 					$('#bcCount').text("댓글("+data.length+")");
 					
 					if(data.length > 0) {
 						for(var i in data){
 							$tr = $("<tr>");
-							$mId = $("<td width='100'>").text(data[i].mId);
+							$mId = $("<td width='150'>").text(data[i].mId);
 							$bc_no = data[i].bc_no;
-							$bc_content = $("<td>").text(data[i].bc_content); 
-							$bc_createdate = $("<td width='100'>").text(data[i].bc_createdate);
-							$bc_status = $("<td width='100'>").text(data[i].bc_status);
+							$bc_content = $("<td width='540'>").text(data[i].bc_content); 
+							$bc_createdate = $("<td width='150'>").text(data[i].bc_createdate);
+							/* $bc_status = $("<td width='100'>").text(data[i].bc_status); */
 							
 							$tr.append("<input type='hidden' value='"+$bc_no+"'>");
 							$tr.append($mId);
 							$tr.append($bc_content);
 							$tr.append($bc_createdate);
-							$tr.append($bc_status);
-							$tr.append("<td><button class='test1111''>삭제</button></td>");
+							/* $tr.append($bc_status); */
+							$tr.append("<label class='hyun_del'><img src='resources/img/delete.png'></label></td>");
 							$tableBody.append($tr);
 						}
 					}else {
 						$tr = $("<tr>");
-						$bc_content = $("<td colspan='3'>").text("등록된 댓글이 없습니다.");
+						$bc_content = $("<td colspan='3' class='x_comment'>").text("등록된 댓글이 없습니다.");
 						$tr.append($bc_content);
 						$tableBody.append($tr);
 					}
@@ -236,27 +253,26 @@ ${ b.b_content }
 		};
 		
 
-		$('.test1111').on('click',function() {
-			console.log($(this).parent().parent().children().eq(0).val());
-		});
+		$(document).on("click",".hyun_del",function(){
+			
+			
+		    var bc_no = $(this).parent().children().eq(0).val();
+		    
+		    alert("삭제하시겠습니까?");
 		
-		
-/* 				$.ajax({
-					url:"deleteComment.go",
-					data:{bc_no:bc_no},
-					type:"post",
-					success:function(data) {
-						if(data == "success") {
-							getCommentList(); 
-							
-							
-						}
-					},error:function(){
-						console.log("댓글 삭제에 실패하였습니다"); 
+			$.ajax({
+				url:"deleteComment.go",
+				data:{bc_no:bc_no},
+				type:"post",
+				success:function(data) {
+					if(data == "success") {
+						getCommentList(); 
 					}
-				});
-		};  */
-		
+				},error:function(){
+					console.log("댓글 삭제에 실패하였습니다"); 
+				}
+			});
+		});
 		
 	</script>
 	

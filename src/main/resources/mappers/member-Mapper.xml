@@ -12,7 +12,7 @@
    		<result property="mAddr" column="M_ADDR" />
    		<result property="mPhone" column="M_PHONE" />
    		<result property="mEmail" column="M_EMAIL" />
-   		<result property="mOrginalfilename" column="M_ORGINAL_FILENAME" />
+   		<result property="mOriginalfilename" column="M_ORIGINAL_FILENAME" />
    		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
    		<result property="mEnrolldate" column="M_ENROLL_DATE" />
    		<result property="mUpdatedate" column="M_UPDATE_DATE" />
@@ -42,7 +42,7 @@
     <update id="memberupdate" parameterType="Member">
     	UPDATE MEMBER
     	SET M_PWD=#{mPwd},M_NAME=#{mName},M_ADDR=#{mAddr},M_PHONE=#{mPhone},M_EMAIL=#{mEmail},
-    		M_ORGINAL_FILENAME=#{mOrginalfilename},M_RENAME_FILENAME=#{mRenamefilename},
+    		M_ORIGINAL_FILENAME=#{mOriginalfilename},M_RENAME_FILENAME=#{mRenamefilename},
     		M_UPDATE_DATE=SYSDATE
     	WHERE M_ID=#{mId}
     </update>

@@ -63,8 +63,18 @@ public class EventDao {
 		return (ArrayList)sqlSession.selectList("evMapper.selectReply", eNo);
 	}
 
+	/**
+	 * Event Page 댓글달기 Kwon
+	 * 2020.04.07 KH
+	 * @param er
+	 * @return
+	 */
 	public int insertReply(EventReply er) {
 		return sqlSession.insert("evMapper.insertReply", er);
+	}
+
+	public int insertEvent(Event e) {
+		return sqlSession.insert("evMapper.insertEvent",e);
 	}
 }
 

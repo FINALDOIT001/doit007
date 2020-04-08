@@ -31,7 +31,8 @@ public class Event implements Serializable{
 	}
 
 	public Event(int eNo, String eIntro, String eTitle, String eCon, String eTag, String eOriginalFileName,
-			String eRenameFileName, String eWriter, int eWriterNo, String eType, int eMonth, int eDays, Date eDate, String eStatus) {
+			String eRenameFileName, String eWriter, int eWriterNo, String eType, int eMonth, int eDays, Date eDate,
+			String eStatus) {
 		super();
 		this.eNo = eNo;
 		this.eIntro = eIntro;
@@ -159,6 +160,10 @@ public class Event implements Serializable{
 
 	public void seteStatus(String eStatus) {
 		this.eStatus = eStatus;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

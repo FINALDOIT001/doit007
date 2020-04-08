@@ -54,15 +54,15 @@
               </div>
 
               <div class="blog_details">
-                <a class="d-inline-block" href="single-blog.html">
+                <a class="d-inline-block">
                   <h2>${ event.eTitle }</h2>
                 </a>
                 <p>${ event.eIntro }</p>
                 <ul class="blog-info-link">
-                  <li><a href="#"><i class="far fa-user"></i> IT, AI</a></li>
-                  <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                  <li><a href="#"><i class="far fa-heart"></i> 21</a></li>
-                  <li><a href="#"><i class="far fa-edit"></i> 관리자</a></li>
+                  <li><i class="far fa-user"></i> IT, AI</li>
+                  <li><i class="far fa-comments"></i> 03 Comments</li>
+                  <li><i class="far fa-heart"></i> 21</li>
+                  <li><i class="far fa-edit"></i> ${ event.eWriter }</li>
                 </ul> 
               </div>
             </article>
@@ -241,7 +241,7 @@
 		$('.eList001').on('click',function() {
 			var eNo = $(this).children().eq(0).val();
 
-			location.href="eventView.go?eNo="+eNo;
+			location.href="eventView.ev?eNo="+eNo;
 		})
 	
 	

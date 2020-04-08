@@ -20,7 +20,7 @@
 		<result property="sgLocation" column="SG_LOCATION" />
 		<result property="sgJoin" column="SG_JOIN_YN" />
 		<result property="sgCon" column="SG_CON" />
-		<result property="sgOrginalFileName" column="SG_ORGINAL_FILENAME" />
+		<result property="sgOriginalFileName" column="SG_ORIGINAL_FILENAME" />
 		<result property="sgRenameFileName" column="SG_RENAME_FILENAME" />
 		<result property="sgTag" column="SG_TAG"/>
 		<result property="sgPayment" column="SG_PAYMENT_YN"/>
@@ -36,7 +36,7 @@
    		<result property="mAddr" column="M_ADDR" />
    		<result property="mPhone" column="M_PHONE" />
    		<result property="mEmail" column="M_EMAIL" />
-   		<result property="mOrginalfilename" column="M_ORGINAL_FILENAME" />
+   		<result property="mOriginalfilename" column="M_ORIGINAL_FILENAME" />
    		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
    		<result property="mEnrolldate" column="M_ENROLL_DATE" />
    		<result property="mUpdatedate" column="M_UPDATE_DATE" />
@@ -61,7 +61,7 @@
 	
 	INSERT INTO STUDY_GROUP
 	VALUES(SEQ_SGNO.NEXTVAL,#{sgTitle},#{sgWriter},#{sgWriterNo},1,#{sgMaxPeople},#{sgAddr},#{sgDeposit},SYSDATE,
-	#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOrginalFileName},#{sgRenameFileName},
+	#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOriginalFileName},#{sgRenameFileName},
 	#{sgTag},DEFAULT,DEFAULT,DEFAULT)
 	
 	</insert>
@@ -91,7 +91,7 @@
 		SG_LOCATION = #{sgLocation},
 		SG_JOIN_YN = #{sgJoin},
 		SG_CON = #{sgCon},
-		SG_ORGINAL_FILENAME = #{sgOrginalFileName},
+		SG_ORIGINAL_FILENAME = #{sgOriginalFileName},
 		SG_RENAME_FILENAME = #{sgRenameFileName},
 		SG_TAG = #{sgTag}
 		WHERE SG_NO = #{sgNo}
