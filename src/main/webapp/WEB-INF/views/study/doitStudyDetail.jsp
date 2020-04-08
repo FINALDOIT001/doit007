@@ -9,8 +9,11 @@
 <meta charset="UTF-8">
 <title>DoitStudyDtail</title>
 
+<%-- <link href='${contextPath}/resources/plugins/fullcalenda/daygrid/main.css' rel='stylesheet' />
+<link href='${contextPath}/resources/plugins/fullcalenda/core/main.css' rel='stylesheet' /> --%>
 
-
+<link href='${fullcalPath}/daygrid/main.css' rel='stylesheet' />
+<link href='${fullcalPath}/core/main.css' rel='stylesheet' />
 
 <style>
 
@@ -29,6 +32,44 @@
 .starR.on {
 	background-position: 0 0;
 }
+
+<!-- 모달 css -->
+   .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 8% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+           
+                                     
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+<!-- 모달 css -->
 </style>
 
 </head>
@@ -46,7 +87,7 @@
 	<!-- 데이타테이블 CSS -->
 	<link rel="stylesheet"
 		href="${contextPath}/resources/css/datatables.css">
-
+	
 
 
 	<!-- Start Align Area -->
@@ -172,19 +213,11 @@
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div class="tab-pane container active" id="home">
-						<!--
-				
-				<div class="col-lg-8">
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-				</div>
-
-			-->
 						<div class="col-lg-12 div_border">
-							<span
-								style="font-size: x-large; font-weight: bold; display: block; margin-bottom: 30px;">활동
-								계획</span> ${sg.sgCon}
+							
+								<div id='calendar'></div>
+								
+								
 						</div>
 
 
@@ -192,61 +225,9 @@
 
 					</div>
 					<div class="tab-pane container fade" id="menu1">
-						<div id="kwon-inst01">
-							<div id="kwon-inst-btn101" class="btn btn-outline-success"
-								onclick="location.href='studyInsertSc.go'">모임 등록</div>
-						</div>
-
-						<div>
-
-							<table id="kwon-table101" class="table table-bordered">
-								<thead class="kwon-thead101">
-									<th width="10%" class="th101">모임일자</th>
-									<th width="10%" class="th101">시간</th>
-									<th width="10%" class="th101">지역</th>
-									<th width="10%" class="th101">장소</th>
-									<th width="10%" class="th101">카테고리</th>
-									<th width="10%" class="th101">모임명</th>
-									<th width="8%" class="th101">참석 인원</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="kwon-tr1" onclick="location.href='studySc.go'">
-										<input type="hidden" value="모임의 아이디 값1" name="아이디 네임">
-										<td class="kwon-td101">2020.03.11</td>
-										<td class="kwon-td101">PM 18:00</td>
-										<td class="kwon-td101">강남</td>
-										<td class="kwon-td101">Test021</td>
-										<td class="kwon-td101">사당역 부근</td>
-										<td class="kwon-td101">2020.03.11</td>
-										<td class="kwon-td101">0/10</td>
-									</tr>
-									<tr class="kwon-tr1" onclick="location.href='studySc.go'">
-										<input type="hidden" value="모임의 아이디 값2" name="아이디 네임">
-										<td class="kwon-td101">2020.03.12</td>
-										<td class="kwon-td101">PM 18:00</td>
-										<td class="kwon-td101">강남</td>
-										<td class="kwon-td101">Test021</td>
-										<td class="kwon-td101">사당역 부근</td>
-										<td class="kwon-td101">2020.03.11</td>
-										<td class="kwon-td101">9/10</td>
-									</tr>
-									<tr class="kwon-tr1" onclick="location.href='studySc.go'">
-										<input type="hidden" value="모임의 아이디 값3" name="아이디 네임">
-										<td class="kwon-td101">2020.03.13</td>
-										<td class="kwon-td101">PM 18:00</td>
-										<td class="kwon-td101">강남</td>
-										<td class="kwon-td101">Test021</td>
-										<td class="kwon-td101">사당역 부근</td>
-										<td class="kwon-td101">2020.03.11</td>
-										<td class="kwon-td101">10/10</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-
-
+					
+					<span style="font-size: x-large; font-weight: bold; display: block; margin-bottom: 30px;">활동계획</span> ${sg.sgCon}
+							
 					</div>
 
 					<!------------------------------------- 사진 파트 --------------------------------------->
@@ -308,10 +289,196 @@
 			</div>
 		</div>
 	</section>
+	<!-- 모달이 가자 -->
+	<div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content" style='width:60%; height:70%;'>
+        <span class="close" onclick="closebtn();" >&times;</span>
+        <br>
+            <section class="about_part">
+		<div class="container">
+		<form action="sgInsert.go" method="post"
+							enctype="multipart/form-data" class="was-validated">
+			<div class="row">
+				<div class="col-lg-6 col-md-6">
+
+
+					<div class="filebox">
+						<label for="cma_file" class="rounded"> <input type="file"
+							name="sbul" id="cma_file" accept="image/*" capture="camera"
+							onchange="getThumbnailPrivew(this,$('#cma_image'))" />
+							<div id="cma_image"></div>
+						</label>
+
+					</div>
+				</div>
+				
+				<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6"
+					style="margin-top: 3%;">
+					<div class="about_text">
+
+							<div class="row">
+								<div class="col">
+									<input type="text" class="form-control" placeholder="공부방 제목 입력"
+										name="sgTitle" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">공부방 제목 입역</div>
+									<input type="text" class="form-control" value="${loginUser.mId}"
+										name="sgWriter" hidden>
+									<input type="number" class="form-control" value="${loginUser.mno}"
+										name="sgWriterNo" hidden>
+									<!-- 방 개설 자 아이디 자동 입력 구간-->
+								</div>
+							</div>
+							<br>
+
+								
+							<div class="row">
+								<div class="col">
+									<input type="text" id="from" class="form-control"
+										placeholder="시작 날짜 설정" name="sgStartDate" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">시작 기간 설정</div>
+								</div>
+								<div class="col">
+									<input type="text" id="to" class="form-control"
+										placeholder="종료 날짜 설정" name="sgEndDate" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">종료 기간 설정</div>
+								</div>
+							</div>
+							<br>
+
+							<div class="row">
+								<div class="col">
+									<input type="text" class="form-control" placeholder="지역 입력"
+										name="sgAddr" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">지역입력 예) 서울</div>
+								</div>
+								<div class="col">
+									<input type="text" class="form-control" placeholder="장소 입력"
+										name="sgLocation" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">장소입력 예) xxx커피집</div>
+								</div>
+							</div>
+							<br>
+
+							<div class="row">
+								<div class="col">
+									<input type="number" min="0" class="form-control"
+										placeholder="보증금 입력" name="sgDeposit" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">인당 보증급 설정</div>
+								</div>
+								<div class="col">
+									<input type="number" min="1" class="form-control"
+										placeholder="모집 인원" name="sgMaxPeople" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">모집 인원 설정</div>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
+									<input type="text" id="teg" class="form-control"
+										placeholder="검색어 등록" name="sgTag" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">검색어 입력 예) @JAVA</div>
+								</div>
+							</div>
+							<br> <br>
+
+							<div class="form-group form-check">
+								<label class="form-check-label"> <input
+									class="form-check-input" type="checkbox" name="sgJoin"
+									> 수업 중간 참여 가능 여부 체크 해주세요.
+									<div class="valid-feedback">중간참여 가능여부 체크 필요</div>
+									
+								</label>
+							</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div style="text-align: center; margin-top: 20px;">
+	
+				<button type="submit" class="genric-btn danger circle"
+					style="font-size: 13px; margin-right: 10px;">등록</button>
+				<button type="reset" class="genric-btn danger circle"
+					style="font-size: 13px;">취소</button>
+			</div>
+			</form>
+		</div>
+	</section>                                                    
+        
+      </div>
+ 
+    </div>
+    <!--  모달이 꺼져 -->
+    
+	
 	<!-- End Align Area -->
 
 	<jsp:include page="../common/footer.jsp" />
+	   
+	   
+	<script src='${fullcalPath}/core/main.js'></script>
+	<script src='${fullcalPath}/daygrid/main.js'></script>
+	<script src='${fullcalPath}/interaction/main.js'></script>
+	
+	
+	
+	<script>
+	
+	function closebtn(){//모달창 닫기
+		$("#myModal").css("display","none");
+	}
+	
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+    
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        plugins: [ 'dayGrid', 'interaction' ],
+        header: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'today',
+          },
+          locale: 'ko',
+          defaultView: 'dayGridMonth',
+          selectable: true,
+          select:function(){
+        	
+                  $('#myModal').css("display","block");
+              		
+          },
+         
+          events:[
+        	  
+        	  {
+        		  title:'java',
+        		  description: 'description for Long Event',
+        		  start : '2020-04-09'
+        	  }
+          ]
+          
+      });
+    
+      calendar.render();
+    });
+	</script>
+	
+	
+	<script>
 
+	</script>
+	
+	   
+	   
+	
 	<script>
 		/*** 별점 ****************************************************/
 		$('div.starRev').children('span').click(function() {
