@@ -9,6 +9,8 @@
 </head>
 <body>
 	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
+	<c:set var="fullcalPath" value="${ pageContext.servletContext.contextPath }/resources/plugins/fullcalenda" scope="application"/>
+	
 
 	<jsp:forward page="main.go"/>
  
