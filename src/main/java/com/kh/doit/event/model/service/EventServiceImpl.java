@@ -42,4 +42,9 @@ public class EventServiceImpl implements EventService {
 		return eDao.insertReply(er);
 	}
 
+	@Override
+	public int insertEvent(Event e) {
+		return eDao.insertEvent(e);
+	}
+
 }

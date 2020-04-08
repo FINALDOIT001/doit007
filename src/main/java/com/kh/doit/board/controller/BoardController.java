@@ -44,7 +44,7 @@ public class BoardController {
 		
 		int listCount = bService.getListCount(); 
 		
-		PageInfo_ha pi_h = Pagination_ha.getPageInfo_ha(currentPage,listCount);
+		PageInfo_ha pi_h = Pagination_ha.getPageInfo(currentPage,listCount);
 		
 		ArrayList<Board> list = bService.selectList(pi_h); 
 		

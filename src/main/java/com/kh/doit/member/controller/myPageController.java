@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.doit.board.model.vo.Board;
+import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.service.myPageService;
 import com.kh.doit.member.model.vo.Member;
 
@@ -33,7 +34,19 @@ public class myPageController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
-
+	@RequestMapping("hodu.me")
+	public String hodu() {
+		return "member/hodupay";
+	}
+	
+	
+	/**
+	 * mypage로 이동
+	 * 김혜림
+	 * @param mv
+	 * @param mId
+	 * @return
+	 */
 	@RequestMapping("myinfo.me")
 	public ModelAndView myinfo(ModelAndView mv,@RequestParam String mId) {
 		Member m = mpService.selectOne(mId);
@@ -46,17 +59,55 @@ public class myPageController {
 		
 	}
 	
+	/**
+	 * mylist로 이동 
+	 * 김혜림
+	 * @param mv
+	 * @param mId
+	 * @param mno
+	 * @return
+	 */
 	@RequestMapping("mylist.me")
-	public ModelAndView mylist(ModelAndView mv, @RequestParam String mId) {
+	public ModelAndView mylist(ModelAndView mv, @RequestParam String mId, @RequestParam int mno) {
 		
-		ArrayList<Board> fblist = null;
+		Member m = mpService.selectOne(mId);
 		
-		fblist = mpService.selectfbList(mId);
+		ArrayList<Board> fblist = mpService.selectfbList(mId);
+		ArrayList<BookShare> bslist = mpService.selectbsList(mno);
+		
+		if(m != null) {
+			mv.addObject("m", m);
+			mv.addObject("fblist", fblist);
+			mv.addObject("bslist", bslist);
+			System.out.println(bslist);
+			mv.setViewName("member/myList");
+		}else {
+			mv.addObject("msg", "자유게시판 리스트 불러오기 실패 !");
+			mv.setViewName("common/errorPage");
+		}
 		
 		
 		return mv;
 	}
 	
+	/**
+	 * 정보수정 
+	 * 김혜림
+	 * @param m
+	 * @param model
+	 * @param request
+	 * @param file
+	 * @param phone1
+	 * @param phone2
+	 * @param phone3
+	 * @param email
+	 * @param selbox
+	 * @param selboxDirect
+	 * @param address1
+	 * @param address2
+	 * @param address3
+	 * @return
+	 */
 	@RequestMapping("mupdate.go")
 	public String memberUpdate(Member m, Model model,HttpServletRequest request, 
 															@RequestParam(name="updatefile", required=false) MultipartFile file, 
@@ -96,7 +147,7 @@ public class myPageController {
 			
 			System.out.println(mRenamefilename);
 			if(mRenamefilename != null) {
-				m.setmOrginalfilename(file.getOriginalFilename());
+				m.setmOriginalfilename(file.getOriginalFilename());
 				m.setmRenamefilename(mRenamefilename);
 			}
 		}
@@ -113,6 +164,14 @@ public class myPageController {
 		
 	}
 	
+	/**
+	 * 회원탈퇴
+	 * 김혜림
+	 * @param mId
+	 * @param model
+	 * @param status
+	 * @return
+	 */
 	@RequestMapping("mdelete.go")
 	public String deleteMember(String mId, Model model, SessionStatus status) {
 		
@@ -139,11 +198,11 @@ public class myPageController {
 			folder.mkdir(); // 폴더가 없으면 생성
 		}
 		
-		String mOrginalfilename = file.getOriginalFilename();
+		String mOriginalfilename = file.getOriginalFilename();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String mRenamefilename = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "." 
-						+ mOrginalfilename.substring(mOrginalfilename.lastIndexOf(".")+1);
+						+ mOriginalfilename.substring(mOriginalfilename.lastIndexOf(".")+1);
 		
 		String renamePath = folder + "\\" + mRenamefilename;
 		

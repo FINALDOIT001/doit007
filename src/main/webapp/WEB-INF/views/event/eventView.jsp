@@ -163,8 +163,19 @@
                        </div>
                      </div>
                      <button class="button rounded-0 primary-bg text-white w-100" type="submit">검색</button>
-                   </form>
-                 </aside>   
+                     
+                       </form>
+	                 <c:url var="eUpdate" value="eUpdate.go">
+                     	<c:param name="eNo" value="${ ev.eNo }"/>
+                     </c:url>
+                     
+					<c:if test="${ loginUser.mName eq ev.eWriter }">                     
+                      <button class="button rounded-0 primary-bg text-white w-100" type="button"
+                       onclick="location.href='${ eUpdate }'">수정</button>
+                      <button class="button rounded-0 primary-bg text-white w-100" type="button">삭제</button>
+                 	</c:if>
+                    
+                 </aside>
      
                  <aside class="single_sidebar_widget popular_post_widget">
                    <h3 class="widget_title">최근 게시물</h3>

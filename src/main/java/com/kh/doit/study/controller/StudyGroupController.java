@@ -247,6 +247,7 @@ public class StudyGroupController {
 		
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
+		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
 		
 		if (sg != null) {
