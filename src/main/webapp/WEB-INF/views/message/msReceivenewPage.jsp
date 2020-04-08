@@ -5,21 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MESSAGE</title>
+<title>Insert title here</title>
 </head>
 <body>
-		
+
 	<jsp:include page="../message/MsHeader.jsp" />
 	
-	<script>
-		/* var strWidth = $('#container').outerWidth() + (window.outerWidth - window.innerWidth);
-		var strHeight = $('#container').outerHeight() + (window.outerHeight - window.innerHeight); */
+	<table style="margin-left: 5%;width: 800px;height: 500px;">
 		
-		$(window).on('load',function(){
-			window.resizeTo(700, 700);
-		});
+	</table>
+	
+	
+	<script>
 		
 	</script>
-	
 </body>
 </html>

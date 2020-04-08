@@ -17,7 +17,7 @@
 		<typeAlias type="com.kh.doit.bookShare.model.vo.BookShareReply" alias="BookShareReply"/>
 		<typeAlias type="com.kh.doit.study.model.vo.GroupMember" alias="GroupMember"/>
 		<typeAlias type="com.kh.doit.event.model.vo.Event" alias="Event"/>
-		
+		<typeAlias type="com.kh.doit.message.model.vo.Message" alias="Message"/>
 		
 		
 		<typeAlias type="com.kh.doit.event.model.vo.EventReply" alias="EventReply"/>
@@ -39,6 +39,7 @@
 		<mapper resource="mappers/bs-mapper.xml"/>
 		<mapper resource="mappers/board-Mapper.xml"/>
 		<mapper resource="mappers/ev-mapper.xml"/>
+		<mapper resource="mappers/message-Mapper.xml"/>
 	</mappers>
 	
 </configuration>

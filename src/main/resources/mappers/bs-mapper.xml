@@ -30,6 +30,20 @@
     	<result property="bscStatus" column="BSC_STATUS"/>
     </resultMap>
     
+    <!-- 혜림 추가 -->
+    <resultMap id="mypagebookSet" type="BookShare">
+    	<id property="bsNo" column="BS_NO"/>
+    	<result property="bsCategory" column="BS_CATEGORY"/>
+    	<result property="bsTitle" column="BS_TITLE" />
+    	<result property="bsWriter" column="BS_WRITER"/>
+    	<result property="bsState" column="BS_STATE"/>
+    	<result property="bsDate" column="BS_DATE"/>
+    	
+    	<association property="member" javaType="Member">
+    		<result property="mno" column="M_NO"/>
+    	</association>
+    </resultMap>
+    
     <select id="selectBSList" resultMap="BSResultSet">
     	SELECT	*
    		FROM	BOOK_SHARE
@@ -109,5 +123,12 @@
     	AND		BS_NO=#{bsNo}
     </update>
     
+    <select id="selectbsList" parameterType="_int" resultMap="mypagebookSet">
+    	SELECT BS.BS_NO, BS.BS_CATEGORY, BS.BS_TITLE, BS.BS_WRITER, BS.BS_DATE, BS.BS_STATE
+    	FROM BOOK_SHARE BS 
+    	JOIN MEMBER M ON BS.BS_WRITER_NO = M.M_NO
+    	WHERE BS.BS_WRITER_NO=#{mno}
+    	
+    </select>
     
 </mapper>
