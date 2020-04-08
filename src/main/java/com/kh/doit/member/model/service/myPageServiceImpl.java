@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.doit.board.model.vo.Board;
+import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.dao.myPageDao;
 import com.kh.doit.member.model.vo.Member;
 
@@ -37,6 +38,11 @@ public class myPageServiceImpl implements myPageService{
 	@Override
 	public ArrayList<Board> selectfbList(String mId) {
 		return mpDao.selectfbList(mId);
+	}
+
+	@Override
+	public ArrayList<BookShare> selectbsList(int mno) {
+		return mpDao.selectbsList(mno);
 	}
 
 

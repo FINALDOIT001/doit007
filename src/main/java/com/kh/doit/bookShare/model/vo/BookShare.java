@@ -5,6 +5,8 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.kh.doit.member.model.vo.Member;
+
 @Component
 public class BookShare implements Serializable{
 	
@@ -26,12 +28,15 @@ public class BookShare implements Serializable{
 	private String bsType;
 	private String bsStatus;
 	
+	private Member member;
+	
 	public BookShare() {
 	}
 
 	public BookShare(int bsNo, String bsLocation, String bsCategory, String bsTitle, String bsCon,
 			String bsOriginalFileName, String bsRenameFileName, String bsWriter, int bsWriterNo, String bsState,
-			Date bsDate, String bsType, String bsStatus) {
+			Date bsDate, String bsType, String bsStatus, Member member) {
+		super();
 		this.bsNo = bsNo;
 		this.bsLocation = bsLocation;
 		this.bsCategory = bsCategory;
@@ -45,6 +50,7 @@ public class BookShare implements Serializable{
 		this.bsDate = bsDate;
 		this.bsType = bsType;
 		this.bsStatus = bsStatus;
+		this.member = member;
 	}
 
 	public int getBsNo() {
@@ -151,12 +157,24 @@ public class BookShare implements Serializable{
 		this.bsStatus = bsStatus;
 	}
 
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "BookShare [bsNo=" + bsNo + ", bsLocation=" + bsLocation + ", bsCategory=" + bsCategory + ", bsTitle="
 				+ bsTitle + ", bsCon=" + bsCon + ", bsOriginalFileName=" + bsOriginalFileName + ", bsRenameFileName="
 				+ bsRenameFileName + ", bsWriter=" + bsWriter + ", bsWriterNo=" + bsWriterNo + ", bsState=" + bsState
-				+ ", bsDate=" + bsDate + ", bsType=" + bsType + ", bsStatus=" + bsStatus + "]";
+				+ ", bsDate=" + bsDate + ", bsType=" + bsType + ", bsStatus=" + bsStatus + ", member=" + member + "]";
 	}
 	
 	

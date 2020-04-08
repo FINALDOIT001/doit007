@@ -169,7 +169,7 @@
                               		onclick="location.href='myinfo.me?mId=${ sessionScope.loginUser.mId }'">MYPAGE</button>
                            		</a>
                            		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              		<a class="dropdown-item" href="mylist.me?mId=${ sessionScope.loginUser.mId }">MYLIST</a>
+                              		<a class="dropdown-item" href="mylist.me?mId=${ sessionScope.loginUser.mId }&mno=${ sessionScope.loginUser.mno }">MYLIST</a>
                            		</div>
                         	</li>
                       		<li class="nav-item">

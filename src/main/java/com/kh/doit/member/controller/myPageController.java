@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.doit.board.model.vo.Board;
+import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.service.myPageService;
 import com.kh.doit.member.model.vo.Member;
 
@@ -47,11 +48,23 @@ public class myPageController {
 	}
 	
 	@RequestMapping("mylist.me")
-	public ModelAndView mylist(ModelAndView mv, @RequestParam String mId) {
+	public ModelAndView mylist(ModelAndView mv, @RequestParam String mId, @RequestParam int mno) {
 		
-		ArrayList<Board> fblist = null;
+		Member m = mpService.selectOne(mId);
 		
-		fblist = mpService.selectfbList(mId);
+		ArrayList<Board> fblist = mpService.selectfbList(mId);
+		ArrayList<BookShare> bslist = mpService.selectbsList(mno);
+		
+		if(fblist != null) {
+			mv.addObject("m", m);
+			mv.addObject("fblist", fblist);
+			mv.addObject("bslist", bslist);
+			System.out.println(bslist);
+			mv.setViewName("member/myList");
+		}else {
+			mv.addObject("msg", "자유게시판 리스트 불러오기 실패 !");
+			mv.setViewName("common/errorPage");
+		}
 		
 		
 		return mv;

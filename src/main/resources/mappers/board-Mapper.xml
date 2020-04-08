@@ -31,6 +31,11 @@
 		<result property="b_title" column="B_TITLE"/>
 		<result property="b_writer" column="B_WRITER"/>
 		<result property="b_modifydate" column="B_MODIFYDATE"/>
+		
+		<association property="member" javaType="Member">
+			<result property="mId" column="M_ID" />
+		</association>
+		
 	</resultMap>
 	
 	<select id="getListCount" resultType="_int">
@@ -99,8 +104,9 @@
 
  	<select id="selectfbList" resultMap="mypageboardSet">
 		SELECT B.B_NO, B.B_TITLE, B.B_WRITER, B.B_MODIFYDATE
-		FROM BOARD LEFT JOIN MEMBER M
-		ON B.B_WRITER = #{mId};
+		FROM BOARD B JOIN MEMBER M
+		ON B.B_WRITER = M.M_ID
+		WHERE B.B_WRITER=#{mId}
 	</select> 
 
 </mapper>
