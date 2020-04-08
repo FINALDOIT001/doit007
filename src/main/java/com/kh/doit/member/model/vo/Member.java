@@ -15,7 +15,7 @@ public class Member{
 	private String mAddr; //주소
 	private String mPhone; //전화번호
 	private String mEmail; //이메일
-	private String mOrginalfilename; //원본 파일명
+	private String mOriginalfilename; //원본 파일명
 	private String mRenamefilename; //바뀐 파일명
 	private Date mEnrolldate; //가입일
 	private Date mUpdatedate; //수정일
@@ -30,7 +30,7 @@ public class Member{
 	}
 
 	public Member(int mno, String mId, String mPwd, String mName, String mAddr, String mPhone, String mEmail,
-			String mOrginalfilename, String mRenamefilename, Date mEnrolldate, Date mUpdatedate, int mUserroles,
+			String mOriginalfilename, String mRenamefilename, Date mEnrolldate, Date mUpdatedate, int mUserroles,
 			String mStatus, GroupMember gm) {
 		super();
 		this.mno = mno;
@@ -40,7 +40,7 @@ public class Member{
 		this.mAddr = mAddr;
 		this.mPhone = mPhone;
 		this.mEmail = mEmail;
-		this.mOrginalfilename = mOrginalfilename;
+		this.mOriginalfilename = mOriginalfilename;
 		this.mRenamefilename = mRenamefilename;
 		this.mEnrolldate = mEnrolldate;
 		this.mUpdatedate = mUpdatedate;
@@ -105,12 +105,12 @@ public class Member{
 		this.mEmail = mEmail;
 	}
 
-	public String getmOrginalfilename() {
-		return mOrginalfilename;
+	public String getmOriginalfilename() {
+		return mOriginalfilename;
 	}
 
-	public void setmOrginalfilename(String mOrginalfilename) {
-		this.mOrginalfilename = mOrginalfilename;
+	public void setmOriginalfilename(String mOriginalfilename) {
+		this.mOriginalfilename = mOriginalfilename;
 	}
 
 	public String getmRenamefilename() {
@@ -164,12 +164,10 @@ public class Member{
 	@Override
 	public String toString() {
 		return "Member [mno=" + mno + ", mId=" + mId + ", mPwd=" + mPwd + ", mName=" + mName + ", mAddr=" + mAddr
-				+ ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", mOrginalfilename=" + mOrginalfilename
+				+ ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", mOriginalfilename=" + mOriginalfilename
 				+ ", mRenamefilename=" + mRenamefilename + ", mEnrolldate=" + mEnrolldate + ", mUpdatedate="
 				+ mUpdatedate + ", mUserroles=" + mUserroles + ", mStatus=" + mStatus + ", gm=" + gm + "]";
 	}
-	
-	
-	
+
 	
 }

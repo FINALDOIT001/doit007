@@ -96,7 +96,7 @@ public class myPageController {
 			
 			System.out.println(mRenamefilename);
 			if(mRenamefilename != null) {
-				m.setmOrginalfilename(file.getOriginalFilename());
+				m.setmOriginalfilename(file.getOriginalFilename());
 				m.setmRenamefilename(mRenamefilename);
 			}
 		}
@@ -139,11 +139,11 @@ public class myPageController {
 			folder.mkdir(); // 폴더가 없으면 생성
 		}
 		
-		String mOrginalfilename = file.getOriginalFilename();
+		String mOriginalfilename = file.getOriginalFilename();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String mRenamefilename = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "." 
-						+ mOrginalfilename.substring(mOrginalfilename.lastIndexOf(".")+1);
+						+ mOriginalfilename.substring(mOriginalfilename.lastIndexOf(".")+1);
 		
 		String renamePath = folder + "\\" + mRenamefilename;
 		
