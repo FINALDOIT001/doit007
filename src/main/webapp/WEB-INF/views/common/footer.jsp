@@ -106,9 +106,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
    <script src="${contextPath}/resources/js/jquery.nice-select.min.js"></script>
 	<script src="${contextPath}/resources/js/contact.js"></script>
 	<script src="${contextPath}/resources/js/jquery.ajaxchimp.min.js"></script>
-	<script src="${contextPath}/resources/js/jquery.form.js"></script>
+ 	<script src="${contextPath}/resources/js/jquery.form.js"></script>
 	<script src="${contextPath}/resources/js/jquery.validate.min.js"></script>
-	<script src="${contextPath}/resources/js/mail-script.js"></script>
+ 	<script src="${contextPath}/resources/js/mail-script.js"></script>
    <!-- counter js -->
    <script src="${contextPath}/resources/js/jquery.counterup.min.js"></script>
    <script src="${contextPath}/resources/js/waypoints.min.js"></script>

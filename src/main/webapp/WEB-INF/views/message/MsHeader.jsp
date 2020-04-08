@@ -16,7 +16,7 @@
 
     <div class="button-group-area mt-10" style="display:flex;margin-top: 5%;margin-left: 5%;margin-right: 5%;margin-bottom: 5%;justify-content: center;" id="container">
         <a href="newMS.ms" class="genric-btn primary-border e-large size-fix">MESSAGE</a>
-        <a href="#" class="genric-btn primary-border e-large size-fix">NEW</a>
+        <a href="ReceivenewPage.ms" class="genric-btn primary-border e-large size-fix">NEW</a>
         <a href="#" class="genric-btn primary-border e-large size-fix">RECEIVE</a>
         <a href="#" class="genric-btn primary-border e-large size-fix">SEND</a>
         <a href="#" class="genric-btn primary-border e-large size-fix">BLOCK</a>

@@ -37,6 +37,23 @@
 		<url-pattern>*.ad</url-pattern>
 	</servlet-mapping>
 	
+	
+		<servlet>
+		<servlet-name>needLoginServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/needLogin-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>needLoginServlet</servlet-name>
+		<url-pattern>*.ev</url-pattern>
+	</servlet-mapping>
+	
+	
 	<!-- 한글 깨짐 방지 인코딩 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

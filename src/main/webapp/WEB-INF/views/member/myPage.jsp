@@ -61,7 +61,7 @@
                </div>
             </div>
       </section>
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="margin-bottom: 20px;">
             <li class="nav-item">
               <a class="nav-link active" style="width: 200px; text-align: center;" data-toggle="tab" href="#home">내 정보 수정</a>
             </li>
@@ -80,14 +80,10 @@
           <div class="tab-content">
             <!-- tab1 start-->
             <div class="tab-pane container active" id="home">
-                <form class="user" action="mupdate.go" method="post" enctype="multipart/form-data">
+                <form class="user" action="mupdate.go" method="post" enctype="multipart/form-data" style="margin-top:40px;">
                 
-                    <div class="col-lg-6" style="margin: auto; margin-top: 50px;">
-                        <table>
-                            <tr>
-                                
-                            </tr>
-                        </table>
+                    <div class="col-lg-6" style="margin: auto;">
+
                         <div class="form-group">
                            	<label><span style="color: red">*</span> 아이디 </label> <span style="font-size: x-small;">(4글자 이상 입력해주세요.)</span>
 							<input type="text" class="form-control hide-on-focus" id="userId" name="mId" value="${ m.mId }"
@@ -111,7 +107,7 @@
                      </div>
 
                      <div class="form-group"> 
-                     <input type="hidden" name="mOrginalfilename" value="${ m.mOrginalfilename }">
+                     <input type="hidden" name="mOriginalfilename" value="${ m.mOriginalfilename }">
                      
 					 <input type="hidden" name="mRenamefilename" value="${ m.mRenamefilename }">
 					 
@@ -121,7 +117,7 @@
                               <div class="filebox">
                               	<c:if test="${ empty m.mRenamefilename }">
                                  <label for="cma_file" id="imglabel" class="rounded-circle" alt="Cinque Terre"
-                                 		style="background-image: url('${contextPath}/resources/img/${m.mOrginalfilename}');">
+                                 		style="background-image: url('${contextPath}/resources/img/${m.mOriginalfilename}');">
                                     <input type="file" name="updatefile" id="cma_file" accept="image/*" capture="camera" onchange="getThumbnailPrivew(this,$('#cma_image'))" />
                                     <div id="cma_image" style="display:none;" ></div>
                                  </label>                              
@@ -296,7 +292,9 @@
                <!-- tab3 end -->
                <!-- tab4 start -->
                <div class="tab-pane container fade" id="menu3">
-
+					<div class="col-lg-12">
+						<button id="hodu" class="genric-btn danger" style="float: right;font-size: 13px;">호두 충전</button>
+					</div>
                </div>
                <!-- tab4 end -->
             </div>
@@ -316,6 +314,7 @@
 	<jsp:include page="../common/footer.jsp"/>
 	<!-- photo -->
  <script>
+ 	/* 사용자 이미지 변경 */
    function getThumbnailPrivew(html, $target) {
        if (html.files && html.files[0]) {
            var reader = new FileReader();
@@ -328,10 +327,7 @@
            reader.readAsDataURL(html.files[0]);
        }
    }
-   </script>
-
-
-<script>
+  
    /*** 별점 ****************************************************/
    $('div.starRev').children('span').click(function(){
       
@@ -397,13 +393,18 @@
 	         }
 	      }); 
 	    });
-	    
+
 	    function selReset(){
 	      $("#selbox").show();
 	      $("#selboxDirect").hide();
 	      
 	      $("#selbox option:eq(0)").prop("selected",true);
 	    }
+	    
+	    /* 호두충전 페이지 생성 */
+	    $('#hodu').click(function(){
+			window.open("hodu.me", "호두 충전", "width=600, height=600, scrollbars=no;")
+		});
 	    /* 다음 주소 api 부분 */
 	    function execPostCode() {
 	         new daum.Postcode({
