@@ -144,6 +144,14 @@ public class EventController {
 	
 	
 	
+	/**
+	 * Insert EventPage Kwon
+	 * 2020.04.08 KH
+	 * @param e
+	 * @param request
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping("eventInsert.do")
 	public String insertEvent(Event e, HttpServletRequest request, 
 			@RequestParam(name="evFileName", required=false) MultipartFile file) {
@@ -169,12 +177,26 @@ public class EventController {
 		int result = eService.insertEvent(e);
 		
 		if (result > 0) {
-			return "redirect:moveBS.go";
+			return "redirect:elist.go";
 		} else {
 			return "common/errorPage";
 		}
 		
 	}
+	
+	
+	@RequestMapping("eUpdate.go")
+	public ModelAndView updatePage(ModelAndView mv, Event ev, int eNo) {
+		
+		ev = eService.selectEvent(eNo);
+		
+		mv.addObject("ev", ev);
+		mv.setViewName("event/updatePage");
+		
+		return mv;
+	}
+	
+	
 	
 
 }
