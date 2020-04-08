@@ -23,10 +23,6 @@ import com.kh.doit.bookShare.model.service.BookShareService;
 import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.bookShare.model.vo.BookShareReply;
 
-/**
- * @author KWON
- *
- */
 @Controller
 public class BookShareController {
 	

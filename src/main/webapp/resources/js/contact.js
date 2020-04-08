@@ -55,7 +55,7 @@ $(document).ready(function(){
                 }
             },
             submitHandler: function(form) {
-                $(form).ajaxSubmit({
+                $('#form222').ajaxSubmit({
                     type:"POST",
                     data: $(form).serialize(),
                     url:"contact_process.php",

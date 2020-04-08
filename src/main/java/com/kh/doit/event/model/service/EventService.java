@@ -49,5 +49,13 @@ public interface EventService {
 	 */
 	int insertReply(EventReply er);
 
+	/**
+	 * 4. Insert Event Kwon
+	 * 2020.04.08 KH
+	 * @param e
+	 * @return
+	 */
+	int insertEvent(Event e);
+
 
 }

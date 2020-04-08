@@ -104,6 +104,8 @@ $('#kwon-inst-btn01').click(function() {
   location.href="bsInsert.go";
 });
 
+
+
 /*$('#kwon-btn02').click(function() {
    location.href="bsUpdate.go";
 });
