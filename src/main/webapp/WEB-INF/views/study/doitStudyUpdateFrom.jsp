@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,20 +47,30 @@
 	<!--::team part end::-->
 	<section class="about_part section-padding">
 		<div class="container">
-		<form action="sgInsert.go" method="post"
+		<form action="sgUdate.go" method="post"
 							enctype="multipart/form-data" class="was-validated">
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
 
-
+					<c:if test="${!empty sg.sgRenameFileName}">
 					<div class="filebox">
-						<label for="cma_file" class="rounded"> <input type="file"
-							name="sbul" id="cma_file" accept="image/*" capture="camera"
+						<label for="cma_file" class="rounded" style="background-image: url('${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}');"> <input type="file"
+							name="fileReLoader" id="cma_file" accept="image/*" capture="camera"
 							onchange="getThumbnailPrivew(this,$('#cma_image'))" />
 							<div id="cma_image"></div>
-						</label>
-
+					</label>
 					</div>
+					</c:if>
+					
+					<c:if test="${empty sg.sgRenameFileName}">
+					<div class="filebox">
+						<label for="cma_file" class="rounded"> <input type="file"
+							name="fileReLoader" id="cma_file" accept="image/*" capture="camera"
+							onchange="getThumbnailPrivew(this,$('#cma_image'))" />
+							<div id="cma_image"></div>
+					</label>
+					</div>
+					</c:if>
 				</div>
 				
 				<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6"
@@ -72,26 +83,29 @@
 										name="sgTitle" value="${sg.sgTitle}" required >
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">공부방 제목 입역</div>
-									<input type="text" class="form-control" value="${loginUser.mId}"
-										name="sgWriter" hidden>
-									<input type="number" class="form-control" value="${loginUser.mno}"
-										name="sgWriterNo" hidden>
+									<input type="text" class="form-control" value="${sg.sgNo}"
+										name="sgNo" hidden>
 									<!-- 방 개설 자 아이디 자동 입력 구간-->
 								</div>
 							</div>
 							<br>
 
-
+							<fmt:parseDate value="${sg.sgStartDate}" var="sDataFmt" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${sDataFmt}" var="sgStartDate" pattern="yyyy-MM-dd"/>
+							
+							<fmt:parseDate value="${sg.sgEndDate}" var="eDataFmt" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${eDataFmt}" var="sgEndDate" pattern="yyyy-MM-dd"/>
+							
 							<div class="row">
 								<div class="col">
 									<input type="text" id="from" class="form-control"
-										placeholder="시작 날짜 설정" name="sgStartDate" value="${sg.sgStartDate}" required>
+										placeholder="시작 날짜 설정" name="sgStartDate" value="${sgStartDate}" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">시작 기간 설정</div>
 								</div>
 								<div class="col">
 									<input type="text" id="to" class="form-control"
-										placeholder="종료 날짜 설정" name="sgEndDate" value="${sg.sgEndDate}" required>
+										placeholder="종료 날짜 설정" name="sgEndDate" value="${sgEndDate}" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">종료 기간 설정</div>
 								</div>
@@ -155,7 +169,7 @@
 				style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
 				<h2>About Study</h2>
 			</div>
-			<div id="summernote" name="sgCon">${sg.sgCon}</div>
+			<textarea id="summernote" name="sgCon">${sg.sgCon}</textarea>
 			<br>
 			<div style="text-align: center; margin-top: 20px;">
 
@@ -182,6 +196,7 @@
 							[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
 				});
 		
+		var markupStr = $('#summernote').summernote('code');
 		
 
 	</script>

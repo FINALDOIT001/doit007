@@ -4,7 +4,7 @@ import com.kh.doit.board.model.vo.PageInfo_ha;
 
 public class Pagination_ha {
 	
-	public static PageInfo_ha getPageInfo_ha(int currentPage,int listCount) {
+	public static PageInfo_ha getPageInfo(int currentPage,int listCount) {
 		
 		PageInfo_ha pi_h = null; 
 		

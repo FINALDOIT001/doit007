@@ -181,8 +181,8 @@
          ]
       });
       
-      <%-- var markupStr = '<%=n.getnContent()%>'; --%>
       var markupStr = '${bs.bsCon}';
+
 		$('#summernote').summernote("code", markupStr);
 		$('#summernote').summernote('disable');
 		$('#summernote').summernote().css('display','none');
@@ -261,6 +261,7 @@ function getCommentList(){
                     html1 += "<div class='desc'>";
                     html1 += "<div class='d-flex justify-content-between'>";
                     html1 += "<div class='d-flex align-items-center'>";
+                    html1 += "<input type='hidden' value='"+data[i].bscNo+"'>";
                     html1 += "<div class='thumb'>";
                     /* html1 += "<img src='${contextPath}/resources/img/"+data[i].mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>"; */
                     /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
@@ -326,9 +327,10 @@ $('#kwon-outBtn02').click(function() {
 </script>
 
 <script>
-	$('#kwon-span202').on(click, function() {
-		
-	})
+$(document).on("click",".kwon-span202",function(){
+    var bscNo = $(this).parent().children().eq(0).val();
+    console.log(bscNo);
+ });
 	
 </script>
 	

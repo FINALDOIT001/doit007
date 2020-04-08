@@ -66,6 +66,7 @@
                           <i class="fas fa-paperclip"></i> 첨부파일
                           <input type="file" name="uploadFile">
                         </div>
+                        <br>
                         <span style="font-size: small;">5MB 이하의 이미지 파일 (JPG, PNG, GIF) 1개를 첨부하실 수 있습니다.</span>
                     </div>
                     </div>

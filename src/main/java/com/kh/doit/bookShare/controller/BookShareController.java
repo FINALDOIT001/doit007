@@ -23,10 +23,6 @@ import com.kh.doit.bookShare.model.service.BookShareService;
 import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.bookShare.model.vo.BookShareReply;
 
-/**
- * @author KWON
- *
- */
 @Controller
 public class BookShareController {
 	
@@ -65,7 +61,6 @@ public class BookShareController {
 		
 		if(bs != null) {
 			mv.addObject("bs",bs);
-//			mv.addObject("rList",rList);
 			mv.setViewName("board/bookShare_view");
 		} else {
 			mv.addObject("msg","게시글 보기 실패");

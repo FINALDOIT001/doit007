@@ -1,14 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.doit.member.model.vo.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<style>
+.note-toolbar {
+	display: none;
+}
+</style>
+
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
+	
+		<!-- include summernote js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
+	
 
    	<!-- SEO jungdo CSS -->
 	<link rel="stylesheet" href="${contextPath}/resources/css/SEO.css">
@@ -36,18 +46,19 @@
             <div class="col-lg-8 posts-list">
                <div class="single-post">
                   <div class="feature-img">
-                     <img class="img-fluid" src="img/blog/it_blog1.jpg" alt="">
+                     <img class="img-fluid" src="${contextPath}/resources/evUploadFiles/${ ev.eRenameFileName }" alt="">
                   </div>
                   <div class="blog_details">
-                     <h2>인공지능과의 연결고리, 그래프 기술 알아보기
+                     <h2>${ ev.eTitle }
                      </h2>
                      <ul class="blog-info-link mt-3 mb-4">
                         <li><a href="#"><i class="far fa-user"></i> IT, AI</a></li>
-                        <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                        <li><a href="#"><i class="far fa-heart"></i> 21</a></li>
-                        <li><a href="#"><i class="far fa-edit"></i> 관리자</a></li>
+                        <li><a href="#comments-area"><i class="far fa-comments"></i><label id="cCnt"></label> Comments</a></li>
+                        <li><a href="#"><i class="far fa-edit"></i> ${ ev.eWriter }</a></li>
                      </ul>
-                     <pre class="excert">
+                     
+                     <textarea id="summernote2"></textarea>
+                     <!-- <pre class="excert">
                         안녕하세요. 그래프 데이터베이스 전문기업 비트나인 입니다. 
                         다음 주에 진행되는 국내 온라인 세미나 주제 변동이 있어 공지 드립니다. 
                         기존 발표 주제에서 크게 벗어 나지 않으며, 좀 더 기술적인 내용을 다루게 되었습니다. 
@@ -68,29 +79,17 @@
 
                         등록 후에는 웨비나 참가에 대한 정보가 포함된 확인 이메일을 받게됩니다.
                         관련 문의사항은 mjkang@bitnine.net  로 연락주시기 바랍니다.
-                     </pre>
+                     </pre> -->
                   </div>
                </div>
                <div class="navigation-top">
-                  <div class="d-sm-flex justify-content-between text-center">
-                     <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> 21</p>
-                     <div class="col-sm-4 text-center my-2 my-sm-0">
-                        <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
-                     </div>
-                     <ul class="social-icons">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                     </ul>
-                  </div>
                   <div class="navigation-area">
                      <div class="row">
                         <div
                            class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                            <div class="thumb">
                               <a href="#">
-                                 <img class="img6060" src="img/blog/it_blog2.jpg" alt="">
+                                 <img class="img6060" src="" alt="">
                               </a>
                            </div>
                            <div class="arrow">
@@ -120,84 +119,17 @@
                            </div>
                            <div class="thumb">
                               <a href="#">
-                                 <img class="img6060" src="img/blog/it_blog1.jpg" alt="">
+                                 <img class="img6060" src="" alt="">
                               </a>
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
-               <div class="comments-area">
-                  <h4>댓글 3</h4>
+               
+               <div class="comments-area" id="comments-area">
                   <div class="comment-list">
-                     <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                           <div class="desc">
-                              <div class="d-flex justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <div class="thumb">
-                                       <img class="img5555" src="img/comment/comment_1.png" alt="" style="width: 55px; height: 55px;">
-                                    </div>
-                                    
-                                    <h5>
-                                       <a href="#">홍길동</a>
-                                    </h5>
-                                    <p class="date">2020년 3월 14일, 오후 2:40 </p>
-                                    <p class="date"><i class="far fa-heart"></i> 3</p>
-                                 </div>
-                              </div>
-                              <p class="comment">
-                              1등
-                              </p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="comment-list">
-                     <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                           <div class="desc">
-                              <div class="d-flex justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <div class="thumb">
-                                       <img class="img5555" src="img/comment/comment_2.png" alt="" style="width: 55px; height: 55px;">
-                                    </div>
-                                    <h5>
-                                       <a href="#">김길동</a>
-                                    </h5>
-                                    <p class="date">2020년 3월 14일, 오후 2:41 </p>
-                                    <p class="date"><i class="far fa-heart"></i> 3</p>
-                                 </div>
-                              </div>
-                              <p class="comment">
-                                 2등
-                              </p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="comment-list">
-                     <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                           <div class="desc">
-                              <div class="d-flex justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <div class="thumb">
-                                       <img class="img5555" src="img/comment/comment_3.png" alt="" style="width: 55px; height: 55px;">
-                                    </div>
-                                    <h5>
-                                       <a href="#">박길동</a>
-                                    </h5>
-                                    <p class="date">2020년 3월 14일, 오후 2:42 </p>
-                                    <p class="date"><i class="far fa-heart"></i> 3</p>
-                                 </div>
-                              </div>
-                              <p class="comment">
-                              ㅁ
-                              </p>
-                           </div>
-                        </div>
-                     </div>
+                   
                   </div>
                </div>
                <div class="comment-form">
@@ -205,13 +137,13 @@
                      <div class="row">
                         <div class="col-10">
                            <div class="form-group">
-                              <textarea class="form-control w-100 placeholder hide-on-focus" name="comment" id="comment"
+                              <textarea class="form-control w-100 placeholder hide-on-focus" name="ecCon" id="ecCon"
                                  cols="30" rows="9" placeholder="댓글을 입력해 주세요."></textarea>
                            </div>
                         </div>
                         <div class="col-2" style="margin-top: 76px;">
                            <div class="form-group">
-                              <button type="submit" class="button button-contactForm">등록</button>
+                              <button type="submit" id="insertReply" class="button button-contactForm">등록</button>
                            </div>
                         </div>
                      </div>
@@ -282,6 +214,147 @@
 
 
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+
+	<script>
+      $('#summernote2').summernote({
+         
+         tabsize: 5,
+         height: 300,
+         toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+         ]
+      });
+      
+      var markupStr = '${ev.eCon}';
+		$('#summernote2').summernote("code", markupStr);
+		$('#summernote2').summernote('disable');
+		$('#summernote2').summernote().css('display','none');
+      
+      console.log(markupStr);
+	</script>
+	
+	<script>
+	 
+    /*
+     * 댓글 등록하기(Ajax)
+     */
+     
+    $(function() {
+    	/**
+    	 * 초기 페이지 로딩시 댓글 불러오기
+    	 */
+
+        getCommentList();
+
+    	
+	    	$('#insertReply').on('click', function() {
+	    		
+	    		var ecENo = ${ ev.eNo };
+	    		console.log("eNo : " + ecENo)
+	    		
+	    		var ecWriter = "<%=((Member) session.getAttribute("loginUser")).getmName()%>"; // 세션에 등록된 Member의 userId
+	    		var ecWriterNo = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
+	    		var ecCon = $('#ecCon').val();
+	    	    
+	    	    $.ajax({
+	    	        type:'POST',
+	    	        url : 'addEvReply.do',
+	    	        data:{
+	    	        	ecENo:ecENo,
+	    	        	ecWriter:ecWriter,
+	    	        	ecWriterNo:ecWriterNo,
+	    	        	ecCon:ecCon
+	    	        },
+	    	        success : function(data){
+	    	            if(data=="success")
+	    	            {
+	    	                getCommentList();
+	    	                $("#ecCon").val("");
+	    	            }
+	    	        },
+	    	        error:function(request,status,error){
+	    	            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    	       }
+	    	        
+	    	    });
+	    	});
+    }); 
+	</script>
+     
+     
+     <script>
+    /**
+     * 댓글 불러오기(Ajax)
+     */
+    function getCommentList(){
+        
+    	var eNo = ${ ev.eNo };
+    	console.log("eNo : " + eNo );
+    	
+        $.ajax({
+            url : "eReply.do",
+            data:{eNo:eNo},
+            dataType : "json",
+            success : function(data){
+                console.log(data);
+    			
+                var html1 = "";
+                var cCnt = data.length;
+                
+                if(data.length > 0){
+                	
+                    for(i=0; i<data.length; i++){
+                        html1 += "<hr>";
+                        html1 += "<div class='single-comment justify-content-between d-flex'>";
+                        html1 += "<div class='user justify-content-between d-flex'>";
+                        html1 += "<div class='desc'>";
+                        html1 += "<div class='d-flex justify-content-between'>";
+                        html1 += "<div class='d-flex align-items-center'>";
+                        html1 += "<div class='thumb'>";
+                        /* html1 += "<img src='${contextPath}/resources/img/"+data[i].mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>"; */
+                        /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
+                        html1 += "</div>";
+                        html1 += "<h5>";
+                        html1 += "<a href=''>"+data[i].ecWriter+"</a> ";
+                        html1 += "</h5>";
+                        html1 += "<p class='date'>"+data[i].ecDate+"</p><span class='kwon-span202' style='text-align:'>삭제<input type='hidden'></span>";
+                        html1 += "</div>";
+                        html1 += "</div>";
+                        html1 += "<p class='comment'>"+data[i].ecCon+"</p>";
+                        html1 += "</div>";
+                        html1 += "</div>";
+                        html1 += "</div>";
+                    }
+                    
+                } else {
+                    
+                    html1 += "<div>";
+                    html1 += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
+                    html1 += "</table></div>";
+                    html1 += "</div>";
+                    
+                }
+                
+                $("#cCnt").text(cCnt);
+                $(".comment-list").html(html1);
+                
+            },
+            error:function(request,status,error){
+               
+           } 
+            
+        });
+    }
+	
+	
+	</script>
 
 </body>
 </html>

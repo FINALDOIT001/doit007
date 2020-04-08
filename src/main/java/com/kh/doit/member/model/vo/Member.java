@@ -1,9 +1,10 @@
 package com.kh.doit.member.model.vo;
 
-
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
+
+import com.kh.doit.study.model.vo.GroupMember;
 
 @Component
 public class Member{
@@ -14,22 +15,23 @@ public class Member{
 	private String mAddr; //주소
 	private String mPhone; //전화번호
 	private String mEmail; //이메일
-	private String mOrginalfilename; //원본 파일명
+	private String mOriginalfilename; //원본 파일명
 	private String mRenamefilename; //바뀐 파일명
 	private Date mEnrolldate; //가입일
 	private Date mUpdatedate; //수정일
 	private int mUserroles; //탈퇴 여부
 	private String mStatus; // 
 	 
+	private GroupMember gm;
 	
 	// 기본 생성자
 	public Member() {
 		super();
 	}
-	// 매개변수 생성자
+
 	public Member(int mno, String mId, String mPwd, String mName, String mAddr, String mPhone, String mEmail,
-			String mOrginalfilename, String mRenamefilename, Date mEnrolldate, Date mUpdatedate, int mUserroles,
-			String mStatus) {
+			String mOriginalfilename, String mRenamefilename, Date mEnrolldate, Date mUpdatedate, int mUserroles,
+			String mStatus, GroupMember gm) {
 		super();
 		this.mno = mno;
 		this.mId = mId;
@@ -38,102 +40,134 @@ public class Member{
 		this.mAddr = mAddr;
 		this.mPhone = mPhone;
 		this.mEmail = mEmail;
-		this.mOrginalfilename = mOrginalfilename;
+		this.mOriginalfilename = mOriginalfilename;
 		this.mRenamefilename = mRenamefilename;
 		this.mEnrolldate = mEnrolldate;
 		this.mUpdatedate = mUpdatedate;
 		this.mUserroles = mUserroles;
 		this.mStatus = mStatus;
+		this.gm = gm;
 	}
-	
-	// getter & setter
+
 	public int getMno() {
 		return mno;
 	}
+
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
+
 	public String getmId() {
 		return mId;
 	}
+
 	public void setmId(String mId) {
 		this.mId = mId;
 	}
+
 	public String getmPwd() {
 		return mPwd;
 	}
+
 	public void setmPwd(String mPwd) {
 		this.mPwd = mPwd;
 	}
+
 	public String getmName() {
 		return mName;
 	}
+
 	public void setmName(String mName) {
 		this.mName = mName;
 	}
+
 	public String getmAddr() {
 		return mAddr;
 	}
+
 	public void setmAddr(String mAddr) {
 		this.mAddr = mAddr;
 	}
+
 	public String getmPhone() {
 		return mPhone;
 	}
+
 	public void setmPhone(String mPhone) {
 		this.mPhone = mPhone;
 	}
+
 	public String getmEmail() {
 		return mEmail;
 	}
+
 	public void setmEmail(String mEmail) {
 		this.mEmail = mEmail;
 	}
-	public String getmOrginalfilename() {
-		return mOrginalfilename;
+
+	public String getmOriginalfilename() {
+		return mOriginalfilename;
 	}
-	public void setmOrginalfilename(String mOrginalfilename) {
-		this.mOrginalfilename = mOrginalfilename;
+
+	public void setmOriginalfilename(String mOriginalfilename) {
+		this.mOriginalfilename = mOriginalfilename;
 	}
+
 	public String getmRenamefilename() {
 		return mRenamefilename;
 	}
+
 	public void setmRenamefilename(String mRenamefilename) {
 		this.mRenamefilename = mRenamefilename;
 	}
+
 	public Date getmEnrolldate() {
 		return mEnrolldate;
 	}
+
 	public void setmEnrolldate(Date mEnrolldate) {
 		this.mEnrolldate = mEnrolldate;
 	}
+
 	public Date getmUpdatedate() {
 		return mUpdatedate;
 	}
+
 	public void setmUpdatedate(Date mUpdatedate) {
 		this.mUpdatedate = mUpdatedate;
 	}
+
 	public int getmUserroles() {
 		return mUserroles;
 	}
+
 	public void setmUserroles(int mUserroles) {
 		this.mUserroles = mUserroles;
 	}
+
 	public String getmStatus() {
 		return mStatus;
 	}
+
 	public void setmStatus(String mStatus) {
 		this.mStatus = mStatus;
 	}
-	
-	// toString
+
+	public GroupMember getGm() {
+		return gm;
+	}
+
+	public void setGm(GroupMember gm) {
+		this.gm = gm;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mno=" + mno + ", mId=" + mId + ", mPwd=" + mPwd + ", mName=" + mName + ", mAddr=" + mAddr
-				+ ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", mOrginalfilename=" + mOrginalfilename
+				+ ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", mOriginalfilename=" + mOriginalfilename
 				+ ", mRenamefilename=" + mRenamefilename + ", mEnrolldate=" + mEnrolldate + ", mUpdatedate="
-				+ mUpdatedate + ", mUserroles=" + mUserroles + ", mStatus=" + mStatus + "]";
+				+ mUpdatedate + ", mUserroles=" + mUserroles + ", mStatus=" + mStatus + ", gm=" + gm + "]";
 	}
-	
+
 	
 }

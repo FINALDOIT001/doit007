@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+\<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
@@ -46,7 +46,7 @@
             <article class="blog_item eList001">
           	<input type="hidden" value="${ event.eNo }">
               <div class="blog_item_img">
-                <img class="card-img rounded-0" src="${contextPath}/resources/bsUploadFiles/${ event.eRenameFileName }" alt=""> <!-- 나중에 이미지 넣기 -->
+                <img class="card-img rounded-0" src="${contextPath}/resources/evUploadFiles/${ event.eRenameFileName }" alt=""> <!-- 나중에 이미지 넣기 -->
                 <a href="#" class="blog_item_date">
                   <h3>${ event.eDays }</h3>
                   <p>${ event.eMonth }월</p>
@@ -54,15 +54,15 @@
               </div>
 
               <div class="blog_details">
-                <a class="d-inline-block" href="single-blog.html">
+                <a class="d-inline-block">
                   <h2>${ event.eTitle }</h2>
                 </a>
                 <p>${ event.eIntro }</p>
                 <ul class="blog-info-link">
-                  <li><a href="#"><i class="far fa-user"></i> IT, AI</a></li>
-                  <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                  <li><a href="#"><i class="far fa-heart"></i> 21</a></li>
-                  <li><a href="#"><i class="far fa-edit"></i> 관리자</a></li>
+                  <li><i class="far fa-user"></i> IT, AI</li>
+                  <li><i class="far fa-comments"></i> 03 Comments</li>
+                  <li><i class="far fa-heart"></i> 21</li>
+                  <li><i class="far fa-edit"></i> ${ event.eWriter }</li>
                 </ul> 
               </div>
             </article>
@@ -170,6 +170,11 @@
         <div class="col-lg-4">
           <div class="blog_right_sidebar">
             <aside class="single_sidebar_widget search_widget">
+			<c:if test="${ loginUser != null }">
+			<c:url var="evInsert" value="evInsert.go">
+			</c:url>
+             <a href="${ evInsert }"><button class="button rounded-0 primary-bg text-white w-100" type="button">글 작성하기</button></a>
+             </c:if>
               <form action="#">
                 <div class="form-group">
                   <div class="input-group mb-3">
@@ -236,7 +241,7 @@
 		$('.eList001').on('click',function() {
 			var eNo = $(this).children().eq(0).val();
 
-			location.href="eventView.go?eNo="+eNo;
+			location.href="eventView.ev?eNo="+eNo;
 		})
 	
 	

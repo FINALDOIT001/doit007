@@ -20,6 +20,17 @@
 		<result property="eDays" column="E_DAYS"/>
 		<result property="eStatus" column="E_STATUS"/>
 	</resultMap>
+	
+    <resultMap type="EventReply" id="eventReplyResultSet" >
+    	<id property="ecNo" column="EC_NO"/>
+    	<result property="ecENo" column="EC_E_NO"/>
+    	<result property="ecWriter" column="EC_WRITER"/>
+    	<result property="ecWriterNo" column="EC_WRITER_NO"/>
+    	<result property="ecDate" column="EC_DATE"/>
+    	<result property="ecCon" column="EC_CON"/>
+    	<result property="ecStatus" column="EC_STATUS"/>
+    </resultMap>
+	
 
 	<select id="getListCount" parameterType="_int" resultType="_int">
 		SELECT	COUNT(*)
@@ -33,7 +44,54 @@
 		FROM	EVENT
 		WHERE	1=1
 		AND		E_STATUS='Y'
+		ORDER BY 1 DESC
 	</select>
-
+	
+	<select id="selectEvent" parameterType="_int" resultMap="eventResultSet">
+		SELECT	*
+		FROM	EVENT
+		WHERE	1=1
+		AND		E_NO=#{eNo}
+		AND		E_STATUS='Y'
+	</select>
+	
+	<select id="selectReply" parameterType="_int" resultMap="eventReplyResultSet">
+		SELECT	*
+		FROM	EVENT_COMMENTS
+		WHERE	1=1
+		AND		EC_E_NO=#{eNo}
+		AND		EC_STATUS='Y'
+	</select>
+	
+	<insert id="insertEvent" parameterType="Event">
+		INSERT INTO EVENT VALUES(
+			SEQ_ENO.NEXTVAL
+			,#{eIntro}
+			,#{eTitle}
+			,#{eCon}
+			,#{eTag}
+			,#{eOriginalFileName}
+			,#{eRenameFileName}
+			,#{eWriter}
+			,#{eWriterNo}
+			,#{eType}
+			,DEFAULT
+			,#{eMonth}
+			,#{eDays}
+			,DEFAULT
+		)
+	</insert>
+	
+	<insert id="insertReply" parameterType="EventReply">
+    	INSERT INTO EVENT_COMMENTS VALUES(
+    		SEQ_ECNO.NEXTVAL
+    		,#{ecENo}
+    		,#{ecWriter}
+    		,#{ecWriterNo}
+    		,SYSDATE
+    		,#{ecCon}
+    		,DEFAULT
+    	)
+	</insert>
 
 </mapper>

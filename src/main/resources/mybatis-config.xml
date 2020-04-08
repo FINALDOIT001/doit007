@@ -18,6 +18,10 @@
 		<typeAlias type="com.kh.doit.study.model.vo.GroupMember" alias="GroupMember"/>
 		<typeAlias type="com.kh.doit.event.model.vo.Event" alias="Event"/>
 		<typeAlias type="com.kh.doit.message.model.vo.Message" alias="Message"/>
+		
+		
+		<typeAlias type="com.kh.doit.event.model.vo.EventReply" alias="EventReply"/>
+		
 
 	</typeAliases>
 	

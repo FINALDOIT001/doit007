@@ -65,4 +65,11 @@ public interface BoardService {
 	 */
 	int insertComment(Board_Comments bc);
 
+	/**
+	 * 9. 댓글 삭제
+	 * @param b_no
+	 * @return
+	 */
+	int deleteComment(int bc_no);
+
 }

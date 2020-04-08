@@ -36,6 +36,11 @@
                <h2><span>DO IT</span> &nbsp;FREE BOARD</h2>
             </div>
          </div>
+         <c:if test="${ loginUser == null }">
+		 	<script>
+		 		alert("로그인 하신 후 이용가능합니다.");
+		 	</script>		
+		 </c:if>
          <div class="card">
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
@@ -57,8 +62,8 @@
                   	<td align="left">
                   		<c:if test="${ !empty loginUser }">
                   			<c:url var="fbDetail" value="fbDetail.go">
-                  				<c:param name="b_no" value="${ b.b_no }"></c:param>
-                  				<c:param name="currentPage" value="${ pi_h.currentPage }"></c:param>
+                  				<c:param name="b_no" value="${ b.b_no }"/>
+                  				<c:param name="currentPage" value="${ pi_h.currentPage }"/>
                   			</c:url>
                   			<a href="${ fbDetail }">${ b.b_title }</a>
                   		</c:if>
@@ -103,7 +108,7 @@
 						</c:if>
 						
 						<c:if test="${ p ne pi_h.currentPage }">
-							<c:url var="pagination" value="blist.do">
+							<c:url var="pagination" value="fblist.go">
 								<c:param name="currentPage" value="${ p }"/>
 							</c:url>
 							<a href="${ pagination }">${ p }</a> &nbsp;

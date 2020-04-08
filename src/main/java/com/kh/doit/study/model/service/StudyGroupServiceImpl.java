@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.dao.StudyGroupDao;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -60,8 +61,8 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	 * 작성자 : 서정도
 	 */
 	@Override
-	public ArrayList<GroupMember> selectGroupMember(int sgNo) {
-		return sgDao.selectGroupMember(sgNo);
+	public ArrayList<Member> memberList(int sgNo) {
+		return sgDao.memberList(sgNo);
 	}
 
 
@@ -75,13 +76,23 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	}
 
 
-	/**
+	/**스터디 그룹 수정 디테일 뷰 (정호)
 	 *
 	 */
 	@Override
 	public Object sgUpdateView(int sgNo) {
 		
 		return sgDao.sgUpdateView(sgNo);
+	}
+
+
+	/**스터디 그룹 지우기 (정호)
+	 *
+	 */
+	@Override
+	public int sgDelete(int sgNo) {
+		
+		return sgDao.sgDelete(sgNo);
 	}
 	
 	

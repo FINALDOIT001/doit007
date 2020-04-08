@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
@@ -53,9 +54,9 @@ public class StudyGroupDao {
 	 * @param sgNo
 	 * @return
 	 */
-	public ArrayList<GroupMember> selectGroupMember(int sgNo) {
-		 
-		return (ArrayList)sqlSession.selectList("studyGroupMapper.groupMember",sgNo);
+	public ArrayList<Member> memberList(int sgNo) {
+
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.memberList", sgNo);
 	}
 
 	public int sgUpdate(StudyGroup sg) {
@@ -66,6 +67,10 @@ public class StudyGroupDao {
 	public Object sgUpdateView(int sgNo) {
 		
 		return sqlSession.selectOne("studyGroupMapper.selectSg",sgNo);
+	}
+
+	public int sgDelete(int sgNo) {
+		return sqlSession.update("studyGroupMapper.sgDelete", sgNo);
 	}
 
 }

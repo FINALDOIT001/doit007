@@ -52,8 +52,14 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="subject">
+						<c:if test="${!empty sg.sgRenameFileName}">
+							<img src="${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}" class="rounded"
+								style="width: 350px; height: 360px;">	
+						</c:if>
+						<c:if test="${empty sg.sgRenameFileName}">
 							<img src="${contextPath}/resources/img/project-5.png" class="rounded"
-								style="width: 350px; height: 360px;">
+								style="width: 350px; height: 360px;">	
+						</c:if>
 						</div>
 					</div>
 					<div class="col-md-4 mt-sm-30">
@@ -71,9 +77,14 @@
 							</li>
 						</ul>
 						<br>
+						<c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
 						<button class="genric-btn info radius"
 							style="margin-bottom: 10px; width: 130px;">스터디 가입</button>
-						팀장일 경우 (스터디 시작) 버튼
+						</c:if>
+						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+						<button class="genric-btn info radius"
+							style="margin-bottom: 10px; width: 130px;">스터디 시작</button>
+						</c:if>
 						<div class="starRev"
 							style="width: 60px; display: inline; float: right;">
 							<span class="starR"></span>
@@ -82,9 +93,21 @@
 						<c:url var="sgUpview" value="sgUpview.go">
 						<c:param name="sgNo" value="${sg.sgNo}"/>
 						</c:url>
+						<c:url var="sgDelete" value="sgDelete.go">
+						<c:param name="sgNo" value="${sg.sgNo}"/>
+						</c:url>
+						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 						<button class="genric-btn danger radius btn-block"
 							style="width: 130px;" onclick="location.href='${sgUpview}'">스터디 수정</button>
-						팀장만 보이는 버튼 / 스터디 가입한 사람일 경우 (스터디 탈퇴) 버튼 나오기
+						</c:if>
+						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+						<button class="genric-btn danger radius btn-block"
+							style="width: 130px;" onclick="location.href='${sgDelete}'">스터디 삭제</button>
+						</c:if>
+						<c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
+						<button class="genric-btn danger radius btn-block"
+							style="width: 130px;" onclick="location.href='studyInsertSc.go'">스터디 탈퇴</button>
+						</c:if>
 					</div>
 					<div class="col-md-4 mt-sm-20">
 						<label class="mb-20"
@@ -94,10 +117,11 @@
 						<div class="checkuserscroll">
 
 							<ul class="checkuser">
-								<c:forEach var="g" items="${gm}">
+								<c:forEach var="m" items="${ml}">
 								<li><div class="checkuserdiv">
-										<img src="${contextPath}/resources/img/client_2.png" class="rounded-circle "
-											style="height: 70px;" alt="Cinque Terre"><c:out value="${g.memberList[0].mName}"/>
+											<img src="${contextPath}/resources/img/${m.mOriginalfilename}" class="rounded-circle "
+											style="height: 70px;" alt="Cinque Terre">
+											<c:out value="${m.mName}"/>
 									</div></li>
 								</c:forEach>
 							</ul>

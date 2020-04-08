@@ -1,9 +1,13 @@
 package com.kh.doit.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.doit.board.model.vo.Board;
+import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.vo.Member;
 
 @Repository("mpDao")
@@ -23,6 +27,14 @@ public class myPageDao {
 	public int deleteMember(String mId) {
 		return sqlSession.delete("memberMapper.deleteMember",mId);
 	}
+
+	public ArrayList<Board> selectfbList(String mId) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectfbList",mId);
+	}
 	
+	public ArrayList<BookShare> selectbsList(int mno) {
+		System.out.println(mno);
+		return (ArrayList)sqlSession.selectList("msMapper.selectbsList",mno);
+	}
 	
 }

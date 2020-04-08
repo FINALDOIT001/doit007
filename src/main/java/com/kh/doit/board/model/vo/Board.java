@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.kh.doit.member.model.vo.Member;
+
 @Component
 public class Board {
 	
@@ -18,10 +20,12 @@ public class Board {
 	private String b_status;
 	private int b_count; 
 	
+	private Member member;
+	
 	public Board() {}
 
 	public Board(int b_no, String b_title, String b_writer, String b_content, String b_org_filename,
-			String b_re_filename, Date b_createdate, Date b_modifydate, String b_status, int b_count) {
+			String b_re_filename, Date b_createdate, Date b_modifydate, String b_status, int b_count, Member member) {
 		super();
 		this.b_no = b_no;
 		this.b_title = b_title;
@@ -33,6 +37,7 @@ public class Board {
 		this.b_modifydate = b_modifydate;
 		this.b_status = b_status;
 		this.b_count = b_count;
+		this.member = member;
 	}
 
 	public int getB_no() {
@@ -115,13 +120,23 @@ public class Board {
 		this.b_count = b_count;
 	}
 
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [b_no=" + b_no + ", b_title=" + b_title + ", b_writer=" + b_writer + ", b_content=" + b_content
 				+ ", b_org_filename=" + b_org_filename + ", b_re_filename=" + b_re_filename + ", b_createdate="
 				+ b_createdate + ", b_modifydate=" + b_modifydate + ", b_status=" + b_status + ", b_count=" + b_count
-				+ "]";
+				+ ", member=" + member + "]";
 	}
+
+	
 	
 	
 

@@ -44,7 +44,7 @@ public class BoardController {
 		
 		int listCount = bService.getListCount(); 
 		
-		PageInfo_ha pi_h = Pagination_ha.getPageInfo_ha(currentPage,listCount);
+		PageInfo_ha pi_h = Pagination_ha.getPageInfo(currentPage,listCount);
 		
 		ArrayList<Board> list = bService.selectList(pi_h); 
 		
@@ -233,5 +233,17 @@ public class BoardController {
 		}
 	}
 
+	@RequestMapping("deleteComment.go")
+	@ResponseBody
+	public String deleteComment(int bc_no) {
+		int result = bService.deleteComment(bc_no);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
 	
 }
