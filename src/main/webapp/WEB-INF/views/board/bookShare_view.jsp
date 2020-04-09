@@ -269,7 +269,7 @@ function getCommentList(){
                     html1 += "<h5>";
                     html1 += "<a href=''>"+data[i].bscWriter+"</a> ";
                     html1 += "</h5>";
-                    html1 += "<p class='date'>"+data[i].bscDate+"</p><span class='kwon-span202' style='text-align:'>삭제<input type='hidden'></span>";
+                    html1 += "<p class='date'>"+data[i].bscDate+"</p><span class='kwon-span202' style='margin-left:800px;'>삭제</span>";
                     html1 += "</div>";
                     html1 += "</div>";
                     html1 += "<p class='comment'>"+data[i].bscCon+"</p>";
@@ -331,6 +331,31 @@ $(document).on("click",".kwon-span202",function(){
     var bscNo = $(this).parent().children().eq(0).val();
     console.log(bscNo);
  });
+ 
+ 
+/* 댓글 삭제하기 */
+$(document).on("click",".kwon-span202",function(){
+	
+	
+    var bscNo = $(this).parent().children().eq(0).val();
+    console.log("댓글번호 : " + bscNo)
+    
+    alert("댓글을 삭제하시겠습니까?");
+
+	$.ajax({
+		url:"delBsReply.do",
+		data:{bscNo:bscNo},
+		type:"post",
+		success:function(data) {
+			if(data == "success") {
+				getCommentList(); 
+			}
+		},error:function(){
+			console.log("댓글 삭제에 실패하였습니다"); 
+		}
+	});
+});
+
 	
 </script>
 	

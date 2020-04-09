@@ -128,7 +128,13 @@
     	FROM BOOK_SHARE BS 
     	JOIN MEMBER M ON BS.BS_WRITER_NO = M.M_NO
     	WHERE BS.BS_WRITER_NO=#{mno}
-    	
     </select>
+    
+    <update id="deleteReply">
+    	UPDATE 	BOOK_SHARE_COMMENTS
+    	SET		BSC_STATUS='N'
+    	WHERE	1=1
+    	AND		BSC_NO=#{bscNo}
+    </update>
     
 </mapper>

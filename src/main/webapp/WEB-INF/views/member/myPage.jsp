@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DO IT</title>
 <style>
       * {
          font-family: 'Noto Sans KR', sans-serif;
@@ -42,9 +42,34 @@
   cursor: pointer;
 }
 .starR.on{background-position:0 0;}
-   </style>
+
+.hodu_border {
+	border: 1.4px solid #d5d5d5;
+    padding: 15px;
+    margin-top:5px;
+}
+
+.hodu_list {
+	border-top: 1px solid #c8c8c8;
+	margin-top: 10px;
+}
+
+#myhodu {
+	font-weight: bold;
+    font-size: initial;
+    margin-bottom:5px;
+}
+
+.font-style {
+	width: 200px; 
+	text-align: center; 
+	font-weight: bold;
+
+}
+</style>
    <link rel="stylesheet" href="${contextPath}/resources/css/hyerim.css">
-   
+   <link rel="stylesheet" href="${contextPath}/resources/css/kwonCustom.css">
+   <link rel="stylesheet" href="${contextPath}/resources/css/datatables.css">
 
 </head>
 <body>
@@ -61,18 +86,18 @@
                </div>
             </div>
       </section>
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="margin-bottom: 20px;">
             <li class="nav-item">
-              <a class="nav-link active" style="width: 200px; text-align: center;" data-toggle="tab" href="#home">내 정보 수정</a>
+              <a class="nav-link active font-style" data-toggle="tab" href="#home"><span>정보 수정</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu1">나의 스터디</a>
+              <a class="nav-link font-style" data-toggle="tab" href="#menu1"><span>나의 스터디</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu2">위시리스트</a>
+              <a class="nav-link font-style" data-toggle="tab" href="#menu2"><span>위시리스트</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu3">마일리지</a>
+                <a class="nav-link font-style" data-toggle="tab" href="#menu3"><span>마일리지</span></a>
               </li>
           </ul>
           
@@ -80,14 +105,10 @@
           <div class="tab-content">
             <!-- tab1 start-->
             <div class="tab-pane container active" id="home">
-                <form class="user" action="mupdate.go" method="post" enctype="multipart/form-data">
+                <form class="user" action="mupdate.go" method="post" enctype="multipart/form-data" style="margin-top:40px;">
                 
-                    <div class="col-lg-6" style="margin: auto; margin-top: 50px;">
-                        <table>
-                            <tr>
-                                
-                            </tr>
-                        </table>
+                    <div class="col-lg-6" style="margin: auto;">
+
                         <div class="form-group">
                            	<label><span style="color: red">*</span> 아이디 </label> <span style="font-size: x-small;">(4글자 이상 입력해주세요.)</span>
 							<input type="text" class="form-control hide-on-focus" id="userId" name="mId" value="${ m.mId }"
@@ -111,7 +132,7 @@
                      </div>
 
                      <div class="form-group"> 
-                     <input type="hidden" name="mOrginalfilename" value="${ m.mOrginalfilename }">
+                     <input type="hidden" name="mOriginalfilename" value="${ m.mOriginalfilename }">
                      
 					 <input type="hidden" name="mRenamefilename" value="${ m.mRenamefilename }">
 					 
@@ -121,7 +142,7 @@
                               <div class="filebox">
                               	<c:if test="${ empty m.mRenamefilename }">
                                  <label for="cma_file" id="imglabel" class="rounded-circle" alt="Cinque Terre"
-                                 		style="background-image: url('${contextPath}/resources/img/${m.mOrginalfilename}');">
+                                 		style="background-image: url('${contextPath}/resources/img/${m.mOriginalfilename}');">
                                     <input type="file" name="updatefile" id="cma_file" accept="image/*" capture="camera" onchange="getThumbnailPrivew(this,$('#cma_image'))" />
                                     <div id="cma_image" style="display:none;" ></div>
                                  </label>                              
@@ -133,12 +154,8 @@
                                     <input type="file" name="updatefile" id="cma_file" accept="image/*" capture="camera" onchange="getThumbnailPrivew(this,$('#cma_image'))" />
                                     <div id="cma_image" style="display:none;" ></div>
                                  </label>                              
-                              	
                               	</c:if>
-
-
-                             </div>
-                              
+                             </div>               
                            </div>
                         </div>
                      </div>
@@ -152,19 +169,20 @@
                         <input type="text" style="display: inline; width: 119px;" class="form-control form-control-user" id="phone3" name="phone3" required>
                      </div>
                      <div class="form-group"> 
-                        <label style="display: block;"><span style="color: red">*</span>
-										이메일</label> <input type="text" style="display: inline; width: 290px;"
-										class="form-control form-control-user" id="email" name="email"
-										placeholder="이메일" required> <label
-										style="font-weight: 600;">@</label> 
-									<select style="width: 185px; display: inline;" class="form-control" id="selbox" name="selbox">
-										<option value="naver.com">naver.com</option>
-										<option value="daum.net">daum.net</option>
-										<option value="gmail.com">gmail.com</option>
-										<option value="direct" id="direct">직접입력</option>
-									</select>
-									<input type="text" style="width: 185px; display: inline;" class="form-control" id="selboxDirect" name="selboxDirect"/>
-									<input type="button" onclick="selReset()"style="margin-left:3px; background:url(${contextPath}/resources/img/cancel.png) no-repeat; border:none; width:13px; height:13px; background-size:12px;"/>
+                        <label style="display: block;">
+                        <span style="color: red">*</span>이메일</label> 
+                        <input type="text" style="display: inline; width: 290px;"
+								class="form-control form-control-user" id="email" name="email"
+								placeholder="이메일" required> 
+						<label style="font-weight: 600;">@</label> 
+						<select style="width: 185px; display: inline;" class="form-control" id="selbox" name="selbox">
+							<option value="naver.com">naver.com</option>
+							<option value="daum.net">daum.net</option>
+							<option value="gmail.com">gmail.com</option>
+							<option value="direct" id="direct">직접입력</option>
+						</select>
+						<input type="text" style="width: 185px; display: inline;" class="form-control" id="selboxDirect" name="selboxDirect"/>
+						<input type="button" onclick="selReset()"style="margin-left:3px; background:url(${contextPath}/resources/img/cancel.png) no-repeat; border:none; width:13px; height:13px; background-size:12px;"/>
                      </div>
                      <div class="form-group" style="margin-bottom: 50px;"> 
                         <label style="display: block;"><span style="color: red">*</span>
@@ -296,26 +314,44 @@
                <!-- tab3 end -->
                <!-- tab4 start -->
                <div class="tab-pane container fade" id="menu3">
-
+					<div class="col-lg-12">
+						<label id="myhodu">나의 이용정보</label>
+						<div class="hodu_border" style="margin-bottom:30px;">
+							<img src="${contextPath}/resources/img/hodu2.png" style="width:40px;">
+							<label style="font-weight:700; margin-left:5px;">보유 중인 호두 
+							<span style="margin:5px; font-size:large; color: #d64748 !important;">110</span> 개</label>
+							<button id="hodu" class="genric-btn danger" style="float: right;font-size: 13px;">호두 충전</button>
+						</div>
+						<label id="myhodu">충전내역</label>
+						<table id="hodu_list" class="table">
+							<thead>
+							  <tr>
+								<th width="5%">No</th>
+								<th width="20%">충전호두</th>
+								<th width="20%">결제금액</th>
+								<th width="10%">구입일</th>
+							  </tr>
+							</thead>
+							<tbody>
+								
+							</tbody>
+						</table>
+						
+					</div>
                </div>
                <!-- tab4 end -->
             </div>
-            
-            
+
          </div>
          
-         
-         <script>
-       
-
-  
-      </script>
       <!--tap end-->
 
 
 	<jsp:include page="../common/footer.jsp"/>
 	<!-- photo -->
+<script src="${contextPath}/resources/js/datatables.js"></script>
  <script>
+ 	/* 사용자 이미지 변경 */
    function getThumbnailPrivew(html, $target) {
        if (html.files && html.files[0]) {
            var reader = new FileReader();
@@ -328,10 +364,7 @@
            reader.readAsDataURL(html.files[0]);
        }
    }
-   </script>
-
-
-<script>
+  
    /*** 별점 ****************************************************/
    $('div.starRev').children('span').click(function(){
       
@@ -397,13 +430,53 @@
 	         }
 	      }); 
 	    });
-	    
+
 	    function selReset(){
 	      $("#selbox").show();
 	      $("#selboxDirect").hide();
 	      
 	      $("#selbox option:eq(0)").prop("selected",true);
 	    }
+	    
+	    /* 호두충전 페이지 생성 */
+	    $('#hodu').click(function(){
+			window.open("hodu.me", "호두 충전", "width=600, height=500, scrollbars=no;")
+		});
+	    
+	    /* 호두충전 내역 테이블 생성 */
+	    $('#hodu_list').dataTable( {
+		lengthChange: false,
+		ordering: false,
+		info: false,
+		searching: false,
+		serverSide: false,
+        "language": {
+        "decimal":        "",
+        "emptyTable":     "구입한 호두가 없습니다.",
+        "info":           "총 _TOTAL_명   _START_에서 _END_까지 표시",
+        "infoEmpty":      "0 개 항목 중 0 ~ 0 개 표시",
+        "infoFiltered":   "(_MAX_ 총 항목에서 필터링 됨)",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "_MENU_",
+        "loadingRecords": "로드 중 ...",
+        "processing":     "처리 중 ...",
+        "search":         "검색 : ",
+        "zeroRecords":    "일치하는 게시글이 없습니다.",
+        "paginate": {
+            "first":      "처음",
+            "last":       "마지막",
+            "next":       ">",
+            "previous":   "<"
+        },
+        "aria": {
+            "sortAscending":  ": 오름차순으로 정렬",
+            "sortDescending": ": 내림차순으로 정렬"
+        }
+    }
+         
+} );
+	    
 	    /* 다음 주소 api 부분 */
 	    function execPostCode() {
 	         new daum.Postcode({

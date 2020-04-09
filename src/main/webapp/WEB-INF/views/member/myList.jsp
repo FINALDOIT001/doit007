@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DO IT</title>
 <style>
       * {
          font-family: 'Noto Sans KR', sans-serif;
@@ -19,6 +19,11 @@
       .pagination {
       	float: right;
       }
+      .font-style {
+		width: 200px; 
+		text-align: center; 
+		font-weight: bold;
+	}
 
    </style>
    <link rel="stylesheet" href="${contextPath}/resources/css/hyerim.css">
@@ -43,13 +48,13 @@
       </section>
         <ul class="nav nav-tabs" style="margin-bottom: 40px;">
             <li class="nav-item">
-              <a class="nav-link active" style="width: 200px; text-align: center;" data-toggle="tab" href="#home">자유게시판</a>
+              <a class="nav-link active font-style" data-toggle="tab" href="#home"><span>자유게시판</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu1">질문게시판</a>
+              <a class="nav-link font-style" data-toggle="tab" href="#menu1"><span>질문게시판</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu2">나눔게시판</a>
+              <a class="nav-link font-style" data-toggle="tab" href="#menu2"><span>나눔게시판</span></a>
             </li>
           </ul>
           
@@ -92,15 +97,15 @@
             <!-- tab2 end -->
             <!-- tab3 start -->
             <div class="tab-pane container fade" id="menu2">
-            	<table id="freeb" class="table table-bordered">
+            	<table id="bookshare121" class="table table-bordered">
 					<thead class="kwon-thead1">
 						<tr class="kwon-tr1">
 							<th width="5%" class="th1">No</th>
-							<td width="13%" class="th1">카테고리</td>
+							<th width="13%" class="th1">카테고리</th>
 							<th width="40%" class="th1">제목</th>
 							<th width="8%" class="th1">글쓴이</th>
 							<th width="10%" class="th1">등록일</th>
-							<td width="10%" class="th1">상태</td>
+							<th width="10%" class="th1">상태</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -151,7 +156,7 @@
 		serverSide: false,
         "language": {
         "decimal":        "",
-        "emptyTable":     "표에서 사용할 수있는 데이터가 없습니다.",
+        "emptyTable":     "작성한 게시글이 없습니다.",
         "info":           "총 _TOTAL_명   _START_에서 _END_까지 표시",
         "infoEmpty":      "0 개 항목 중 0 ~ 0 개 표시",
         "infoFiltered":   "(_MAX_ 총 항목에서 필터링 됨)",
@@ -161,7 +166,38 @@
         "loadingRecords": "로드 중 ...",
         "processing":     "처리 중 ...",
         "search":         "검색 : ",
-        "zeroRecords":    "일치하는 레코드가 없습니다.",
+        "zeroRecords":    "일치하는 게시글이 없습니다.",
+        "paginate": {
+            "first":      "처음",
+            "last":       "마지막",
+            "next":       "다음",
+            "previous":   "이전"
+        },
+        "aria": {
+            "sortAscending":  ": 오름차순으로 정렬",
+            "sortDescending": ": 내림차순으로 정렬"
+        }
+    }
+         
+} );
+	$('#bookshare121').dataTable( {
+		lengthChange: false,
+		ordering: false,
+		info: false,
+		serverSide: false,
+        "language": {
+        "decimal":        "",
+        "emptyTable":     "작성한 게시글이 없습니다.",
+        "info":           "총 _TOTAL_명   _START_에서 _END_까지 표시",
+        "infoEmpty":      "0 개 항목 중 0 ~ 0 개 표시",
+        "infoFiltered":   "(_MAX_ 총 항목에서 필터링 됨)",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "_MENU_",
+        "loadingRecords": "로드 중 ...",
+        "processing":     "처리 중 ...",
+        "search":         "검색 : ",
+        "zeroRecords":    "일치하는 게시글이 없습니다.",
         "paginate": {
             "first":      "처음",
             "last":       "마지막",

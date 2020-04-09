@@ -1,20 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>DoitStudyDtail</title>
 
+<%-- <link href='${contextPath}/resources/plugins/fullcalenda/daygrid/main.css' rel='stylesheet' />
+<link href='${contextPath}/resources/plugins/fullcalenda/core/main.css' rel='stylesheet' /> --%>
 
-
+<link href='${fullcalPath}/daygrid/main.css' rel='stylesheet' />
+<link href='${fullcalPath}/core/main.css' rel='stylesheet' />
 
 <style>
 
 /* 별점 */
 .starR {
-	background: url(${contextPath}/resources/img/like_icon.png) no-repeat right 0;
+	background: url(${contextPath}/resources/img/like_icon.png) no-repeat
+		right 0;
 	background-size: auto 94%;
 	width: 40px;
 	height: 40px;
@@ -26,6 +32,44 @@
 .starR.on {
 	background-position: 0 0;
 }
+
+<!-- 모달 css -->
+   .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 8% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+           
+                                     
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+<!-- 모달 css -->
 </style>
 
 </head>
@@ -33,15 +77,17 @@
 <body>
 
 
-<jsp:include page="../common/header.jsp" />
+	<jsp:include page="../common/header.jsp" />
 
 	<!-- Kwon CSS -->
-	<link rel="stylesheet" href="${contextPath}/resources/css/kwonCustom.css">
+	<link rel="stylesheet"
+		href="${contextPath}/resources/css/kwonCustom.css">
 	<!-- jung  -->
 	<link rel="stylesheet" href="${contextPath}/resources/css/jungho.css">
 	<!-- 데이타테이블 CSS -->
-	<link rel="stylesheet" href="${contextPath}/resources/css/datatables.css">
-
+	<link rel="stylesheet"
+		href="${contextPath}/resources/css/datatables.css">
+	
 
 
 	<!-- Start Align Area -->
@@ -52,77 +98,87 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="subject">
-						<c:if test="${!empty sg.sgRenameFileName}">
-							<img src="${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}" class="rounded"
-								style="width: 350px; height: 360px;">	
-						</c:if>
-						<c:if test="${empty sg.sgRenameFileName}">
-							<img src="${contextPath}/resources/img/project-5.png" class="rounded"
-								style="width: 350px; height: 360px;">	
-						</c:if>
+							<c:if test="${!empty sg.sgRenameFileName}">
+								<img
+									src="${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}"
+									class="rounded" style="width: 350px; height: 360px;">
+							</c:if>
+							<c:if test="${empty sg.sgRenameFileName}">
+								<img src="${contextPath}/resources/img/project-5.png"
+									class="rounded" style="width: 350px; height: 360px;">
+							</c:if>
 						</div>
 					</div>
 					<div class="col-md-4 mt-sm-30">
 						<label
 							style="font-size: xx-large; font-weight: bold; margin-bottom: 20px;">
-							JAVA 스터디 그룹 </label> <br>
+							${sg.sgTitle} </label> <br>
 						<ul>
-							<li style="margin-bottom: 3px;"><span>지역 :</span> ${sg.sgAddr}</li>
-							<li style="margin-bottom: 3px;">모집인원 : 3/${sg.sgMaxPeople}</li>
-							<li style="margin-bottom: 3px;">팀장: ${sg.sgWriter}</li>
-							<li style="margin-bottom: 3px;">보증금 : ${sg.sgDeposit}</li>
-							<li style="margin-bottom: 3px;">수업 진행도 : 모집 중</li>
-							<li style="margin-bottom: 3px;">중간 참여 : <c:if test="${ sg.sgJoin eq 'Y' }"><b style="color:blue">참여 가능</b></c:if>
-																	 <c:if test="${ sg.sgJoin eq 'N' }"><b>참여 불가능</b></c:if>
-							</li>
+							<!-- 아이콘 : font Awesome -->
+							<li style="margin-bottom: 3px;"><i
+								class="fas fa-street-view"></i>&nbsp;&nbsp;&nbsp;지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역
+								&nbsp;:&nbsp; ${sg.sgAddr}</li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-users"></i>&nbsp;&nbsp;모집인원
+								&nbsp;:&nbsp; ${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-medal"></i>&nbsp;&nbsp;&nbsp;팀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장
+								&nbsp;:&nbsp; ${sg.sgWriter}</li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;보&nbsp;&nbsp;증&nbsp;&nbsp;금
+								&nbsp;:&nbsp; <fmt:formatNumber value="${sg.sgDeposit}"
+									groupingUsed="true" />원</li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-spinner"></i>&nbsp;&nbsp;&nbsp;진&nbsp;&nbsp;행&nbsp;&nbsp;도
+								&nbsp;:&nbsp; <c:if test="${ sg.sgConfirm eq 'Y'}">모집중</c:if>
+								<c:if test="${ sg.sgConfirm ne 'Y'}">모집 종료</c:if></li>
+							<li style="margin-bottom: 3px;"><i class="fas fa-user-check"></i>&nbsp;&nbsp;중간참여
+								&nbsp;:&nbsp; <c:if test="${ sg.sgJoin eq 'Y' }">
+									<b style="color: blue">참여 가능</b>
+								</c:if> <c:if test="${ sg.sgJoin eq 'N' }">
+									<b>참여 불가능</b>
+								</c:if></li>
 						</ul>
 						<br>
-						<c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
-						<button class="genric-btn info radius"
-							style="margin-bottom: 10px; width: 130px;">스터디 가입</button>
-						</c:if>
-						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
-						<button class="genric-btn info radius"
-							style="margin-bottom: 10px; width: 130px;">스터디 시작</button>
-						</c:if>
-						<div class="starRev"
-							style="width: 60px; display: inline; float: right;">
-							<span class="starR"></span>
-						</div>
-						<br>
-						<c:url var="sgUpview" value="sgUpview.go">
-						<c:param name="sgNo" value="${sg.sgNo}"/>
-						</c:url>
-						<c:url var="sgDelete" value="sgDelete.go">
-						<c:param name="sgNo" value="${sg.sgNo}"/>
-						</c:url>
-						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
-						<button class="genric-btn danger radius btn-block"
-							style="width: 130px;" onclick="location.href='${sgUpview}'">스터디 수정</button>
-						</c:if>
-						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
-						<button class="genric-btn danger radius btn-block"
-							style="width: 130px;" onclick="location.href='${sgDelete}'">스터디 삭제</button>
-						</c:if>
-						<c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
-						<button class="genric-btn danger radius btn-block"
-							style="width: 130px;" onclick="location.href='studyInsertSc.go'">스터디 탈퇴</button>
-						</c:if>
+						<ul>
+							<li><c:if
+									test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
+									<button class="genric-btn info radius"
+										style="margin-bottom: 10px; width: 130px;">스터디 가입</button>
+								</c:if> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+									<button class="genric-btn info radius"
+										style="margin-bottom: 10px; width: 130px;">스터디 시작</button>
+								</c:if> <c:url var="sgUpview" value="sgUpview.go">
+									<c:param name="sgNo" value="${sg.sgNo}" />
+								</c:url> <c:url var="sgDelete" value="sgDelete.go">
+									<c:param name="sgNo" value="${sg.sgNo}" />
+								</c:url> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+									<button class="genric-btn danger radius" style="width: 130px;"
+										onclick="location.href='${sgUpview}'">스터디 수정</button>
+								</c:if> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+									<button class="genric-btn danger radius" style="width: 130px;"
+										onclick="location.href='${sgDelete}'">스터디 삭제</button>
+								</c:if> <c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
+									<button class="genric-btn danger radius" style="width: 130px;"
+										onclick="location.href='studyInsertSc.go'">스터디 탈퇴</button>
+								</c:if>
+								<div class="starRev"
+									style="width: 60px; display: inline; float: right;">
+									<span class="starR"></span>
+								</div></li>
+						</ul>
 					</div>
 					<div class="col-md-4 mt-sm-20">
 						<label class="mb-20"
-							style="margin-left: 45px; font-size: large; font-weight: bold;">참석자
-							(3명)</label>
+							style="margin-left: 45px; font-size: large; font-weight: bold;">참석자(${fn:length(ml)}명)</label>
 
 						<div class="checkuserscroll">
 
 							<ul class="checkuser">
 								<c:forEach var="m" items="${ml}">
-								<li><div class="checkuserdiv">
-											<img src="${contextPath}/resources/img/${m.mOriginalfilename}" class="rounded-circle "
-											style="height: 70px;" alt="Cinque Terre">
-											<c:out value="${m.mName}"/>
-									</div></li>
+									<li><div class="checkuserdiv">
+											<img
+												src="${contextPath}/resources/img/${m.mOriginalfilename}"
+												class="rounded-circle " style="height: 70px;"
+												alt="Cinque Terre">
+											<c:out value="${m.mName}" />
+										</div></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -143,32 +199,25 @@
 					<li class="nav-item"><a class="nav-link"
 						style="width: 200px; text-align: center; font-weight: bold;"
 						data-toggle="tab" href="#menu1">일정</a></li>
-					<li class="nav-item"><a class="nav-link"
-						style="width: 200px; text-align: center; font-weight: bold;"
-						data-toggle="tab" href="#menu3">자료실</a></li>
-					<li class="nav-item"><a class="nav-link"
-						style="width: 200px; text-align: center; font-weight: bold;"
-						data-toggle="tab" href="#menu2">갤러리</a></li>
+					<c:if test="${sg.sgPayment eq 'Y'}">
+						<li class="nav-item"><a class="nav-link"
+							style="width: 200px; text-align: center; font-weight: bold;"
+							data-toggle="tab" href="#menu3">자료실</a></li>
+						<li class="nav-item"><a class="nav-link"
+							style="width: 200px; text-align: center; font-weight: bold;"
+							data-toggle="tab" href="#menu2">갤러리</a></li>
+					</c:if>
 				</ul>
 
-				<br>
-				<br>
+				<br> <br>
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div class="tab-pane container active" id="home">
-						<!--
-				
-				<div class="col-lg-8">
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 30%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-					</div>
-				</div>
-
-			-->
 						<div class="col-lg-12 div_border">
-							<span
-								style="font-size: x-large; font-weight: bold; display: block; margin-bottom: 30px;">활동
-								계획</span> ${sg.sgCon}
+							
+								<div id='calendar'></div>
+								
+								
 						</div>
 
 
@@ -176,65 +225,60 @@
 
 					</div>
 					<div class="tab-pane container fade" id="menu1">
-						<div id="kwon-inst01">
-							<div id="kwon-inst-btn101" class="btn btn-outline-success" onclick="location.href='studyInsertSc.go'">모임
-								등록</div>
-						</div>
-
-						<div>
-
-							<table id="kwon-table101" class="table table-bordered">
-								<thead class="kwon-thead101">
-										<th width="10%" class="th101">모임일자</th>
-										<th width="10%" class="th101">시간</th>
-										<th width="10%" class="th101">지역</th>
-										<th width="10%" class="th101">장소</th>
-										<th width="10%" class="th101">카테고리</th>
-										<th width="10%" class="th101">모임명</th>
-										<th width="8%" class="th101">참석 인원</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="kwon-tr1" onclick="location.href='studySc.go'">
-										<input type="hidden" value="모임의 아이디 값1" name="아이디 네임">
-										<td class="kwon-td101">2020.03.11</td>
-										<td class="kwon-td101">PM 18:00</td>
-										<td class="kwon-td101">강남</td>
-										<td class="kwon-td101">Test021</td>
-										<td class="kwon-td101">사당역 부근</td>
-										<td class="kwon-td101">2020.03.11</td>
-										<td class="kwon-td101">0/10</td>
-									</tr>
-									<tr class="kwon-tr1"  onclick="location.href='studySc.go'">
-										<input type="hidden" value="모임의 아이디 값2" name="아이디 네임">
-										<td class="kwon-td101">2020.03.12</td>
-										<td class="kwon-td101">PM 18:00</td>
-										<td class="kwon-td101">강남</td>
-										<td class="kwon-td101">Test021</td>
-										<td class="kwon-td101">사당역 부근</td>
-										<td class="kwon-td101">2020.03.11</td>
-										<td class="kwon-td101">9/10</td>
-									</tr>
-									<tr class="kwon-tr1"  onclick="location.href='studySc.go'">
-										<input type="hidden" value="모임의 아이디 값3" name="아이디 네임">
-										<td class="kwon-td101">2020.03.13</td>
-										<td class="kwon-td101">PM 18:00</td>
-										<td class="kwon-td101">강남</td>
-										<td class="kwon-td101">Test021</td>
-										<td class="kwon-td101">사당역 부근</td>
-										<td class="kwon-td101">2020.03.11</td>
-										<td class="kwon-td101">10/10</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-
-
+					
+					<span style="font-size: x-large; font-weight: bold; display: block; margin-bottom: 30px;">활동계획</span> ${sg.sgCon}
+							
 					</div>
 
 					<!------------------------------------- 사진 파트 --------------------------------------->
-					<div class="tab-pane container fade" id="menu2">글씨 나옴??</div>
+					<div class="tab-pane container fade" id="menu2">
+
+						<section class="about_part section">
+							<div class="container">
+								<div class="row">
+									<div class="section_tittle">
+										<h2>
+											<span>NEW</span> PHOTO
+										</h2>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6 col-md-6">
+										<div class="about_img">
+											<img src="${contextPath}/resources/img/about.png" alt="">
+										</div>
+									</div>
+									<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
+										<div class="about_text">
+											<h2>새로 업로드된 <span>사진</span>
+											</h2>
+											<h5>
+												<ul>
+													<!-- 아이콘 : font Awesome -->
+													<li style="margin-bottom: 3px;"><i
+														class="fas fa-street-view"></i>&nbsp;&nbsp;&nbsp;지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역
+														&nbsp;:&nbsp; ${sg.sgAddr}</li>
+													<li style="margin-bottom: 3px;"><i
+														class="fas fa-medal"></i>&nbsp;&nbsp;&nbsp;작&nbsp;&nbsp;성&nbsp;&nbsp;자
+														&nbsp;:&nbsp; ${sg.sgWriter}</li>
+													<li style="margin-bottom: 3px;"><i
+														class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용
+														&nbsp;:&nbsp; 가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하</li>
+												</ul>
+											</h5>
+											<br><br><br>
+											<a href="#" class="btn_1" style="float: right;">사진 추가</a>
+											<div class="about_part_counter">
+												<div class="single_counter">
+													<p style="font-size: 30px; width: 390px;">저장된 사진&nbsp;<span class="counter" style="color:red;">1000</span>&nbsp;장</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</div>
 					<div class="tab-pane container fade" id="menu3"></div>
 
 				</div>
@@ -245,9 +289,195 @@
 			</div>
 		</div>
 	</section>
-	<!-- End Align Area -->
+	<!-- 모달이 가자 -->
+	<div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content" style='width:60%; height:70%;'>
+        <span class="close" onclick="closebtn();" >&times;</span>
+        <br>
+            <section class="about_part">
+		<div class="container">
+		<form action="sgInsert.go" method="post"
+							enctype="multipart/form-data" class="was-validated">
+			<div class="row">
+				<div class="col-lg-6 col-md-6">
+
+
+					<div class="filebox">
+						<label for="cma_file" class="rounded"> <input type="file"
+							name="sbul" id="cma_file" accept="image/*" capture="camera"
+							onchange="getThumbnailPrivew(this,$('#cma_image'))" />
+							<div id="cma_image"></div>
+						</label>
+
+					</div>
+				</div>
+				
+				<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6"
+					style="margin-top: 3%;">
+					<div class="about_text">
+
+							<div class="row">
+								<div class="col">
+									<input type="text" class="form-control" placeholder="공부방 제목 입력"
+										name="sgTitle" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">공부방 제목 입역</div>
+									<input type="text" class="form-control" value="${loginUser.mId}"
+										name="sgWriter" hidden>
+									<input type="number" class="form-control" value="${loginUser.mno}"
+										name="sgWriterNo" hidden>
+									<!-- 방 개설 자 아이디 자동 입력 구간-->
+								</div>
+							</div>
+							<br>
+
+								
+							<div class="row">
+								<div class="col">
+									<input type="text" id="from" class="form-control"
+										placeholder="시작 날짜 설정" name="sgStartDate" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">시작 기간 설정</div>
+								</div>
+								<div class="col">
+									<input type="text" id="to" class="form-control"
+										placeholder="종료 날짜 설정" name="sgEndDate" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">종료 기간 설정</div>
+								</div>
+							</div>
+							<br>
+
+							<div class="row">
+								<div class="col">
+									<input type="text" class="form-control" placeholder="지역 입력"
+										name="sgAddr" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">지역입력 예) 서울</div>
+								</div>
+								<div class="col">
+									<input type="text" class="form-control" placeholder="장소 입력"
+										name="sgLocation" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">장소입력 예) xxx커피집</div>
+								</div>
+							</div>
+							<br>
+
+							<div class="row">
+								<div class="col">
+									<input type="number" min="0" class="form-control"
+										placeholder="보증금 입력" name="sgDeposit" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">인당 보증급 설정</div>
+								</div>
+								<div class="col">
+									<input type="number" min="1" class="form-control"
+										placeholder="모집 인원" name="sgMaxPeople" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">모집 인원 설정</div>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
+									<input type="text" id="teg" class="form-control"
+										placeholder="검색어 등록" name="sgTag" required>
+									<div class="valid-feedback">Valid.</div>
+									<div class="invalid-feedback">검색어 입력 예) @JAVA</div>
+								</div>
+							</div>
+							<br> <br>
+
+							<div class="form-group form-check">
+								<label class="form-check-label"> <input
+									class="form-check-input" type="checkbox" name="sgJoin"
+									> 수업 중간 참여 가능 여부 체크 해주세요.
+									<div class="valid-feedback">중간참여 가능여부 체크 필요</div>
+									
+								</label>
+							</div>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div style="text-align: center; margin-top: 20px;">
 	
-	   <jsp:include page="../common/footer.jsp" />
+				<button type="submit" class="genric-btn danger circle"
+					style="font-size: 13px; margin-right: 10px;">등록</button>
+				<button type="reset" class="genric-btn danger circle"
+					style="font-size: 13px;">취소</button>
+			</div>
+			</form>
+		</div>
+	</section>                                                    
+        
+      </div>
+ 
+    </div>
+    <!--  모달이 꺼져 -->
+    
+	
+	<!-- End Align Area -->
+
+	<jsp:include page="../common/footer.jsp" />
+	   
+	   
+	<script src='${fullcalPath}/core/main.js'></script>
+	<script src='${fullcalPath}/daygrid/main.js'></script>
+	<script src='${fullcalPath}/interaction/main.js'></script>
+	
+	
+	
+	<script>
+	
+	function closebtn(){//모달창 닫기
+		$("#myModal").css("display","none");
+	}
+	
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+    
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        plugins: [ 'dayGrid', 'interaction' ],
+        header: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'today',
+          },
+          locale: 'ko',
+          defaultView: 'dayGridMonth',
+          selectable: true,
+          select:function(){
+        	
+                  $('#myModal').css("display","block");
+              		
+          },
+         
+          events:[
+        	  
+        	  {
+        		  title:'java',
+        		  description: 'description for Long Event',
+        		  start : '2020-04-09'
+        	  }
+          ]
+          
+      });
+    
+      calendar.render();
+    });
+	</script>
+	
+	
+	<script>
+
+	</script>
+	
+	   
+	   
 	
 	<script>
 		/*** 별점 ****************************************************/
@@ -269,14 +499,14 @@
 			return false;
 		});
 	</script>
-	
+
 
 	<!-- dataTables js -->
 	<script src="${contextPath}/resources/js/datatables.js"></script>
 	<script src="${contextPath}/resources/js/kwonCustom.js"></script>
 	<script src="${contextPath}/resources/js/jungho.js"></script>
-	
-	
+
+
 
 
 </body>

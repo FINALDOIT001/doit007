@@ -45,12 +45,12 @@
          <div class="row">
             <div class="col-lg-8 posts-list">
                <div class="single-post">
+               <input type="hidden" id="eNo" value="${ ev.eNo }">
                   <div class="feature-img">
                      <img class="img-fluid" src="${contextPath}/resources/evUploadFiles/${ ev.eRenameFileName }" alt="">
                   </div>
                   <div class="blog_details">
-                     <h2>${ ev.eTitle }
-                     </h2>
+                     <h2 id="eTitle"> ${ ev.eTitle } </h2>
                      <ul class="blog-info-link mt-3 mb-4">
                         <li><a href="#"><i class="far fa-user"></i> IT, AI</a></li>
                         <li><a href="#comments-area"><i class="far fa-comments"></i><label id="cCnt"></label> Comments</a></li>
@@ -127,12 +127,12 @@
                   </div>
                </div>
                
-               <div class="comments-area" id="comments-area">
+               <div class="comments-area" id="comments-area" style="padding-bottom:0px;">
                   <div class="comment-list">
                    
                   </div>
                </div>
-               <div class="comment-form">
+               <div class="comment-form" style="margin-top:20px;">
                   <form class="form-contact comment_form" action="#" id="commentForm"></form>
                      <div class="row">
                         <div class="col-10">
@@ -163,8 +163,20 @@
                        </div>
                      </div>
                      <button class="button rounded-0 primary-bg text-white w-100" type="submit">검색</button>
-                   </form>
-                 </aside>   
+                     
+                       </form>
+	                 <c:url var="eUpdate" value="eUpdate.go">
+                     	<c:param name="eNo" value="${ ev.eNo }"/>
+                     </c:url>
+                     
+					<c:if test="${ loginUser.mName eq ev.eWriter }">                     
+                      <button class="button rounded-0 primary-bg text-white w-100" type="button"
+                       onclick="location.href='${ eUpdate }'">수정</button>
+                      <button id="kwon-del204"class="button rounded-0 primary-bg text-white w-100" type="button">삭제</button>
+                 	</c:if>
+                 	<button id="kwon-back01" class="button rounded-0 primary-bg text-white w-100" type="button">BACK</button>
+                    
+                 </aside>
      
                  <aside class="single_sidebar_widget popular_post_widget">
                    <h3 class="widget_title">최근 게시물</h3>
@@ -214,6 +226,9 @@
 
 
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<%-- <script src="${contextPath}/resources/js/kwonCustom.js"></script> --%>
+	
 	
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
 
@@ -321,10 +336,11 @@
                         /* html1 += "<img src='${contextPath}/resources/img/"+data[i].mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>"; */
                         /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
                         html1 += "</div>";
+                        html1 += "<input type='hidden' value='"+data[i].ecNo+"'>";
                         html1 += "<h5>";
                         html1 += "<a href=''>"+data[i].ecWriter+"</a> ";
                         html1 += "</h5>";
-                        html1 += "<p class='date'>"+data[i].ecDate+"</p><span class='kwon-span202' style='text-align:'>삭제<input type='hidden'></span>";
+                        html1 += "<p class='date'>"+data[i].ecDate+"</p><span class='kwon-span204' style='margin-left:520px;'>삭제</span>";
                         html1 += "</div>";
                         html1 += "</div>";
                         html1 += "<p class='comment'>"+data[i].ecCon+"</p>";
@@ -352,9 +368,52 @@
             
         });
     }
+    
+    /* 이벤트 글 삭제하기 */
+    $('#kwon-del204').click(function() {
+    	var title = $('#eTitle').text();
+    	var eNo = $('#eNo').val();
+    	var result = confirm(title+"을 삭제하시겠습니까?");
+    	
+    	if(result) {
+    		location.href="deleteEv.do?eNo="+eNo;
+    	} else {
+    		
+    	}
+    });
+    
+    /* 뒤로 가기 버튼 */
+    $('#kwon-back01').click(function() {
+      window.history.back();
+    });
+    
+    /* 댓글 삭제하기 */
+	$(document).on("click",".kwon-span204",function(){
+		
+		
+	    var ecNo = $(this).parent().children().eq(1).val();
+	    console.log("댓글번호 : " + ecNo)
+	    
+	    alert("댓글을 삭제하시겠습니까?");
 	
+		$.ajax({
+			url:"deleteEr.go",
+			data:{ecNo:ecNo},
+			type:"post",
+			success:function(data) {
+				if(data == "success") {
+					getCommentList(); 
+				}
+			},error:function(){
+				console.log("댓글 삭제에 실패하였습니다"); 
+			}
+		});
+	});
+
+
 	
 	</script>
+	
 
 </body>
 </html>

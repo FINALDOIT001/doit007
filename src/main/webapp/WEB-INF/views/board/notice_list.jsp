@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Notice List</title>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
@@ -42,88 +42,90 @@
                 <thead>
                   <tr>
                     <th>번호</th>
-                    <th>작성자</th>
                     <th>제목</th>
+                    <th>작성자</th>
                     <th>작성일</th>
                     <th>조회수</th>
                   </tr>
                 </thead>
+                <c:forEach var="n" items="${ nlist }">
                 <tbody>
                   <tr>
-                    <td>5</td>
-                    <td>admin</td>
-                    <td><a href="ntView.go">공지입니당5</a></td>
-                    <td>2020-01-19</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                      <td>4</td>
-                      <td>admin</td>
-                      <td>공지입니다4</td>
-                      <td>2020-01-13</td>
-                      <td>8</td>
-                  </tr>
-                  <tr>
-                      <td>3</td>
-                      <td>admin</td>
-                      <td>공지입니다3</td>
-                      <td>2020-01-12</td>
-                      <td>76</td>
-                  </tr>							
-                  <tr>
-                      <td>2</td>
-                      <td>admin</td>
-                      <td>공지입니다2</td>
-                      <td>2020-01-04</td>
-                      <td>32</td>
-                  </tr>							
-                  <tr>
-                      <td>1</td>
-                      <td>admin</td>
-                      <td>공지입니다1</td>
-                      <td>2020-01-01</td>
-                      <td>5</td>
+                    <td align="center">${ n.n_no }</td>
+                    <td align="left">
+                    	<c:if test="${ !empty loginUser }">
+                    		<c:url var="nDetail" value="nDetail.go">
+                    			<c:param name="n_no" value="${ n.n_no }"/>
+                    			<c:param name="currentPage" value="${ pi_n.currentPage }"/>
+                    		</c:url>
+                    		<a href="${ nDetail }">${ n.n_title }</a>
+                    	</c:if>
+                    	<c:if test="${ empty loginUser }">
+                    		${ n.n_title }
+                    	</c:if>
+                    </td>
+                    <td align="center">${ n.n_writer }</td>
+                    <td align="center">${ n.n_modifydate }</td>
+                    <td align="center">${ n.n_count }</td>
                   </tr>
                 </tbody>
+                </c:forEach>
+                
+                <!-- 페이징 -->
+                <tr align="center" height="20">
+					<td colspan="6">
+			
+					<!-- [이전] -->
+					<c:if test="${ pi_n.currentPage eq 1 }">
+						prev &nbsp;
+					</c:if>
+					<c:if test="${ pi_n.currentPage ne 1 }">
+						<c:url var="before" value="fblist.go">
+							<c:param name="currentPage" value="${ pi_n.currentPage - 1 }"/>
+						</c:url>
+						<a href="${ before }">[이전]</a> &nbsp;
+					</c:if>
+					
+					<!-- 페이지 -->
+					<c:forEach var="p" begin="${ pi_n.startPage }" end="${ pi_n.endPage }">
+						<c:if test="${ p eq pi_n.currentPage }">
+							${ p }
+						</c:if>
+						
+						<c:if test="${ p ne pi_n.currentPage }">
+							<c:url var="pagination" value="nlist.go">
+								<c:param name="currentPage" value="${ p }"/>
+							</c:url>
+							<a href="${ pagination }">${ p }</a> &nbsp;
+						</c:if>
+					</c:forEach>
+				
+					<!-- [다음] -->
+					<c:if test="${ pi_n.currentPage eq pi_n.maxPage }">
+						&nbsp;next
+					</c:if>
+					<c:if test="${ pi_n.currentPage ne pi_n.maxPage }">
+						<c:url var="after" value="nlist.go">
+							<c:param name="currentPage" value="${ pi_n.currentPage + 1 }"/>
+						</c:url> 
+						<a href="${ after }">[다음]</a>
+					</c:if>
+					</td>
+				</tr>
+				<!-- 페이징 끝 -->
               </table>
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-	       	작성하기 버튼은  loginUser 의 네임 혹은 Roles가 운영자일 경우에만 보이도록 해주세요 
-	       	<%--<c:if test="${ loginUser.userRoles eq 777 }">  --%>
+           <!-- 관리자만 작성가능하게~@ -->
+	       <c:if test="${ loginUser.mUserroles eq 777 }">  
 	         <div class="col-md-12" style="text-align: right; margin-top: 20px;">
-	           <a href="ntWrite.go" class="genric-btn danger circle" style="font-size: 13px;">작성하기</a>
+	           <button onclick="location.href='nInsertForm.go';" class="genric-btn danger circle" style="font-size: 13px;">작성하기</a>
 	       </div>
-	       <%-- </c:if> --%>
-    </div>
-
-    <!-- 페이징 부분 -->
-    <nav class="col-md-12 blog-pagination justify-content-center d-flex">
-        <ul class="pagination">
-            <li class="page-item">
-                <a href="#" class="page-link" aria-label="Previous">
-                    <span aria-hidden="true">
-                        <span class="lnr lnr-chevron-left"> < </span>
-                    </span>
-                </a>
-            </li>
-            <li class="page-item active"><a href="#" class="page-link">01</a></li>
-            <li class="page-item"><a href="#" class="page-link">02</a></li>
-            <li class="page-item"><a href="#" class="page-link">03</a></li>
-            <li class="page-item"><a href="#" class="page-link">04</a></li>
-            <li class="page-item"><a href="#" class="page-link">05</a></li>
-            <li class="page-item">
-                <a href="#" class="page-link" aria-label="Next">
-                    <span aria-hidden="true">
-                        <span class="lnr lnr-chevron-right"> > </span>
-                    </span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    
-   </section>
+	       </c:if> 
+	    </div>
+	   </section>
 
 
 	<jsp:include page="../common/footer.jsp"/>

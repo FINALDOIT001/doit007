@@ -144,12 +144,20 @@ public class EventController {
 	
 	
 	
+	/**
+	 * Insert EventPage Kwon
+	 * 2020.04.08 KH
+	 * @param e
+	 * @param request
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping("eventInsert.do")
-	public String insertEvent(Event e, HttpServletRequest request, 
+	public String insertEvent(Event ev, HttpServletRequest request, 
 			@RequestParam(name="evFileName", required=false) MultipartFile file) {
 		commonFile cf = new commonFile();
 		
-		System.out.println("Serlvet Insert Event : " + e);
+		System.out.println("Serlvet Insert Event : " + ev);
 		
 		// 들어온 파일값이 공백이 아니면
 		if (!file.getOriginalFilename().equals("")) {
@@ -159,22 +167,131 @@ public class EventController {
 			String renameFileName = cf.saveFile(file, request, "evUploadFiles"); // 아래쪽에 메소드로 새로 빼준다
 
 			if (renameFileName != null) {
-				e.seteOriginalFileName(file.getOriginalFilename());
-				e.seteRenameFileName(renameFileName);
+				ev.seteOriginalFileName(file.getOriginalFilename());
+				ev.seteRenameFileName(renameFileName);
 			}
 			
 		}
-		System.out.println("Servlet Event 추가 : " + e);
+		System.out.println("Servlet Event 추가 : " + ev);
 		
-		int result = eService.insertEvent(e);
+		int result = eService.insertEvent(ev);
 		
 		if (result > 0) {
-			return "redirect:moveBS.go";
+			return "redirect:elist.go";
 		} else {
 			return "common/errorPage";
 		}
 		
 	}
 	
+	
+	/**
+	 * 이벤트 업데이트 페이지로 이동 Kwon
+	 * 2020.04.09 KH
+	 * @param mv
+	 * @param ev
+	 * @param eNo
+	 * @return
+	 */
+	@RequestMapping("eUpdate.go")
+	public ModelAndView updatePage(ModelAndView mv, Event ev, int eNo) {
+		
+		ev = eService.selectEvent(eNo);
+		
+		System.out.println("servlet Update Event객체 : " + ev);
+		
+		mv.addObject("ev", ev);
+		mv.setViewName("event/eventUpdate");
+		
+		return mv;
+	}
+	
+	/**
+	 * Update Event.do Kwon
+	 * 2020.04.09 KH
+	 * @param mv
+	 * @param ev
+	 * @param request
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping("eUpdate.do")
+	public ModelAndView updateEvent(ModelAndView mv, Event ev, HttpServletRequest request,
+			@RequestParam(name="eFileName", required=false) MultipartFile file) {
+		commonFile cf = new commonFile();
+		
+		System.out.println("Serlvet Insert Event : " + ev);
+		
+		if (file != null && !file.isEmpty()) { // 새로 업로드된 파일이 있다면!
+			if (ev.geteRenameFileName() != null) { // 기존 업로드된 파일이 있었다면?
+				cf.deleteFile(ev.geteRenameFileName(), request, "evUploadFiles");
+			}
+			// 기존 파일을 지운 뒤, 새로 넣을 파일이 있으니까 renameFileName 으로 만들어준다.
+			String bsRenameFileName = cf.saveFile(file, request, "evUploadFiles"); // 아래쪽 메소드로 다시 달라고 한다
+			
+			if (bsRenameFileName != null) {
+				ev.seteOriginalFileName(file.getOriginalFilename());
+				ev.seteRenameFileName(bsRenameFileName);
+			}
+
+		}
+		
+		System.out.println("Servlet Event 수정 : " + ev);
+		
+		int result = eService.updateEvent(ev);
+		
+		if (result > 0) {
+			mv.setViewName("redirect:elist.go");
+		} else {
+			mv.addObject("msg","이벤트 수정에 실패했습니다.");
+			mv.setViewName("common/errorPage");
+		}
+
+		return mv;
+	}
+	
+	
+	/**
+	 * 이벤트 글 지우기 Kwon
+	 * 2020.04.09 KH
+	 * @param mv
+	 * @param eNo
+	 * @return
+	 */
+	@RequestMapping("deleteEv.do")
+	public ModelAndView deleteEvent(ModelAndView mv, int eNo) {
+		
+		System.out.println("Servlet 삭제 Event No : " + eNo);
+		
+		int result = eService.deleteEvent(eNo);
+		
+		if (result > 0) {
+			mv.setViewName("redirect:elist.go");
+		} else {
+			mv.addObject("msg", "이벤트 삭제에 실패했습니다.");
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+		
+	}
+	
+	
+	@RequestMapping("deleteEr.go")
+	@ResponseBody
+	public String deleteEr(int ecNo) {
+		
+		System.out.println("servlet deleteEr ecNo : " + ecNo);
+		
+		int result = eService.deleteEr(ecNo);
+		
+		System.out.println("댓글 삭제함 : " +result);
+		
+		if (result > 0 ) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 
 }

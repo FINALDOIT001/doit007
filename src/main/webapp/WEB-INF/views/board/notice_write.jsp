@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Notice Write</title>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
@@ -44,23 +44,24 @@
     </div>
 
      <!-- Main content -->
-     <section class="content">
+     <section class="content">   
+      <form action="nInsert.go" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6" style="margin: auto;">
                 <div class="card card-outline card-info">
                     <div class="card-header" style="background-color: #fff;">
                         <div class="card-body" style="background-color: #fff;">
                             <div class="form-group">
-                              <input class="form-control" placeholder="제목을 입력하세요.">
+                              <input class="form-control" name="n_title" placeholder="제목을 입력하세요.">
                             </div>
                             <div class="form-group">
-                              <input class="form-control" value="admin" readonly>
+                              <input class="form-control" name="n_writer" value="${ loginUser.mId }" readonly>
                             </div>
                            
                     <!-- /.card-header -->
                     <div class="card-body pad">
                         <div class="mb-3">
-                            <textarea class="textarea" placeholder="내용을 입력하세요."
+                            <textarea class="textarea" name="n_content" placeholder="내용을 입력하세요."
                                 style="width: 100%; height: 600px; font-size: 14px; line-height: 18px; border: 1px solid rgb(219, 212, 212); padding: 10px;"></textarea>
                         </div>
 
@@ -68,8 +69,9 @@
                     <div class="form-group">
                         <div class="btn btn-default btn-file">
                           <i class="fas fa-paperclip"></i> 첨부파일
-                          <input type="file" name="attachment">
+                          <input type="file" name="uploadFile">
                         </div>
+                        <br>
                         <span style="font-size: small;">5MB 이하의 이미지 파일 (JPG, PNG, GIF) 1개를 첨부하실 수 있습니다.</span>
                     </div>
                     </div>
@@ -77,8 +79,8 @@
                     <hr>
                     <div class="card-footer" style="background-color: #fff;">
                       <div style="text-align: center;">
-                        <button type="submit" class="genric-btn danger circle" style="font-size: 13px; margin-right: 10px;"><i class="far fa-envelope"></i> 등록</button>
-                        <button type="reset" class="genric-btn danger circle" style="font-size: 13px;" onclick="location.href='moveNT.go'"><i class="fas fa-times"></i> 취소</button>
+                        <input type="submit" value="등록" class="genric-btn danger circle" style="font-size: 13px; margin-right: 10px;">
+                        <a href="nlist.go"><input type="reset" value="취소" class="genric-btn danger circle" style="font-size: 13px;"></a>
                       </div>
                     </div>
                     <!-- /.card-footer -->
@@ -87,6 +89,7 @@
             <!-- /.col-->
         </div>
         <!-- ./row -->
+        </form>
     </section>
     <!-- /.content -->
 
