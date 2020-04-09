@@ -36,7 +36,6 @@
 					</div>
 					<form action="bsUpdate.do" id="kwon-Form01"
 						enctype="multipart/form-data" method="POST">
-						<input type="hidden" name="mId" value=""> 
 						<input type="hidden" name="bsWriter" value="${ loginUser.mName }">
 						<input type="hidden" name="bsNo" id="bsNo" value="${ bs.bsNo }">
 						<input type="hidden" name="bsWriterNo" value="${ bs.bsWriterNo }">
