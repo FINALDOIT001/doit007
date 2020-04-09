@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>DO IT</title>
 <style>
       * {
          font-family: 'Noto Sans KR', sans-serif;
@@ -19,6 +19,11 @@
       .pagination {
       	float: right;
       }
+      .font-style {
+		width: 200px; 
+		text-align: center; 
+		font-weight: bold;
+	}
 
    </style>
    <link rel="stylesheet" href="${contextPath}/resources/css/hyerim.css">
@@ -43,13 +48,13 @@
       </section>
         <ul class="nav nav-tabs" style="margin-bottom: 40px;">
             <li class="nav-item">
-              <a class="nav-link active" style="width: 200px; text-align: center;" data-toggle="tab" href="#home">자유게시판</a>
+              <a class="nav-link active font-style" data-toggle="tab" href="#home"><span>자유게시판</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu1">질문게시판</a>
+              <a class="nav-link font-style" data-toggle="tab" href="#menu1"><span>질문게시판</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="width: 200px; text-align: center;" data-toggle="tab" href="#menu2">나눔게시판</a>
+              <a class="nav-link font-style" data-toggle="tab" href="#menu2"><span>나눔게시판</span></a>
             </li>
           </ul>
           

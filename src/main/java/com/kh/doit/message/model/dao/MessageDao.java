@@ -30,6 +30,16 @@ public class MessageDao {
 		return sqlSession.insert("messageMapper.msSendMessage",m1);
 	}
 
+	public ArrayList<Message> selectNewMSList(String userID) {
+		
+		return (ArrayList)sqlSession.selectList("messageMapper.selectNewMSList",userID);
+	}
+
+	public int messageDelete(String[] delList) {
+		
+		return sqlSession.delete("messageMapper.messageDelete",delList);
+	}
+
 
 
 }

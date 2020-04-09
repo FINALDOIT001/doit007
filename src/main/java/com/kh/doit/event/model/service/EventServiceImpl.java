@@ -43,8 +43,23 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public int insertEvent(Event e) {
-		return eDao.insertEvent(e);
+	public int insertEvent(Event ev) {
+		return eDao.insertEvent(ev);
+	}
+
+	@Override
+	public int updateEvent(Event ev) {
+		return eDao.updateEvent(ev);
+	}
+
+	@Override
+	public int deleteEvent(int eNo) {
+		return eDao.deleteEvent(eNo);
+	}
+
+	@Override
+	public int deleteEr(int ecNo) {
+		return eDao.deleteEr(ecNo);
 	}
 
 }

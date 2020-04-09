@@ -105,7 +105,7 @@
 							</div>
 							<div class="offset-sm-9">
 								<div>
-									<input type="submit" id="kwon-insert-204" class="genric-btn danger circle" style="font-size: 13px;" value="책 등록하기"></input>
+									<input type="submit" id="kwon-insert-204" class="genric-btn danger circle" style="font-size: 13px;" value="등록하기"></input>
 			                        <input type="reset" id="kwon-reset01" class="genric-btn danger circle" style="font-size: 13px;" value="취소하기"></input>
 			                        <input type="button" id="kwon-back01" class="genric-btn danger circle" style="font-size: 13px;" value="뒤로가기"></input>
 								</div>
@@ -123,8 +123,8 @@
 	
 	
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+	<script src="${contextPath}/resources/js/kwonCustom.js"></script>
 
 	<script>
 		$('#summernote3')

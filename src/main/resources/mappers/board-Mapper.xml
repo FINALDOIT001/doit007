@@ -14,7 +14,6 @@
 		<result property="b_count" column="B_COUNT"/>
 	</resultMap>
 	
-	
 	<resultMap type="BoardComment" id="commentResultSet">
 		<id property="bc_no" column="BC_NO"/>
 		<result property="bc_b_no" column="BC_B_NO"/>
@@ -23,6 +22,19 @@
 		<result property="bc_modifydate" column="BC_MODIFYDATE"/>
 		<result property="bc_content" column="BC_CON"/>
 		<result property="bc_status" column="BC_STATUS"/>
+	</resultMap>
+	
+	<resultMap type="Notice" id="noticeResultSet">
+		<id property="n_no" column="N_NO" />
+		<result property="n_title" column="N_TITLE" />
+		<result property="n_writer" column="N_WRITER" />
+		<result property="n_createdate" column="N_CREATEDATE" />
+		<result property="n_modifydate" column="N_MODIFYDATE" />
+		<result property="n_content" column="N_CON" />
+		<result property="n_org_filename" column="N_ORIGINAL_FILENAME" />
+		<result property="n_re_filename" column="N_RENAME_FILENAME" />
+		<result property="n_status" column="N_STATUS" />
+		<result property="n_count" column="N_COUNT" />
 	</resultMap>
 	
 	<!-- 혜림 추가  -->
@@ -38,6 +50,7 @@
 		
 	</resultMap>
 	
+	<!-- freeBoard 부분 -->
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM BOARD
@@ -101,6 +114,41 @@
 		SET BC_STATUS='N'
 		WHERE BC_NO=#{bc_no}
 	</update>
+	<!-- freeBoard 끝 -->
+	
+	<!-- notice 부분 -->
+	<select id="getNoListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+	</select>
+	
+	<select id="selectNoList" resultMap="noticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE N_STATUS='Y'
+		ORDER BY N_NO DESC
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE
+		VALUES(SEQ_NNO.NEXTVAL,#{n_title},#{n_writer},SYSDATE,SYSDATE,#{n_content},#{n_org_filename},#{n_re_filename},DEFAULT,#{n_count})
+	</insert>
+	
+	<update id="updateNoCount" parameterType="_int">
+		UPDATE NOTICE
+		SET N_COUNT = N_COUNT+1
+		WHERE N_NO=#{n_no}
+	</update>
+	
+	<select id="selectNotice" resultMap="noticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE N_NO=#{n_no}
+		AND N_STATUS='Y'
+	</select>
+	
+	<!-- notice 끝 -->
 
  	<select id="selectfbList" resultMap="mypageboardSet">
 		SELECT B.B_NO, B.B_TITLE, B.B_WRITER, B.B_MODIFYDATE
@@ -108,5 +156,7 @@
 		ON B.B_WRITER = M.M_ID
 		WHERE B.B_WRITER=#{mId}
 	</select> 
+	
+	
 
 </mapper>

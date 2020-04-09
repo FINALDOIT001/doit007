@@ -40,4 +40,26 @@ public interface MessageService {
 	  */
 	int msSendMessage(Message m1);
 
+	/**
+	  * @Method Name : selectNewMSList
+	  * @작성일 : Apr 9, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 읽지 않은 메시지 불러오기
+	  * @param userID
+	  * @return
+	  */
+	ArrayList<Message> selectNewMSList(String userID);
+
+	/**
+	  * @Method Name : messageDelete
+	  * @작성일 : Apr 9, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 쪽지삭제
+	  * @param delList
+	  * @return
+	  */
+	int messageDelete(String[] delList);
+
 }

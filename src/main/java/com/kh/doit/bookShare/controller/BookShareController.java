@@ -110,6 +110,24 @@ public class BookShareController {
 		}
 	}
 	
+	@RequestMapping("delBsReply.do")
+	@ResponseBody
+	public String delBsReply(int bscNo) {
+		System.out.println("댓글삭제 bscNo : " + bscNo);
+		int result = bsService.deleteReply(bscNo);
+		System.out.println("삭제결과  : " + result);
+		
+		if (result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+		
+	}
+	
+	
+	
+	
 	
 	@RequestMapping("bsInsert.go")
 	public String moveBookShareWrite() {
