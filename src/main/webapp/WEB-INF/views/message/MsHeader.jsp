@@ -16,13 +16,19 @@
 
     <div class="button-group-area mt-10" style="display:flex;margin-top: 5%;margin-left: 5%;margin-right: 5%;margin-bottom: 5%;justify-content: center;" id="container">
         <a href="newMS.ms" class="genric-btn primary-border e-large size-fix">MESSAGE</a>
-        <a href="ReceivenewPage.ms" class="genric-btn primary-border e-large size-fix">NEW</a>
+		
+        <c:url var="msRNewPage" value="ReceivenewPage.ms">
+			<c:param name="userID" value="${ sessionScope.loginUser.mId }"></c:param>
+		</c:url>
+        <a href="${ msRNewPage }" class="genric-btn primary-border e-large size-fix">NEW</a>
+        
+        
         <a href="#" class="genric-btn primary-border e-large size-fix">RECEIVE</a>
         <a href="#" class="genric-btn primary-border e-large size-fix">SEND</a>
         <a href="#" class="genric-btn primary-border e-large size-fix">BLOCK</a>
     </div>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<%-- <script src="${contextPath}/resources/js/MSbootstrap.min_inseok.js"></script> --%>
+	<script src="${contextPath}/resources/js/MSbootstrap.min_inseok.js"></script>
 </body>
 </html>

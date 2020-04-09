@@ -16,7 +16,7 @@
 	
 	<input type="hidden" id="writerId" value="${ sessionScope.loginUser.mId }">
 	
-	<table style="margin-left: 5%;width: 800px;height: 500px;">
+	<table style="margin-left: 13%;width: 600px;height: 500px;">
 		<tr>
 			<td style="width:150px;height:50px;text-align:center;">RECIPIENT</td>
 			<td>
@@ -68,7 +68,7 @@
 					
 					console.log(data);
 					
-					if(data != null){
+					if( data.length != 0 ){
 						for(var i in data){
 							var userInfo = data[i].mId + "(" + data[i].mName + ")";
 							list.push(userInfo);

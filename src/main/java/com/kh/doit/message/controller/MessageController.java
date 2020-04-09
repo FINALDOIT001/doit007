@@ -3,12 +3,15 @@ package com.kh.doit.message.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -134,9 +137,56 @@ public class MessageController {
 		
 	}
 	
+	/**
+	  * @Method Name : ReceivenewPage
+	  * @작성일 : Apr 9, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 받아온 읽지 않은 메시지 리스트
+	  * @param mv
+	  * @param userID
+	  * @return
+	  */
 	@RequestMapping("ReceivenewPage.ms")
-	public String ReceivenewPage() {
-		return "message/msReceivenewPage";
+	public ModelAndView ReceivenewPage(ModelAndView mv, @RequestParam String userID) {
+		
+		ArrayList<Message> msList = msService.selectNewMSList(userID);
+		
+		if( msList != null ) {
+			mv.addObject("msList",msList);
+			mv.setViewName("message/MsListView");
+		}else {
+			mv.addObject("msg", "쪽지 리스트 불러오기 실패 !");
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	/**
+	  * @Method Name : messageDelete
+	  * @작성일 : Apr 9, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 리스트로 받은 쪽지 삭제
+	  * @param request
+	  * @param response
+	  * @param delList
+	  * @throws JsonIOException
+	  * @throws IOException
+	  */
+	@RequestMapping(value="MSdelete.ms",method= {RequestMethod.GET, RequestMethod.POST})
+	public void messageDelete(HttpServletRequest request,
+							  HttpServletResponse response,
+							  @RequestParam String[] delList
+							  ) throws JsonIOException, IOException {
+		
+		int result = msService.messageDelete(delList);
+
+		Gson gson = new GsonBuilder().create();
+		
+		gson.toJson(result,response.getWriter());
+			
 	}
 	
 }
