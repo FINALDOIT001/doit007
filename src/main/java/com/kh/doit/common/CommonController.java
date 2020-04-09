@@ -46,4 +46,12 @@ public class CommonController {
 	public String studySc() {
 		return "study/doitStudy_Schedule";
 	}
+	
+	/** 정호 스터디 뒤테 스케  링크
+	 * @return
+	 */
+	@RequestMapping("studyPhotoInsert.go")
+	public String studyPhotoInsert() {
+		return "study/doitStudyPhotoInsertFrom";
+	}
 }

@@ -94,6 +94,39 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		
 		return sgDao.sgDelete(sgNo);
 	}
+
+
+	/**
+	 * 스터디 그룹 탈퇴
+	 * 작성자 : 서정도
+	 */
+	@Override
+	public int sgGroupOut(int mno) {
+		
+		return sgDao.sgGroupOut(mno);
+	}
+
+
+	/**
+	 * 스터디 가입
+	 * 작성자 : 서정도
+	 */
+	@Override
+	public int sgJoin(GroupMember gm) {
+
+		return sgDao.sgJoin(gm);
+	}
+
+
+	/**
+	 * 스터디 시작
+	 * 작성자 : 서정도
+	 */
+	@Override
+	public int sgStart(int sgNo) {
+
+		return sgDao.sgStart(sgNo);
+	}
 	
 	
 

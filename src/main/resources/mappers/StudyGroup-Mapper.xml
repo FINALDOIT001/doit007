@@ -28,6 +28,11 @@
 		<result property="sgConfirm" column="SG_CONFIRM_YN"/>
 	</resultMap>
 	
+	<resultMap id="groupMemberResultSet" type="GroupMember">
+   		<result property="gm_sgNo" column="GM_SG_NO"/>
+   		<result property="gm_mNo" column="GM_M_NO"/>
+   	</resultMap>
+	
 	<resultMap id="memberResultSet" type="Member">
    		<id property="mno" column="M_NO"/>
    		<result property="mId" column="M_ID"/>
@@ -50,27 +55,24 @@
     </resultMap>
     
 	<select id="getlistCount" resultType="_int">
-	SELECT COUNT(*)
-	FROM STUDY_GROUP
-	WHERE SG_STATUS_YN='Y'
-	
+		SELECT COUNT(*)
+		FROM STUDY_GROUP
+		WHERE SG_STATUS_YN='Y'
 	</select>
 	
 	
-	 <insert id="sgInsert" parameterType="StudyGroup">
-	
-	INSERT INTO STUDY_GROUP
-	VALUES(SEQ_SGNO.NEXTVAL,#{sgTitle},#{sgWriter},#{sgWriterNo},1,#{sgMaxPeople},#{sgAddr},#{sgDeposit},SYSDATE,
-	#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOriginalFileName},#{sgRenameFileName},
-	#{sgTag},DEFAULT,DEFAULT,DEFAULT)
-	
+	<insert id="sgInsert" parameterType="StudyGroup">
+		INSERT ALL
+		INTO STUDY_GROUP VALUES(SEQ_SGNO.NEXTVAL,#{sgTitle},#{sgWriter},#{sgWriterNo},1,#{sgMaxPeople},#{sgAddr},#{sgDeposit},SYSDATE,#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOriginalFileName},#{sgRenameFileName},#{sgTag},DEFAULT,DEFAULT,DEFAULT)
+		INTO GROUP_MEMBER VALUES(SEQ_SGNO.CURRVAL,#{sgWriterNo})	
+		SELECT *
+		FROM DUAL
 	</insert>
 	
 	<select id="selectList" resultMap="studyGroupResultSet">
-	SELECT * FROM STUDY_GROUP
-	WHERE SG_STATUS_YN='Y'
-	ORDER BY SG_NO DESC
-	
+		SELECT * FROM STUDY_GROUP
+		WHERE SG_STATUS_YN='Y'
+		ORDER BY SG_NO DESC
 	</select>
 	
 	<select id="selectSg" resultMap="studyGroupResultSet">
@@ -98,9 +100,9 @@
 	</update>
 	
 	<update id="sgDelete" parameterType="_int">
-	UPDATE STUDY_GROUP SET
-	SG_STATUS_YN = 'N'
-	WHERE SG_NO = #{sgNo}
+		UPDATE STUDY_GROUP SET
+		SG_STATUS_YN = 'N'
+		WHERE SG_NO = #{sgNo}
 	</update>
 
 	<select id="memberList" resultMap="memberResultSet">
@@ -110,6 +112,19 @@
 		WHERE GM_SG_NO = #{sgNo}
 	</select>
 
+	<delete id="sgGroupOut" parameterType="_int">
+		DELETE FROM GROUP_MEMBER WHERE GM_M_NO = #{mno}
+	</delete>
+	
+	<insert id="sgJoin" parameterType="GroupMember">
+		INSERT INTO GROUP_MEMBER VALUES(#{gm_sgNo},#{gm_mNo})
+	</insert>
+	
+	<update id="sgStart" parameterType="_int">
+		UPDATE STUDY_GROUP SET
+		SG_CONFIRM_YN = 'N'
+		WHERE SG_NO = #{sgNo}
+	</update>
 
 </mapper>
     
