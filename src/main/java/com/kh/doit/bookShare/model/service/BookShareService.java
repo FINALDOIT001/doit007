@@ -68,4 +68,12 @@ public interface BookShareService {
 	 */
 	int updateBs(BookShare bs);
 
+	/**
+	 * BS 댓글 삭제하기 Kwon
+	 * 2020.04.09 KH
+	 * @param bscNo
+	 * @return
+	 */
+	int deleteReply(int bscNo);
+
 }

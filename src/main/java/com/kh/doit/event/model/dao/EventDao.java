@@ -73,8 +73,44 @@ public class EventDao {
 		return sqlSession.insert("evMapper.insertReply", er);
 	}
 
-	public int insertEvent(Event e) {
-		return sqlSession.insert("evMapper.insertEvent",e);
+	/**
+	 * Event 추가하기 Kwon
+	 * 2020.04.08 KH
+	 * @param ev
+	 * @return
+	 */
+	public int insertEvent(Event ev) {
+		return sqlSession.insert("evMapper.insertEvent",ev);
+	}
+
+	/**
+	 * Event update Kwon
+	 * 2020.04.09 KH
+	 * @param ev
+	 * @return
+	 */
+	public int updateEvent(Event ev) {
+		return sqlSession.update("evMapper.updateEvent", ev);
+	}
+
+	/**
+	 * 이벤트 글 삭제하기 Kwon
+	 * 2020.04.09 KH
+	 * @param eNo
+	 * @return
+	 */
+	public int deleteEvent(int eNo) {
+		return sqlSession.update("evMapper.deleteEvent", eNo);
+	}
+
+	/**
+	 * 이벤트 댓글 삭제하기 Kwon
+	 * 2020.04.09 KH
+	 * @param ecNo
+	 * @return
+	 */
+	public int deleteEr(int ecNo) {
+		return sqlSession.update("evMapper.deleteEr",ecNo);
 	}
 }
 
