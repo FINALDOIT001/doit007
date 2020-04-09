@@ -79,7 +79,7 @@
                               Community
                            </a>
                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="moveNT.go">Notice</a>
+                              <a class="dropdown-item" href="nlist.go">Notice</a>
                               <a class="dropdown-item" href="fblist.go">Board</a>
                               <a class="dropdown-item" href="moveBS.go">Book-Share</a>
                            </div>

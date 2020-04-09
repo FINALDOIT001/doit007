@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판</title>
+<title>freeBoard View</title>
 <style>
 	.hyun_del {
 		padding:10px;
@@ -16,6 +16,10 @@
 		height:18px;
 	}
 	.x_comment {
+		padding:10px;
+	}
+	.thumbnail {
+		width:350px;
 		padding:10px;
 	}
 </style>
@@ -73,16 +77,24 @@
 				<tr>
 				<th width="134" height="50">첨부파일</th>
 				<td colspan="5" width="1107" height="50">
-					<c:if test="${ !empty b.b_org_filename }">
-						<a href="${ contextPath }/resources/buploadFiles/${ b.b_re_filename }" download="${ b.b_org_filename }">${ b.b_org_filename }</a>
+					<c:if test="${ !empty b.b_re_filename }">
+						<a href="${ contextPath }/resources/buploadFiles/${ b.b_re_filename }" download="${ b.b_re_filename }">${ b.b_re_filename }  <span style="color:gray; font-size:12px;">(다운로드 가능)</span></a>
 					</c:if>
 				</td>
 				<!-- 첨부파일 -->
 				</tr>
 				<tr>
+				<th width="134" height="50">첨부파일<br>미리보기</th>
+				<td colspan="5" width="1107" height="50">
+					<c:if test="${ !empty b.b_org_filename }">
+						<img class="thumbnail" src="${contextPath}/resources/buploadFiles/${b.b_re_filename}">
+					</c:if>
+				</td>
+				</tr>
+				<tr>
 					<td colspan="6">
 						<!-- 본문 내용 --> 
-						<textarea name="" class="freeboard_content" readonly>   
+						<textarea name="" class="freeboard_content" style="height:450px;" readonly>   
 ${ b.b_content }          
            				</textarea>
 					</td>
@@ -131,10 +143,10 @@ ${ b.b_content }
 				</table>	
 				
 				
-				<table width="1000" cellspacing="0" id="bctb" style="margin:15px;">
+				<table width="1050" cellspacing="0" id="bctb" style="margin:15px; margin-left:40px;">
 				<thead>
 					<tr>
-						<td style="padding:10px;" colspan="3"><b id="bcCount" style="color:black; margin-left:7px;"></b></td>
+						<td style="padding:10px;" colspan="4"><b id="bcCount" style="color:black; margin-left:7px;"></b></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -205,7 +217,9 @@ ${ b.b_content }
 			
 		});
 	
+		
 		function getCommentList() {
+			
 			var b_no = ${ b.b_no };
 			
 			$.ajax({
@@ -228,10 +242,10 @@ ${ b.b_content }
 					if(data.length > 0) {
 						for(var i in data){
 							$tr = $("<tr>");
-							$mId = $("<td width='150'>").text(data[i].mId);
+							$mId = $("<td width='200'>").text(data[i].mId);
 							$bc_no = data[i].bc_no;
-							$bc_content = $("<td width='540'>").text(data[i].bc_content); 
-							$bc_createdate = $("<td width='150'>").text(data[i].bc_createdate);
+							$bc_content = $("<td width='570'>").text(data[i].bc_content); 
+							$bc_createdate = $("<td width='200'>").text(data[i].bc_createdate);
 							/* $bc_status = $("<td width='100'>").text(data[i].bc_status); */
 							
 							$tr.append("<input type='hidden' value='"+$bc_no+"'>");
@@ -239,12 +253,12 @@ ${ b.b_content }
 							$tr.append($bc_content);
 							$tr.append($bc_createdate);
 							/* $tr.append($bc_status); */
-							$tr.append("<label class='hyun_del'><img src='resources/img/delete.png'></label></td>");
+							$tr.append("<td width='60'><label class='hyun_del'><img src='resources/img/delete.png'></label></td>");
 							$tableBody.append($tr);
 						}
 					}else {
 						$tr = $("<tr>");
-						$bc_content = $("<td colspan='3' class='x_comment'>").text("등록된 댓글이 없습니다.");
+						$bc_content = $("<td colspan='4' class='x_comment'>").text("등록된 댓글이 없습니다.");
 						$tr.append($bc_content);
 						$tableBody.append($tr);
 					}
@@ -252,11 +266,10 @@ ${ b.b_content }
 			});
 		};
 		
-
+		/* 댓글 삭제 */
 		$(document).on("click",".hyun_del",function(){
 			
-			
-		    var bc_no = $(this).parent().children().eq(0).val();
+		    var bc_no = $(this).parent().parent().children().eq(0).val();
 		    
 		    alert("삭제하시겠습니까?");
 		

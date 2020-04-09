@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>freeBoard List</title>
 <style>
 </style>
 </head>
@@ -72,7 +72,7 @@
                   		</c:if>
                   	</td>
                   	<td align="center">${ b.b_writer }</td>
-                  	<td align="center">${ b.b_createdate }</td>
+                  	<td align="center">${ b.b_modifydate }</td> <!-- 날짜 다시 봐바 -->
                   	<td align="center">${ b.b_count }</td>
                   <%-- 	<td align="center">
                   		<c:if test="${ !empty b.b_org_filename }">
@@ -140,11 +140,6 @@
     </div>
     
     
-    
-    
-    
-    
-
     <!-- 페이징 부분 -->
    <!--  <nav class="col-md-12 blog-pagination justify-content-center d-flex">
         <ul class="pagination">
