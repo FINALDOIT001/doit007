@@ -41,58 +41,66 @@
 			<section class="project_gallery">
 				<div class="project_gallery_tittle">
 					<h2>
-						<span>글</span> 작성
+						<span>&nbsp;&nbsp;이벤트   </span>수정
 					</h2>
 				</div>
 			</section>
 			<div class="row">
 				<div class="col-lg-12">
-					<form action="eventInsert.do" method="post" enctype="multipart/form-data">
+					<form action="eUpdate.do" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="eNo" value=" ${ ev.eNo }">
 						<input type="hidden" name="eWriter" value="${ loginUser.mName }">
 						<input type="hidden" name="eWriterNo" value="${ loginUser.mno }">
 						<div class="row">
 							<div class="col-12">
 								<div class="form-group">
 									<input class="form-control placeholder hide-on-focus"
-										name="eTitle" id="eTitle" type="text" placeholder="제목">
+										name="eTitle" id="eTitle" type="text" value="${ ev.eTitle }"placeholder="제목">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<!-- <input class="form-control placeholder hide-on-focus"
+										name="evFileName" id="photo" type="file" placeholder="사진"> -->
+									<input type="file" name="eFileName">
+									<c:if test="${ !empty ev.eOriginalFileName }">
+                 							현재 업로드 파일 :
+                 							<a
+											href="${ contextPath }/resources/evUploadFiles/${ ev.eRenameFileName }"
+											download="${ ev.eOriginalFileName }"> ${ ev.eOriginalFileName }</a>
+									</c:if>
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
 									<input class="form-control placeholder hide-on-focus"
-										name="evFileName" id="photo" type="file" placeholder="사진">
+										name="eTag" id="eTag" type="text" value="${ ev.eTag }" placeholder="태그">
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
 									<input class="form-control placeholder hide-on-focus"
-										name="eTag" id="eTag" type="text" placeholder="태그">
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group">
-									<input class="form-control placeholder hide-on-focus"
-										name="eType" id="eType" type="text"
+										name="eType" id="eType" type="text" value="${ ev.eType }"
 										placeholder="타입(세미나, 웨비나, 포럼 등)">
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<div class="form-group">
-									<input class="form-control" name="eMonth" type="number" min="1"
-										max="12" placeholder="월">
+									<input class="form-control" name="eMonth" type="number" value="${ ev.eMonth }" 
+									min="1" max="12" placeholder="월">
 								</div>
 							</div>
 							<div class="col-sm-3">
 								<div class="form-group">
-									<input class="form-control" name="eDays" type="number" min="1"
-										max="31" placeholder="일">
+									<input class="form-control" name="eDays" type="number"  value="${ ev.eDays }"
+									min="1" max="31" placeholder="일">
 								</div>
 							</div>
 							<div class="col-12">
 								<div class="form-group">
 									<textarea class="form-control w-100 placeholder hide-on-focus"
 										name="eIntro" id="eIntro" cols="30" rows="9"
-										placeholder="인트로 내용을 입력하세요"></textarea>
+										placeholder="인트로 내용을 입력하세요">${ ev.eIntro }</textarea>
 								</div>
 							</div>
 
@@ -105,9 +113,9 @@
 							</div>
 							<div class="offset-sm-9">
 								<div>
-									<input type="submit" id="kwon-insert-204" class="genric-btn danger circle" style="font-size: 13px;" value="책 등록하기"></input>
-			                        <input type="reset" id="kwon-reset01" class="genric-btn danger circle" style="font-size: 13px;" value="취소하기"></input>
-			                        <input type="button" id="kwon-back01" class="genric-btn danger circle" style="font-size: 13px;" value="뒤로가기"></input>
+									<input type="submit" id="kwon-insert-205" class="genric-btn danger circle" style="font-size: 13px;" value="수정"></input>
+			                        <input type="reset" id="kwon-reset01" class="genric-btn danger circle" style="font-size: 13px;" value="취소"></input>
+			                        <input type="button" id="kwon-back01" class="genric-btn danger circle" style="font-size: 13px;" value="BACK"></input>
 								</div>
 							</div>
 						</div>
@@ -120,6 +128,8 @@
 
 
 	<jsp:include page="../common/footer.jsp" />
+	<script src="${contextPath}/resources/js/kwonCustom.js"></script>
+	
 	
 	
 
@@ -146,13 +156,15 @@
 
 						});
 
-		$('#summernote3').summernote('code');
+		var markupStr = '${ ev.eCon }';
+		$('#summernote3').summernote('code', markupStr);
+		$('#summernote3').summernote.css('display','none');
 
 	</script>
 	
 	<script>
- 	$('#kwon-insert-204').click(function() {
-		  location.href="eventInsert.do";
+ 	$('#kwon-insert-205').click(function() {
+		  location.href="eUpdate.do";
 	});
  
 	</script>

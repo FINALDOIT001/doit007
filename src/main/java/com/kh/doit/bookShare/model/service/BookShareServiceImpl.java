@@ -47,6 +47,10 @@ public class BookShareServiceImpl implements BookShareService {
 	public int updateBs(BookShare bs) {
 		return bsDao.updateBs(bs);
 	}
+	@Override
+	public int deleteReply(int bscNo) {
+		return bsDao.deleteReply(bscNo);
+	}
 	
 	
 

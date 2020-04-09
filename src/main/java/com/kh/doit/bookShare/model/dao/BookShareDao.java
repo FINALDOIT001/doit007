@@ -99,4 +99,14 @@ public class BookShareDao {
 		return sqlSession.update("msMapper.updateBookShare", bs);
 	}
 
+	/**
+	 * BookShare Reply 삭제하기 Kwon
+	 * 2020.04.09 KH
+	 * @param bscNo
+	 * @return
+	 */
+	public int deleteReply(int bscNo) {
+		return sqlSession.update("msMapper.deleteReply",bscNo);
+	}
+
 }

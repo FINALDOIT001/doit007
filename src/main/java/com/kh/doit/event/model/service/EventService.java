@@ -55,7 +55,31 @@ public interface EventService {
 	 * @param e
 	 * @return
 	 */
-	int insertEvent(Event e);
+	int insertEvent(Event ev);
+
+	/**
+	 * 5. update Event Kwon
+	 * 2020.04.09 KH
+	 * @param ev
+	 * @return
+	 */
+	int updateEvent(Event ev);
+
+	/**
+	 * 6. Delete Event Kwon
+	 * 2020.04.09 KH
+	 * @param eNo
+	 * @return
+	 */
+	int deleteEvent(int eNo);
+
+	/**
+	 * 7. delete Event Reply  Kwon
+	 * 2020.04.09 KH
+	 * @param ecNo
+	 * @return
+	 */
+	int deleteEr(int ecNo);
 
 
 }

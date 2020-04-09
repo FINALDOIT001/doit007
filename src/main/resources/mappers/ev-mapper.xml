@@ -93,5 +93,34 @@
     		,DEFAULT
     	)
 	</insert>
-
+	
+	<update id="updateEvent" parameterType="Event">
+		UPDATE	EVENT
+		SET		E_TITLE=#{eTitle}
+				,E_INTRO=#{eIntro}
+				,E_TAG=#{eTag}
+				,E_CON=#{eCon}
+				,E_ORIGINAL_FILENAME=#{eOriginalFileName}
+				,E_RENAME_FILENAME=#{eRenameFileName}
+				,E_TYPE=#{eType}
+				,E_MONTH=#{eMonth}
+				,E_DAYS=#{eDays}
+		WHERE	1=1
+		AND		E_NO=#{eNo}
+	</update>
+	
+	<update id="deleteEvent" parameterType="_int">
+		UPDATE	EVENT
+		SET		E_STATUS='N'
+		WHERE	1=1
+		AND		E_NO=#{eNo}
+	</update>
+	
+	<update id="deleteEr" parameterType="_int">
+		UPDATE 	EVENT_COMMENTS
+		SET		EC_STATUS='N'
+		WHERE	1=1
+		AND		EC_NO=#{ecNo}
+	</update>
+	
 </mapper>
