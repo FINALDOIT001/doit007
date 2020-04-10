@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,20 +18,22 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.doit.bookShare.model.vo.BookShareReply;
-import com.kh.doit.common.commonFile;
+import com.kh.doit.common.CommonFile;
 import com.kh.doit.event.common.EventPagination;
 import com.kh.doit.event.model.service.EventService;
 import com.kh.doit.event.model.vo.Event;
 import com.kh.doit.event.model.vo.EventPageInfo;
 import com.kh.doit.event.model.vo.EventReply;
 
-@Controller
+@RestController
 public class EventController {
 	
 	@Autowired
 	private EventService eService;
 	
-	
+	@Autowired
+	private CommonFile cf;
+
 	/**
 	 * 1. 이벤트 리스트 가져오기
 	 * @param mv
@@ -119,7 +121,6 @@ public class EventController {
 	 * @return
 	 */
 	@RequestMapping("addEvReply.do")
-	@ResponseBody
 	public String addEvReply(EventReply er) {
 		System.out.println("Servlet Ev댓글추가 : " + er);
 		int result = eService.insertReply(er);
@@ -155,7 +156,6 @@ public class EventController {
 	@RequestMapping("eventInsert.do")
 	public String insertEvent(Event ev, HttpServletRequest request, 
 			@RequestParam(name="evFileName", required=false) MultipartFile file) {
-		commonFile cf = new commonFile();
 		
 		System.out.println("Serlvet Insert Event : " + ev);
 		
@@ -218,8 +218,7 @@ public class EventController {
 	@RequestMapping("eUpdate.do")
 	public ModelAndView updateEvent(ModelAndView mv, Event ev, HttpServletRequest request,
 			@RequestParam(name="eFileName", required=false) MultipartFile file) {
-		commonFile cf = new commonFile();
-		
+
 		System.out.println("Serlvet Insert Event : " + ev);
 		
 		if (file != null && !file.isEmpty()) { // 새로 업로드된 파일이 있다면!
@@ -278,7 +277,6 @@ public class EventController {
 	
 	
 	@RequestMapping("deleteEr.go")
-	@ResponseBody
 	public String deleteEr(int ecNo) {
 		
 		System.out.println("servlet deleteEr ecNo : " + ecNo);

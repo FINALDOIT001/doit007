@@ -10,6 +10,9 @@
 .note-toolbar {
 	display: none;
 }
+.kwon-span204 {
+	cursor:pointer;
+}
 </style>
 
 </head>

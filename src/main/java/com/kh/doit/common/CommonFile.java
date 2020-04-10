@@ -5,9 +5,11 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-public class commonFile {
+@Component
+public class CommonFile {
 	
 	// 파일 저장용 메소드
 		public static String saveFile(MultipartFile file, HttpServletRequest request, String uploadFiles) {
