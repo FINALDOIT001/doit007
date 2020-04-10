@@ -85,64 +85,119 @@
 	</div>
 	<div class="col-lg-12" style="margin-top:20px;">
 		<label style="font-size:large; font-weight:700;">구매하기</label><br>
+		<input type="hidden" id="mid" value="${sessionScope.loginUser.mId}"/>
 		
 		<div class="hodu_border">
 			<div style="width:50%">
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-1" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-1">호두 10개 <span class="hodu_price">5000원</span></label>
+				<input type="radio" name="hoduNum" id="hodu1" class="custom-control-input" value="10">
+				<input type="hidden" value="5000"/>
+				<label class="custom-control-label hodu_num" for="hodu1">호두 10개 <span class="hodu_price">5000원</span></label>
 			</div>
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-2" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-2">호두 20개 <span class="hodu_price">9500원</span></label>
+				<input type="radio" name="hoduNum" id="hodu2" class="custom-control-input" value="20">
+				<input type="hidden" value="9500"/>
+				<label class="custom-control-label hodu_num" for="hodu2">호두 20개 <span class="hodu_price">9500원</span></label>
 			</div>
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-3" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-3">호두 30개 <span class="hodu_price">14000원</span></label>
+				<input type="radio" name="hoduNum" id="hodu3" class="custom-control-input" value="30">
+				<input type="hidden" value="14000"/>
+				<label class="custom-control-label hodu_num" for="hodu3">호두 30개 <span class="hodu_price">14000원</span></label>
 			</div>
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-4" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-4">호두 40개 <span class="hodu_price">18000원</span></label>
+				<input type="radio" name="hoduNum" id="hodu4" class="custom-control-input" value="40">
+				<input type="hidden" value="18000"/>
+				<label class="custom-control-label hodu_num" for="hodu4">호두 40개 <span class="hodu_price">18000원</span></label>
 			</div>
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-5" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-5">호두 50개 <span class="hodu_price">22000원</span></label>
+				<input type="radio" name="hoduNum" id="hodu5" class="custom-control-input" value="50">
+				<input type="hidden" value="22000"/>
+				<label class="custom-control-label hodu_num" for="hodu5">호두 50개 <span class="hodu_price">22000원</span></label>
 			</div>
 			</div>
 			<div style="width:50%; margin-left: 50px;">
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-6" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-6">호두 60개&nbsp;&nbsp; <span class="hodu_price">25000원</span></label>
+				<input type="radio" name="hoduNum" id="hodu6" class="custom-control-input" value="60">
+				<input type="hidden" value="25000"/>
+				<label class="custom-control-label hodu_num" for="hodu6">호두 60개&nbsp;&nbsp; <span class="hodu_price">25000원</span></label>
 			</div>
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-7" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-7">호두 80개&nbsp;&nbsp; <span class="hodu_price">30000원</span></label>
+				<input type="radio" name="hoduNum" id="hodu7" class="custom-control-input" value="80">
+				<input type="hidden" value="30000"/>
+				<label class="custom-control-label hodu_num" for="hodu7">호두 80개&nbsp;&nbsp; <span class="hodu_price">30000원</span></label>
 			</div>
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-8" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-8">호두 100개 <span class="hodu_price">40000원</span></label>
+				<input type="radio" name="hoduNum" id="hodu8" class="custom-control-input" value="100">
+				<input type="hidden" value="40000"/>
+				<label class="custom-control-label hodu_num" for="hodu8">호두 100개 <span class="hodu_price">40000원</span></label>
 			</div>
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-9" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-9">호두 200개 <span class="hodu_price">75000원</span></label>
+				<input type="radio" name="hoduNum" id="hodu9" class="custom-control-input" value="200">
+				<input type="hidden" value="75000"/>
+				<label class="custom-control-label hodu_num" for="hodu9">호두 200개 <span class="hodu_price">75000원</span></label>
 			</div>
 			<div class="custom-control custom-radio div_margin">
-				<input type="radio" name="jb-radio" id="jb-radio-10" class="custom-control-input">
-				<label class="custom-control-label hodu_num" for="jb-radio-10">호두 999개 <span class="hodu_price">199000원</span></label>
+				<input type="radio" name="hoduNum" id="hodu10" class="custom-control-input" value="999">
+				<input type="hidden" value="199000"/>
+				<label class="custom-control-label hodu_num" for="hodu10">호두 999개 <span class="hodu_price">199000원</span></label>
 			</div>
 			</div>
 		</div>
 		<div class="col-lg-12" style="margin-top:40px; text-align:center;">
-			<button id="hodupay" class="genric-btn danger" style="font-size: 13px;">결제하기</button>
+
+			<button id="hodupay" class="genric-btn danger" 
+				style="font-size: 13px;" onclick="hodupay();">결제하기</button>
 		</div>
 	</div>
-	
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	
 	<script>
-		
-		$('#hodupay').on("click",function(){
+
+
+		function hodupay(){
+			if($('input:radio[name=hoduNum]').is(":checked")){
+				
+		console.log($('input:radio[name=hoduNum]:checked').next().val());
+		var hPrice = $('input:radio[name=hoduNum]:checked').next().val();
+		var hodu = $("input:radio[name=hoduNum]:checked").val();
+		var hmNo = ${sessionScope.loginUser.mno};
+		var hmId = $('#mid').val();
+ 			$.ajax({
+				url:"hpay.go",
+				data: {
+					hPrice:hPrice,
+					hmNo:hmNo,
+					hmId:hmId,
+					hoduNum:hodu
+					
+				},
+				type: "post",
+				dataType:"json",
+				success:function(data){
+					if(data == "1"){
+						console.log(data);
+						alert("결제가 성공하였습니다.");
+						window.opener.location.href="http://localhost:8888/doit/myinfo.me?mId=hoho#menu3";
+						window.close();
+					}else{
+						alert("결제가 실패하였습니다.");
+					}
+				},error:function(request, status, errorData){
+					alert("error code : " + request.status + "\n"
+							+ "message : " + request.responseText
+							+ "error : " + errorData);
+				}
+			}); 
+			}else{
+				alert("호두를 선택하지않았습니다.");
+			}
+			
+		}
+
+	/* 결제 api */
+	/* $('#').on("click",function(){
 		var IMP = window.IMP; // 생략가능
 		IMP.init('imp71796721');
 			
@@ -194,7 +249,7 @@
 		        alert(msg);
 		    }
 		});
-	});
+	}); */
 	</script>
 </body>
 </html>

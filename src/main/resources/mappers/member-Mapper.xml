@@ -19,6 +19,20 @@
    		<result property="mUserroles" column="M_USERROLES" />
    		<result property="mStatus" column="M_STATUS" />
     </resultMap>
+    
+    <resultMap id="hoduResultSet" type="Hodu">
+    	<id property="hNo" column="H_NO"/>
+    	<result property="hmId" column="H_MID"/>
+    	<result property="hoduNum" column="HODU"/>
+    	<result property="hPrice" column="H_PRICE"/>
+    	<result property="hDate" column="H_DATE"/>
+    	
+    	<association property="member" javaType="Member">
+    		<result property="mId" column="M_ID"/>
+    	</association>
+    </resultMap>
+    
+    
     <select id="idCheck" parameterType="string" resultType="_int">
     	SELECT COUNT(*)
     	FROM MEMBER
@@ -58,4 +72,17 @@
     	SET M_STATUS='N'
     	WHERE M_ID=#{mId}
     </update>
+    
+    <insert id="inserthodu" parameterType="Hodu">
+    	INSERT INTO HODU_TABLE
+    	VALUES (SEQ_HNO.NEXTVAL,#{hmNo}, #{hmId}, #{hoduNum}, #{hPrice}, SYSDATE)
+    </insert>
+    
+    <select id="selecthList" resultMap="hoduResultSet">
+    	SELECT H.H_NO, H.HODU, H.H_PRICE, H.H_DATE
+    	FROM HODU_TABLE H JOIN MEMBER M
+    	ON H_MID = M.M_ID
+    	WHERE H.H_MID = #{mId}
+    </select>
+    
 </mapper>
