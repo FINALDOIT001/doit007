@@ -56,10 +56,19 @@
 	VALUES(SEQ_MSNO.NEXTVAL,#{msSender},#{msRecipient},#{msTitle},#{msContext},DEFAULT,NULL,DEFAULT)
 </insert>
 
+<select id="selectNewMSList" parameterType="String" resultMap="MessageResultSet">
+	SELECT *
+	FROM MESSAGE
+	WHERE MS_RECIPIENT_ID = #{ userID }
+	AND MS_CHECK = 'N'
+</select>
 
-
-
-
-
+<delete id="messageDelete" parameterType="java.util.ArrayList">
+		DELETE MESSAGE
+		WHERE MS_NO = 
+	<foreach collection="array" item="item" index="index" separator=",">
+		${item}
+	</foreach>
+</delete>
 
 </mapper>

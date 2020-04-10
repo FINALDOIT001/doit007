@@ -15,7 +15,13 @@ public class GroupMember {
 	
 	public GroupMember() {
 	}
-	 
+	
+	public GroupMember(int gm_sgNo, int gm_mNo) {
+		super();
+		this.gm_sgNo = gm_sgNo;
+		this.gm_mNo = gm_mNo;
+	}
+
 	public GroupMember(int gm_sgNo, int gm_mNo, ArrayList<Member> memberList) {
 		super();
 		this.gm_sgNo = gm_sgNo;

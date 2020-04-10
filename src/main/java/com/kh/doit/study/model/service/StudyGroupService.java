@@ -60,6 +60,31 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	int sgDelete(int sgNo);
+
+	/**
+	 * 스터디 그룹 탈퇴
+	 * 작성자 : 서정도
+	 * @param sgNo
+	 * @return
+	 */
+	int sgGroupOut(int mno);
+
+	/**
+	 * 스터디 가입
+	 * 작성자 : 서정도
+	 * @param mno
+	 * @param sgNo
+	 * @return
+	 */
+	int sgJoin(GroupMember gm);
+
+	/**
+	 * 스터디 시작
+	 * 작성자 : 서정도
+	 * @param sgNo
+	 * @return
+	 */
+	int sgStart(int sgNo);
 	
 
 	

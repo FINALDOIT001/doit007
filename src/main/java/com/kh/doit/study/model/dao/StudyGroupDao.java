@@ -70,7 +70,23 @@ public class StudyGroupDao {
 	}
 
 	public int sgDelete(int sgNo) {
+		
 		return sqlSession.update("studyGroupMapper.sgDelete", sgNo);
+	}
+
+	public int sgGroupOut(int mno) {
+
+		return sqlSession.delete("studyGroupMapper.sgGroupOut", mno);
+	}
+
+	public int sgJoin(GroupMember gm) {
+		
+		return sqlSession.insert("studyGroupMapper.sgJoin", gm);
+	}
+	
+	public int sgStart(int sgNo) {
+		
+		return sqlSession.update("studyGroupMapper.sgStart", sgNo);
 	}
 
 }

@@ -33,5 +33,17 @@ public class MessageServiceImpl implements MessageService{
 		return msDao.msSendMessage(m1);
 	}
 
+	@Override
+	public ArrayList<Message> selectNewMSList(String userID) {
+		
+		return msDao.selectNewMSList(userID);
+	}
+
+	@Override
+	public int messageDelete(String[] delList) {
+		
+		return msDao.messageDelete(delList);
+	}
+
 
 }
