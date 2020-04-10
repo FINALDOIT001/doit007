@@ -11,6 +11,10 @@
 .note-toolbar {
 	display: none;
 }
+.kwon-span202 {
+	cursor:pointer;
+}
+
 </style>
 
 </head>
@@ -255,6 +259,7 @@ function getCommentList(){
             if(data.length > 0){
             	
                 for(i=0; i<data.length; i++){
+		            var mno = ${ loginUser.mno };
                     html1 += "<hr>";
                     html1 += "<div class='single-comment justify-content-between d-flex'>";
                     html1 += "<div class='user justify-content-between d-flex'>";
@@ -269,7 +274,7 @@ function getCommentList(){
                     html1 += "<h5>";
                     html1 += "<a href=''>"+data[i].bscWriter+"</a> ";
                     html1 += "</h5>";
-                    html1 += "<p class='date'>"+data[i].bscDate+"</p><span class='kwon-span202' style='margin-left:800px;'>삭제</span>";
+                    html1 += "<p class='date'>"+data[i].bscDate+"</p><c:if test='${ mno eq "+data[i].bscWriterNo+"'><span class='kwon-span202' style='margin-left:800px;'>삭제</span></c:if>";
                     html1 += "</div>";
                     html1 += "</div>";
                     html1 += "<p class='comment'>"+data[i].bscCon+"</p>";
