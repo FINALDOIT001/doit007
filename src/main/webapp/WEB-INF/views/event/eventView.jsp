@@ -340,6 +340,7 @@
                         /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
                         html1 += "</div>";
                         html1 += "<input type='hidden' value='"+data[i].ecNo+"'>";
+                        html1 += "<input type='hidden' value='"+data[i].ecWriterNo+"'>";
                         html1 += "<h5>";
                         html1 += "<a href=''>"+data[i].ecWriter+"</a> ";
                         html1 += "</h5>";
@@ -395,22 +396,34 @@
 		
 		
 	    var ecNo = $(this).parent().children().eq(1).val();
+	    var ecWriterNo = $(this).parent().children().eq(2).val();
+	    var mno = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
 	    console.log("댓글번호 : " + ecNo)
 	    
-	    alert("댓글을 삭제하시겠습니까?");
+	    var result = confirm("댓글을 삭제하시겠습니까?"); 
+	    
+	    if(result) {
+	    	if( mno == ecWriterNo) {
+	    		
 	
-		$.ajax({
-			url:"deleteEr.go",
-			data:{ecNo:ecNo},
-			type:"post",
-			success:function(data) {
-				if(data == "success") {
-					getCommentList(); 
+			$.ajax({
+				url:"deleteEr.go",
+				data:{ecNo:ecNo},
+				type:"post",
+				success:function(data) {
+					if(data == "success") {
+						getCommentList(); 
+					}
+				},error:function(){
+					console.log("댓글 삭제에 실패하였습니다"); 
 				}
-			},error:function(){
-				console.log("댓글 삭제에 실패하였습니다"); 
-			}
-		});
+			});
+	    	} else {
+	    		alert('본인이 쓴 댓글만 삭제할 수 있습니다.');
+	    	}	    	
+	    } else {
+	    	
+	    }
 	});
 
 
