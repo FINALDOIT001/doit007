@@ -1,4 +1,4 @@
-package com.kh.doit.hodu.model.vo;
+package com.kh.doit.member.model.vo;
 
 import java.sql.Date;
 
@@ -9,22 +9,24 @@ public class Hodu {
 	private int hNo;     // 번호
 	private int hmNo;    // 멤버번호
 	private String hmId; // 멤버아이디
-	private int hodu;    // 호두 개수
+	private int hoduNum;    // 호두 개수
 	private int hPrice;  // 호두 가격
 	private Date hDate;  // 날짜
+	private Member member; 
 	
 	public Hodu() {
 		super();
 	}
 
-	public Hodu(int hNo, int hmNo, String hmId, int hodu, int hPrice, Date hDate) {
+	public Hodu(int hNo, int hmNo, String hmId, int hoduNum, int hPrice, Date hDate, Member member) {
 		super();
 		this.hNo = hNo;
 		this.hmNo = hmNo;
 		this.hmId = hmId;
-		this.hodu = hodu;
+		this.hoduNum = hoduNum;
 		this.hPrice = hPrice;
 		this.hDate = hDate;
+		this.member = member;
 	}
 
 	public int gethNo() {
@@ -51,12 +53,12 @@ public class Hodu {
 		this.hmId = hmId;
 	}
 
-	public int getHodu() {
-		return hodu;
+	public int getHoduNum() {
+		return hoduNum;
 	}
 
-	public void setHodu(int hodu) {
-		this.hodu = hodu;
+	public void setHoduNum(int hoduNum) {
+		this.hoduNum = hoduNum;
 	}
 
 	public int gethPrice() {
@@ -75,11 +77,19 @@ public class Hodu {
 		this.hDate = hDate;
 	}
 
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 	@Override
 	public String toString() {
-		return "Hodu [hNo=" + hNo + ", hmNo=" + hmNo + ", hmId=" + hmId + ", hodu=" + hodu + ", hPrice=" + hPrice
-				+ ", hDate=" + hDate + "]";
+		return "Hodu [hNo=" + hNo + ", hmNo=" + hmNo + ", hmId=" + hmId + ", hoduNum=" + hoduNum + ", hPrice=" + hPrice
+				+ ", hDate=" + hDate + ", member=" + member + "]";
 	}
-	
+
 	
 }

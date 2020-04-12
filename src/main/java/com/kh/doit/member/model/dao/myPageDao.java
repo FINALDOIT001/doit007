@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doit.board.model.vo.Board;
 import com.kh.doit.bookShare.model.vo.BookShare;
+import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 
 @Repository("mpDao")
@@ -35,6 +36,14 @@ public class myPageDao {
 	public ArrayList<BookShare> selectbsList(int mno) {
 		System.out.println(mno);
 		return (ArrayList)sqlSession.selectList("msMapper.selectbsList",mno);
+	}
+
+	public int inserthodu(Hodu hodu) {
+		return sqlSession.insert("memberMapper.inserthodu",hodu);
+	}
+
+	public ArrayList<Hodu> selecthList(String mId) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selecthList",mId);
 	}
 	
 }

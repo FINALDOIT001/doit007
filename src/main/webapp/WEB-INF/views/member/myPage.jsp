@@ -88,7 +88,7 @@
       </section>
         <ul class="nav nav-tabs" style="margin-bottom: 20px;">
             <li class="nav-item">
-              <a class="nav-link active font-style" data-toggle="tab" href="#home"><span>정보 수정</span></a>
+              <a class="nav-link active font-style" data-toggle="tab" href="#home" id="tabhome"><span>정보 수정</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link font-style" data-toggle="tab" href="#menu1"><span>나의 스터디</span></a>
@@ -97,7 +97,7 @@
               <a class="nav-link font-style" data-toggle="tab" href="#menu2"><span>위시리스트</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-style" data-toggle="tab" href="#menu3"><span>마일리지</span></a>
+                <a class="nav-link font-style" data-toggle="tab" href="#menu3" id="ho"><span>마일리지</span></a>
               </li>
           </ul>
           
@@ -319,7 +319,7 @@
 						<div class="hodu_border" style="margin-bottom:30px;">
 							<img src="${contextPath}/resources/img/hodu2.png" style="width:40px;">
 							<label style="font-weight:700; margin-left:5px;">보유 중인 호두 
-							<span style="margin:5px; font-size:large; color: #d64748 !important;">110</span> 개</label>
+							<a id="hodumnum" style="margin:5px; font-size:large; color: #d64748 !important;"></a> 개</label>
 							<button id="hodu" class="genric-btn danger" style="float: right;font-size: 13px;">호두 충전</button>
 						</div>
 						<label id="myhodu">충전내역</label>
@@ -333,7 +333,14 @@
 							  </tr>
 							</thead>
 							<tbody>
-								
+								<c:forEach var ="h" items="${ hlist }">
+								<tr class="kwon-tr1" style="text-align:center;">
+									<td style="text-align:center;" class="kwon-td1">${ h.hNo }</td>
+									<td style="text-align:center;" class="kwon-td1">${ h.hoduNum }개</td>
+									<td style="text-align:center;" class="kwon-td1">${ h.hPrice }원</td>
+									<td style="text-align:center;" class="kwon-td1">${ h.hDate }</td>
+								</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 						
@@ -351,6 +358,7 @@
 	<!-- photo -->
 <script src="${contextPath}/resources/js/datatables.js"></script>
  <script>
+
  	/* 사용자 이미지 변경 */
    function getThumbnailPrivew(html, $target) {
        if (html.files && html.files[0]) {

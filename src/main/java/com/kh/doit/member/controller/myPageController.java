@@ -1,10 +1,12 @@
 package com.kh.doit.member.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,9 +19,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.doit.board.model.vo.Board;
 import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.service.myPageService;
+import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 
 @SessionAttributes("loginUser")
@@ -50,9 +56,11 @@ public class myPageController {
 	@RequestMapping("myinfo.me")
 	public ModelAndView myinfo(ModelAndView mv,@RequestParam String mId) {
 		Member m = mpService.selectOne(mId);
+		ArrayList<Hodu> hlist = mpService.selecthList(mId);
 		
 		if(m != null) {
 			mv.addObject("m",m);
+			mv.addObject("hlist",hlist);
 			mv.setViewName("member/myPage");
 		}
 		return mv;
@@ -184,6 +192,29 @@ public class myPageController {
 			model.addAttribute("msg","회원 탈퇴 실패!");
 			return "common/errorPage";
 		}
+	}
+	
+	@RequestMapping("hpay.go")
+	public void hodupay(HttpServletResponse response,Hodu hodu,@RequestParam int hPrice, @RequestParam int hmNo,@RequestParam String hmId, @RequestParam int hoduNum) throws JsonIOException, IOException {
+		
+
+		hodu.setHmNo(hmNo);
+		hodu.setHmId(hmId);
+		hodu.sethPrice(hPrice); 
+		hodu.setHoduNum(hoduNum);
+		
+		int result = mpService.inserthodu(hodu);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		Gson gson = new GsonBuilder().create();
+		
+		if(result > 0) {
+			gson.toJson(result,response.getWriter());
+		}else {
+			gson.toJson(result,response.getWriter());
+		}
+		
 	}
 	
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
