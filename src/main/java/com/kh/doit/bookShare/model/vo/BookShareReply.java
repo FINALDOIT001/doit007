@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.kh.doit.member.model.vo.Member;
+
 @Component
 public class BookShareReply {
 	private int bscNo;
@@ -14,10 +16,12 @@ public class BookShareReply {
 	private String bscCon;
 	private String bscStatus;
 	
+	private Member member;
+	
 	public BookShareReply() {}
 
 	public BookShareReply(int bscNo, int bscBsNo, String bscWriter, int bscWriterNo, Date bscDate, String bscCon,
-			String bscStatus) {
+			String bscStatus, Member member) {
 		super();
 		this.bscNo = bscNo;
 		this.bscBsNo = bscBsNo;
@@ -26,6 +30,7 @@ public class BookShareReply {
 		this.bscDate = bscDate;
 		this.bscCon = bscCon;
 		this.bscStatus = bscStatus;
+		this.member = member;
 	}
 
 	public int getBscNo() {
@@ -84,10 +89,19 @@ public class BookShareReply {
 		this.bscStatus = bscStatus;
 	}
 
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 	@Override
 	public String toString() {
 		return "BookShareReply [bscNo=" + bscNo + ", bscBsNo=" + bscBsNo + ", bscWriter=" + bscWriter + ", bscWriterNo="
-				+ bscWriterNo + ", bscDate=" + bscDate + ", bscCon=" + bscCon + ", bscStatus=" + bscStatus + "]";
+				+ bscWriterNo + ", bscDate=" + bscDate + ", bscCon=" + bscCon + ", bscStatus=" + bscStatus + ", member="
+				+ member + "]";
 	}
 
 	

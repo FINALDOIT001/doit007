@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.doit.bookShare.model.vo.BookShareReply;
 import com.kh.doit.event.model.dao.EventDao;
 import com.kh.doit.event.model.vo.Event;
 import com.kh.doit.event.model.vo.EventPageInfo;
@@ -28,7 +27,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public ArrayList<BookShareReply> selectReplyList(int eNo) {
+	public ArrayList<EventReply> selectReplyList(int eNo) {
 		return eDao.selectReplyList(eNo);
 	}
 
@@ -60,6 +59,16 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public int deleteEr(int ecNo) {
 		return eDao.deleteEr(ecNo);
+	}
+
+	@Override
+	public int getSearchListCount(String evSearch) {
+		return eDao.getSearchListCount(evSearch);
+	}
+
+	@Override
+	public ArrayList<Event> getSearchList(EventPageInfo epi, String evSearch) {
+		return eDao.getSearchList(epi,evSearch);
 	}
 
 }

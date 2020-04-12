@@ -7,17 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
-import com.kh.doit.bookShare.model.vo.BookShareReply;
 import com.kh.doit.common.CommonFile;
 import com.kh.doit.event.common.EventPagination;
 import com.kh.doit.event.model.service.EventService;
@@ -25,7 +23,7 @@ import com.kh.doit.event.model.vo.Event;
 import com.kh.doit.event.model.vo.EventPageInfo;
 import com.kh.doit.event.model.vo.EventReply;
 
-@RestController
+@Controller
 public class EventController {
 	
 	@Autowired
@@ -75,7 +73,7 @@ public class EventController {
 	@RequestMapping("eReply.do")
 	public void selectReplyList(HttpServletResponse response, int eNo) throws JsonIOException, IOException {
 	
-		ArrayList<BookShareReply> rList = eService.selectReplyList(eNo);
+		ArrayList<EventReply> rList = eService.selectReplyList(eNo);
 		
 		System.out.println("Servlet 댓글 리스트 : " + rList);
 		
@@ -97,7 +95,7 @@ public class EventController {
 	 * @param eNo
 	 * @return
 	 */
-	@RequestMapping("eventView.ev")
+	@RequestMapping("eventView.ev") // *.ev 사용하면 로그인이 필요합니다 출력
 	public ModelAndView eventView(ModelAndView mv, Event ev, EventReply er, int eNo) {
 		
 		ev = eService.selectEvent(eNo);
@@ -276,6 +274,11 @@ public class EventController {
 	}
 	
 	
+	/**
+	 * EV 댓글 삭제하기
+	 * @param ecNo
+	 * @return
+	 */
 	@RequestMapping("deleteEr.go")
 	public String deleteEr(int ecNo) {
 		
@@ -291,5 +294,29 @@ public class EventController {
 			return "fail";
 		}
 	}
+	
+	
+	@RequestMapping("evSearch.do")
+	public ModelAndView searchEv(ModelAndView mv, String evSearch, 
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
+		int listCount = eService.getSearchListCount(evSearch);
+	
+		System.out.println("Servlet 검색한 Event listCount : " + listCount);
+		
+		EventPageInfo epi = EventPagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<Event> list = eService.getSearchList(epi, evSearch);
+		
+		System.out.println("Servlet 이벤트 리스트 : " + list);
+		System.out.println("Servlet epi : " + epi);
+		
+		mv.addObject("list",list);
+		mv.addObject("epi",epi);
+		mv.setViewName("event/eventList");
+
+	
+		return mv;
+	}
+	
 }

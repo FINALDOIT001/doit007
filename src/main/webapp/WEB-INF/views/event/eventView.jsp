@@ -156,18 +156,17 @@
             <div class="col-lg-4">
                <div class="blog_right_sidebar">
                  <aside class="single_sidebar_widget search_widget">
-                   <form action="#">
-                     <div class="form-group">
-                       <div class="input-group mb-3">
-                         <input type="text" class="form-control placeholder hide-on-focus" placeholder="검색할 키워드를 입력하세요.">
-                         <div class="input-group-append">
-                           <button class="btn" type="button"><i class="ti-search"></i></button>
-                         </div>
-                       </div>
-                     </div>
-                     <button class="button rounded-0 primary-bg text-white w-100" type="submit">검색</button>
-                     
-                       </form>
+              <form action="evSearch.do">
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input type="search" class="form-control placeholder hide-on-focus" name="evSearch" id="evSearch" placeholder="검색할 키워드를 입력하세요.">
+                    <div class="input-group-append">
+                      <button class="btn" type="button"><i class="ti-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <button class="button rounded-0 primary-bg text-white w-100" id="searching" type="button">검색</button>
+              </form>
 	                 <c:url var="eUpdate" value="eUpdate.go">
                      	<c:param name="eNo" value="${ ev.eNo }"/>
                      </c:url>
@@ -259,6 +258,13 @@
 	</script>
 	
 	<script>
+	
+	$('#searching').on('click',function() {
+		var evSearch = $('#evSearch').val();
+		
+		location.href="evSearch.do?evSearch="+evSearch;
+	})
+
 	 
     /*
      * 댓글 등록하기(Ajax)
@@ -336,7 +342,7 @@
                         html1 += "<div class='d-flex justify-content-between'>";
                         html1 += "<div class='d-flex align-items-center'>";
                         html1 += "<div class='thumb'>";
-                        /* html1 += "<img src='${contextPath}/resources/img/"+data[i].mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>"; */
+                        html1 += "<img src='${contextPath}/resources/img/"+data[i].member.mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>";
                         /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
                         html1 += "</div>";
                         html1 += "<input type='hidden' value='"+data[i].ecNo+"'>";
@@ -344,7 +350,7 @@
                         html1 += "<h5>";
                         html1 += "<a href=''>"+data[i].ecWriter+"</a> ";
                         html1 += "</h5>";
-                        html1 += "<p class='date'>"+data[i].ecDate+"</p><span class='kwon-span204' style='margin-left:520px;'>삭제</span>";
+                        html1 += "<p class='date'>"+data[i].ecDate+"</p><span class='kwon-span204' style='margin-left:470px;'>삭제</span>";
                         html1 += "</div>";
                         html1 += "</div>";
                         html1 += "<p class='comment'>"+data[i].ecCon+"</p>";

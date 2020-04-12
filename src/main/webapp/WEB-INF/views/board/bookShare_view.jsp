@@ -267,7 +267,7 @@ function getCommentList(){
                     html1 += "<input type='hidden' value='"+data[i].bscNo+"'>";
                     html1 += "<input type='hidden' value='"+data[i].bscWriterNo+"'>";
                     html1 += "<div class='thumb'>";
-                    /* html1 += "<img src='${contextPath}/resources/img/"+data[i].mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>"; */
+                    html1 += "<img src='${contextPath}/resources/img/"+data[i].member.mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>";
                     /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
                     html1 += "</div>";
                     html1 += "<h5>";

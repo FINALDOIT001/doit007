@@ -31,7 +31,7 @@ public interface EventService {
 	 * @param eNo
 	 * @return
 	 */
-	ArrayList<BookShareReply> selectReplyList(int eNo);
+	ArrayList<EventReply> selectReplyList(int eNo);
 
 	/**
 	 * 2. Event 1개 불러오기 Kwon
@@ -80,6 +80,21 @@ public interface EventService {
 	 * @return
 	 */
 	int deleteEr(int ecNo);
+
+	/**
+	 * 8. 검색용 리스트 갯수 가져오기
+	 * @param evSearch 
+	 * @return
+	 */
+	int getSearchListCount(String evSearch);
+
+	/**
+	 * 검색한 리스트 가져오기
+	 * @param epi
+	 * @param evSearch
+	 * @return
+	 */
+	ArrayList<Event> getSearchList(EventPageInfo epi, String evSearch);
 
 
 }
