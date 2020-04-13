@@ -167,8 +167,7 @@
 	<!-- <script src="js/datatables-min.js"></script> -->
 	<script src="${contextPath}/resources/js/kwonCustom.js"></script>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
 
 	<script>
       $('#summernote').summernote({

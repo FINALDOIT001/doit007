@@ -18,12 +18,11 @@
 				<div class="col-lg-5 offset-lg-1 col-sm-8 offset-sm-2">
 					<div class="banner_text aling-items-center">
 						<div class="banner_text_iner">
-							<h5>Dream</h5>
+							<h5><p>Develop a passion for learning.</p></h5>
 							<h2>
-								Proparties <br> Now In City
+								If you do,<br>you will never cease to grow.
 							</h2>
-							<p>Lorem ipsum dolor sit consectetur adipiscing elit sed do
-								eiusmod tempor incididunt ut labore et dolore magna.</p>
+							
 						</div>
 					</div>
 				</div>
@@ -39,7 +38,7 @@
 			<div class="row">
 				<div class="section_tittle">
 					<h2>
-						<span>about</span> us
+						<span>about</span>&nbsp;&nbsp; Study
 					</h2>
 				</div>
 			</div>
@@ -86,7 +85,7 @@
 				<div class="col-lg-12">
 					<div class="section_tittle">
 						<h2>
-							<span>our</span> project
+							<span>our</span> &nbsp;&nbsp;Event
 						</h2>
 					</div>
 					<div class="portfolio-filter">
@@ -357,7 +356,7 @@
 				<div class="col-lg-7 col-xl-6">
 					<div class="section_tittle">
 						<h2>
-							our <span>services</span>
+							our <span>Community</span>
 						</h2>
 					</div>
 					<div class="service_part_iner">

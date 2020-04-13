@@ -148,6 +148,19 @@
 		AND N_STATUS='Y'
 	</select>
 	
+	<update id="updateNotice" parameterType="Notice">
+		UPDATE NOTICE
+		SET N_TITLE=#{n_title},N_CON=#{n_content},N_ORIGINAL_FILENAME=#{n_org_filename},
+			N_RENAME_FILENAME=#{n_re_filename},N_MODIFYDATE=SYSDATE
+		WHERE N_NO=#{n_no}
+	</update>
+	
+	<update id="deleteNotice" parameterType="_int">
+		UPDATE NOTICE
+		SET N_STATUS='N'
+		WHERE N_NO=#{n_no}
+	</update>
+	
 	<!-- notice 끝 -->
 
  	<select id="selectfbList" resultMap="mypageboardSet">

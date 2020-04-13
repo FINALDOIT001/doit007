@@ -53,16 +53,16 @@
                   <tr>
                     <td align="center">${ n.n_no }</td>
                     <td align="left">
-                    	<c:if test="${ !empty loginUser }">
-                    		<c:url var="nDetail" value="nDetail.go">
+                    	<%-- <c:if test="${ !empty loginUser }"> --%>
+                    		<c:url var="nDetail" value="nDetail.ev">
                     			<c:param name="n_no" value="${ n.n_no }"/>
                     			<c:param name="currentPage" value="${ pi_n.currentPage }"/>
                     		</c:url>
                     		<a href="${ nDetail }">${ n.n_title }</a>
-                    	</c:if>
+                    	<%-- </c:if>
                     	<c:if test="${ empty loginUser }">
                     		${ n.n_title }
-                    	</c:if>
+                    	</c:if> --%>
                     </td>
                     <td align="center">${ n.n_writer }</td>
                     <td align="center">${ n.n_modifydate }</td>
