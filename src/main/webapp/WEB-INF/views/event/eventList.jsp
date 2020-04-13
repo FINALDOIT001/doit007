@@ -173,18 +173,18 @@
 			<c:if test="${ loginUser != null }">
 			<c:url var="evInsert" value="evInsert.go">
 			</c:url>
-             <a href="${ evInsert }"><button class="button rounded-0 primary-bg text-white w-100" type="button">글 작성하기</button></a>
+             <a href="${ evInsert }"><button class="button rounded-0 primary-bg text-white w-100" type="button">글 작성하기</button></a><br><br>
              </c:if>
-              <form action="#">
+              <form action="evSearch.do">
                 <div class="form-group">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control placeholder hide-on-focus" placeholder="검색할 키워드를 입력하세요.">
+                    <input type="search" class="form-control placeholder hide-on-focus" name="evSearch" id="evSearch" placeholder="검색할 키워드를 입력하세요.">
                     <div class="input-group-append">
                       <button class="btn" type="button"><i class="ti-search"></i></button>
                     </div>
                   </div>
                 </div>
-                <button class="button rounded-0 primary-bg text-white w-100" type="submit">검색</button>
+                <button class="button rounded-0 primary-bg text-white w-100" id="searching" type="button">검색</button>
               </form>
             </aside>
 
@@ -242,6 +242,13 @@
 			var eNo = $(this).children().eq(0).val();
 
 			location.href="eventView.ev?eNo="+eNo;
+		})
+		
+
+		$('#searching').on('click',function() {
+			var evSearch = $('#evSearch').val();
+			
+			location.href="evSearch.do?evSearch="+evSearch;
 		})
 	
 	
