@@ -16,9 +16,26 @@
    		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
    		<result property="mEnrolldate" column="M_ENROLL_DATE" />
    		<result property="mUpdatedate" column="M_UPDATE_DATE" />
+   		<result property="mhodu" column="M_HODU" />
    		<result property="mUserroles" column="M_USERROLES" />
    		<result property="mStatus" column="M_STATUS" />
     </resultMap>
+    
+    <resultMap id="hoduResultSet" type="Hodu">
+    	<id property="hNo" column="H_NO"/>
+    	<result property="hmId" column="H_MID"/>
+    	<result property="hoduNum" column="HODU"/>
+    	<result property="hPrice" column="H_PRICE"/>
+    	<result property="hDate" column="H_DATE"/>
+    	
+    	<association property="member" javaType="Member">
+    		<result property="mId" column="M_ID"/>
+    	</association>
+    </resultMap>
+    
+
+    
+    
     <select id="idCheck" parameterType="string" resultType="_int">
     	SELECT COUNT(*)
     	FROM MEMBER
@@ -29,7 +46,7 @@
     <insert id="insertMember" parameterType="Member">
     	INSERT INTO MEMBER 
     	VALUES (SEQ_MNO.NEXTVAL,#{mId}, #{mPwd}, #{mName}, #{mAddr}, #{mPhone}, 
-    			#{mEmail}, default, default, SYSDATE, SYSDATE, default, default)
+    			#{mEmail}, default, default, SYSDATE, SYSDATE, default, default, default)
     </insert>
     
     <select id="memberLogin" parameterType="Member" resultMap="memberResultSet">
@@ -57,5 +74,33 @@
     	UPDATE MEMBER
     	SET M_STATUS='N'
     	WHERE M_ID=#{mId}
+    </update>
+    
+    <insert id="inserthodu" parameterType="Hodu">
+    	INSERT INTO HODU_TABLE
+    	VALUES (SEQ_HNO.NEXTVAL,#{hmNo}, #{hmId}, #{hoduNum}, #{hPrice}, SYSDATE)
+    </insert>
+    
+    <select id="selecthList" resultMap="hoduResultSet">
+    	SELECT H.H_NO, H.HODU, H.H_PRICE, H.H_DATE
+    	FROM HODU_TABLE H JOIN MEMBER M
+    	ON H_MID = M.M_ID
+    	WHERE H.H_MID = #{mId}
+    </select>
+    
+    <!-- <update id="updatemhodu" parameterType="_int" >
+    	UPDATE MEMBER
+		SET M_HODU = (SELECT SUM(H.HODU)
+		FROM HODU_TABLE H JOIN MEMBER M
+		ON M.M_NO = H.H_MNO
+		WHERE M.M_NO = #{hmNo})
+		WHERE M_NO = #{hmNo};
+    </update> -->
+    
+    <update id="updateHoduTest">
+    	UPDATE 	MEMBER
+   		SET		M_HODU = M_HODU + #{hoduNum}
+   		WHERE	1=1
+   		AND		M_NO=#{hmNo}
     </update>
 </mapper>

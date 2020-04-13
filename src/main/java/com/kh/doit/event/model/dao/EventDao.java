@@ -59,7 +59,7 @@ public class EventDao {
 	 * @param eNo
 	 * @return
 	 */
-	public ArrayList<BookShareReply> selectReplyList(int eNo) {
+	public ArrayList<EventReply> selectReplyList(int eNo) {
 		return (ArrayList)sqlSession.selectList("evMapper.selectReply", eNo);
 	}
 
@@ -112,6 +112,33 @@ public class EventDao {
 	public int deleteEr(int ecNo) {
 		return sqlSession.update("evMapper.deleteEr",ecNo);
 	}
+
+	/**
+	 * 검색한 게시글 갯수 가져오기
+	 * @return
+	 */
+	public int getSearchListCount(String evSearch) {
+		return sqlSession.selectOne("evMapper.getSearchListCount", evSearch);
+	}
+	
+	public ArrayList<Event> getSearchList(EventPageInfo epi, String evSearch) {
+		
+		int offset = (epi.getCurrentPage() - 1) * epi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, epi.getBoardLimit());
+
+		return (ArrayList)sqlSession.selectList("evMapper.SearchList", evSearch, rowBounds);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

@@ -82,6 +82,7 @@
                               <a class="dropdown-item" href="nlist.go">Notice</a>
                               <a class="dropdown-item" href="fblist.go">Board</a>
                               <a class="dropdown-item" href="moveBS.go">Book-Share</a>
+                              <a class="dropdown-item" href="qna.go">Q&A</a>
                            </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -192,7 +193,7 @@
                                  <button style="border:none; font-size: 14px; font-weight: 700; background-color:transparent;" 
                                     onclick="location.href='myinfo.me?mId=${ sessionScope.loginUser.mId }'">MYPAGE</button>
                                  </a>
-                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="mylist.me?mId=${ sessionScope.loginUser.mId }&mno=${ sessionScope.loginUser.mno }">MYLIST</a>
                                  </div>
                            </li>

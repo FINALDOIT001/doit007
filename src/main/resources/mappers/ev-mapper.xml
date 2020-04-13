@@ -29,6 +29,11 @@
     	<result property="ecDate" column="EC_DATE"/>
     	<result property="ecCon" column="EC_CON"/>
     	<result property="ecStatus" column="EC_STATUS"/>
+    	
+    	<association property="member" javaType="Member">
+    		<result property="mRenamefilename" column="M_RENAME_FILENAME"/>
+    	</association>
+    	
     </resultMap>
 	
 
@@ -55,6 +60,15 @@
 		AND		E_STATUS='Y'
 	</select>
 	
+	<!-- <select id="selectReply" parameterType="_int" resultMap="eventReplyResultSet">
+		SELECT	EC.*, M.M_RENAME_FILENAME
+		FROM	EVENT_COMMENTS EC
+		JOIN	MEMBER M ON (EC.EC_WRITER_NO = M.M_NO)
+		WHERE	1=1
+		AND		EC_E_NO=#{eNo}
+		AND		EC_STATUS='Y'
+	</select> -->
+
 	<select id="selectReply" parameterType="_int" resultMap="eventReplyResultSet">
 		SELECT	*
 		FROM	EVENT_COMMENTS
@@ -122,5 +136,28 @@
 		WHERE	1=1
 		AND		EC_NO=#{ecNo}
 	</update>
+	
+	<select id="getSearchListCount" parameterType="String" resultType="_int">
+		SELECT	COUNT(*)
+		FROM	EVENT
+		WHERE	1=1
+		AND		E_TITLE like '%' || #{evSearch} || '%'
+		OR		E_INTRO like '%' || #{evSearch} || '%'
+	</select>
+	
+	<select id="SearchList" resultMap="eventResultSet" parameterType="String">
+		SELECT	*
+		FROM	EVENT
+		WHERE	1=1
+		AND		E_STATUS='Y'
+		AND		E_TITLE like '%' || #{evSearch} || '%'
+		OR		E_INTRO like '%' || #{evSearch} || '%'
+		ORDER BY 1 DESC
+	</select>
+	
+	
+	
+	
+	
 	
 </mapper>

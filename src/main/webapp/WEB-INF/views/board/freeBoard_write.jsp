@@ -10,6 +10,9 @@
 <body>
 	<jsp:include page="../common/header.jsp"/>
 	
+	<!-- include Summernote CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
+	
 	
    <!--::breadcrumb part start::-->
    <section class="breadcrumb blog_bg_freeboard">
@@ -56,8 +59,7 @@
                     <!-- /.card-header -->
                     <div class="card-body pad">
                         <div class="mb-3">
-                            <textarea class="textarea" name="b_content" placeholder="내용을 입력하세요."
-                                style="width: 100%; height: 600px; font-size: 14px; line-height: 18px; border: 1px solid rgb(219, 212, 212); padding: 10px;"></textarea>
+                            <textarea class="textarea" id="summernote" name="b_content"></textarea>
                         </div>
 
                     </div>
@@ -95,6 +97,31 @@
 	
 
 	<jsp:include page="../common/footer.jsp"/>
+	
+	 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+    
+	 <script>
+        $('#summernote').summernote({
+    	
+            tabsize: 5,
+            height: 300,
+            toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+            ],
+            placeholder: '상세 내용을 입력해주세요'
+
+        });
+        
+        $('#summernote').summernote('code');
+    
+		var pic = $('#uploadFile').val();
+        console.log(pic);
+   </script>
 
 </body>
 </html>

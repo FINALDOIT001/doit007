@@ -36,11 +36,6 @@
                <h2><span>DO IT</span> &nbsp;FREE BOARD</h2>
             </div>
          </div>
-         <c:if test="${ loginUser == null }">
-		 	<script>
-		 		alert("로그인 하신 후 이용가능합니다.");
-		 	</script>		
-		 </c:if>
          <div class="card">
             <!-- /.card-header -->
             <div class="card-body table-responsive p-0">
@@ -60,16 +55,16 @@
                   <tr>
                   	<td align="center">${ b.b_no }</td>
                   	<td align="left">
-                  		<c:if test="${ !empty loginUser }">
-                  			<c:url var="fbDetail" value="fbDetail.go">
+                  		<%-- <c:if test="${ !empty loginUser }"> --%>
+                  			<c:url var="fbDetail" value="fbDetail.ev">
                   				<c:param name="b_no" value="${ b.b_no }"/>
                   				<c:param name="currentPage" value="${ pi_h.currentPage }"/>
                   			</c:url>
                   			<a href="${ fbDetail }">${ b.b_title }</a>
-                  		</c:if>
-                  		<c:if test="${ empty loginUser }">
+                  		<%-- </c:if> --%>
+                  		<%-- <c:if test="${ empty loginUser }">
                   			${ b.b_title }
-                  		</c:if>
+                  		</c:if> --%>
                   	</td>
                   	<td align="center">${ b.b_writer }</td>
                   	<td align="center">${ b.b_modifydate }</td> <!-- 날짜 다시 봐바 -->
@@ -92,7 +87,7 @@
 			
 					<!-- [이전] -->
 					<c:if test="${ pi_h.currentPage eq 1 }">
-						[이전] &nbsp;
+						prev &nbsp;
 					</c:if>
 					<c:if test="${ pi_h.currentPage ne 1 }">
 						<c:url var="before" value="fblist.go">
@@ -117,7 +112,7 @@
 				
 					<!-- [다음] -->
 					<c:if test="${ pi_h.currentPage eq pi_h.maxPage }">
-						&nbsp;[다음]
+						&nbsp;next
 					</c:if>
 					<c:if test="${ pi_h.currentPage ne pi_h.maxPage }">
 						<c:url var="after" value="fblist.go">
@@ -134,9 +129,11 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
+          <c:if test="${ !empty loginUser }">
           <div class="col-md-12" style="text-align: right; margin-top: 20px;">
             <button onclick="location.href='fbInsertForm.go';" class="genric-btn danger circle" style="font-size: 13px;">작성하기</button>
         </div>
+        </c:if>
     </div>
     
     

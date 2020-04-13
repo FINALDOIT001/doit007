@@ -85,7 +85,7 @@ public class StudyGroupController {
 			String renameFileName = saveFile(file, request);
 			
 			if(renameFileName !=null) {
-				sg.setSgOrginalFileName(file.getOriginalFilename());
+				sg.setSgOriginalFileName(file.getOriginalFilename());
 				sg.setSgRenameFileName(renameFileName);
 			}
 			
@@ -172,7 +172,7 @@ public class StudyGroupController {
 			String renameFileName = saveFile(file, request);
 			
 			if(renameFileName != null) {
-				sg.setSgOrginalFileName(file.getOriginalFilename());
+				sg.setSgOriginalFileName(file.getOriginalFilename());
 				sg.setSgRenameFileName(renameFileName);
 			}
 		}
@@ -232,7 +232,7 @@ public class StudyGroupController {
 	}
 
 	/**
-	 * 디테일
+	 * 디테일 상세내용 / 참석자
 	 * 작성자 : 서정도
 	 * @param mv
 	 * @param sgNo
@@ -260,6 +260,73 @@ public class StudyGroupController {
 		}
  
 		return mv;
+	}
+	
+	
+	/**
+	 * 스터디 탈퇴
+	 * 작성자 : 서정도
+	 * @param model
+	 * @param sgNo
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("sgGroupOut.go")
+	private String sgGroupOut(Model model, int mno, HttpServletRequest request) {
+		
+		int result = sgService.sgGroupOut(mno);
+		
+		if(result > 0) {
+			return "redirect:sgList.go";
+		}else {
+			model.addAttribute("msg","탈퇴 하기 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	/**
+	 * 스터디 가입
+	 * 작성자 : 서정도
+	 * @param model
+	 * @param sgNo
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("sgJoin.go")
+	private String sgJoin(Model model, int sgNo, int mno) {
+		
+		GroupMember gm = new GroupMember(sgNo,mno);
+		
+		int result = sgService.sgJoin(gm);
+		
+		if(result > 0) {
+			return "redirect:studyDetail.go?sgNo="+sgNo;
+			
+		}else {
+			model.addAttribute("msg","가입 하기 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	/**
+	 * 스터디 시작
+	 * 작성자 : 서정도
+	 * @param model
+	 * @param sgNo
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("sgStart.go")
+	private String sgStart(Model model, int sgNo) {
+		
+		int result = sgService.sgStart(sgNo);
+		
+		if(result > 0) {
+			return "redirect:studyDetail.go?sgNo="+sgNo;
+		}else {
+			model.addAttribute("msg","시작 하기 실패");
+			return "common/errorPage";
+		}
 	}
 	
 }

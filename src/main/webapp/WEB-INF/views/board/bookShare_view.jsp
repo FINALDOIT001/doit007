@@ -11,6 +11,10 @@
 .note-toolbar {
 	display: none;
 }
+.kwon-span202 {
+	cursor:pointer;
+}
+
 </style>
 
 </head>
@@ -163,8 +167,7 @@
 	<!-- <script src="js/datatables-min.js"></script> -->
 	<script src="${contextPath}/resources/js/kwonCustom.js"></script>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
 
 	<script>
       $('#summernote').summernote({
@@ -240,14 +243,13 @@ $(function() {
 function getCommentList(){
     
 	var bsNo = ${ bs.bsNo };
-	console.log("bsNo : " + bsNo );
+    var testmno = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
 	
     $.ajax({
         url : "bsReply.do",
         data:{bsNo:bsNo},
         dataType : "json",
         success : function(data){
-            console.log(data);
 			
             var html1 = "";
             var cCnt = data.length;
@@ -262,14 +264,15 @@ function getCommentList(){
                     html1 += "<div class='d-flex justify-content-between'>";
                     html1 += "<div class='d-flex align-items-center'>";
                     html1 += "<input type='hidden' value='"+data[i].bscNo+"'>";
+                    html1 += "<input type='hidden' value='"+data[i].bscWriterNo+"'>";
                     html1 += "<div class='thumb'>";
-                    /* html1 += "<img src='${contextPath}/resources/img/"+data[i].mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>"; */
+                    /* html1 += "<img src='${contextPath}/resources/img/"+data[i].member.mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>"; */
                     /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
                     html1 += "</div>";
                     html1 += "<h5>";
                     html1 += "<a href=''>"+data[i].bscWriter+"</a> ";
                     html1 += "</h5>";
-                    html1 += "<p class='date'>"+data[i].bscDate+"</p><span class='kwon-span202' style='margin-left:800px;'>삭제</span>";
+                    html1 += "<p class='date'>"+data[i].bscDate+"</p><span class='kwon-span202' style='margin-left:820px;'>삭제</span>";
                     html1 += "</div>";
                     html1 += "</div>";
                     html1 += "<p class='comment'>"+data[i].bscCon+"</p>";
@@ -277,6 +280,7 @@ function getCommentList(){
                     html1 += "</div>";
                     html1 += "</div>";
                 }
+                
                 
             } else {
                 
@@ -331,29 +335,39 @@ $(document).on("click",".kwon-span202",function(){
     var bscNo = $(this).parent().children().eq(0).val();
     console.log(bscNo);
  });
- 
- 
+
 /* 댓글 삭제하기 */
 $(document).on("click",".kwon-span202",function(){
 	
-	
     var bscNo = $(this).parent().children().eq(0).val();
+    var bscWriterNo = $(this).parent().children().eq(1).val();
+    var mno = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
     console.log("댓글번호 : " + bscNo)
-    
-    alert("댓글을 삭제하시겠습니까?");
 
-	$.ajax({
-		url:"delBsReply.do",
-		data:{bscNo:bscNo},
-		type:"post",
-		success:function(data) {
-			if(data == "success") {
-				getCommentList(); 
-			}
-		},error:function(){
-			console.log("댓글 삭제에 실패하였습니다"); 
-		}
-	});
+    var result = confirm("댓글을 삭제하시겠습니까?");
+    
+    if(result) {
+    	
+    	if( mno == bscWriterNo) {
+    
+			$.ajax({
+				url:"delBsReply.do",
+				data:{bscNo:bscNo},
+				type:"post",
+				success:function(data) {
+					if(data == "success") {
+						getCommentList(); 
+					}
+				},error:function(){
+					console.log("댓글 삭제에 실패하였습니다"); 
+				}
+			});
+    	} else {
+    		alert('본인이 쓴 댓글만 삭제할 수 있습니다.');
+    	}
+    } else {
+    	
+    }
 });
 
 	

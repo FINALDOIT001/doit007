@@ -22,11 +22,14 @@
 		width:350px;
 		padding:10px;
 	}
+	
 </style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
 
+	<!-- include summernote js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
 
 
 	<!--::breadcrumb part start::-->
@@ -94,9 +97,7 @@
 				<tr>
 					<td colspan="6">
 						<!-- 본문 내용 --> 
-						<textarea name="" class="freeboard_content" style="height:450px;" readonly>   
-${ b.b_content }          
-           				</textarea>
+						<input type="textarea" class="" id="summernote" name=""> 
 					</td>
 				</tr>
 			</table>
@@ -290,6 +291,31 @@ ${ b.b_content }
 	</script>
 	
 	<jsp:include page="../common/footer.jsp" />
+	
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+
+	<script>
+      $('#summernote').summernote({
+         
+         tabsize: 5,
+         height: 300,
+         toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+         ]
+      });
+      
+      var markupStr = '${b.b_content}';
+
+		$('#summernote').summernote("code", markupStr);
+		$('#summernote').summernote('disable');
+		$('#summernote').summernote().css('display','none');
+    
+	</script>
 
 </body>
 </html>

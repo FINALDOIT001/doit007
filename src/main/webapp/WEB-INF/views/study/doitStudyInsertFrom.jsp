@@ -75,7 +75,7 @@
 										name="sgTitle" required>
 									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">공부방 제목 입역</div>
-									<input type="text" class="form-control" value="${loginUser.mId}"
+									<input type="text" class="form-control" value="${loginUser.mName}"
 										name="sgWriter" hidden>
 									<input type="number" class="form-control" value="${loginUser.mno}"
 										name="sgWriterNo" hidden>

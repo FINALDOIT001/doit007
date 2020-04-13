@@ -26,9 +26,6 @@
 							<span>책을</span> 나눕시다
 						</h2>
 					</div>
-					<c:if test="${ loginUser == null }">
-						로그인 하신 후 보실 수 있습니다.
-					</c:if>
 					<div>
 						<div id="kwon-inst01">
 						<c:if test="${ loginUser != null }">
@@ -64,18 +61,12 @@
 			<td align="center" class="kwon-td1">${ bs.bsNo }</td>
 			<td align="center" class="kwon-td1">${ bs.bsCategory }</td>
 			<td align="center" class="kwon-td1">
-				<c:url var="bsView" value="bsView.go">
+				<c:url var="bsView" value="bsView.ev">
 					<c:param name="bsNo" value="${ bs.bsNo }"/>
 				</c:url>
 			
-			<c:if test="${ loginUser != null }">
 				<a class="kwon-td1 tdtitle1" href="${ bsView }" 
 				style="color:#5b5b5b !important;">${ bs.bsTitle }</a>
-			</c:if>
-			<c:if test="${ loginUser == null }">
-				${ bs.bsTitle }
-			</c:if>
-			
 			
 			</td>
 			<td align="center" class="kwon-td1">${ bs.bsWriter }</td>

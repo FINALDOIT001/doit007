@@ -15,6 +15,7 @@
 <link href='${fullcalPath}/daygrid/main.css' rel='stylesheet' />
 <link href='${fullcalPath}/core/main.css' rel='stylesheet' />
 
+
 <style>
 
 /* 별점 */
@@ -33,43 +34,58 @@
 	background-position: 0 0;
 }
 
-<!-- 모달 css -->
-   .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 8% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-           
-                                     
-        }
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-<!-- 모달 css -->
+<!--
+모달 css -->.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 8% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+}
+/* The Close Button */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+<!--
+모달
+
+
+
+ 
+
+
+
+css
+
+
+
+ 
+
+
+
+-->
 </style>
 
 </head>
@@ -87,7 +103,12 @@
 	<!-- 데이타테이블 CSS -->
 	<link rel="stylesheet"
 		href="${contextPath}/resources/css/datatables.css">
-	
+		
+		
+<!-- Datepicker -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		
+
 
 
 	<!-- Start Align Area -->
@@ -126,8 +147,8 @@
 								&nbsp;:&nbsp; <fmt:formatNumber value="${sg.sgDeposit}"
 									groupingUsed="true" />원</li>
 							<li style="margin-bottom: 3px;"><i class="fas fa-spinner"></i>&nbsp;&nbsp;&nbsp;진&nbsp;&nbsp;행&nbsp;&nbsp;도
-								&nbsp;:&nbsp; <c:if test="${ sg.sgConfirm eq 'Y'}">모집중</c:if>
-								<c:if test="${ sg.sgConfirm ne 'Y'}">모집 종료</c:if></li>
+								&nbsp;:&nbsp; <c:if test="${ sg.sgConfirm eq 'Y'}">모집중</c:if> <c:if
+									test="${ sg.sgConfirm ne 'Y'}">모집 종료</c:if></li>
 							<li style="margin-bottom: 3px;"><i class="fas fa-user-check"></i>&nbsp;&nbsp;중간참여
 								&nbsp;:&nbsp; <c:if test="${ sg.sgJoin eq 'Y' }">
 									<b style="color: blue">참여 가능</b>
@@ -137,27 +158,36 @@
 						</ul>
 						<br>
 						<ul>
-							<li><c:if
-									test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
+							<li><c:url var="sgJoin" value="sgJoin.go">  
+									<c:param name="sgNo" value="${sg.sgNo}" />
+									<c:param name="mno" value="${loginUser.mno}" />
+								</c:url> <c:url var="sgStart" value="sgStart.go">
+									<c:param name="sgNo" value="${sg.sgNo}" />
+								</c:url> <c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
 									<button class="genric-btn info radius"
-										style="margin-bottom: 10px; width: 130px;">스터디 가입</button>
+										style="margin-bottom: 10px; width: 130px;"
+										onclick="location.href='${sgJoin}'">스터디 가입</button>
 								</c:if> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 									<button class="genric-btn info radius"
-										style="margin-bottom: 10px; width: 130px;">스터디 시작</button>
+										style="margin-bottom: 10px; width: 130px;"
+										onclick="location.href='${sgStart}'">스터디 시작</button>
 								</c:if> <c:url var="sgUpview" value="sgUpview.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 								</c:url> <c:url var="sgDelete" value="sgDelete.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
+								</c:url> <c:url var="sgGroupOut" value="sgGroupOut.go">
+									<c:param name="mno" value="${loginUser.mno}" />
 								</c:url> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 									<button class="genric-btn danger radius" style="width: 130px;"
 										onclick="location.href='${sgUpview}'">스터디 수정</button>
 								</c:if> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
-									<button class="genric-btn danger radius" style="width: 130px;"
+									<button class="genric-btn danger radius" style="width: 263px;"
 										onclick="location.href='${sgDelete}'">스터디 삭제</button>
 								</c:if> <c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
 									<button class="genric-btn danger radius" style="width: 130px;"
-										onclick="location.href='studyInsertSc.go'">스터디 탈퇴</button>
+										onclick="location.href='${sgGroupOut}'">스터디 탈퇴</button>
 								</c:if>
+
 								<div class="starRev"
 									style="width: 60px; display: inline; float: right;">
 									<span class="starR"></span>
@@ -195,10 +225,10 @@
 					style="margin-top: 30px;">
 					<li class="nav-item"><a class="nav-link active"
 						style="width: 200px; text-align: center; font-weight: bold;"
-						data-toggle="tab" href="#home">스터디 소개</a></li>
+						data-toggle="tab" href="#home">일정</a></li>
 					<li class="nav-item"><a class="nav-link"
 						style="width: 200px; text-align: center; font-weight: bold;"
-						data-toggle="tab" href="#menu1">일정</a></li>
+						data-toggle="tab" href="#menu1">스터디 소개</a></li>
 					<c:if test="${sg.sgPayment eq 'Y'}">
 						<li class="nav-item"><a class="nav-link"
 							style="width: 200px; text-align: center; font-weight: bold;"
@@ -214,20 +244,13 @@
 				<div class="tab-content">
 					<div class="tab-pane container active" id="home">
 						<div class="col-lg-12 div_border">
-							
-								<div id='calendar'></div>
-								
-								
+							<div id='calendar'></div>
 						</div>
-
-
-
-
 					</div>
 					<div class="tab-pane container fade" id="menu1">
-					
-					<span style="font-size: x-large; font-weight: bold; display: block; margin-bottom: 30px;">활동계획</span> ${sg.sgCon}
-							
+						<span
+							style="font-size: x-large; font-weight: bold; display: block; margin-bottom: 30px;">활동계획</span>
+						${sg.sgCon}
 					</div>
 
 					<!------------------------------------- 사진 파트 --------------------------------------->
@@ -250,7 +273,8 @@
 									</div>
 									<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
 										<div class="about_text">
-											<h2>새로 업로드된 <span>사진</span>
+											<h2>
+												새로 업로드된 <span>사진</span>
 											</h2>
 											<h5>
 												<ul>
@@ -263,14 +287,17 @@
 														&nbsp;:&nbsp; ${sg.sgWriter}</li>
 													<li style="margin-bottom: 3px;"><i
 														class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용
-														&nbsp;:&nbsp; 가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하</li>
+														&nbsp;:&nbsp;
+														가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하</li>
 												</ul>
 											</h5>
-											<br><br><br>
-											<a href="#" class="btn_1" style="float: right;">사진 추가</a>
+											<br> <br> <br> <a class="btn_1"
+												style="float: right;" href="studyPhotoInsert.go">사진 추가</a>
 											<div class="about_part_counter">
 												<div class="single_counter">
-													<p style="font-size: 30px; width: 390px;">저장된 사진&nbsp;<span class="counter" style="color:red;">1000</span>&nbsp;장</p>
+													<p style="font-size: 30px; width: 390px;">
+														저장된 사진&nbsp;<span class="counter" style="color: red;">1000</span>&nbsp;장
+													</p>
 												</div>
 											</div>
 										</div>
@@ -278,6 +305,26 @@
 								</div>
 							</div>
 						</section>
+
+						<!-- The Modal -->
+						<div class="modal" id="sgPhoto">
+							<div class="modal-dialog modal-dialog-centered">
+								<div class="modal-content">
+
+									<!-- Modal body -->
+									<div class="modal-body"></div>
+
+									<!-- Modal footer -->
+									<div class="modal-footer">
+										<button type="button" class="btn btn-danger"
+											data-dismiss="modal">Close</button>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+
 					</div>
 					<div class="tab-pane container fade" id="menu3"></div>
 
@@ -291,194 +338,232 @@
 	</section>
 	<!-- 모달이 가자 -->
 	<div id="myModal" class="modal">
- 
-      <!-- Modal content -->
-      <div class="modal-content" style='width:60%; height:70%;'>
-        <span class="close" onclick="closebtn();" >&times;</span>
-        <br>
-            <section class="about_part">
-		<div class="container">
-		<form action="sgInsert.go" method="post"
-							enctype="multipart/form-data" class="was-validated">
-			<div class="row">
-				<div class="col-lg-6 col-md-6">
+
+		<!-- Modal content -->
+		<div class="modal-content" style='width: 60%; height: 60%;'>
+			<span class="close" onclick="closebtn();">&times;</span> <br>
+			<section class="about_part">
+				<div class="container">
+					
+						
+						<div class="row">
+							<div class="col-lg-6 col-md-6">
 
 
-					<div class="filebox">
-						<label for="cma_file" class="rounded"> <input type="file"
-							name="sbul" id="cma_file" accept="image/*" capture="camera"
-							onchange="getThumbnailPrivew(this,$('#cma_image'))" />
-							<div id="cma_image"></div>
-						</label>
+								
+									<div id="map" style="width:100%;height:100%;" onclick="relaycl();"></div>
 
-					</div>
-				</div>
-				
-				<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6"
-					style="margin-top: 3%;">
+							
+							</div>
+
+							<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
 					<div class="about_text">
 
+						<!-- 폼 태그 시작 부분 나중에 추가-->
+						<form name="studyDali" action="" class="was-validated">
 							<div class="row">
+
 								<div class="col">
-									<input type="text" class="form-control" placeholder="공부방 제목 입력"
-										name="sgTitle" required>
+									<input type="text" class="form-control" placeholder="공부 주제 입력"
+										name="studytitle" required>
 									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">공부방 제목 입역</div>
-									<input type="text" class="form-control" value="${loginUser.mId}"
-										name="sgWriter" hidden>
-									<input type="number" class="form-control" value="${loginUser.mno}"
-										name="sgWriterNo" hidden>
+									<div class="invalid-feedback">공부 주제 입력</div>
+									<input type="text" class="form-control" vlaue="니돈먹튀"
+										name="userId" hidden>
 									<!-- 방 개설 자 아이디 자동 입력 구간-->
 								</div>
 							</div>
 							<br>
 
-								
+
 							<div class="row">
 								<div class="col">
-									<input type="text" id="from" class="form-control"
-										placeholder="시작 날짜 설정" name="sgStartDate" required>
+									<input type="time" class="form-control" name="stime" required>
 									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">시작 기간 설정</div>
+									<div class="invalid-feedback">만남 시간 설정</div>
 								</div>
 								<div class="col">
-									<input type="text" id="to" class="form-control"
-										placeholder="종료 날짜 설정" name="sgEndDate" required>
+									<input type="text" class="form-control" id="dailyDate" name="scdate" required>
 									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">종료 기간 설정</div>
+									<div class="invalid-feedback">스터디 일정 설정</div>
 								</div>
 							</div>
 							<br>
 
 							<div class="row">
 								<div class="col">
-									<input type="text" class="form-control" placeholder="지역 입력"
-										name="sgAddr" required>
-									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">지역입력 예) 서울</div>
+									<input type="text" class="form-control addressmagin"
+										placeholder="우편번호" id="postcode" name="postcode" required>
 								</div>
 								<div class="col">
-									<input type="text" class="form-control" placeholder="장소 입력"
-										name="sgLocation" required>
-									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">장소입력 예) xxx커피집</div>
+									<input type="button" class="genric-btn danger radius" onclick="DaumPostcode();"
+										style="margin-bottom: 10px; font-size: 13px;" value="우편번호 찾기">
+
 								</div>
 							</div>
-							<br>
-
 							<div class="row">
 								<div class="col">
-									<input type="number" min="0" class="form-control"
-										placeholder="보증금 입력" name="sgDeposit" required>
-									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">인당 보증급 설정</div>
-								</div>
-								<div class="col">
-									<input type="number" min="1" class="form-control"
-										placeholder="모집 인원" name="sgMaxPeople" required>
-									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">모집 인원 설정</div>
+									<input type="text" class="form-control addressmagin"
+										id="address" placeholder="주소" name="address" required>
 								</div>
 							</div>
-							<br>
 							<div class="row">
 								<div class="col">
-									<input type="text" id="teg" class="form-control"
-										placeholder="검색어 등록" name="sgTag" required>
-									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">검색어 입력 예) @JAVA</div>
+									<input type="text" class="form-control" placeholder="상세주소"
+										id="detailAddress" name="detailAddress" required>
 								</div>
 							</div>
-							<br> <br>
-
-							<div class="form-group form-check">
-								<label class="form-check-label"> <input
-									class="form-check-input" type="checkbox" name="sgJoin"
-									> 수업 중간 참여 가능 여부 체크 해주세요.
-									<div class="valid-feedback">중간참여 가능여부 체크 필요</div>
-									
-								</label>
-							</div>
+							<br> <br> <br>
+							</form>
 					</div>
 				</div>
 			</div>
 			<hr>
-			<div style="text-align: center; margin-top: 20px;">
-	
-				<button type="submit" class="genric-btn danger circle"
+			<br>
+			<div style="text-align: center;">
+				<button onclick="submitto();" class="genric-btn danger circle"
 					style="font-size: 13px; margin-right: 10px;">등록</button>
 				<button type="reset" class="genric-btn danger circle"
 					style="font-size: 13px;">취소</button>
 			</div>
-			</form>
+					
+				</div>
+			</section>
+
 		</div>
-	</section>                                                    
-        
-      </div>
- 
-    </div>
-    <!--  모달이 꺼져 -->
-    
-	
+
+	</div>
+	<!--  모달이 꺼져 -->
+
+
 	<!-- End Align Area -->
 
 	<jsp:include page="../common/footer.jsp" />
-	   
-	   
+
+	
+	<!-- 지도 주소 검색  js-->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1b439b4a0ff0544fb67982c72bca1e3"></script>
+	<!-- 지도 주소 검색  js끝 -->
+
 	<script src='${fullcalPath}/core/main.js'></script>
 	<script src='${fullcalPath}/daygrid/main.js'></script>
 	<script src='${fullcalPath}/interaction/main.js'></script>
 	
-	
-	
+	<!-- datepicker -->
 	<script>
 	
-	function closebtn(){//모달창 닫기
-		$("#myModal").css("display","none");
-	}
+	$(function() {
+	    $("#dailyDate").datepicker({
+	      showButtonPanel: true,
+	     
+	    });
+	  } );
 	
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-    
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: [ 'dayGrid', 'interaction' ],
-        header: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'today',
-          },
-          locale: 'ko',
-          defaultView: 'dayGridMonth',
-          selectable: true,
-          select:function(){
-        	
-                  $('#myModal').css("display","block");
-              		
-          },
-         
-          events:[
-        	  
-        	  {
-        		  title:'java',
-        		  description: 'description for Long Event',
-        		  start : '2020-04-09'
-        	  }
-          ]
-          
-      });
-    
-      calendar.render();
-    });
 	</script>
-	
-	
+	<!-- from 태그 값 넘기기 -->
 	<script>
+	
+	 
+	
+	function submitto(){
+		$("#studyDali").submit();
+		
+	}
+	</script>
+	<!-- from 태그 값 넘기기  끝-->
+	
+	<!-- 다음 지도 와 주소 검색 시작-->
+	<script>
+	
+	function DaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+              
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("detailAddress").focus();
+            }
+        }).open();
+    }
+	
+	// 여기부터 다음 카카오 지도.
+	
+	var container = document.getElementById('map');
+	var options = {
+		center: new kakao.maps.LatLng(33.450701, 126.570667),
+		level: 3
+	};
+
+	var map = new kakao.maps.Map(container, options);
+
+
 
 	</script>
-	
-	   
-	   
-	
+<!-- 다음 지도 와 주소 검색 끝 -->
+
+
+	<script>
+		function closebtn() {//모달창 닫기
+			$("#myModal").css("display", "none");
+		}
+
+		document.addEventListener('DOMContentLoaded', function() {
+			var calendarEl = document.getElementById('calendar');
+
+			var calendar = new FullCalendar.Calendar(calendarEl, {
+				plugins : [ 'dayGrid', 'interaction' ],
+				header : {
+					left : 'prev,next',
+					center : 'title',
+					right : 'today',
+				},
+				locale : 'ko',
+				defaultView : 'dayGridMonth',
+				selectable : true,
+				select : function() {
+
+					$('#myModal').css("display", "block");
+					
+					map.relayout();
+
+				},
+
+				events : [
+
+				{
+					title : 'java',
+					description : 'description for Long Event',
+					start : '2020-04-09'
+				} ]
+
+			});
+
+			calendar.render();
+		});
+	</script>
+
+
+	<script>
+		
+	</script>
+
+
+
+
 	<script>
 		/*** 별점 ****************************************************/
 		$('div.starRev').children('span').click(function() {
