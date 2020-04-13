@@ -86,6 +86,7 @@
     	FROM HODU_TABLE H JOIN MEMBER M
     	ON H_MID = M.M_ID
     	WHERE H.H_MID = #{mId}
+    	ORDER BY 1 DESC
     </select>
     
     <!-- <update id="updatemhodu" parameterType="_int" >
@@ -103,4 +104,10 @@
    		WHERE	1=1
    		AND		M_NO=#{hmNo}
     </update>
+    
+    <select id="selectHodunum" resultMap="memberResultSet">
+    	SELECT *
+    	FROM MEMBER
+    	WHERE M_NO=#{mno}
+    </select>
 </mapper>

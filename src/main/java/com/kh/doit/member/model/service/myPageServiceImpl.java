@@ -67,6 +67,11 @@ public class myPageServiceImpl implements myPageService{
 		return mpDao.updatemho(th);
 	}
 
+	@Override
+	public Member selectHodunum(int mno) {
+		return mpDao.selectHodunum(mno);
+	}
+
 
 
 }
