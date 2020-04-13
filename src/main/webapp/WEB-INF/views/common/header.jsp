@@ -82,6 +82,7 @@
                               <a class="dropdown-item" href="nlist.go">Notice</a>
                               <a class="dropdown-item" href="fblist.go">Board</a>
                               <a class="dropdown-item" href="moveBS.go">Book-Share</a>
+                              <a class="dropdown-item" href="qna.go">Q&A</a>
                            </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -135,7 +136,7 @@
                                     <i class="fas fa-donate text-white"></i>
                                  </div>
                               </div>
-                              <div>
+                              <div> 
                                  <div class="small text-gray-500">December 7, 2019</div>
                                  믿음 천국 불신 지옥
                               </div>

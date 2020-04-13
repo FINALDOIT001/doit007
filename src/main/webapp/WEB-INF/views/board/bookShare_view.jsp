@@ -266,13 +266,13 @@ function getCommentList(){
                     html1 += "<input type='hidden' value='"+data[i].bscNo+"'>";
                     html1 += "<input type='hidden' value='"+data[i].bscWriterNo+"'>";
                     html1 += "<div class='thumb'>";
-                    html1 += "<img src='${contextPath}/resources/img/"+data[i].member.mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>";
+                    /* html1 += "<img src='${contextPath}/resources/img/"+data[i].member.mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>"; */
                     /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
                     html1 += "</div>";
                     html1 += "<h5>";
                     html1 += "<a href=''>"+data[i].bscWriter+"</a> ";
                     html1 += "</h5>";
-                    html1 += "<p class='date'>"+data[i].bscDate+"</p><span class='kwon-span202' style='margin-left:800px;'>삭제</span>";
+                    html1 += "<p class='date'>"+data[i].bscDate+"</p><span class='kwon-span202' style='margin-left:820px;'>삭제</span>";
                     html1 += "</div>";
                     html1 += "</div>";
                     html1 += "<p class='comment'>"+data[i].bscCon+"</p>";
