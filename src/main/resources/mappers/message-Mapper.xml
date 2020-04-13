@@ -65,10 +65,39 @@
 
 <delete id="messageDelete" parameterType="java.util.ArrayList">
 		DELETE MESSAGE
-		WHERE MS_NO = 
+		WHERE MS_NO IN (
 	<foreach collection="array" item="item" index="index" separator=",">
 		${item}
 	</foreach>
+	)
 </delete>
+
+<select id="selectReceiveMSList" parameterType="String" resultMap="MessageResultSet">
+	SELECT *
+	FROM MESSAGE
+	WHERE MS_RECIPIENT_ID = #{ userID }
+</select>
+
+<select id="selectSendMSList" parameterType="String" resultMap="MessageResultSet">
+	SELECT *
+	FROM MESSAGE
+	WHERE MS_SENDER_ID = #{ userID }
+</select>
+
+<select id="msDetailView" parameterType="_int" resultMap="MessageResultSet">
+	SELECT *
+	FROM MESSAGE
+	WHERE MS_NO = #{ms_No}
+</select>
+
+<update id="msReadCheck" parameterType="_int">
+	UPDATE MESSAGE
+	SET MS_CHECK = 'Y',
+		MS_DATE2 = SYSDATE
+	WHERE MS_NO = #{ms_No}
+</update>
+
+
+
 
 </mapper>

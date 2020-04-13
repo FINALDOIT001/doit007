@@ -50,8 +50,15 @@ public class MessageController {
 	  * @return
 	  */
 	@RequestMapping("newMS.ms")
-	public String newMS() {
-		return "message/MsNewmessage";
+	public ModelAndView newMS(
+			ModelAndView mv,
+			@RequestParam(value="recipientID", required=false, defaultValue="null") String recipientID
+			) {
+		
+		mv.addObject("recipientID",recipientID)
+		.setViewName("message/MsNewmessage");
+		
+		return mv;
 	}
 	
 	/**
@@ -147,13 +154,29 @@ public class MessageController {
 	  * @param userID
 	  * @return
 	  */
-	@RequestMapping("ReceivenewPage.ms")
-	public ModelAndView ReceivenewPage(ModelAndView mv, @RequestParam String userID) {
+	@RequestMapping("ListPage.ms")
+	public ModelAndView ListPage(ModelAndView mv, 
+									   @RequestParam String userID,
+									   @RequestParam String Type) {
 		
-		ArrayList<Message> msList = msService.selectNewMSList(userID);
+		ArrayList<Message> msList = new ArrayList<>();
+		
+		switch(Type) {
+			case "New" :
+				msList = msService.selectNewMSList(userID);
+				break;
+			case "Receive" :
+				msList = msService.selectReceiveMSList(userID);
+				break;
+			case "Send" :
+				msList = msService.selectSendMSList(userID);
+				break;
+		}
+		
 		
 		if( msList != null ) {
 			mv.addObject("msList",msList);
+			mv.addObject("Type",Type);
 			mv.setViewName("message/MsListView");
 		}else {
 			mv.addObject("msg", "쪽지 리스트 불러오기 실패 !");
@@ -188,5 +211,42 @@ public class MessageController {
 		gson.toJson(result,response.getWriter());
 			
 	}
+	
+	@RequestMapping("msDetailView.ms")
+	public ModelAndView msDetailView(ModelAndView mv, 
+									   @RequestParam int ms_No,
+									   @RequestParam String ms_loginId,
+									   @RequestParam String Type) {
+		
+		Message m = msService.msDetailView(ms_No);
+
+		if( m != null ) {
+			
+			if(m.getMsSender().equals(ms_loginId)) {
+				
+			}else {
+				
+				int result = msService.msReadCheck(ms_No);
+				
+				if( result > 0 ) {
+					
+				}else {
+					mv.addObject("msg", "쪽지 읽기 실패 !");
+					mv.setViewName("common/errorPage");
+					return mv;
+				}
+			}
+
+			mv.addObject("m",m);
+			mv.addObject("Type",Type);
+			mv.setViewName("message/msDetailView");
+		}else {
+			mv.addObject("msg", "쪽지 읽기 실패 !");
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
 	
 }

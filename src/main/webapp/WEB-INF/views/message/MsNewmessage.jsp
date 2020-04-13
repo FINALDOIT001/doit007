@@ -20,7 +20,14 @@
 		<tr>
 			<td style="width:150px;height:50px;text-align:center;">RECIPIENT</td>
 			<td>
-				<input id="userId" class="form-control placeholder hide-on-focus" placeholder="RECIPIENT">
+				<c:choose>
+					<c:when test="${ recipientID eq 'null' }">
+						<input id="userId" class="form-control placeholder hide-on-focus" placeholder="RECIPIENT">
+					</c:when>
+					<c:otherwise>
+						<input id="userId" class="form-control placeholder hide-on-focus" placeholder="RECIPIENT" value="${ recipientID }">
+					</c:otherwise>
+				</c:choose>
 			</td>
 		</tr>
 		<tr>

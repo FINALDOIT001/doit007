@@ -60,10 +60,18 @@
 		AND		E_STATUS='Y'
 	</select>
 	
-	<select id="selectReply" parameterType="_int" resultMap="eventReplyResultSet">
+	<!-- <select id="selectReply" parameterType="_int" resultMap="eventReplyResultSet">
 		SELECT	EC.*, M.M_RENAME_FILENAME
 		FROM	EVENT_COMMENTS EC
 		JOIN	MEMBER M ON (EC.EC_WRITER_NO = M.M_NO)
+		WHERE	1=1
+		AND		EC_E_NO=#{eNo}
+		AND		EC_STATUS='Y'
+	</select> -->
+
+	<select id="selectReply" parameterType="_int" resultMap="eventReplyResultSet">
+		SELECT	*
+		FROM	EVENT_COMMENTS
 		WHERE	1=1
 		AND		EC_E_NO=#{eNo}
 		AND		EC_STATUS='Y'

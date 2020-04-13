@@ -19,43 +19,42 @@
 
             <div class="col-sm-6 col-lg-3">
                <div class="single_footer_part">
-                  <h4>About Us</h4>
-                  <p>Heaven fruitful doesn't over lesser days appear creeping seasons so behold bearing days open</p>
+                  <h4>About Doit</h4>
+                  <p>DOIT?</p>
                   <div class="footer_icon social_icon">
-                     <ul class="list-unstyled">
+                     <!-- <ul class="list-unstyled">
                         <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
                         <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
                         <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
-                     </ul>
+                     </ul> -->
                   </div>
                </div>
             </div>
             <div class="col-sm-6 col-lg-3">
                <div class="single_footer_part">
-                  <h4>Contact Info</h4>
-                  <p>Address : Your address goes
-                     here, your demo address.</p>
-                  <p>Phone : +8880 44338899</p>
-                  <p>Email : info@colorlib.com</p>
+                  <h4>Community</h4>
+                  <p>Notice</p>
+                  <p>Free-Board</p>
+                  <p>Book-Share</p>
                </div>
             </div>
             <div class="col-sm-6 col-lg-3">
                <div class="single_footer_part">
-                  <h4>Important Link</h4>
+                  <h4>Event</h4>
                   <ul class="list-unstyled">
-                     <li><a href=""> WHMCS-bridge</a></li>
-                     <li><a href="">Search Domain</a></li>
-                     <li><a href="">My Account</a></li>
-                     <li><a href="">Shopping Cart</a></li>
-                     <li><a href="">Our Shop</a></li>
+                     <li><a href=""></a></li>
+                     <li><a href=""></a></li>
+                     <li><a href=""></a></li>
+                     <li><a href=""></a></li>
+                     <li><a href=""></a></li>
                   </ul>
                </div>
             </div>
             <div class="col-sm-6 col-lg-3">
                <div class="single_footer_part">
-                  <h4>Newsletter</h4>
-                  <p>Heaven fruitful doesn't over lesser in days. Appear creeping seasons deve behold bearing days open
+                  <h4>Doit-Hodu</h4>
+                  <p>Mileage Service
                   </p>
                   <div id="mc_embed_signup">
                      <form target="_blank"

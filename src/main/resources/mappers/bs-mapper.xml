@@ -20,7 +20,7 @@
 		<result property="bsStatus" column="BS_STATUS"/>
     </resultMap>
     
-<!--     <resultMap id="BSReplyResultSet" type="BookShareReply">
+     <resultMap id="BSReplyResultSet" type="BookShareReply">
     	<id property="bscNo" column="BSC_NO"/>
     	<result property="bscBsNo" column="BSC_BS_NO"/>
     	<result property="bscWriter" column="BSC_WRITER"/>
@@ -29,8 +29,8 @@
     	<result property="bscCon" column="BSC_CON"/>
     	<result property="bscStatus" column="BSC_STATUS"/>
     </resultMap>
- -->    
-    <resultMap id="BSReplyResultSet2" type="BookShareReply">
+     
+    <!-- <resultMap id="BSReplyResultSet2" type="BookShareReply">
     	<id property="bscNo" column="BSC_NO"/>
     	<result property="bscBsNo" column="BSC_BS_NO"/>
     	<result property="bscWriter" column="BSC_WRITER"/>
@@ -39,11 +39,11 @@
     	<result property="bscCon" column="BSC_CON"/>
     	<result property="bscStatus" column="BSC_STATUS"/>
     	
-    	<association property="member" javaType="Member">
+    	 <association property="member" javaType="Member">
     		<result property="mRenamefilename" column="M_RENAME_FILENAME"/>
-    	</association>
+    	</association> 
     	
-    </resultMap>
+    </resultMap> -->
     
     
     <!-- 혜림 추가 -->
@@ -75,10 +75,18 @@
     	AND		BS_STATUS='Y'
     </select>
     
-    <select id="selectBSReply" resultMap="BSReplyResultSet2">
+    <!-- <select id="selectBSReply" resultMap="BSReplyResultSet2">
     	SELECT	BSC.*, M.M_RENAME_FILENAME
  		FROM	BOOK_SHARE_COMMENTS BSC
  		JOIN	MEMBER M ON (BSC.BSC_WRITER_NO = M.M_NO)
+ 		WHERE	1=1
+ 		AND		BSC_BS_NO=#{bsNo}
+ 		AND		BSC_STATUS='Y'
+    </select> -->
+    
+    <select id="selectBSReply" resultMap="BSReplyResultSet">
+    	SELECT	*
+ 		FROM	BOOK_SHARE_COMMENTS 
  		WHERE	1=1
  		AND		BSC_BS_NO=#{bsNo}
  		AND		BSC_STATUS='Y'

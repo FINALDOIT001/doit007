@@ -133,7 +133,7 @@ public class BoardController {
 	 * @param currentPage
 	 * @return
 	 */
-	@RequestMapping("fbDetail.go")
+	@RequestMapping("fbDetail.ev")
 	public ModelAndView fboardDetail(ModelAndView mv,int b_no,
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
 		Board b = bService.selectBoard(b_no);
@@ -171,7 +171,7 @@ public class BoardController {
 		int result = bService.updateBoard(b);
 		
 		if(result > 0) {
-			mv.addObject("b_no",b.getB_no()).setViewName("redirect:fbDetail.go");
+			mv.addObject("b_no",b.getB_no()).setViewName("redirect:fbDetail.ev");
 		}else {
 			mv.addObject("msg","게시글 수정 실패");
 		}

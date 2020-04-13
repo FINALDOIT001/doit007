@@ -19,7 +19,7 @@ public class Message implements Serializable{
 	private String msContext;
 	private Date msDate1;
 	private Date msDate2;
-	private char msCheck;
+	private String msCheck;
 	
 	public Message() {}
 	
@@ -34,7 +34,7 @@ public class Message implements Serializable{
 
 
 	public Message(int msNo, String msSender, String msRecipient, String msTitle, String msContext, Date msDate1,
-			Date msDate2, char msCheck) {
+			Date msDate2, String msCheck) {
 		super();
 		this.msNo = msNo;
 		this.msSender = msSender;
@@ -102,11 +102,11 @@ public class Message implements Serializable{
 		this.msDate2 = msDate2;
 	}
 
-	public char getMsCheck() {
+	public String getMsCheck() {
 		return msCheck;
 	}
 
-	public void setMsCheck(char msCheck) {
+	public void setMsCheck(String msCheck) {
 		this.msCheck = msCheck;
 	}
 
