@@ -10,6 +10,7 @@ import com.kh.doit.board.model.vo.Board;
 import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
+import com.kh.doit.member.model.vo.TestHodu;
 
 @Repository("mpDao")
 public class myPageDao {
@@ -44,6 +45,20 @@ public class myPageDao {
 
 	public ArrayList<Hodu> selecthList(String mId) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selecthList",mId);
+	}
+
+//	public int updateho(int hmNo) {
+//		return sqlSession.update("memberMapper.updatemhodu",hmNo);
+//	}
+
+	
+	/**
+	 * 멤버에 호두 추가 Kwon
+	 * @param th
+	 * @return
+	 */
+	public int updatemho(TestHodu th) {
+		return sqlSession.update("memberMapper.updateHoduTest",th);
 	}
 	
 }

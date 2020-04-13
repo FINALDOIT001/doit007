@@ -19,10 +19,12 @@ public class Member{
 	private String mRenamefilename; //바뀐 파일명
 	private Date mEnrolldate; //가입일
 	private Date mUpdatedate; //수정일
+	private int mhodu; // 호두갯수
 	private int mUserroles; //탈퇴 여부
 	private String mStatus; // 
 	 
 	private GroupMember gm;
+	private Hodu hodu;
 	
 	// 기본 생성자
 	public Member() {
@@ -30,8 +32,8 @@ public class Member{
 	}
 
 	public Member(int mno, String mId, String mPwd, String mName, String mAddr, String mPhone, String mEmail,
-			String mOriginalfilename, String mRenamefilename, Date mEnrolldate, Date mUpdatedate, int mUserroles,
-			String mStatus, GroupMember gm) {
+			String mOriginalfilename, String mRenamefilename, Date mEnrolldate, Date mUpdatedate, int mhodu,
+			int mUserroles, String mStatus, GroupMember gm, Hodu hodu) {
 		super();
 		this.mno = mno;
 		this.mId = mId;
@@ -44,9 +46,11 @@ public class Member{
 		this.mRenamefilename = mRenamefilename;
 		this.mEnrolldate = mEnrolldate;
 		this.mUpdatedate = mUpdatedate;
+		this.mhodu = mhodu;
 		this.mUserroles = mUserroles;
 		this.mStatus = mStatus;
 		this.gm = gm;
+		this.hodu = hodu;
 	}
 
 	public int getMno() {
@@ -137,6 +141,14 @@ public class Member{
 		this.mUpdatedate = mUpdatedate;
 	}
 
+	public int getMhodu() {
+		return mhodu;
+	}
+
+	public void setMhodu(int mhodu) {
+		this.mhodu = mhodu;
+	}
+
 	public int getmUserroles() {
 		return mUserroles;
 	}
@@ -161,13 +173,24 @@ public class Member{
 		this.gm = gm;
 	}
 
+	public Hodu getHodu() {
+		return hodu;
+	}
+
+	public void setHodu(Hodu hodu) {
+		this.hodu = hodu;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [mno=" + mno + ", mId=" + mId + ", mPwd=" + mPwd + ", mName=" + mName + ", mAddr=" + mAddr
 				+ ", mPhone=" + mPhone + ", mEmail=" + mEmail + ", mOriginalfilename=" + mOriginalfilename
 				+ ", mRenamefilename=" + mRenamefilename + ", mEnrolldate=" + mEnrolldate + ", mUpdatedate="
-				+ mUpdatedate + ", mUserroles=" + mUserroles + ", mStatus=" + mStatus + ", gm=" + gm + "]";
+				+ mUpdatedate + ", mhodu=" + mhodu + ", mUserroles=" + mUserroles + ", mStatus=" + mStatus + ", gm="
+				+ gm + ", hodu=" + hodu + "]";
 	}
+	
+	
 
 	
 }

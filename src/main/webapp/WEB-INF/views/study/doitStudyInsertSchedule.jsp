@@ -49,10 +49,11 @@
 				</div>
 				<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
 					<div class="about_text">
-						<form action="" class="was-validated">
-							<!-- 폼 태그 시작 부분 나중에 추가-->
 
+						<!-- 폼 태그 시작 부분 나중에 추가-->
+						<form action="" class="was-validated">
 							<div class="row">
+
 								<div class="col">
 									<input type="text" class="form-control" placeholder="공부 주제 입력"
 										name="studytitle" required>
@@ -88,7 +89,7 @@
 								<div class="col">
 									<input type="button" class="genric-btn danger radius"
 										style="margin-bottom: 10px; font-size: 13px;" value="우편번호 찾기">
-									</button>
+
 								</div>
 							</div>
 							<div class="row">
@@ -103,8 +104,8 @@
 										name="adddd" required>
 								</div>
 							</div>
-							<br> <br>
-							<br>
+							<br> <br> <br>
+							</form>
 					</div>
 				</div>
 			</div>
@@ -122,9 +123,6 @@
 					style="font-size: 13px;">취소</button>
 			</div>
 
-			</form>
-
-		</div>
 		</div>
 	</section>
 

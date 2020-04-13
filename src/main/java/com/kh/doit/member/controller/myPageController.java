@@ -27,6 +27,7 @@ import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.service.myPageService;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
+import com.kh.doit.member.model.vo.TestHodu;
 
 @SessionAttributes("loginUser")
 
@@ -58,6 +59,7 @@ public class myPageController {
 		Member m = mpService.selectOne(mId);
 		ArrayList<Hodu> hlist = mpService.selecthList(mId);
 		
+		System.out.println("마이페이지 : " + m);
 		if(m != null) {
 			mv.addObject("m",m);
 			mv.addObject("hlist",hlist);
@@ -203,7 +205,10 @@ public class myPageController {
 		hodu.sethPrice(hPrice); 
 		hodu.setHoduNum(hoduNum);
 		
+		TestHodu th = new TestHodu(hmNo, hoduNum);
+		
 		int result = mpService.inserthodu(hodu);
+		int houpdate = mpService.updatemho(th);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		
@@ -214,6 +219,7 @@ public class myPageController {
 		}else {
 			gson.toJson(result,response.getWriter());
 		}
+		
 		
 	}
 	
