@@ -82,6 +82,7 @@
                               <a class="dropdown-item" href="nlist.go">Notice</a>
                               <a class="dropdown-item" href="fblist.go">Board</a>
                               <a class="dropdown-item" href="moveBS.go">Book-Share</a>
+                              <a class="dropdown-item" href="qna.go">Q&A</a>
                            </div>
                         </li>
                         <li class="nav-item dropdown">

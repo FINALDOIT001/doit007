@@ -52,7 +52,7 @@ public class BookShareController {
 		
 	}
 	
-	@RequestMapping("bsView.go")
+	@RequestMapping("bsView.ev")
 	public ModelAndView moveBookShareView(ModelAndView mv, BookShare bs, int bsNo) {
 		bs = bsService.selectOne(bsNo);
 		
