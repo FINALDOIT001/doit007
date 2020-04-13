@@ -1,5 +1,7 @@
 package com.kh.doit.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.doit.member.model.service.MemberService;
 import com.kh.doit.member.model.vo.Member;
+import com.kh.doit.message.model.service.MessageService;
+import com.kh.doit.message.model.vo.Message;
 import com.kh.doit.util.UserSha256;
 
 @SessionAttributes("loginUser")
@@ -26,6 +30,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+	private MessageService msService;
 	
 	// 암호화 처리 
 	@Autowired
@@ -91,7 +98,7 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping(value="login.me", method=RequestMethod.POST)
-	public String moveLogin(@ModelAttribute Member m, Model model ) {
+	public ModelAndView moveLogin(@ModelAttribute Member m, ModelAndView mv ) {
 		
 		System.out.println(m);
 		
@@ -101,16 +108,25 @@ public class MemberController {
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getmPwd(), loginUser.getmPwd())) {
 			
-			model.addAttribute("loginUser", loginUser);
-			return "redirect:index.jsp"; 
+			// 메시지관련 정보 받아서 뿌리기
+			String userId = loginUser.getmId();
+			ArrayList<Message> list = msService.selectNewMSList(userId);
 			
+			System.out.println(list);
 			
+			mv.addObject("loginUser", loginUser);
+			mv.addObject("list", list);
+			mv.addObject("listsize", list.size());
+			mv.setViewName("common/main");
+
 		}else {
 			
-			model.addAttribute("msg","로그인 실패!");
-			return "common/errorPage";
+			mv.addObject("msg","로그인 실패!");
+			mv.setViewName("common/errorPage");
 			
 		}
+		
+		return mv;
 	}
 	
 

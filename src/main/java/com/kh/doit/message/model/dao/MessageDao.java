@@ -40,6 +40,26 @@ public class MessageDao {
 		return sqlSession.delete("messageMapper.messageDelete",delList);
 	}
 
+	public ArrayList<Message> selectReceiveMSList(String userID) {
+		
+		return (ArrayList)sqlSession.selectList("messageMapper.selectReceiveMSList",userID);
+	}
+
+	public ArrayList<Message> selectSendMSList(String userID) {
+		
+		return (ArrayList)sqlSession.selectList("messageMapper.selectSendMSList",userID);
+	}
+
+	public Message msDetailView(int ms_No) {
+		
+		return sqlSession.selectOne("messageMapper.msDetailView",ms_No);
+	}
+
+	public int msReadCheck(int ms_No) {
+		
+		return sqlSession.update("messageMapper.msReadCheck",ms_No);
+	}
+
 
 
 }
