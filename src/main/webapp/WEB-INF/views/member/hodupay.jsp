@@ -179,8 +179,9 @@
 					if(data == "1"){
 						console.log(data);
 						alert("결제가 성공하였습니다.");
-						window.opener.location.href="http://localhost:8888/doit/myinfo.me?mId=hoho#menu3";
-						window.close();
+						opener.location.reload();
+						window.close(); 
+
 					}else{
 						alert("결제가 실패하였습니다.");
 					}
