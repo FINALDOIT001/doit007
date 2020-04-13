@@ -136,7 +136,7 @@
                                     <i class="fas fa-donate text-white"></i>
                                  </div>
                               </div>
-                              <div>
+                              <div> 
                                  <div class="small text-gray-500">December 7, 2019</div>
                                  믿음 천국 불신 지옥
                               </div>

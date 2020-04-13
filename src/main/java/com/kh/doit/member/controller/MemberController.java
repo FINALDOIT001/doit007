@@ -46,6 +46,11 @@ public class MemberController {
 	 */
 	@RequestMapping("moveJoin.go")
 	public String moveJoin() {
+		return "member/join_2";
+	}
+	
+	@RequestMapping("joinform.go")
+	public String moveJoin2() {
 		return "member/join";
 	}
 	
