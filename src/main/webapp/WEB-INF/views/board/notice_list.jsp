@@ -121,7 +121,7 @@
            <!-- 관리자만 작성가능하게~@ -->
 	       <c:if test="${ loginUser.mUserroles eq 777 }">  
 	         <div class="col-md-12" style="text-align: right; margin-top: 20px;">
-	           <button onclick="location.href='nInsertForm.go';" class="genric-btn danger circle" style="font-size: 13px;">작성하기</a>
+	           <button onclick="location.href='nInsertForm.go';" class="genric-btn danger circle" style="font-size: 13px;">작성하기</a></button>
 	       </div>
 	       </c:if> 
 	    </div>
