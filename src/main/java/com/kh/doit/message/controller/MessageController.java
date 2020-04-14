@@ -249,4 +249,21 @@ public class MessageController {
 	}
 	
 	
+	@RequestMapping(value="getHeadMS.ms",method= {RequestMethod.GET, RequestMethod.POST})
+	public void getHeadMS(
+				HttpServletRequest request,
+				HttpServletResponse response,
+				@RequestParam String userID
+			) throws JsonIOException, IOException {
+		
+		ArrayList<Message> list = msService.selectNewMSList(userID);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		Gson gson = new GsonBuilder().create();
+		
+		gson.toJson(list,response.getWriter());
+		
+	}
+	
 }

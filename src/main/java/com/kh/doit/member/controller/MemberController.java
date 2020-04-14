@@ -31,9 +31,6 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
-	@Autowired
-	private MessageService msService;
-	
 	// 암호화 처리 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -112,16 +109,8 @@ public class MemberController {
 		System.out.println(loginUser);
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getmPwd(), loginUser.getmPwd())) {
-			
-			// 메시지관련 정보 받아서 뿌리기
-			String userId = loginUser.getmId();
-			ArrayList<Message> list = msService.selectNewMSList(userId);
-			
-			System.out.println(list);
-			
+
 			mv.addObject("loginUser", loginUser);
-			mv.addObject("list", list);
-			mv.addObject("listsize", list.size());
 			mv.setViewName("common/main");
 
 		}else {
