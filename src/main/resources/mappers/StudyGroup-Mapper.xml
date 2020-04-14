@@ -6,99 +6,117 @@
 <mapper namespace="studyGroupMapper">
 
 	<resultMap id="studyGroupResultSet" type="StudyGroup">
-		<id property="sgNo" column="SG_NO"/>
-		<result property="sgTitle" column="SG_TITLE"/>
-		<result property="sgWriter" column="SG_WRITER"/>
-		<result property="sgWriterNo" column="SG_WRITER_NO"/>
-		<result property="sgNowPeople" column="SG_NOWPEOPLE"/>
-		<result property="sgMaxPeople" column="SG_MAXPEOPLE"/>
+		<id property="sgNo" column="SG_NO" />
+		<result property="sgTitle" column="SG_TITLE" />
+		<result property="sgWriter" column="SG_WRITER" />
+		<result property="sgWriterNo" column="SG_WRITER_NO" />
+		<result property="sgNowPeople" column="SG_NOWPEOPLE" />
+		<result property="sgMaxPeople" column="SG_MAXPEOPLE" />
 		<result property="sgAddr" column="SG_ADDR" />
-		<result property="sgDeposit" column="SG_DEPOSIT"/>
-		<result property="sgCreateDate" column="SG_CREATE_DATE"/>
+		<result property="sgDeposit" column="SG_DEPOSIT" />
+		<result property="sgCreateDate" column="SG_CREATE_DATE" />
 		<result property="sgStartDate" column="SG_START_DATE" />
-		<result property="sgEndDate" column="SG_END_DATE"/>
+		<result property="sgEndDate" column="SG_END_DATE" />
 		<result property="sgLocation" column="SG_LOCATION" />
 		<result property="sgJoin" column="SG_JOIN_YN" />
 		<result property="sgCon" column="SG_CON" />
-		<result property="sgOriginalFileName" column="SG_ORIGINAL_FILENAME" />
+		<result property="sgOriginalFileName"
+			column="SG_ORIGINAL_FILENAME" />
 		<result property="sgRenameFileName" column="SG_RENAME_FILENAME" />
-		<result property="sgTag" column="SG_TAG"/>
-		<result property="sgPayment" column="SG_PAYMENT_YN"/>
-		<result property="sgStatus" column="SG_STATUS_YN"/>
-		<result property="sgConfirm" column="SG_CONFIRM_YN"/>
+		<result property="sgTag" column="SG_TAG" />
+		<result property="sgPayment" column="SG_PAYMENT_YN" />
+		<result property="sgStatus" column="SG_STATUS_YN" />
+		<result property="sgConfirm" column="SG_CONFIRM_YN" />
 	</resultMap>
-	
+
 	<resultMap id="groupMemberResultSet" type="GroupMember">
-   		<result property="gm_sgNo" column="GM_SG_NO"/>
-   		<result property="gm_mNo" column="GM_M_NO"/>
-   	</resultMap>
-	
+		<result property="gm_sgNo" column="GM_SG_NO" />
+		<result property="gm_mNo" column="GM_M_NO" />
+	</resultMap>
+
 	<resultMap id="memberResultSet" type="Member">
-   		<id property="mno" column="M_NO"/>
-   		<result property="mId" column="M_ID"/>
-   		<result property="mPwd" column="M_PWD" />
-   		<result property="mName" column="M_NAME" />
-   		<result property="mAddr" column="M_ADDR" />
-   		<result property="mPhone" column="M_PHONE" />
-   		<result property="mEmail" column="M_EMAIL" />
-   		<result property="mOriginalfilename" column="M_ORIGINAL_FILENAME" />
-   		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
-   		<result property="mEnrolldate" column="M_ENROLL_DATE" />
-   		<result property="mUpdatedate" column="M_UPDATE_DATE" />
-   		<result property="mUserroles" column="M_USERROLES" />
-   		<result property="mStatus" column="M_STATUS" />
-   		
-   		<association property="gm" javaType="GroupMember">
-   			<result property="gm_sgNo" column="GM_SG_NO"/>
-   			<result property="gm_mNo" column="GM_M_NO"/>
-   		</association>
-    </resultMap>
-    
+		<id property="mno" column="M_NO" />
+		<result property="mId" column="M_ID" />
+		<result property="mPwd" column="M_PWD" />
+		<result property="mName" column="M_NAME" />
+		<result property="mAddr" column="M_ADDR" />
+		<result property="mPhone" column="M_PHONE" />
+		<result property="mEmail" column="M_EMAIL" />
+		<result property="mOriginalfilename"
+			column="M_ORIGINAL_FILENAME" />
+		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
+		<result property="mEnrolldate" column="M_ENROLL_DATE" />
+		<result property="mUpdatedate" column="M_UPDATE_DATE" />
+		<result property="mUserroles" column="M_USERROLES" />
+		<result property="mStatus" column="M_STATUS" />
+
+		<association property="gm" javaType="GroupMember">
+			<result property="gm_sgNo" column="GM_SG_NO" />
+			<result property="gm_mNo" column="GM_M_NO" />
+		</association>
+	</resultMap>
+
+	<resultMap id="dailyStudyResultSet" type="DailyStudy">
+		<id property="ssNo" column="SS_NO" />
+		<result property="ssSgNo" column="SS_SG_NO" />
+		<result property="sstitle" column="SS_TITLE"/>
+		<result property="ssDayDate" column="SS_DAY_DATE" />
+		<result property="ssTimeDate" column="SS_TIME_DATE" />
+		<result property="ssLocation" column="SS_LOCATION" />
+		<result property="ssAdd" column="SS_ADDR" />
+	</resultMap>
+
 	<select id="getlistCount" resultType="_int">
 		SELECT COUNT(*)
-		FROM STUDY_GROUP
+		FROM
+		STUDY_GROUP
 		WHERE SG_STATUS_YN='Y'
 	</select>
-	
-	
+
+
 	<insert id="sgInsert" parameterType="StudyGroup">
 		INSERT ALL
-		INTO STUDY_GROUP VALUES(SEQ_SGNO.NEXTVAL,#{sgTitle},#{sgWriter},#{sgWriterNo},1,#{sgMaxPeople},#{sgAddr},#{sgDeposit},SYSDATE,#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOriginalFileName},#{sgRenameFileName},#{sgTag},DEFAULT,DEFAULT,DEFAULT)
-		INTO GROUP_MEMBER VALUES(SEQ_SGNO.CURRVAL,#{sgWriterNo})	
+		INTO STUDY_GROUP
+		VALUES(SEQ_SGNO.NEXTVAL,#{sgTitle},#{sgWriter},#{sgWriterNo},1,#{sgMaxPeople},#{sgAddr},#{sgDeposit},SYSDATE,#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOriginalFileName},#{sgRenameFileName},#{sgTag},DEFAULT,DEFAULT,DEFAULT)
+		INTO GROUP_MEMBER VALUES(SEQ_SGNO.CURRVAL,#{sgWriterNo})
 		SELECT *
 		FROM DUAL
 	</insert>
-	
+
 	<select id="selectList" resultMap="studyGroupResultSet">
 		SELECT * FROM STUDY_GROUP
 		WHERE SG_STATUS_YN='Y'
 		ORDER BY SG_NO DESC
 	</select>
-	
+
 	<select id="selectSg" resultMap="studyGroupResultSet">
 		SELECT *
 		FROM STUDY_GROUP
-		WHERE SG_NO = #{sgNo}
+		WHERE
+		SG_NO = #{sgNo}
 	</select>
-	
+
 	<update id="sgUpdate" parameterType='StudyGroup'>
 		UPDATE STUDY_GROUP SET
 		SG_TITLE = #{sgTitle},
 		SG_MAXPEOPLE = #{sgMaxPeople},
-		SG_ADDR = #{sgAddr},
+		SG_ADDR =
+		#{sgAddr},
 		SG_DEPOSIT = #{sgDeposit},
 		SG_CREATE_DATE = SYSDATE,
 		SG_START_DATE = #{sgStartDate},
 		SG_END_DATE = #{sgEndDate},
-		SG_LOCATION = #{sgLocation},
+		SG_LOCATION
+		= #{sgLocation},
 		SG_JOIN_YN = #{sgJoin},
 		SG_CON = #{sgCon},
 		SG_ORIGINAL_FILENAME = #{sgOriginalFileName},
-		SG_RENAME_FILENAME = #{sgRenameFileName},
+		SG_RENAME_FILENAME =
+		#{sgRenameFileName},
 		SG_TAG = #{sgTag}
 		WHERE SG_NO = #{sgNo}
 	</update>
-	
+
 	<update id="sgDelete" parameterType="_int">
 		UPDATE STUDY_GROUP SET
 		SG_STATUS_YN = 'N'
@@ -108,23 +126,31 @@
 	<select id="memberList" resultMap="memberResultSet">
 		SELECT *
 		FROM MEMBER M
-		JOIN GROUP_MEMBER GM ON(GM.GM_M_NO = M.M_NO)
+		JOIN
+		GROUP_MEMBER GM ON(GM.GM_M_NO = M.M_NO)
 		WHERE GM_SG_NO = #{sgNo}
 	</select>
 
 	<delete id="sgGroupOut" parameterType="_int">
-		DELETE FROM GROUP_MEMBER WHERE GM_M_NO = #{mno}
+		DELETE FROM GROUP_MEMBER
+		WHERE GM_M_NO = #{mno}
 	</delete>
-	
+
 	<insert id="sgJoin" parameterType="GroupMember">
-		INSERT INTO GROUP_MEMBER VALUES(#{gm_sgNo},#{gm_mNo})
+		INSERT INTO GROUP_MEMBER
+		VALUES(#{gm_sgNo},#{gm_mNo})
 	</insert>
-	
+
 	<update id="sgStart" parameterType="_int">
 		UPDATE STUDY_GROUP SET
 		SG_CONFIRM_YN = 'N'
 		WHERE SG_NO = #{sgNo}
 	</update>
+	
+	<select id="sgDailySlist" parameterType="_int" resultMap="dailyStudyResultSet">
+	SELECT * FROM STUDY_SCHEDULE
+	WHERE SS_SG_NO= #{sgNo}
+	</select>
 
 </mapper>
     
