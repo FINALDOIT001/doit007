@@ -152,7 +152,7 @@ public class MemberController {
 		}
 	
 		@RequestMapping("join.me")
-		public ModelAndView insertMember(Member m, ModelAndView mv, @RequestParam(value="phone1", required=false) String phone1,
+		public ModelAndView insertMember(@ModelAttribute Member m, ModelAndView mv, @RequestParam(value="phone1", required=false) String phone1,
 																@RequestParam(value="phone2", required=false) String phone2,
 																@RequestParam(value="phone3", required=false) String phone3,
 																@RequestParam(value="email",required=false) String email,
@@ -184,6 +184,8 @@ public class MemberController {
 			
 			if(result > 0) {
 				// 회원가입 성공 했을 때 로그인으로 보내주기
+				Member loginUser = mService.memberLogin(m);
+				mv.addObject("loginUser", loginUser);
 				mv.setViewName("redirect:index.jsp");
 			}else {
 				mv.addObject("msg","회원가입 실패!");
