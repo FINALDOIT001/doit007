@@ -1,7 +1,9 @@
 package com.kh.doit.member.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.doit.member.model.service.MemberService;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.message.model.service.MessageService;
@@ -194,5 +199,34 @@ public class MemberController {
 			return mv;
 			
 		}
+		
+		@RequestMapping("searchId.go")
+		public String searchId() {
+			return "member/SearchId";
+		}
+		
+		@RequestMapping("startSearch.go")
+		public void startSearch(HttpServletResponse response, @RequestParam String email) throws JsonIOException, IOException {
+			
+			int result = mService.countId(email);
+			
+			response.setContentType("application/json; charset=utf-8");
+			
+			Gson gson = new GsonBuilder().create();
+			if(result > 0) {
+				String sId = mService.searchId(email);
+				gson.toJson(sId,response.getWriter());
+			}else {
+				gson.toJson("no",response.getWriter());
+			}
+			
+		}
+
+		
+		@RequestMapping("searchPwd.go")
+		public String searchPwd() {
+			return "member/SearchPwd";
+		}
+		
 		
 }

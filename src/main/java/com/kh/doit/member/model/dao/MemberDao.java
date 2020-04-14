@@ -23,8 +23,14 @@ public class MemberDao {
 	public int insertMember(Member m) {
 		return sqlSession.insert("memberMapper.insertMember",m);
 	}
-	
-	
-	
+
+	public String searchId(String email) {
+		
+		return sqlSession.selectOne("memberMapper.searchId",email);
+	}
+
+	public int countId(String email) {
+		return sqlSession.selectOne("memberMapper.countId",email);
+	}
 
 }
