@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -80,8 +81,8 @@ public class EventController {
 		response.setContentType("application/json; charset=UTF-8");
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		gson.toJson(rList,response.getWriter());
 		
+		gson.toJson(rList,response.getWriter());
 	}
 
 	
@@ -118,10 +119,13 @@ public class EventController {
 	 * @param er
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("addEvReply.do")
 	public String addEvReply(EventReply er) {
 		System.out.println("Servlet Ev댓글추가 : " + er);
 		int result = eService.insertReply(er);
+		
+		System.out.println("Servlet 댓글추가 result : " + result);
 		
 		if(result > 0) {
 			return "success";
@@ -279,6 +283,7 @@ public class EventController {
 	 * @param ecNo
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("deleteEr.go")
 	public String deleteEr(int ecNo) {
 		

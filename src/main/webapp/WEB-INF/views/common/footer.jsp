@@ -37,6 +37,7 @@
                   <p>Notice</p>
                   <p>Free-Board</p>
                   <p>Book-Share</p>
+                  <p>Q&A</p>
                </div>
             </div>
             <div class="col-sm-6 col-lg-3">

@@ -162,7 +162,7 @@
 						<c:url var="after" value="fblist.go">
 							<c:param name="currentPage" value="${ pi_h.currentPage + 1 }"/>
 						</c:url> 
-						<a href="${ after }">[다음]</a>
+						<a href="${ after }">next</a>
 					</c:if>
 					</td>
 				</tr>

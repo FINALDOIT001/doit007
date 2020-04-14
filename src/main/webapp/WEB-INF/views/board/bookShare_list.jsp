@@ -69,7 +69,7 @@
 				style="color:#5b5b5b !important;">${ bs.bsTitle }</a>
 			
 			</td>
-			<td align="center" class="kwon-td1">${ bs.bsWriter }</td>
+			<td align="center" class="kwon-td1" value="${ bs.bsWriterNo }">${ bs.bsWriter }</td>
 			<td align="center" class="kwon-td1">${ bs.bsLocation }</td>
 			<td align="center" class="kwon-td1">${ bs.bsDate }</td>
 			<td align="center" class="kwon-td1">${ bs.bsState }</td>
