@@ -91,6 +91,7 @@ public class BookShareController {
 		response.setContentType("application/json; charset=UTF-8");
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
 		gson.toJson(rList,response.getWriter());
 		
 	}

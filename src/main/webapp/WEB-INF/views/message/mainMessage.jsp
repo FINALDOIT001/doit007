@@ -15,9 +15,9 @@
 		/* var strWidth = $('#container').outerWidth() + (window.outerWidth - window.innerWidth);
 		var strHeight = $('#container').outerHeight() + (window.outerHeight - window.innerHeight); */
 		
-		$(window).on('load',function(){
+		/* $(window).on('load',function(){
 			window.resizeTo(700, 700);
-		});
+		}); */
 		
 	</script>
 	

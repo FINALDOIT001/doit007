@@ -66,7 +66,51 @@
                   			${ b.b_title }
                   		</c:if> --%>
                   	</td>
-                  	<td align="center">${ b.b_writer }</td>
+                  	
+                  	<c:choose>
+                  		<c:when test="${ b.b_writer eq sessionScope.loginUser.mId }">
+                  			<td align="center">
+                  				${ b.b_writer }
+                  			</td>
+                  		</c:when>
+                  		<c:otherwise>
+
+		                  	<td align="center">
+		                  	
+		                  	<ul>
+		                  	<li class="nav-item dropdown no-arrow mx-1">
+		                  		<!-- <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+		                  			<span>${ b.b_writer }</span>
+		                  		<!-- </a> -->
+		                  		<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+								<h6 class="dropdown-header">
+									${ b.b_writer }
+								</h6>
+								<a class="dropdown-item d-flex align-items-center" href="newMS.ms?recipientID=${ b.b_writer }" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+								<div class="mr-3"></div>
+								<div>
+									<i class="fas fa-envelope fa-fw"></i>
+								   <span class="font-weight-bold">쪽지보내기</span>
+								</div>
+								</a>
+								
+								<a id="reportAtag" class="dropdown-item d-flex align-items-center" href="report.rp?rpUserID=${b.b_writer}" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+								<div class="mr-3"></div>
+								<div>
+									<i class="fas fa-user-alt-slash"></i>
+								   <span class="font-weight-bold">신고하기</span>
+								</div>
+								</a>
+								
+		                  	</li>
+		                  	</ul>
+							
+		                  	</td>
+		                  	
+                  		</c:otherwise>
+                  	</c:choose>
+                  	
+                  	
                   	<td align="center">${ b.b_modifydate }</td> <!-- 날짜 다시 봐바 -->
                   	<td align="center">${ b.b_count }</td>
                   <%-- 	<td align="center">
@@ -118,7 +162,7 @@
 						<c:url var="after" value="fblist.go">
 							<c:param name="currentPage" value="${ pi_h.currentPage + 1 }"/>
 						</c:url> 
-						<a href="${ after }">[다음]</a>
+						<a href="${ after }">next</a>
 					</c:if>
 					</td>
 				</tr>

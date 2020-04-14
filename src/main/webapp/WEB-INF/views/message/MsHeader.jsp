@@ -48,5 +48,12 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="${contextPath}/resources/js/MSbootstrap.min_inseok.js"></script>
+	
+	<script>
+		$(window).on('load',function(){
+			window.resizeTo(850, 700);
+		});
+	</script>
+	
 </body>
 </html>

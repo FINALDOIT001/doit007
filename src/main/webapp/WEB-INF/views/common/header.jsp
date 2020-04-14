@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
- 
+
 <head>
    <!-- Required meta tags -->
    <meta charset="utf-8">
@@ -110,7 +110,7 @@
                       <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <i class="fas fa-envelope fa-fw" id="goMS"></i>
-                           <span class="badge badge-danger badge-counter">${ listsize }+</span>
+                           <span class="badge badge-danger badge-counter" id="msListSize"></span>
                         </a>
                         
                         
@@ -118,67 +118,45 @@
                            <h6 class="dropdown-header">
                            쪽지
                            </h6>
-                           
-                           
-                           <c:choose>
-                           	<c:when test="${ listsize > 4 }">
-                           		
-                           		<c:forEach var="ms" begin="0" end="3" items="${ list }">
-                           			
-       			                   <a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3"></div>
-			                           <div>
-			                              <div class="small text-gray-500">${ ms.msDate1 }</div>
-			                              <span class="font-weight-bold">${ ms.msContext }</span>
-			                           </div>
-		                           </a>
-                           			
-                           		</c:forEach>
-                           		
-                           	</c:when>
-                           	
-                           	<c:when test="${ listsize == 0 }">
 
-       			                   <a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3"></div>
-			                           <div>
-			                              <div class="small text-gray-500"></div>
-			                              <span class="font-weight-bold">받으신 메시지가 없습니다.</span>
-			                           </div>
-		                           </a>
-
-                           	</c:when>
-                           	
-                           	<c:otherwise>
-                           		
-                           		<c:forEach var="ms" begin="0" end="${ listsize }" items="${ list }">
                            			
-									<a class="dropdown-item d-flex align-items-center" href="#">
-										<div class="mr-3"></div>
-										<div>
-										   <div class="small text-gray-500">${ ms.msDate1 }</div>
-										   <span class="font-weight-bold">${ ms.msContext }</span>
-										</div>
-									</a>
-                           			
-                           		</c:forEach>
+							<a id="msAtag0" class="dropdown-item d-flex align-items-center" href="#" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+							
+								<div class="mr-3"></div>
+								<div>
+								   <div class="small text-gray-500" id="msDate0"></div>
+								   <span class="font-weight-bold" id="msContext0"></span>
+								</div>
+							</a>
+							
+							<a id="msAtag1" class="dropdown-item d-flex align-items-center" href="#" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+							
+								<div class="mr-3"></div>
+								<div>
+								   <div class="small text-gray-500" id="msDate1"></div>
+								   <span class="font-weight-bold" id="msContext1"></span>
+								</div>
+							</a>
+							
+							<a id="msAtag2" class="dropdown-item d-flex align-items-center" href="#" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+							
+								<div class="mr-3"></div>
+								<div>
+								   <div class="small text-gray-500" id="msDate2"></div>
+								   <span class="font-weight-bold" id="msContext2"></span>
+								</div>
+							</a>
+							
+							<a id="msAtag3" class="dropdown-item d-flex align-items-center" href="#" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+							
+								<div class="mr-3"></div>
+								<div>
+								   <div class="small text-gray-500" id="msDate3"></div>
+								   <span class="font-weight-bold" id="msContext3"></span>
+								</div>
+							</a>
+                           
 
-                           	</c:otherwise>
-                           </c:choose>
-                           
-                           
-                           <!-- <a class="dropdown-item d-flex align-items-center" href="#">
-                           <div class="mr-3"></div>
-                           <div>
-                              <div class="small text-gray-500">December 12, 2019</div>
-                              <span class="font-weight-bold">권샌세 믿고있었다고!</span>
-                           </div>
-                           </a> -->
-                           
-                           
-                           
-                           
-                           
                         </div>
                      </li>
                             
@@ -246,8 +224,62 @@
    <script>
       /* 쪽지 새창 띄우기 */
       $('#goMS').click(function(){
-         window.open("new.ms", "MESSAGE", "width=900, height=900, scrollbars=no;")
+         window.open("ListPage.ms?userID="+"${ sessionScope.loginUser.mId }"+"&Type=New", "MESSAGE", "width=700, height=700, scrollbars=no;")
       });
+      
+      $(function(){
+    	  
+    	  var userID = "${ sessionScope.loginUser.mId }";
+    	  
+    	  $.ajax({
+    		  url:"getHeadMS.ms",
+    		  data:{
+    			  userID:userID
+    		  },type:"post",
+    		  dataType:"json",
+    		  success:function(data){
+    			  
+    			  console.log(data);
+    			  
+    			  var datasize = data.length;
+    			  $('#msListSize').text(datasize + "+");
+    			  
+    			  if(datasize == 0){
+    				  
+    				  $('#msListSize').text("");
+    				  
+    				  $('#msContext0').text("메세지가 없습니다.");
+    				  
+    			  }else if(datasize > 4){
+    				  datasize = 4;
+    			  }
+    			  
+    			  var size = datasize;
+
+    			  for(var i=0; i<size; i++ ){
+    				  
+    				  var aID = "#msAtag" + i;
+    				  var dID = "#msDate" + i;
+    				  var cID = "#msContext" + i;
+    				  
+    				  var userID = "${ sessionScope.loginUser.mId }";
+						
+    				  $(aID).attr('href',"msDetailView.ms?ms_No="+data[i].msNo+"&ms_loginId="+userID+"&Type=New");
+    				  $(dID).text(data[i].msDate1);
+    				  $(cID).text(data[i].msContext);
+    			  }
+    			  
+    		  },error:function(request, status, errorData){
+					alert("error code : " + request.status + "\n"
+							+ "message : " + request.responseText
+							+ "error : " + errorData);
+				}
+    		  
+    	  });
+    	  
+      });
+      
+      
       
    </script>
    
