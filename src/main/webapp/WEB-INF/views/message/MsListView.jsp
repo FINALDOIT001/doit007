@@ -5,21 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BOX</title>
+<title>NEW BOX</title>
 <style>
-	#atag:link{
+	.atag:link{
 		text-decoration: none;
 		color: #000000;
 	}
-	#atag:visited:{
+	.atag:visited:{
+		text-decoration: none;
+		color: #bbbbbb;
+	}
+	.atag:active{
 		text-decoration: none;
 		color: #000000;
 	}
-	#atag:active{
-		text-decoration: none;
-		color: #000000;
-	}
-	#atag:hover{
+	.atag:hover{
 		text-decoration: none;
 		color: #ff3334;
 	}
@@ -52,7 +52,19 @@
 <body>
 
 	<jsp:include page="../message/MsHeader.jsp" />
-
+	
+	<c:choose>
+		<c:when test="${ Type eq 'New' }">
+			<h2 style="margin-left:10%;">New</h2>
+		</c:when>
+		<c:when test="${ Type eq 'Receive' }">
+			<h2 style="margin-left:10%;">Receive</h2>
+		</c:when>
+		<c:otherwise>
+			<h2 style="margin-left:10%;">Send</h2>
+		</c:otherwise>
+	</c:choose>
+	
 	<div class="button-group-area mt-40" style="margin-left:12%;">
 		<a id="deleteMS" href="#" class="genric-btn primary small">DELETE</a>
 	</div>
@@ -86,8 +98,22 @@
 				
 				<c:url var="msDetailView" value="msDetailView.ms">
 					<c:param name="ms_No" value="${ msList.msNo }"></c:param>
+					<c:param name="Type" value="${ Type }"></c:param>
+					<c:param name="ms_loginId" value="${ sessionScope.loginUser.mId }"></c:param>
 				</c:url>
-				<td align="center" style="text-align: center;"><a id="atag" href="${ msDetailView }">${ msList.msTitle }</a></td>
+				
+				<c:choose>
+					<c:when test="${ msList.msCheck eq 'N' }">
+						<td align="center" style="text-align: center;"><a class="atag" href="${ msDetailView }">
+						<i class="far fa-envelope"></i>
+						&nbsp;&nbsp;${ msList.msTitle }</a></td>
+					</c:when>
+					<c:otherwise>
+						<td align="center" style="text-align: center;"><a class="atag" style="color: #bbbbbb;" href="${ msDetailView }">
+						<i class="far fa-envelope-open"></i>
+						&nbsp;&nbsp;${ msList.msTitle }</a></td>
+					</c:otherwise>
+				</c:choose>
 				
 				<td align="center" style="text-align: center;">${ msList.msSender }</td>
 				
@@ -100,8 +126,8 @@
 		
 	</table>
 		
-
-	
+	<!-- font awesome --><!-- font awesome -->
+	<script src="https://kit.fontawesome.com/849a01517e.js" crossorigin="anonymous"></script>
 	<script src="${contextPath}/resources/js/datatables.js"></script>
 	<script src="${contextPath}/resources/js/contact.js"></script>
 	<script>
@@ -116,7 +142,7 @@
 		$('#table2').dataTable( {
 			lengthChange: false,
 			ordering: false,
-			searching: false,
+			searching: true,
 			info: false,
 			serverSide: false,
 	        "language": {
@@ -189,7 +215,8 @@
 						},type:"post",
 						success:function(data){
 							
-							console.log(data);
+							alert(data+"건의 메세지가 삭제되었습니다.");
+							location.reload();
 							
 						},error:function(request, status, errorData){
 							alert("error code : " + request.status + "\n"
@@ -201,7 +228,7 @@
 				}
 				
 			}else{
-				alert("삭제할 메시지를 선택하세요.");
+				alert("삭제할 메세지를 선택하세요.");
 			}
 			
 		});

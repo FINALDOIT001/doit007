@@ -34,6 +34,23 @@ public interface NoticeService {
 	 */
 	Notice selectNotice(int n_no);
 
+	/**
+	 * 공지사항 수정
+	 * @param n_no
+	 * @return
+	 */
+	Notice selectUpdateNotice(int n_no);
+
+	int updateNotice(Notice n);
+
+	/**
+	 * 공지사항 삭제
+	 * @param n_no
+	 * @return
+	 */
+	int deleteNotice(int n_no);
+	
+
 	
 
 }

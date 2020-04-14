@@ -11,6 +11,7 @@ import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.dao.myPageDao;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
+import com.kh.doit.member.model.vo.TestHodu;
 
 @Service("mpService")
 public class myPageServiceImpl implements myPageService{
@@ -54,6 +55,21 @@ public class myPageServiceImpl implements myPageService{
 	@Override
 	public ArrayList<Hodu> selecthList(String mId) {
 		return mpDao.selecthList(mId);
+	}
+
+//	@Override
+//	public int updatemho(int hmNo) {
+//		return mpDao.updateho(hmNo);
+//	}
+
+	@Override
+	public int updatemho(TestHodu th) {
+		return mpDao.updatemho(th);
+	}
+
+	@Override
+	public Member selectHodunum(int mno) {
+		return mpDao.selectHodunum(mno);
 	}
 
 

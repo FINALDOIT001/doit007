@@ -16,6 +16,9 @@
 <body>
 	<jsp:include page="../common/header.jsp"/>
 	
+	<!-- include summernote js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
+	
    <!--::breadcrumb part start::-->
    <section class="breadcrumb blog_bg_notice">
       <div class="container">
@@ -77,9 +80,7 @@
       	   <tr>
            <td colspan="6">                              
 		   <!-- 본문 내용 -->	
-		   	<textarea name="" class="notice_content" style="height:450px;" readonly>   
-${ n.n_content }          
-            </textarea>
+		   <input type="textarea" class="" id="summernote" name="">
            </td>
         </tr>
        </table>
@@ -113,6 +114,32 @@ ${ n.n_content }
 	
 
 	<jsp:include page="../common/footer.jsp"/>
+	
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+
+	<script>
+      $('#summernote').summernote({
+         
+         tabsize: 5,
+         height: 300,
+         toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+         ]
+      });
+      
+      var markupStr = '${n.n_content}';
+
+		$('#summernote').summernote("code", markupStr);
+		$('#summernote').summernote('disable');
+		$('#summernote').summernote().css('display','none');
+    
+	</script>
+	
 
 </body>
 </html>

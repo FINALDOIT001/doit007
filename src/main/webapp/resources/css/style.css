@@ -616,7 +616,7 @@ ul {
   display: flex;
   align-items: center;
   position: relative;
-  background-image: url(../img/banner_overlay.png);
+  background-image: url(../img/main1.jpg) !important;
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 1;
@@ -4125,6 +4125,14 @@ h1, h2, h3, h4, h5, h6 {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.blog_bg2 {
+  background-image: url("../img/blog_bg2.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
 /* line 5, ../../01 cl html template/New folder/May 2019/178 Real Estate/Real Estate Html/sass/_breadcrumb.scss */
 .breadcrumb {

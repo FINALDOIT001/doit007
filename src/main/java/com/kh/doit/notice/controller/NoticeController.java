@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,7 +84,7 @@ public class NoticeController {
 		}
 	}
 	
-	@RequestMapping("nDetail.go")
+	@RequestMapping("nDetail.ev")
 	public ModelAndView noticeDetail(ModelAndView mv,int n_no,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage) {
 		Notice n = nService.selectNotice(n_no);
 		
@@ -94,6 +96,57 @@ public class NoticeController {
 		return mv;
 	}
 	
+	@RequestMapping("nUpdateForm.go")
+	public ModelAndView noticeUpdate(ModelAndView mv,int n_no) {
+		mv.addObject("n",nService.selectUpdateNotice(n_no)).setViewName("board/notice_upwrite");
+		
+		return mv;
+	}
+	
+	@RequestMapping("nUpdate.go")
+	public ModelAndView updateNotice(ModelAndView mv,@ModelAttribute Notice n,HttpServletRequest request,
+									@RequestParam(value="reloadFile",required=false) MultipartFile file) {
+		if(file != null && !file.isEmpty()) {
+			if(n.getN_re_filename() != null) {
+				deleteFile(n.getN_re_filename(),request);
+			}
+			
+			String n_re_filename = saveFile(file, request);
+			
+			if(n_re_filename != null) {
+				n.setN_org_filename(file.getOriginalFilename());
+				n.setN_re_filename(n_re_filename);
+			}
+		}
+		
+		int result = nService.updateNotice(n);
+		
+		if(result > 0) {
+			mv.addObject("n_no",n.getN_no()).setViewName("redirect:nDetail.ev");
+		}else {
+			mv.addObject("msg","게시글 수정 실패");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("ndelete.go")
+	public String noticeDelete(Model model,int n_no,HttpServletRequest request) {
+		Notice n = nService.selectUpdateNotice(n_no);
+		
+		if(n.getN_re_filename() != null) {
+			deleteFile(n.getN_re_filename(),request);
+		}
+		
+		int result = nService.deleteNotice(n_no);
+		
+		if(result > 0) {
+			return "redirect:nlist.go";
+		}else {
+			model.addAttribute("msg","게시글 삭제 실패");
+			return "common/errorPage";
+		}
+	}
 	
 	
 	/**
@@ -132,5 +185,21 @@ public class NoticeController {
 			
 			return n_re_filename;
 		}
+	
+	/**
+	 * 파일 삭제
+	 * @param fileName
+	 * @param request
+	 */
+	public void deleteFile(String fileName,HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\buploadFiles";
+		
+		File f = new File(savePath + "\\" + fileName);
+		
+		if(f.exists()) {
+			f.delete();
+		}
+	}
 
 }

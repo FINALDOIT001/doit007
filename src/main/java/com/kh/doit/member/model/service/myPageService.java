@@ -6,6 +6,7 @@ import com.kh.doit.board.model.vo.Board;
 import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
+import com.kh.doit.member.model.vo.TestHodu;
 
 public interface myPageService {
 
@@ -63,6 +64,29 @@ public interface myPageService {
 	 * @return
 	 */
 	ArrayList<Hodu> selecthList(String mId);
+
+	/**
+	 * 마일리지(호두) 충전 시 member테이블의 mhodu컬럼 업데이트하기
+	 * 2020-04-13 김혜림
+	 * @param hmNo
+	 * @return
+	 */
+	// int updatemho(int hmNo);
+
+	/**
+	 * 호두 충전 Kwon
+	 * @param th
+	 * @return
+	 */
+	int updatemho(TestHodu th);
+
+	/**
+	 * 호두 갯수 보여주기
+	 * 2020-04-13 김혜림
+	 * @param mno
+	 * @return
+	 */
+	Member selectHodunum(int mno);
 
 
 

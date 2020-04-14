@@ -78,10 +78,11 @@
                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Community
                            </a>
-                           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="navbarDropdown">
+                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                               <a class="dropdown-item" href="nlist.go">Notice</a>
                               <a class="dropdown-item" href="fblist.go">Board</a>
                               <a class="dropdown-item" href="moveBS.go">Book-Share</a>
+                              <a class="dropdown-item" href="qna.go">Q&A</a>
                            </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -103,12 +104,13 @@
                             </li>
                             <li>
                          </c:if>
+                         
                          <c:if test="${ !empty sessionScope.loginUser && (sessionScope.loginUser.mno != 0) }">
                          
                       <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <i class="fas fa-envelope fa-fw" id="goMS"></i>
-                           <span class="badge badge-danger badge-counter">4+</span>
+                           <span class="badge badge-danger badge-counter">${ listsize }+</span>
                         </a>
                         
                         
@@ -117,43 +119,66 @@
                            쪽지
                            </h6>
                            
-                           <a class="dropdown-item d-flex align-items-center" href="#">
-                           <div class="mr-3">
-                              <div class="icon-circle bg-primary">
-                                 <i class="fas fa-file-alt text-white"></i>
-                              </div>
-                           </div>
+                           
+                           <c:choose>
+                           	<c:when test="${ listsize > 4 }">
+                           		
+                           		<c:forEach var="ms" begin="0" end="3" items="${ list }">
+                           			
+       			                   <a class="dropdown-item d-flex align-items-center" href="#">
+									<div class="mr-3"></div>
+			                           <div>
+			                              <div class="small text-gray-500">${ ms.msDate1 }</div>
+			                              <span class="font-weight-bold">${ ms.msContext }</span>
+			                           </div>
+		                           </a>
+                           			
+                           		</c:forEach>
+                           		
+                           	</c:when>
+                           	
+                           	<c:when test="${ listsize == 0 }">
+
+       			                   <a class="dropdown-item d-flex align-items-center" href="#">
+									<div class="mr-3"></div>
+			                           <div>
+			                              <div class="small text-gray-500"></div>
+			                              <span class="font-weight-bold">받으신 메시지가 없습니다.</span>
+			                           </div>
+		                           </a>
+
+                           	</c:when>
+                           	
+                           	<c:otherwise>
+                           		
+                           		<c:forEach var="ms" begin="0" end="${ listsize }" items="${ list }">
+                           			
+									<a class="dropdown-item d-flex align-items-center" href="#">
+										<div class="mr-3"></div>
+										<div>
+										   <div class="small text-gray-500">${ ms.msDate1 }</div>
+										   <span class="font-weight-bold">${ ms.msContext }</span>
+										</div>
+									</a>
+                           			
+                           		</c:forEach>
+
+                           	</c:otherwise>
+                           </c:choose>
+                           
+                           
+                           <!-- <a class="dropdown-item d-flex align-items-center" href="#">
+                           <div class="mr-3"></div>
                            <div>
                               <div class="small text-gray-500">December 12, 2019</div>
                               <span class="font-weight-bold">권샌세 믿고있었다고!</span>
                            </div>
-                           </a>
+                           </a> -->
                            
-                           <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="mr-3">
-                                 <div class="icon-circle bg-success">
-                                    <i class="fas fa-donate text-white"></i>
-                                 </div>
-                              </div>
-                              <div>
-                                 <div class="small text-gray-500">December 7, 2019</div>
-                                 믿음 천국 불신 지옥
-                              </div>
-                           </a>
                            
-                           <a class="dropdown-item d-flex align-items-center" href="#">
-                              <div class="mr-3">
-                                 <div class="icon-circle bg-warning">
-                                    <i class="fas fa-exclamation-triangle text-white"></i>
-                                 </div>
-                              </div>
-                              <div>
-                              <div class="small text-gray-500">December 2, 2019</div>
-                                 파이널 가즈아
-                              </div>
-                           </a>
                            
-                           <a class="dropdown-item text-center small text-gray-500" href="#">Show All Messages</a>
+                           
+                           
                         </div>
                      </li>
                             

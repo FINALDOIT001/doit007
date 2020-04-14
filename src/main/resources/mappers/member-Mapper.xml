@@ -16,6 +16,7 @@
    		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
    		<result property="mEnrolldate" column="M_ENROLL_DATE" />
    		<result property="mUpdatedate" column="M_UPDATE_DATE" />
+   		<result property="mhodu" column="M_HODU" />
    		<result property="mUserroles" column="M_USERROLES" />
    		<result property="mStatus" column="M_STATUS" />
     </resultMap>
@@ -32,6 +33,8 @@
     	</association>
     </resultMap>
     
+
+    
     
     <select id="idCheck" parameterType="string" resultType="_int">
     	SELECT COUNT(*)
@@ -43,7 +46,7 @@
     <insert id="insertMember" parameterType="Member">
     	INSERT INTO MEMBER 
     	VALUES (SEQ_MNO.NEXTVAL,#{mId}, #{mPwd}, #{mName}, #{mAddr}, #{mPhone}, 
-    			#{mEmail}, default, default, SYSDATE, SYSDATE, default, default)
+    			#{mEmail}, default, default, SYSDATE, SYSDATE, default, default, default)
     </insert>
     
     <select id="memberLogin" parameterType="Member" resultMap="memberResultSet">
@@ -83,6 +86,28 @@
     	FROM HODU_TABLE H JOIN MEMBER M
     	ON H_MID = M.M_ID
     	WHERE H.H_MID = #{mId}
+    	ORDER BY 1 DESC
     </select>
     
+    <!-- <update id="updatemhodu" parameterType="_int" >
+    	UPDATE MEMBER
+		SET M_HODU = (SELECT SUM(H.HODU)
+		FROM HODU_TABLE H JOIN MEMBER M
+		ON M.M_NO = H.H_MNO
+		WHERE M.M_NO = #{hmNo})
+		WHERE M_NO = #{hmNo};
+    </update> -->
+    
+    <update id="updateHoduTest">
+    	UPDATE 	MEMBER
+   		SET		M_HODU = M_HODU + #{hoduNum}
+   		WHERE	1=1
+   		AND		M_NO=#{hmNo}
+    </update>
+    
+    <select id="selectHodunum" resultMap="memberResultSet">
+    	SELECT *
+    	FROM MEMBER
+    	WHERE M_NO=#{mno}
+    </select>
 </mapper>

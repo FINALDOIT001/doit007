@@ -62,4 +62,47 @@ public interface MessageService {
 	  */
 	int messageDelete(String[] delList);
 
+	/**
+	  * @Method Name : selectReceiveMSList
+	  * @작성일 : Apr 10, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 받은 메시지 보관함
+	  * @param userID
+	  * @return
+	  */
+	ArrayList<Message> selectReceiveMSList(String userID);
+
+	/**
+	  * @Method Name : selectSendMSList
+	  * @작성일 : Apr 10, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 보낸 메시지 보관함
+	  * @param userID
+	  * @return
+	  */
+	ArrayList<Message> selectSendMSList(String userID);
+
+	/**
+	  * @Method Name : msDetailView
+	  * @작성일 : Apr 10, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 읽을 메시지 불러오기
+	  * @param ms_No
+	  * @return
+	  */
+	Message msDetailView(int ms_No);
+
+	/**
+	  * @Method Name : msReadCheck
+	  * @작성일 : Apr 10, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 로그인된 사람과 메시지 보낸사람이 같지 않을때 읽은 정보처리
+	  * @param ms_No
+	  */
+	int msReadCheck(int ms_No);
+
 }

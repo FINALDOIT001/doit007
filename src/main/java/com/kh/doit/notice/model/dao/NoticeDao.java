@@ -40,4 +40,12 @@ public class NoticeDao {
 		return sqlsession.selectOne("boardMapper.selectNotice",n_no);
 	}
 
+	public int updateNotice(Notice n) {
+		return sqlsession.update("boardMapper.updateNotice",n);
+	}
+
+	public int deleteNotice(int n_no) {
+		return sqlsession.update("boardMapper.deleteNotice",n_no);
+	}
+
 }

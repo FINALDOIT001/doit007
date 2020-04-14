@@ -23,7 +23,7 @@
 				<div class="col-lg-12">
 					<div class="section_tittle">
 						<h2>
-							<span>책을</span> 나눕시다
+							<span>질문</span> 아오 모르겠다
 						</h2>
 					</div>
 					<div>
@@ -56,7 +56,7 @@
 								</tr> -->
 								
 								
-		<c:forEach var="bs" items="${ bslist }">
+		<c:forEach var="bs" items="${ list }">
 		<tr class="kwon-tr1">
 			<td align="center" class="kwon-td1">${ bs.bsNo }</td>
 			<td align="center" class="kwon-td1">${ bs.bsCategory }</td>

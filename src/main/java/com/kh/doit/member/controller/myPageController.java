@@ -27,6 +27,7 @@ import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.service.myPageService;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
+import com.kh.doit.member.model.vo.TestHodu;
 
 @SessionAttributes("loginUser")
 
@@ -58,6 +59,7 @@ public class myPageController {
 		Member m = mpService.selectOne(mId);
 		ArrayList<Hodu> hlist = mpService.selecthList(mId);
 		
+		System.out.println("마이페이지 : " + m);
 		if(m != null) {
 			mv.addObject("m",m);
 			mv.addObject("hlist",hlist);
@@ -194,6 +196,18 @@ public class myPageController {
 		}
 	}
 	
+	/**
+	 * 호두 결제 페이지
+	 * 2020-04-13 김혜림
+	 * @param response
+	 * @param hodu
+	 * @param hPrice
+	 * @param hmNo
+	 * @param hmId
+	 * @param hoduNum
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	@RequestMapping("hpay.go")
 	public void hodupay(HttpServletResponse response,Hodu hodu,@RequestParam int hPrice, @RequestParam int hmNo,@RequestParam String hmId, @RequestParam int hoduNum) throws JsonIOException, IOException {
 		
@@ -203,7 +217,11 @@ public class myPageController {
 		hodu.sethPrice(hPrice); 
 		hodu.setHoduNum(hoduNum);
 		
+		TestHodu th = new TestHodu(hmNo, hoduNum);
+		
 		int result = mpService.inserthodu(hodu);
+		System.out.println(result);
+		int houpdate = mpService.updatemho(th);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		
@@ -214,7 +232,17 @@ public class myPageController {
 		}else {
 			gson.toJson(result,response.getWriter());
 		}
+	}
+	
+	@RequestMapping("hodunum.go")
+	public void hodumnum(HttpServletResponse response, @RequestParam(value="mno", required=false) int mno) throws JsonIOException, IOException {
+		Member m = mpService.selectHodunum(mno);
 		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().create();
+		
+		gson.toJson(m,response.getWriter());
 	}
 	
 	public String saveFile(MultipartFile file, HttpServletRequest request) {

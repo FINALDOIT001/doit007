@@ -55,7 +55,7 @@ public class EventController {
 		System.out.println("Servlet 이벤트 리스트 : " + list);
 		System.out.println("Servlet epi : " + epi);
 		
-		mv.addObject("list",list);
+		mv.addObject("elist",list);
 		mv.addObject("epi",epi);
 		mv.setViewName("event/eventList");
 		
