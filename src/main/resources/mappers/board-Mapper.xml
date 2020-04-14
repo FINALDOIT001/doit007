@@ -171,5 +171,68 @@
 	</select> 
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- Kwon Qna -->
+	<resultMap type="Qna" id="QnaResultSet">
+		<id property="qNo" column="Q_NO" />
+		<result property="qCategory" column="Q_CATEGORY"/>
+		<result property="qTitle" column="Q_TITLE"/>
+		<result property="qCon" column="Q_CON"/>
+		<result property="qOriginalFileName" column="Q_ORIGINAL_FILENAME"/>
+		<result property="qRenameFileName" column="Q_RENAME_FILENAME"/>
+		<result property="qWriter" column="Q_WRITER"/>
+		<result property="qWriterNo" column="Q_WRITER_NO"/>
+		<result property="qState" column="Q_STATE"/>
+		<result property="qDate" column="Q_DATE"/>
+		<result property="qType" column="Q_TYPE"/>
+		<result property="qStatus" column="Q_STATUS"/>
+	</resultMap>
+	
+	<resultMap type="QnaReply" id="QnaReplyResultSet">
+		<id property="qcNo" column="QC_NO"/>
+		<result property="qcqNo" column="QC_Q_NO"/>
+		<result property="qcWriter" column="QC_WRITER"/>
+		<result property="qcWriterNo" column="QC_WRITER_NO"/>
+		<result property="qcDate" column="QC_DATE"/>
+		<result property="qcCon" column="QC_CON"/>
+		<result property="qcStatus" column="QC_STATUS"/>
+	</resultMap>
+	
+	<select id="selectQnaList" resultMap="QnaResultSet">
+		SELECT	*
+		FROM	QNA
+		WHERE	1=1
+		AND		Q_STATUS='Y'
+	</select>
+	
+	<select id="selectQna" resultMap="QnaResultSet">
+		SELECT	*
+		FROM	QNA
+		WHERE	1=1
+		AND		Q_NO=#{qno}
+		AND		Q_STATUS='Y'
+	</select>
+	
 
 </mapper>
