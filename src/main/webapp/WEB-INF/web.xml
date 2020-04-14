@@ -35,6 +35,7 @@
 		<url-pattern>*.do</url-pattern>
 		<url-pattern>*.ms</url-pattern>
 		<url-pattern>*.ad</url-pattern>
+		<url-pattern>*.rp</url-pattern>
 	</servlet-mapping>
 	
 	

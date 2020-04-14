@@ -39,7 +39,6 @@
 				<td width="80px" height="50px">${ m.msDate2 }</td>
 			</c:otherwise>
 			</c:choose>
-
 		</tr>
 	
 		<tr>

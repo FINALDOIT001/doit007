@@ -104,6 +104,11 @@ $('#kwon-inst-btn01').click(function() {
   location.href="bsInsert.go";
 });
 
+$('#kwon-inst-btn06').click(function() {
+	  location.href="qnaInsert.go";
+});
+
+
 
 
 /*$('#kwon-btn02').click(function() {
