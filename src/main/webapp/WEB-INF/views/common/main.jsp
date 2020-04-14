@@ -56,7 +56,7 @@
 						<p>많은 개발자들이 Do it을 통해 발전해나가고 있습니다.<br>
 						     다양한 study에 Do it을 활용하여 참여해보세요.
 						</p>
-						<a href="#" class="btn_1">learn More</a>
+						<a href="sgList.go" class="btn_1">learn More</a>
 						<div class="about_part_counter">
 							<div class="single_counter">
 								<span class="counter">120</span>
@@ -85,12 +85,12 @@
 				<div class="col-lg-12">
 					<div class="section_tittle">
 						<h2>
-							<span>TOP</span> &nbsp;&nbsp;Study 5
+							<span>TOP</span> &nbsp;&nbsp;Study
 						</h2>
 					</div>
 					<div class="portfolio-filter">
 						<h2>
-							Do it 의 <br> TOP 5 <span> STUDY</span>
+							Do it 의 <br> TOP 3 <span> STUDY</span>
 						</h2>
 						<ul class="nav nav-tabs" id="myTab" role="tablist">
 							<li><a class="active" id="Architecture-tab"
@@ -112,7 +112,7 @@
 							aria-labelledby="Architecture-tab">
 							<div class="col-lg-6 col-sm-12 col-md-6">
 								<div class="portfolio_box">
-									<a href="${contextPath}/resources/img/project-1.png" class="img-gal">
+									<a href="${contextPath}/resources/img/JAVA.png" class="img-gal">
 										<div class="single_portfolio">
 											<img class="img-fluid w-100" src="${contextPath}/resources/img/JAVA.png" alt="">
 										</div>
@@ -131,7 +131,7 @@
 									<div
 										class="col-lg-12 col-sm-6 col-md-12 single_portfolio_project">
 										<div class="portfolio_box">
-											<a href="${contextPath}/resources/img/project-2.png" class="img-gal">
+											<a href="${contextPath}/resources/img/JAVA2.jpg" class="img-gal">
 												<div class="single_portfolio">
 													<img class="img-fluid w-100" src="${contextPath}/resources/img/JAVA2.jpg" alt="">
 												</div>
@@ -148,7 +148,7 @@
 									<div
 										class="col-lg-12 col-sm-6 col-md-12 single_portfolio_project">
 										<div class="portfolio_box">
-											<a href="${contextPath}/resources/img/project-3.png" class="img-gal">
+											<a href="${contextPath}/resources/img/JAVA3.jpg" class="img-gal">
 												<div class="single_portfolio">
 													<img class="img-fluid w-100" src="${contextPath}/resources/img/JAVA3.jpg" alt="">
 												</div>
@@ -170,7 +170,7 @@
 							id="Exterior" role="tabpanel" aria-labelledby="Exterior-tab">
 							<div class="col-lg-6 col-sm-12 col-md-6">
 								<div class="portfolio_box">
-									<a href="${contextPath}/resources/img/project-3.png" class="img-gal">
+									<a href="${contextPath}/resources/img/database.jpg" class="img-gal">
 										<div class="single_portfolio">
 											<img class="img-fluid w-100" src="${contextPath}/resources/img/database.jpg" alt="">
 										</div>
@@ -189,7 +189,7 @@
 									<div
 										class="col-lg-12 col-sm-6 col-md-12 single_portfolio_project">
 										<div class="portfolio_box">
-											<a href="${contextPath}/resources/img/project-2.png" class="img-gal">
+											<a href="${contextPath}/resources/img/database2.jpeg" class="img-gal">
 												<div class="single_portfolio">
 													<img class="img-fluid w-100" src="${contextPath}/resources/img/database2.jpeg" alt="">
 												</div>
@@ -206,7 +206,7 @@
 									<div
 										class="col-lg-12 col-sm-6 col-md-12 single_portfolio_project">
 										<div class="portfolio_box">
-											<a href="${contextPath}/resources/img/project-1.png" class="img-gal">
+											<a href="${contextPath}/resources/img/database3.jpg" class="img-gal">
 												<div class="single_portfolio">
 													<img class="img-fluid w-100" src="${contextPath}/resources/img/database3.jpg" alt="">
 												</div>
@@ -228,7 +228,7 @@
 							id="Landing" role="tabpanel" aria-labelledby="Landing-tab">
 							<div class="col-lg-6 col-sm-12 col-md-6">
 								<div class="portfolio_box">
-									<a href="${contextPath}/resources/img/project-1.png" class="img-gal">
+									<a href="${contextPath}/resources/img/javascript.png" class="img-gal">
 										<div class="single_portfolio">
 											<img class="img-fluid w-100" src="${contextPath}/resources/img/javascript.png" alt="">
 										</div>
@@ -247,7 +247,7 @@
 									<div
 										class="col-lg-12 col-sm-6 col-md-12 single_portfolio_project">
 										<div class="portfolio_box">
-											<a href="${contextPath}/resources/img/project-4.png" class="img-gal">
+											<a href="${contextPath}/resources/img/jqeury.jpg" class="img-gal">
 												<div class="single_portfolio">
 													<img class="img-fluid w-100" src="${contextPath}/resources/img/jqeury.jpg" alt="">
 												</div>
@@ -264,7 +264,7 @@
 									<div
 										class="col-lg-12 col-sm-6 col-md-12 single_portfolio_project">
 										<div class="portfolio_box">
-											<a href="${contextPath}/resources/img/project-3.png" class="img-gal">
+											<a href="${contextPath}/resources/img/jqeury2.jpg" class="img-gal">
 												<div class="single_portfolio">
 													<img class="img-fluid w-100" src="${contextPath}/resources/img/jqeury2.jpg" alt="">
 												</div>
@@ -324,7 +324,7 @@
 							<div class="col-lg-6 col-sm-6">
 								<div class="single_service_text">
 									<img src="${contextPath}/resources/img/icon/service_4.svg" alt="">
-									<a href="#"><h4>Q&A</h4></a>
+									<a href="qna.go"><h4>Q&A</h4></a>
 									<p style="margin-top:30px;">궁금한 것이 있다면 <br>질문하세요!<br>답변해드립니다.</p>
 								</div>
 							</div>
@@ -337,7 +337,7 @@
 							Do it offers you a variety of <span> Services.</span>
 						</h2>
 						<p>다양한 정보와 서비스를 제공합니다. <br>자유롭게 말할 수 있고, <br>책을 나누고, <br>질문과 답변을 할 수 있습니다.</p>
-						<a href="service.html" class="btn_1">learn more</a>
+						<a href="fblist.go" class="btn_1">learn more</a>
 					</div>
 				</div>
 			</div>
@@ -345,7 +345,7 @@
 	</section>
 	<!--::service part end::-->
 
-	<!--::team part end::-->
+	<%-- <!--::team part end::-->
 	<section class="project_gallery section-padding">
 		<div class="container-fluid">
 			<div class="row">
@@ -434,10 +434,10 @@
 			</div>
 		</div>
 	</section>
-	<!--::team part end::-->
+	<!--::team part end::--> --%>
 
 	<!--::blog_part start::-->
-	<div class="blog_part padding_bottom">
+	<div class="blog_part padding_bottom" style="margin-top:200px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-7 col-lg-5">
@@ -479,7 +479,7 @@
 										<a href="#">Event</a> / February 14, 2020
 									</p>
 									<a href="blog.html">
-										<h5 class="mt-0">[우리금융그룹] 2020 『디노랩』모집 공고</h5>
+										<h5 class="mt-0">[우리금융그룹] 2020 『디노랩』<br>모집 공고</h5>
 									</a>
 									<ul class="list-unstyled">
 										<li><a href=""> <span class="ti-time"></span>
@@ -497,7 +497,7 @@
 										<a href="#">Event</a> / June 29, 2020
 									</p>
 									<a href="blog.html">
-										<h5 class="mt-0">GIGDC2020 글로벌 인디 게임 제작 경진대회</h5>
+										<h5 class="mt-0">GIGDC2020 글로벌 인디 게임 <br>제작 경진대회</h5>
 									</a>
 									<ul class="list-unstyled">
 										<li><a href=""> <span class="ti-time"></span>
