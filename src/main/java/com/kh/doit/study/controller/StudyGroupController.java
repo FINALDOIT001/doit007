@@ -1,11 +1,14 @@
 package com.kh.doit.study.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.common.paginationJung;
 import com.kh.doit.study.model.service.StudyGroupService;
+import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
@@ -328,5 +335,16 @@ public class StudyGroupController {
 			return "common/errorPage";
 		}
 	}
+	@RequestMapping("dailyStudyList.go")
+	public void getdailyStudyList(HttpServletResponse response, int sgNo) throws JsonIOException, IOException {
+		ArrayList<DailyStudy> dsList = sgService.sgDailySlist(sgNo);
+		System.out.println(dsList);
+		response.setContentType("application/json; charset=UTF-8");
+		
+		Gson gson = new GsonBuilder().create();
+		
+		gson.toJson(dsList,response.getWriter());
+		
 	
+}
 }

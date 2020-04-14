@@ -31,9 +31,6 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
-	@Autowired
-	private MessageService msService;
-	
 	// 암호화 처리 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -112,16 +109,8 @@ public class MemberController {
 		System.out.println(loginUser);
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getmPwd(), loginUser.getmPwd())) {
-			
-			// 메시지관련 정보 받아서 뿌리기
-			String userId = loginUser.getmId();
-			ArrayList<Message> list = msService.selectNewMSList(userId);
-			
-			System.out.println(list);
-			
+
 			mv.addObject("loginUser", loginUser);
-			mv.addObject("list", list);
-			mv.addObject("listsize", list.size());
 			mv.setViewName("common/main");
 
 		}else {
@@ -152,7 +141,7 @@ public class MemberController {
 		}
 	
 		@RequestMapping("join.me")
-		public ModelAndView insertMember(Member m, ModelAndView mv, @RequestParam(value="phone1", required=false) String phone1,
+		public ModelAndView insertMember(@ModelAttribute Member m, ModelAndView mv, @RequestParam(value="phone1", required=false) String phone1,
 																@RequestParam(value="phone2", required=false) String phone2,
 																@RequestParam(value="phone3", required=false) String phone3,
 																@RequestParam(value="email",required=false) String email,
@@ -184,6 +173,8 @@ public class MemberController {
 			
 			if(result > 0) {
 				// 회원가입 성공 했을 때 로그인으로 보내주기
+				Member loginUser = mService.memberLogin(m);
+				mv.addObject("loginUser", loginUser);
 				mv.setViewName("redirect:index.jsp");
 			}else {
 				mv.addObject("msg","회원가입 실패!");

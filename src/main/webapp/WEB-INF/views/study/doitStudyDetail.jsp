@@ -73,7 +73,13 @@
 
 
 
+
+
+
  
+
+
+
 
 
 
@@ -81,7 +87,13 @@ css
 
 
 
+
+
+
  
+
+
+
 
 
 
@@ -103,11 +115,12 @@ css
 	<!-- 데이타테이블 CSS -->
 	<link rel="stylesheet"
 		href="${contextPath}/resources/css/datatables.css">
-		
-		
-<!-- Datepicker -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-		
+
+
+	<!-- Datepicker -->
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
 
 
@@ -158,7 +171,7 @@ css
 						</ul>
 						<br>
 						<ul>
-							<li><c:url var="sgJoin" value="sgJoin.go">  
+							<li><c:url var="sgJoin" value="sgJoin.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 									<c:param name="mno" value="${loginUser.mno}" />
 								</c:url> <c:url var="sgStart" value="sgStart.go">
@@ -344,89 +357,93 @@ css
 			<span class="close" onclick="closebtn();">&times;</span> <br>
 			<section class="about_part">
 				<div class="container">
-					
-						
-						<div class="row">
-							<div class="col-lg-6 col-md-6">
 
 
-								
-									<div id="map" style="width:100%;height:100%;" onclick="relaycl();"></div>
+					<div class="row">
+						<div class="col-lg-6 col-md-6">
 
-							
+
+
+							<div id="map" style="width: 100%; height: 100%;"
+								onclick="relaycl();"></div>
+
+
+						</div>
+
+						<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
+							<div class="about_text">
+
+								<!-- 폼 태그 시작 부분 나중에 추가-->
+								<form name="studyDali" action="" class="was-validated">
+									<div class="row">
+
+										<div class="col">
+											<input type="text" class="form-control"
+												placeholder="공부 주제 입력" name="studytitle" required>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">공부 주제 입력</div>
+											<input type="text" class="form-control" vlaue="니돈먹튀"
+												name="userId" hidden>
+											<!-- 방 개설 자 아이디 자동 입력 구간-->
+										</div>
+									</div>
+									<br>
+
+
+									<div class="row">
+										<div class="col">
+											<input type="time" class="form-control" name="stime" required>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">만남 시간 설정</div>
+										</div>
+										<div class="col">
+											<input type="text" class="form-control" id="dailyDate"
+												name="scdate" required>
+											<div class="valid-feedback">Valid.</div>
+											<div class="invalid-feedback">스터디 일정 설정</div>
+										</div>
+									</div>
+									<br>
+
+									<div class="row">
+										<div class="col">
+											<input type="text" class="form-control addressmagin"
+												placeholder="우편번호" id="postcode" name="postcode" required>
+										</div>
+										<div class="col">
+											<input type="button" class="genric-btn danger radius"
+												onclick="DaumPostcode();"
+												style="margin-bottom: 10px; font-size: 13px;"
+												value="우편번호 찾기">
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<input type="text" class="form-control addressmagin"
+												id="address" placeholder="주소" name="address" required>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col">
+											<input type="text" class="form-control" placeholder="상세주소"
+												id="detailAddress" name="detailAddress" required>
+										</div>
+									</div>
+									<br> <br> <br>
+								</form>
 							</div>
-
-							<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
-					<div class="about_text">
-
-						<!-- 폼 태그 시작 부분 나중에 추가-->
-						<form name="studyDali" action="" class="was-validated">
-							<div class="row">
-
-								<div class="col">
-									<input type="text" class="form-control" placeholder="공부 주제 입력"
-										name="studytitle" required>
-									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">공부 주제 입력</div>
-									<input type="text" class="form-control" vlaue="니돈먹튀"
-										name="userId" hidden>
-									<!-- 방 개설 자 아이디 자동 입력 구간-->
-								</div>
-							</div>
-							<br>
-
-
-							<div class="row">
-								<div class="col">
-									<input type="time" class="form-control" name="stime" required>
-									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">만남 시간 설정</div>
-								</div>
-								<div class="col">
-									<input type="text" class="form-control" id="dailyDate" name="scdate" required>
-									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">스터디 일정 설정</div>
-								</div>
-							</div>
-							<br>
-
-							<div class="row">
-								<div class="col">
-									<input type="text" class="form-control addressmagin"
-										placeholder="우편번호" id="postcode" name="postcode" required>
-								</div>
-								<div class="col">
-									<input type="button" class="genric-btn danger radius" onclick="DaumPostcode();"
-										style="margin-bottom: 10px; font-size: 13px;" value="우편번호 찾기">
-
-								</div>
-							</div>
-							<div class="row">
-								<div class="col">
-									<input type="text" class="form-control addressmagin"
-										id="address" placeholder="주소" name="address" required>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col">
-									<input type="text" class="form-control" placeholder="상세주소"
-										id="detailAddress" name="detailAddress" required>
-								</div>
-							</div>
-							<br> <br> <br>
-							</form>
+						</div>
 					</div>
-				</div>
-			</div>
-			<hr>
-			<br>
-			<div style="text-align: center;">
-				<button onclick="submitto();" class="genric-btn danger circle"
-					style="font-size: 13px; margin-right: 10px;">등록</button>
-				<button type="reset" class="genric-btn danger circle"
-					style="font-size: 13px;">취소</button>
-			</div>
-					
+					<hr>
+					<br>
+					<div style="text-align: center;">
+						<button onclick="submitto();" class="genric-btn danger circle"
+							style="font-size: 13px; margin-right: 10px;">등록</button>
+						<button type="reset" class="genric-btn danger circle"
+							style="font-size: 13px;">취소</button>
+					</div>
+
 				</div>
 			</section>
 
@@ -440,27 +457,19 @@ css
 
 	<jsp:include page="../common/footer.jsp" />
 
-	
+
 	<!-- 지도 주소 검색  js-->
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1b439b4a0ff0544fb67982c72bca1e3"></script>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1b439b4a0ff0544fb67982c72bca1e3"></script>
 	<!-- 지도 주소 검색  js끝 -->
 
 	<script src='${fullcalPath}/core/main.js'></script>
 	<script src='${fullcalPath}/daygrid/main.js'></script>
 	<script src='${fullcalPath}/interaction/main.js'></script>
-	
-	<!-- datepicker -->
-	<script>
-	
-	$(function() {
-	    $("#dailyDate").datepicker({
-	      showButtonPanel: true,
-	     
-	    });
-	  } );
-	
-	</script>
+
+
 	<!-- from 태그 값 넘기기 -->
 	<script>
 	
@@ -472,7 +481,7 @@ css
 	}
 	</script>
 	<!-- from 태그 값 넘기기  끝-->
-	
+
 	<!-- 다음 지도 와 주소 검색 시작-->
 	<script>
 	
@@ -513,17 +522,35 @@ css
 
 
 	</script>
-<!-- 다음 지도 와 주소 검색 끝 -->
+	<!-- 다음 지도 와 주소 검색 끝 -->
 
 
 	<script>
+	var sgNo2 = ${sg.sgNo};
+		console.log("여긴 돌아감 : " + sgNo2);
+	
+		
+	
+	
+
 		function closebtn() {//모달창 닫기
 			$("#myModal").css("display", "none");
 		}
 
 		document.addEventListener('DOMContentLoaded', function() {
+			var sgNo = ${sg.sgNo};
+			var dailystudy=new Array();
+			
+			var list;
+			
+			
+				
+			
+			console.log(sgNo);
+			
+			
 			var calendarEl = document.getElementById('calendar');
-
+			
 			var calendar = new FullCalendar.Calendar(calendarEl, {
 				plugins : [ 'dayGrid', 'interaction' ],
 				header : {
@@ -541,18 +568,30 @@ css
 					map.relayout();
 
 				},
-
-				events : [
-
-				{
-					title : 'java',
-					description : 'description for Long Event',
-					start : '2020-04-09'
-				} ]
-
+				eventSources:[{
+					events: function(successCallback,failureCallback){
+						$.ajax({
+							  data:{sgNo:sgNo},
+							  url:"dailyStudyList.go",
+								dataType:"json",
+								success:function(data){
+																
+									successCallback(data);
+								}
+						});
+					}
+					
+				}]
 			});
 
 			calendar.render();
+			
+			/* 
+			
+			if(dailystudy.length > 0){
+				
+			} */
+			
 		});
 	</script>
 

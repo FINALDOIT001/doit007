@@ -20,10 +20,11 @@
 		<typeAlias type="com.kh.doit.event.model.vo.Event" alias="Event"/>
 		<typeAlias type="com.kh.doit.message.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.kh.doit.member.model.vo.Hodu" alias="Hodu"/>
-		
-		
 		<typeAlias type="com.kh.doit.event.model.vo.EventReply" alias="EventReply"/>
+		<typeAlias type="com.kh.doit.study.model.vo.DailyStudy" alias="DailyStudy"/>
 		
+		<typeAlias type="com.kh.doit.qna.model.vo.Qna" alias="Qna"/>
+		<typeAlias type="com.kh.doit.qna.model.vo.QnaReply" alias="QnaReply"/>
 
 	</typeAliases>
 	
