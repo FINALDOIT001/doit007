@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/SEO.css">
    
    <!--::breadcrumb part start::-->
-   <section class="breadcrumb blog_bg">
+   <section class="breadcrumb blog_bg2">
       <div class="container">
          <div class="row">
             <div class="col-lg-12">
@@ -42,7 +42,7 @@
         <div class="col-lg-8 mb-5 mb-lg-0">
           <div class="blog_left_sidebar">
           
-		<c:forEach var="event" items="${ list }">
+		<c:forEach var="event" items="${ elist }">
             <article class="blog_item eList001">
           	<input type="hidden" value="${ event.eNo }">
               <div class="blog_item_img">

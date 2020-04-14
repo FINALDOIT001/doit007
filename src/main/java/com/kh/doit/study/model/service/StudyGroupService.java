@@ -3,6 +3,7 @@ package com.kh.doit.study.model.service;
 import java.util.ArrayList;
 
 import com.kh.doit.member.model.vo.Member;
+import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
@@ -85,6 +86,8 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	int sgStart(int sgNo);
+
+	ArrayList<DailyStudy> sgDailySlist(int sgNo);
 	
 
 	

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 public class Qna {
 	
 	private int qNo; 
-	private String qLocation; //지역
 	private String qCategory;
 	private String qTitle;
 	private String qCon;
@@ -23,11 +22,11 @@ public class Qna {
 	
 	public Qna() {
 	}
-	public Qna(int qNo, String qLocation, String qCategory, String qTitle, String qCon, String qOriginalFileName,
-			String qRenameFileName, String qWriter, int qWriterNo, String qState, Date qDate, String qType,
-			String qStatus) {
+
+	public Qna(int qNo, String qCategory, String qTitle, String qCon, String qOriginalFileName, String qRenameFileName,
+			String qWriter, int qWriterNo, String qState, Date qDate, String qType, String qStatus) {
+		super();
 		this.qNo = qNo;
-		this.qLocation = qLocation;
 		this.qCategory = qCategory;
 		this.qTitle = qTitle;
 		this.qCon = qCon;
@@ -40,90 +39,111 @@ public class Qna {
 		this.qType = qType;
 		this.qStatus = qStatus;
 	}
+
 	public int getqNo() {
 		return qNo;
 	}
+
 	public void setqNo(int qNo) {
 		this.qNo = qNo;
 	}
-	public String getqLocation() {
-		return qLocation;
-	}
-	public void setqLocation(String qLocation) {
-		this.qLocation = qLocation;
-	}
+
 	public String getqCategory() {
 		return qCategory;
 	}
+
 	public void setqCategory(String qCategory) {
 		this.qCategory = qCategory;
 	}
+
 	public String getqTitle() {
 		return qTitle;
 	}
+
 	public void setqTitle(String qTitle) {
 		this.qTitle = qTitle;
 	}
+
 	public String getqCon() {
 		return qCon;
 	}
+
 	public void setqCon(String qCon) {
 		this.qCon = qCon;
 	}
+
 	public String getqOriginalFileName() {
 		return qOriginalFileName;
 	}
+
 	public void setqOriginalFileName(String qOriginalFileName) {
 		this.qOriginalFileName = qOriginalFileName;
 	}
+
 	public String getqRenameFileName() {
 		return qRenameFileName;
 	}
+
 	public void setqRenameFileName(String qRenameFileName) {
 		this.qRenameFileName = qRenameFileName;
 	}
+
 	public String getqWriter() {
 		return qWriter;
 	}
+
 	public void setqWriter(String qWriter) {
 		this.qWriter = qWriter;
 	}
+
 	public int getqWriterNo() {
 		return qWriterNo;
 	}
+
 	public void setqWriterNo(int qWriterNo) {
 		this.qWriterNo = qWriterNo;
 	}
+
 	public String getqState() {
 		return qState;
 	}
+
 	public void setqState(String qState) {
 		this.qState = qState;
 	}
+
 	public Date getqDate() {
 		return qDate;
 	}
+
 	public void setqDate(Date qDate) {
 		this.qDate = qDate;
 	}
+
 	public String getqType() {
 		return qType;
 	}
+
 	public void setqType(String qType) {
 		this.qType = qType;
 	}
+
 	public String getqStatus() {
 		return qStatus;
 	}
+
 	public void setqStatus(String qStatus) {
 		this.qStatus = qStatus;
 	}
+
 	@Override
 	public String toString() {
-		return "Qna [qNo=" + qNo + ", qLocation=" + qLocation + ", qCategory=" + qCategory + ", qTitle=" + qTitle
-				+ ", qCon=" + qCon + ", qOriginalFileName=" + qOriginalFileName + ", qRenameFileName=" + qRenameFileName
-				+ ", qWriter=" + qWriter + ", qWriterNo=" + qWriterNo + ", qState=" + qState + ", qDate=" + qDate
-				+ ", qType=" + qType + ", qStatus=" + qStatus + "]";
+		return "Qna [qNo=" + qNo + ", qCategory=" + qCategory + ", qTitle=" + qTitle + ", qCon=" + qCon
+				+ ", qOriginalFileName=" + qOriginalFileName + ", qRenameFileName=" + qRenameFileName + ", qWriter="
+				+ qWriter + ", qWriterNo=" + qWriterNo + ", qState=" + qState + ", qDate=" + qDate + ", qType=" + qType
+				+ ", qStatus=" + qStatus + "]";
 	}
+
+	
 	
 }

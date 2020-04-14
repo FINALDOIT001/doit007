@@ -56,7 +56,7 @@
 								</tr> -->
 								
 								
-		<c:forEach var="bs" items="${ list }">
+		<c:forEach var="bs" items="${ bslist }">
 		<tr class="kwon-tr1">
 			<td align="center" class="kwon-td1">${ bs.bsNo }</td>
 			<td align="center" class="kwon-td1">${ bs.bsCategory }</td>

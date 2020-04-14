@@ -80,6 +80,14 @@ public interface myPageService {
 	 */
 	int updatemho(TestHodu th);
 
+	/**
+	 * 호두 갯수 보여주기
+	 * 2020-04-13 김혜림
+	 * @param mno
+	 * @return
+	 */
+	Member selectHodunum(int mno);
+
 
 
 }

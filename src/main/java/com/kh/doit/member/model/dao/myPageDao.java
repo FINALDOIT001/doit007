@@ -60,5 +60,9 @@ public class myPageDao {
 	public int updatemho(TestHodu th) {
 		return sqlSession.update("memberMapper.updateHoduTest",th);
 	}
+
+	public Member selectHodunum(int mno) {
+		return sqlSession.selectOne("memberMapper.selectHodunum",mno);
+	}
 	
 }

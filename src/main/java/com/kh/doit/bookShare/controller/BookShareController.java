@@ -42,7 +42,7 @@ public class BookShareController {
 		
 		
 		if(list != null) {
-			mv.addObject("list", list);
+			mv.addObject("bslist", list);
 			mv.setViewName("board/bookShare_list");
 		} else {
 			mv.addObject("msg", "리스트 불러오기 실패");

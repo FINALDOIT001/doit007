@@ -318,22 +318,26 @@
 						<label id="myhodu">나의 이용정보</label>
 						<div class="hodu_border" style="margin-bottom:30px;">
 							<img src="${contextPath}/resources/img/hodu2.png" style="width:40px;">
-							<label style="font-weight:700; margin-left:5px;">보유 중인 호두 
-							<a id="hodumnum" style="margin:5px; font-size:large; color: #d64748 !important;">${loginUser.mhodu}</a> 개</label>
+							<input type="hidden" id="membermno" value="${loginUser.mno}"/>
+							<label style="font-weight:700; margin-left:5px;">보유 중인 호두 &nbsp;
+							<a id="hodumnum" style="margin:5px; font-size:large; color: #d64748 !important;"></a>개</label>
 							<button id="hodu" class="genric-btn danger" style="float: right;font-size: 13px;">호두 충전</button>
 						</div>
 						<label id="myhodu">충전내역</label>
 						<table id="hodu_list" class="table">
 							<thead>
 							  <tr>
+							  <th width="5%">No</th>
 								<th width="20%">충전호두</th>
 								<th width="20%">결제금액</th>
 								<th width="10%">구입일</th>
 							  </tr>
 							</thead>
 							<tbody>
-								<c:forEach var ="h" items="${ hlist }">
+								<c:forEach var ="h" items="${ hlist }" varStatus="status">
 								<tr class="kwon-tr1" style="text-align:center;">
+									
+									<td style="text-align:center;" class="kwon-td1">${ status.count }</td>
 									<td style="text-align:center;" class="kwon-td1">${ h.hoduNum }개</td>
 									<td style="text-align:center;" class="kwon-td1">${ h.hPrice }원</td>
 									<td style="text-align:center;" class="kwon-td1">${ h.hDate }</td>
@@ -427,6 +431,25 @@
 	         }
 	      }); 
 	    });
+	    $(function(){
+			hoduNum();
+			
+			
+		});
+	 /* 호두 개수 나오기 */
+	 function hoduNum(){
+		 var mno = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
+		 $.ajax({
+			 url:"hodunum.go",
+			 data:{mno:mno},
+			 
+			 dataType:"json",
+			 success:function(data){
+				 $("#hodumnum").text(data.mhodu);
+			 }
+		 });
+		 
+	 }
 
 	    function selReset(){
 	      $("#selbox").show();
@@ -437,7 +460,8 @@
 	    
 	    /* 호두충전 페이지 생성 */
 	    $('#hodu').click(function(){
-			window.open("hodu.me", "호두 충전", "width=600, height=500, scrollbars=no;")
+			window.open("hodu.me", "호두 충전", "width=600, height=700, scrollbars=no;");
+
 		});
 	    
 	    /* 호두충전 내역 테이블 생성 */
@@ -447,6 +471,7 @@
 		info: false,
 		searching: false,
 		serverSide: false,
+		order: [[0, 'desc']],
         "language": {
         "decimal":        "",
         "emptyTable":     "구입한 호두가 없습니다.",

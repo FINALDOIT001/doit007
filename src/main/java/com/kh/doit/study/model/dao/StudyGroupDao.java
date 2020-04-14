@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.doit.member.model.vo.Member;
+import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
@@ -87,6 +88,11 @@ public class StudyGroupDao {
 	public int sgStart(int sgNo) {
 		
 		return sqlSession.update("studyGroupMapper.sgStart", sgNo);
+	}
+
+	public ArrayList<DailyStudy> sgDailySlist(int sgNo) {
+		
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.sgDailySlist", sgNo);
 	}
 
 }
