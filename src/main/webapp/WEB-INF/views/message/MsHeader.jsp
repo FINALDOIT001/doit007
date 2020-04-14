@@ -51,7 +51,7 @@
 	
 	<script>
 		$(window).on('load',function(){
-			window.resizeTo(700, 700);
+			window.resizeTo(850, 700);
 		});
 	</script>
 	

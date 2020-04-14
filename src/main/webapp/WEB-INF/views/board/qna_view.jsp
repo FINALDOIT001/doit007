@@ -42,42 +42,42 @@
 				<div class="col-lg-12">
 					<div class="section_tittle">
 						<h2>
-							<span>책을</span> 가지고싶다
+							<span>QNA</span> 상세보기 
 						</h2>
 					</div>
 					<form action="select.do" id="kwon-Form01"
 						enctype="multipart/form-data" method="POST">
 						<input type="hidden" name="mId" value=""> 
 						<input type="hidden" name="mName" value="">
-						<input type="hidden" name="bsNo" id="bsNo" value="${ bs.bsNo }">
+						<input type="hidden" name="qNo" id="qNo" value="${ qna.qNo }">
 						<table border="1" class="kwon-table1" cellpadding="10px">
 
 							<tr>
-								<td class="th02">지역</td>
+								<td class="th02">상태</td>
 								<td colspan="2"><input type="text" name="bsLocation"
-									value="${ bs.bsLocation }" disabled></td>
+									value="${ qna.qState }" disabled></td>
 								<td class="th02 th03" colspan="1">분류</td>
-								<td colspan="2"><label name="bsCategory">${ bs.bsCategory }</label></td>
+								<td colspan="2"><label name="bsCategory">${ qna.qCategory }</label></td>
 							</tr>
 							<tr>
 
 								<td class="th02" colspan="1">제목</td>
 								<td class="td02" colspan="4"><input type="text" id="bsTitle"
-									name="title" class="tdin02" value="${ bs.bsTitle }" disabled>
+									name="title" class="tdin02" value="${ qna.qTitle }" disabled>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="6" class="td-img01">
 									<div>
-										<c:if test="${ !empty bs.bsRenameFileName }">
+										<c:if test="${ !empty qna.qRenameFileName }">
 										<img class="img01"
-											src="${contextPath}/resources/bsUploadFiles/${bs.bsRenameFileName}"
+											src="${contextPath}/resources/qUploadFiles/${qna.qRenameFileName}"
 											alt="사진 있었음">
 										</c:if>
-										<c:if test="${ empty bs.bsRenameFileName }">
-											<img class="img01"
-											src="${contextPath}/resources/bsUploadFiles/default.jpg"
-											alt="사진 없음">
+										<c:if test="${ empty qna.qRenameFileName }">
+											<%-- <img class="img01"
+											src="${contextPath}/resources/qUploadFiles/default.jpg"
+											alt="사진 없음"> --%>
 										
 										</c:if>
 									</div>
@@ -90,22 +90,22 @@
 						</div>
 
 						<div style="text-align: center;">
-							<c:if test="${ loginUser.mName eq bs.bsWriter }">
+							<c:if test="${ loginUser.mName eq qna.qWriter }">
 							
-							<c:url var="bsUpdate" value="bsUpdate.go">
-								<c:param name="bsNo" value="${ bs.bsNo }"/>
+							<c:url var="qnaUpdate" value="qnaUpdate.go">
+								<c:param name="qNo" value="${ qna.qNo }"/>
 							</c:url>
 							
 							
-								<a href="${ bsUpdate }"><input type="button" id="kwon-btn02" name="bsNo"
+								<a href="${ qnaUpdate }"><input type="button" id="kwon-btn07" name=""
 									class="genric-btn danger circle" style="font-size: 13px;"
 									value="수정하기"></input></a>
-								<input type="button" id="kwon-deleteBtn02" name="bsNo"
+								<input type="button" id="kwon-deleteBtn07" name=""
 									class="genric-btn danger circle" style="font-size: 13px;"
 									value="삭제하기"></input>
-								<input type="button" id="kwon-outBtn02" name="bsNo"
+								<input type="button" id="kwon-outBtn07" name=""
 									class="genric-btn danger circle" style="font-size: 13px; margin-left:10px;"
-									value="나눔완료"></input>
+									value="답변완료"></input>
 									
 									
 							</c:if>
@@ -132,7 +132,7 @@
 								<div class="col-10">
 									<div class="form-group">
 										<textarea class="form-control w-100 placeholder hide-on-focus"
-											name="bscCon" id="bscCon" cols="30" rows="5"
+											name="qcCon" id="qcCon" cols="30" rows="5"
 											placeholder="댓글을 입력해 주세요."></textarea>
 									</div>
 								</div>
@@ -184,7 +184,7 @@
          ]
       });
       
-      var markupStr = '${bs.bsCon}';
+      var markupStr = '${qna.qCon}';
 
 		$('#summernote').summernote("code", markupStr);
 		$('#summernote').summernote('disable');
@@ -205,25 +205,25 @@ $(function() {
 	
 	$('#insertReply').on('click', function() {
 		
-		var bscBsNo = ${ bs.bsNo };
-		var bscWriter = "<%=((Member) session.getAttribute("loginUser")).getmName()%>"; // 세션에 등록된 Member의 userId
-		var bscWriterNo = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
-		var bscCon = $('#bscCon').val();
+		var qcqNo = ${ qna.qNo };
+		var qcWriter = "<%=((Member) session.getAttribute("loginUser")).getmName()%>"; // 세션에 등록된 Member의 userId
+		var qcWriterNo = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
+		var qcCon = $('#qcCon').val();
 	    
 	    $.ajax({
 	        type:'POST',
-	        url : 'addReply.do',
+	        url : 'addQnaReply.do',
 	        data:{
-	        	bscBsNo:bscBsNo,
-	        	bscWriter:bscWriter,
-	        	bscWriterNo:bscWriterNo,
-	        	bscCon:bscCon
+	        	qcqNo:qcqNo,
+	        	qcWriter:qcWriter,
+	        	qcWriterNo:qcWriterNo,
+	        	qcCon:qcCon
 	        },
 	        success : function(data){
 	            if(data=="success")
 	            {
 	                getCommentList();
-	                $("#bscCon").val("");
+	                $("#qcCon").val("");
 	            }
 	        },
 	        error:function(request,status,error){
@@ -242,12 +242,12 @@ $(function() {
  */
 function getCommentList(){
     
-	var bsNo = ${ bs.bsNo };
+	var qNo = ${ qna.qNo };
     var testmno = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
 	
     $.ajax({
-        url : "bsReply.do",
-        data:{bsNo:bsNo},
+        url : "qnaReply.do",
+        data:{qNo:qNo},
         dataType : "json",
         success : function(data){
 			
@@ -263,22 +263,22 @@ function getCommentList(){
                     html1 += "<div class='desc'>";
                     html1 += "<div class='d-flex justify-content-between'>";
                     html1 += "<div class='d-flex align-items-center'>";
-                    html1 += "<input type='hidden' value='"+data[i].bscNo+"'>";
-                    html1 += "<input type='hidden' value='"+data[i].bscWriterNo+"'>";
+                    html1 += "<input type='hidden' value='"+data[i].qcNo+"'>";
+                    html1 += "<input type='hidden' value='"+data[i].qcWriterNo+"'>";
                     html1 += "<div class='thumb'>";
-                    /* html1 += "<img src='${contextPath}/resources/img/"+data[i].member.mRenamefilename+"' alt='' style='width: 55px; height: 55px;'>"; */
-                    /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
                     html1 += "</div>";
                     html1 += "<h5>";
-                    html1 += "<a href=''>"+data[i].bscWriter+"</a> ";
+                    html1 += "<a href=''>"+data[i].qcWriter+"</a> ";
                     html1 += "</h5>";
-                    html1 += "<p class='date'>"+data[i].bscDate+"</p>";
+                    
+                    html1 += "<p class='date'>"+data[i].qcDate+"</p>";
                     if ( testmno == data[i].bscWriterNo ) {
-                        html1 += "<span class='kwon-span202' style='margin-left:820px;'>삭제</span>";
+                        html1 += "<span class='kwon-span207' style='margin-left:820px;'>삭제</span>";
                         }
+
                     html1 += "</div>";
                     html1 += "</div>";
-                    html1 += "<p class='comment'>"+data[i].bscCon+"</p>";
+                    html1 += "<p class='comment'>"+data[i].qcCon+"</p>";
                     html1 += "</div>";
                     html1 += "</div>";
                     html1 += "</div>";
@@ -307,25 +307,25 @@ function getCommentList(){
  
 </script>
 <script>
-$('#kwon-deleteBtn02').click(function() {
-	var title = $('#bsTitle').val();
-	var bsNo = $('#bsNo').val();
+$('#kwon-deleteBtn07').click(function() {
+	var title = $('#qTitle').val();
+	var qNo = $('#qNo').val();
 	var result = confirm(title+" 글을 삭제하시겠습니까?");
 	
 	if(result) {
-		location.href="deleteBs.do?bsNo="+bsNo;
+		location.href="deleteQna.do?qNo="+qNo;
 	} else {
 		
 	}
 	
 });
 
-$('#kwon-outBtn02').click(function() {
-	var bsNo = $('#bsNo').val();
+$('#kwon-outBtn07').click(function() {
+	var qNo = $('#qNo').val();
 	var result = confirm("(~˘▾˘)~♫•*¨*•.¸¸♪끝?");
 	
 	if(result) {
-		location.href="endBs.do?bsNo="+bsNo;
+		location.href="endQna.do?qNo="+qNo;
 	} else {
 		
 	}
@@ -334,28 +334,28 @@ $('#kwon-outBtn02').click(function() {
 </script>
 
 <script>
-$(document).on("click",".kwon-span202",function(){
-    var bscNo = $(this).parent().children().eq(0).val();
-    console.log(bscNo);
+$(document).on("click",".kwon-span207",function(){
+    var qcNo = $(this).parent().children().eq(0).val();
+    console.log(qcNo);
  });
 
 /* 댓글 삭제하기 */
-$(document).on("click",".kwon-span202",function(){
+$(document).on("click",".kwon-span207",function(){
 	
-    var bscNo = $(this).parent().children().eq(0).val();
-    var bscWriterNo = $(this).parent().children().eq(1).val();
+    var qcNo = $(this).parent().children().eq(0).val();
+    var qcWriter = $(this).parent().children().eq(1).val();
     var mno = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
-    console.log("댓글번호 : " + bscNo)
+    console.log("댓글번호 : " + qcNo)
 
     var result = confirm("댓글을 삭제하시겠습니까?");
     
     if(result) {
     	
-    	if( mno == bscWriterNo) {
+    	if( mno == qcWriter) {
     
 			$.ajax({
-				url:"delBsReply.do",
-				data:{bscNo:bscNo},
+				url:"delQnaReply.do",
+				data:{qcNo:qcNo},
 				type:"post",
 				success:function(data) {
 					if(data == "success") {

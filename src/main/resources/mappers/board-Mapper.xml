@@ -226,13 +226,30 @@
 		AND		Q_STATUS='Y'
 	</select>
 	
-	<select id="selectQna" resultMap="QnaResultSet">
+	<select id="selectQna" parameterType="_int" resultMap="QnaResultSet">
 		SELECT	*
 		FROM	QNA
 		WHERE	1=1
-		AND		Q_NO=#{qno}
+		AND		Q_NO=#{qNo}
 		AND		Q_STATUS='Y'
 	</select>
+	
+	<insert id="insertQna" parameterType="Qna">
+		INSERT INTO QNA VALUES(
+			SEQ_QNO.NEXTVAL
+			,#{qCategory}
+			,#{qTitle}
+			,#{qCon}
+			,#{qOriginalFileName}
+			,#{qRenameFileName}
+			,#{qWriter}
+			,#{qWriterNo}
+			,'질문중'
+			,SYSDATE
+			,NULL
+			,DEFAULT
+		)
+	</insert>
 	
 
 </mapper>

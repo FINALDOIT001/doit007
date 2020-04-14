@@ -23,6 +23,11 @@ public class QnaServiceImpl implements QnaService {
 	public Qna selectQna(int qno) {
 		return qDao.selectQna(qno);
 	}
+
+	@Override
+	public int insertQna(Qna qna) {
+		return qDao.insertQna(qna);
+	}
 	
 	
 

@@ -180,27 +180,7 @@
                     
                  </aside>
      
-                 <aside class="single_sidebar_widget popular_post_widget">
-                   <h3 class="widget_title">최근 게시물</h3>
-                   <div class="media post_item">
-                     <img class="img8080" src="img/blog/it_blog1.jpg" alt="post">
-                     <div class="media-body">
-                       <a href="single-blog.html">
-                         <h3>인공지능과의 연결고리, 그래프 기술 알아보기</h3>
-                       </a>
-                       <p>2시간 전</p>
-                     </div>
-                   </div>
-                   <div class="media post_item">
-                     <img class="img8080" src="img/blog/it_blog2.jpg" alt="post">
-                     <div class="media-body">
-                       <a href="single-blog.html">
-                         <h3>[우리금융그룹] 2020 『디노랩』모집 공고</h3>
-                       </a>
-                       <p>2020년-2월-14일</p>
-                     </div>
-                   </div>
-                 </aside>
+                 
                  <aside class="single_sidebar_widget tag_cloud_widget">
                    <h4 class="widget_title">태그 모음</h4>
                    <ul class="list">
@@ -281,7 +261,7 @@
 	    	$('#insertReply').on('click', function() {
 	    		
 	    		var ecENo = ${ ev.eNo };
-	    		console.log("eNo : " + ecENo)
+	    		console.log("eNo : " + ecENo);
 	    		
 	    		var ecWriter = "<%=((Member) session.getAttribute("loginUser")).getmName()%>"; // 세션에 등록된 Member의 userId
 	    		var ecWriterNo = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
@@ -297,8 +277,7 @@
 	    	        	ecCon:ecCon
 	    	        },
 	    	        success : function(data){
-	    	            if(data=="success")
-	    	            {
+	    	            if(data=="success") {
 	    	                getCommentList();
 	    	                $("#ecCon").val("");
 	    	            }
@@ -320,7 +299,7 @@
     function getCommentList(){
         
     	var eNo = ${ ev.eNo };
-    	console.log("eNo : " + eNo );
+        var testmno = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
     	
         $.ajax({
             url : "eReply.do",
@@ -342,15 +321,16 @@
                         html1 += "<div class='d-flex justify-content-between'>";
                         html1 += "<div class='d-flex align-items-center'>";
                         html1 += "<div class='thumb'>";
-                        /* html1 += "<c:if test='not empty "+data[i].member.mRenamefilename+'"><img src='${contextPath}/resources/img/user/"+data[i].member.mRenamefilename+"' alt='' style='width: 55px; height: 55px;'></c:if>"; */
-                        /* html1 += "<input type='hidden' value='"+data[i].bscNo+"'>; */
                         html1 += "</div>";
                         html1 += "<input type='hidden' value='"+data[i].ecNo+"'>";
                         html1 += "<input type='hidden' value='"+data[i].ecWriterNo+"'>";
                         html1 += "<h5>";
                         html1 += "<a href=''>"+data[i].ecWriter+"</a> ";
                         html1 += "</h5>";
-                        html1 += "<p class='date'>"+data[i].ecDate+"</p><span class='kwon-span204' style='margin-left:520px;'>삭제</span>";
+                        html1 += "<p class='date'>"+data[i].ecDate+"</p>";
+                        if ( testmno == data[i].ecWriterNo ) {
+                        html1 += "<span class='kwon-span204' style='margin-left:520px;'>삭제</span>";
+                        }
                         html1 += "</div>";
                         html1 += "</div>";
                         html1 += "<p class='comment'>"+data[i].ecCon+"</p>";
@@ -404,7 +384,7 @@
 	    var ecNo = $(this).parent().children().eq(1).val();
 	    var ecWriterNo = $(this).parent().children().eq(2).val();
 	    var mno = "<%=((Member) session.getAttribute("loginUser")).getMno()%>";
-	    console.log("댓글번호 : " + ecNo)
+	    console.log("댓글번호 : " + ecNo);
 	    
 	    var result = confirm("댓글을 삭제하시겠습니까?"); 
 	    

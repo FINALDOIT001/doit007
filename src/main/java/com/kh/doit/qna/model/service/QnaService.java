@@ -21,4 +21,12 @@ public interface QnaService {
 	 */
 	Qna selectQna(int qno);
 
+	/**
+	 * 3. QNA 추가하기 Kwon
+	 * 2020.04.14 KH
+	 * @param qna
+	 * @return
+	 */
+	int insertQna(Qna qna);
+
 }

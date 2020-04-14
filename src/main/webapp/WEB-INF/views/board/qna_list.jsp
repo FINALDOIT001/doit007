@@ -29,7 +29,7 @@
 					<div>
 						<div id="kwon-inst01">
 						<c:if test="${ loginUser != null }">
-							<div id="kwon-inst-btn02" class="genric-btn danger circle">질문합니다</div>
+							<div id="kwon-inst-btn06" class="genric-btn danger circle">질문합니다</div>
 						</c:if>
 						</div>
 						<table id="test1" class="table table-bordered">

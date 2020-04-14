@@ -29,8 +29,18 @@ public class QnaDao {
 	 * @param qno
 	 * @return
 	 */
-	public Qna selectQna(int qno) {
-		return sqlSession.selectOne("boardMapper.selectQna", qno);
+	public Qna selectQna(int qNo) {
+		return sqlSession.selectOne("boardMapper.selectQna", qNo);
+	}
+
+	/**
+	 * 3. QNA 추가하기 Kwon
+	 * 2020.04.14 KH
+	 * @param qna
+	 * @return
+	 */
+	public int insertQna(Qna qna) {
+		return sqlSession.insert("boardMapper.insertQna", qna);
 	}
 
 	
