@@ -59,7 +59,7 @@
 	<resultMap id="dailyStudyResultSet" type="DailyStudy">
 		<id property="ssNo" column="SS_NO" />
 		<result property="ssSgNo" column="SS_SG_NO" />
-		<result property="sstitle" column="SS_TITLE"/>
+		<result property="ssTitle" column="SS_TITLE"/>
 		<result property="ssDayDate" column="SS_DAY_DATE" />
 		<result property="ssTimeDate" column="SS_TIME_DATE" />
 		<result property="ssLocation" column="SS_LOCATION" />

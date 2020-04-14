@@ -337,7 +337,7 @@ public class StudyGroupController {
 	}
 	@RequestMapping("dailyStudyList.go")
 	public void getdailyStudyList(HttpServletResponse response, int sgNo) throws JsonIOException, IOException {
-		ArryList<DailyStudy> dsList = sgService.sgDailySlist(sgNo);
+		ArrayList<DailyStudy> dsList = sgService.sgDailySlist(sgNo);
 		System.out.println(dsList);
 		response.setContentType("application/json; charset=UTF-8");
 		

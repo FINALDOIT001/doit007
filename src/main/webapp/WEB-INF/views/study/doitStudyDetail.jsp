@@ -397,8 +397,13 @@ css
 											<div class="invalid-feedback">만남 시간 설정</div>
 										</div>
 										<div class="col">
-											<input type="text" class="form-control" id="dailyDate"
-												name="scdate" required>
+										<fmt:parseDate value="${sg.sgStartDate}" var="sDataFmt" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${sDataFmt}" var="sgStartDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseDate value="${sg.sgEndDate}" var="eDataFmt" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${eDataFmt}" var="sgEndDate" pattern="yyyy-MM-dd"/>
+										
+											<input type="date" class="form-control" id="dailyDate"
+												min="${sgStartDate}" max="${sgEndDate}" name="scdate" required>
 											<div class="valid-feedback">Valid.</div>
 											<div class="invalid-feedback">스터디 일정 설정</div>
 										</div>
@@ -459,10 +464,8 @@ css
 
 
 	<!-- 지도 주소 검색  js-->
-	<script
-		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1b439b4a0ff0544fb67982c72bca1e3"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1b439b4a0ff0544fb67982c72bca1e3&libraries=services"></script>
 	<!-- 지도 주소 검색  js끝 -->
 
 	<script src='${fullcalPath}/core/main.js'></script>
@@ -484,45 +487,62 @@ css
 
 	<!-- 다음 지도 와 주소 검색 시작-->
 	<script>
+
+	 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+     mapOption = {
+         center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+         level: 5 // 지도의 확대 레벨
+     };
+
+ //지도를 미리 생성
+	 var map = new daum.maps.Map(mapContainer, mapOption);
+ //주소-좌표 변환 객체를 생성
+		 var geocoder = new daum.maps.services.Geocoder();
+ //마커를 미리 생성
+ 		var marker = new daum.maps.Marker({
+    	 position: new daum.maps.LatLng(37.537187, 127.005476),
+     	map: map
+ });
+
+
+ function DaumPostcode() {
+     new daum.Postcode({
+         oncomplete: function(data) {
+             var addr = data.address;
+             var postcode = data.zonecode// 최종 주소 변수
+
+             // 주소 정보를 해당 필드에 넣는다.
+             document.getElementById("address").value = addr;
+             document.getElementById('postcode').value = postcode;
+             document.getElementById("detailAddress").focus();
+             
+             // 주소로 상세 정보를 검색
+             geocoder.addressSearch(data.address, function(results, status) {
+                 // 정상적으로 검색이 완료됐으면
+                 if (status === daum.maps.services.Status.OK) {
+
+                     var result = results[0]; //첫번째 결과의 값을 활용
+                     
+                     console.log(result);
+
+                     // 해당 주소에 대한 좌표를 받아서
+                     var coords = new daum.maps.LatLng(result.y, result.x);
+                     // 지도를 보여준다.
+                     
+                     map.relayout();
+                     // 지도 중심을 변경한다.
+                     map.setCenter(coords);
+                     // 마커를 결과값으로 받은 위치로 옮긴다.
+                     marker.setPosition(coords)
+                 }
+             });
+         }
+     }).open();
+ }
 	
-	function DaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-              
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("detailAddress").focus();
-            }
-        }).open();
-    }
-	
-	// 여기부터 다음 카카오 지도.
-	
-	var container = document.getElementById('map');
-	var options = {
-		center: new kakao.maps.LatLng(33.450701, 126.570667),
-		level: 3
-	};
-
-	var map = new kakao.maps.Map(container, options);
-
-
-
+	//다음 지도 와 주소 검색 끝 
 	</script>
-	<!-- 다음 지도 와 주소 검색 끝 -->
+	
 
 
 	<script>
@@ -556,32 +576,51 @@ css
 				header : {
 					left : 'prev,next',
 					center : 'title',
-					right : 'today',
+					right : 'today, myCustomButton',
 				},
 				locale : 'ko',
 				defaultView : 'dayGridMonth',
 				selectable : true,
 				select : function() {
 
-					$('#myModal').css("display", "block");
 					
-					map.relayout();
+					
 
 				},
-				eventSources:[{
-					events: function(successCallback,failureCallback){
+				
+					events: function(fetchInfo, successCallback, failureCallback){
 						$.ajax({
 							  data:{sgNo:sgNo},
 							  url:"dailyStudyList.go",
 								dataType:"json",
-								success:function(data){
-																
-									successCallback(data);
-								}
+								success:function(result){
+									console.log(result);
+									var events=[];
+								$.each(result, function(i, data){
+									events.push({
+										id:data.ssNo,
+										title:data.ssTitle,
+										start:data.ssDayDate +"T"+ data.ssTimeDate
+									});
+								});
+								console.log(events);
+								successCallback(events);									
+								},
+								error: function(jqXHR, textStatus, errorThrown) {
+						            console.log( textStatus +" - "+ errorThrown );
+								}	
 						});
-					}
+					},
+					customButtons: {
+					    myCustomButton: {
+					      text: '일정등록',
+					      click: function() {
+					    	  $('#myModal').css("display", "block");
+					    	  map.relayout();
+					      }
+					    }
+					  },
 					
-				}]
 			});
 
 			calendar.render();

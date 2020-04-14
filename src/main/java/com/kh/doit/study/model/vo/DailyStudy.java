@@ -7,7 +7,7 @@ public class DailyStudy {
 	
 	private int ssNo;
 	private int ssSgNo;
-	private String SStitle;
+	private String ssTitle;
 	private String ssDayDate;
 	private String ssTimeDate;
 	private String ssLocation;
@@ -16,12 +16,12 @@ public class DailyStudy {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DailyStudy(int ssNo, int ssSgNo, String sStitle, String ssDayDate, String ssTimeDate, String ssLocation,
+	public DailyStudy(int ssNo, int ssSgNo, String ssTitle, String ssDayDate, String ssTimeDate, String ssLocation,
 			String ssAdd) {
 		super();
 		this.ssNo = ssNo;
 		this.ssSgNo = ssSgNo;
-		SStitle = sStitle;
+		this.ssTitle = ssTitle;
 		this.ssDayDate = ssDayDate;
 		this.ssTimeDate = ssTimeDate;
 		this.ssLocation = ssLocation;
@@ -39,11 +39,11 @@ public class DailyStudy {
 	public void setSsSgNo(int ssSgNo) {
 		this.ssSgNo = ssSgNo;
 	}
-	public String getSStitle() {
-		return SStitle;
+	public String getSsTitle() {
+		return ssTitle;
 	}
-	public void setSStitle(String sStitle) {
-		SStitle = sStitle;
+	public void setSsTitle(String ssTitle) {
+		this.ssTitle = ssTitle;
 	}
 	public String getSsDayDate() {
 		return ssDayDate;
@@ -71,9 +71,8 @@ public class DailyStudy {
 	}
 	@Override
 	public String toString() {
-		return "DailyStudy [ssNo=" + ssNo + ", ssSgNo=" + ssSgNo + ", SStitle=" + SStitle + ", ssDayDate=" + ssDayDate
+		return "DailyStudy [ssNo=" + ssNo + ", ssSgNo=" + ssSgNo + ", ssTitle=" + ssTitle + ", ssDayDate=" + ssDayDate
 				+ ", ssTimeDate=" + ssTimeDate + ", ssLocation=" + ssLocation + ", ssAdd=" + ssAdd + "]";
 	}
-	
 
 }
