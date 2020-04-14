@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/SEO.css">
    
    <!--::breadcrumb part start::-->
-   <section class="breadcrumb blog_bg">
+   <section class="breadcrumb blog_bg2">
       <div class="container">
          <div class="row">
             <div class="col-lg-12">
