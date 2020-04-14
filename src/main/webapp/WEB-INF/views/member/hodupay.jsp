@@ -171,8 +171,8 @@
 					    pg : 'kakaopay', // version 1.1.0부터 지원.
 					    pay_method : 'card',
 					    merchant_uid : 'merchant_' + new Date().getTime(),
-					    name : '주문명:결제테스트',
-					    amount : 100,
+					    name : 'DO IT 결제',
+					    amount : hPrice,
 					    buyer_email : 'ggghr@naver.com',
 					    buyer_name : '구매자이름',
 					    buyer_tel : '010-1234-5678',
@@ -228,14 +228,10 @@
 			    				}); 
 			    				
 			    			}
-					    	opener.location.reload();
-							window.close(); 
+			    			opener.document.location.reload();
+								window.close(); 
 					    } else {
-					        var msg = '';
-					        msg += '' + rsp.error_msg;
-							// 실패시 이동할 페이지
-							location.href="#";
-					        alert(msg);
+					        alert("결제가 실패하였습니다.");
 					    }
 					});
 				}
