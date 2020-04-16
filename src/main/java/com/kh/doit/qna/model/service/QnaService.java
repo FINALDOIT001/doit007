@@ -29,4 +29,28 @@ public interface QnaService {
 	 */
 	int insertQna(Qna qna);
 
+	/**
+	 * 4. QNA 수정하기 Kwon
+	 * 2020.04.16 KH
+	 * @param qna
+	 * @return
+	 */
+	int updateQna(Qna qna);
+
+	/**
+	 * 5. QNA 삭제하기 Kwon
+	 * 2020.04.16 KH
+	 * @param qNo
+	 * @return
+	 */
+	int deleteQna(int qNo);
+
+	/**
+	 * 6. QNA 질문 -> 답변완료로 변경 Kwon
+	 * 2020.04.16 KH
+	 * @param qNo
+	 * @return
+	 */
+	int endQna(int qNo);
+
 }

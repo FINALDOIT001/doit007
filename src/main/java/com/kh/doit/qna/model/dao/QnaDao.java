@@ -43,6 +43,37 @@ public class QnaDao {
 		return sqlSession.insert("boardMapper.insertQna", qna);
 	}
 
+	/**
+	 * 4. QNA 수정하기 Kwon
+	 * 2020.04.16 KH
+	 * @param qna
+	 * @return
+	 */
+	public int updateQna(Qna qna) {
+		System.out.println("Dao update QNA : " + qna);
+		return sqlSession.update("boardMapper.updateQna", qna);
+	}
+
+	/**
+	 * 5. QNA 삭제하기 Kwon
+	 * 2020.04.16 KH
+	 * @param qNo
+	 * @return
+	 */
+	public int deleteQna(int qNo) {
+		return sqlSession.update("boardMapper.deleteQna", qNo);
+	}
+
+	/**
+	 * 6. QNA 질문완료로 변경 Kwon
+	 * 2020.04.16 KH
+	 * @param qNo
+	 * @return
+	 */
+	public int endQna(int qNo) {
+		return sqlSession.update("boardMapper.endQna", qNo);
+	}
+
 	
 
 }

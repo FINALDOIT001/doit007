@@ -155,6 +155,22 @@
 		ORDER BY 1 DESC
 	</select>
 	
+	<select id="TagCount" parameterType="String" resultType="_int">
+		SELECT	COUNT(*)
+		FROM	EVENT
+		WHERE	1=1
+		AND		E_STATUS='Y'
+		AND		E_TAG like '%' || #{eTag} || '%'
+	</select>
+	
+	<select id="TagList" resultMap="eventResultSet" parameterType="String">
+		SELECT	*
+		FROM	EVENT
+		WHERE	1=1
+		AND		E_STATUS='Y'
+		AND		E_TAG like '%' || #{eTag} || '%'
+	</select>
+	
 	
 	
 	
