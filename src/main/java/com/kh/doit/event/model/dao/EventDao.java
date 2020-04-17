@@ -161,6 +161,14 @@ public class EventDao {
 
 		return (ArrayList)sqlSession.selectList("evMapper.TagList", eTag, rowBounds);
 	}
+
+	/**
+	 * 태그 보여주기용 전체 리스트 가져오기
+	 * @return
+	 */
+	public ArrayList<Event> selectListAll() {
+		return (ArrayList)sqlSession.selectList("evMapper.selectListAll");
+	}
 	
 	
 	

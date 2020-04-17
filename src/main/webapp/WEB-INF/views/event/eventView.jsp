@@ -13,6 +13,7 @@
 .kwon-span204 {
 	cursor:pointer;
 }
+
 </style>
 
 </head>
@@ -103,7 +104,7 @@
                            <div class="detials">
                               <p>이전 게시물</p>
                               <a href="#">
-                                 <h4>[우리금융그룹] 2020 ...</h4>
+                                 <h4 class=>[우리금융그룹] 2020 ...</h4>
                               </a>
                            </div>
                         </div>
@@ -181,7 +182,7 @@
                  </aside>
      
                  
-                 <aside class="single_sidebar_widget tag_cloud_widget">
+                 <!-- <aside class="single_sidebar_widget tag_cloud_widget">
                    <h4 class="widget_title">태그 모음</h4>
                    <ul class="list">
                      <li>
@@ -197,7 +198,7 @@
                        <a href="#">Blockchain</a>
                      </li>
                    </ul>
-                 </aside>
+                 </aside> -->
                </div>
             </div>
          </div>

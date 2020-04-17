@@ -57,9 +57,11 @@ public class EventController {
 		ArrayList<Event> list = eService.selectList(epi);
 		
 		String tag = "";
-		System.out.println("list.get(0).geteTag() : " +  list.get(0).geteTag());
-		for(int i = 0 ; i < list.size() ; i++) {
-			tag += list.get(i).geteTag()+",";
+		
+		ArrayList<Event> tagList = eService.selectListAll();
+		System.out.println("tagList.get(0).geteTag() : " +  tagList.get(0).geteTag());
+		for(int i = 0 ; i < tagList.size() ; i++) {
+			tag += tagList.get(i).geteTag()+",";
 		}
 		
 		String tagArr[] = tag.split(","); // 태그를 하나로 합친 다음에, 배열로 하나하나 잘라서 넣어준다. 
