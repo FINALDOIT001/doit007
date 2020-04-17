@@ -2,6 +2,7 @@ package com.kh.doit.study.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -335,6 +336,13 @@ public class StudyGroupController {
 			return "common/errorPage";
 		}
 	}
+	/**이것슨 스터디 스케쥴 리스트 불러오기
+	 * 정호가 만든겨
+	 * @param response
+	 * @param sgNo
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	@RequestMapping("dailyStudyList.go")
 	public void getdailyStudyList(HttpServletResponse response, int sgNo) throws JsonIOException, IOException {
 		ArrayList<DailyStudy> dsList = sgService.sgDailySlist(sgNo);
@@ -345,6 +353,29 @@ public class StudyGroupController {
 		
 		gson.toJson(dsList,response.getWriter());
 		
-	
 }
+	/**이것슨 스터디 스케쥴 리스트 저장하기
+	 * 정호가 만든겨
+	 * @param ds
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("dailyStudyinsert.go")
+	private String dailyStudyinsert(DailyStudy ds, HttpServletRequest request 
+			,@RequestParam(value="ssTimeDate" ,required = false)String ssTimeDate) {
+		System.out.println(ssTimeDate);
+		 
+		 System.out.println(ds);
+		
+		int result = sgService.dailyStudyinsert(ds);
+		
+		 
+		 if(result > 0) {
+			 return "redirect:dailyStudyList.go";
+		 }else {
+			 return "common/errorPage";
+		 }
+		
+		
+	}
 }

@@ -59,11 +59,12 @@
 	<resultMap id="dailyStudyResultSet" type="DailyStudy">
 		<id property="ssNo" column="SS_NO" />
 		<result property="ssSgNo" column="SS_SG_NO" />
+		<result property="zipcode" column="SS_ZIPCODE"/>
 		<result property="ssTitle" column="SS_TITLE"/>
 		<result property="ssDayDate" column="SS_DAY_DATE" />
 		<result property="ssTimeDate" column="SS_TIME_DATE" />
-		<result property="ssLocation" column="SS_LOCATION" />
-		<result property="ssAdd" column="SS_ADDR" />
+		<result property="ssAdd" column="SS_ADDRESS" />
+		<result property="ssExAdd" column="SS_EXADDRESS" />
 	</resultMap>
 
 	<select id="getlistCount" resultType="_int">
@@ -151,6 +152,11 @@
 	SELECT * FROM STUDY_SCHEDULE
 	WHERE SS_SG_NO= #{sgNo}
 	</select>
+	
+	<insert id="sgDailyinsert" parameterType="DailyStudy">
+	INSERT INTO STUDY_SCHEDULE
+	VALUES(SEQ_SSNO.NEXTVAL,#{ssSgNo},#{ssDayDate},#{ssTimeDate},#{ssTitle},#{ssAdd},#{ssExAdd},#{zipcode})
+	</insert>
 
 </mapper>
     

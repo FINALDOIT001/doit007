@@ -130,10 +130,25 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	}
 
 
+	/**이것슨 스터디 스케쥴 리스트 불러오기
+	 * 정호가 만든겨
+	 *
+	 */
 	@Override
 	public ArrayList<DailyStudy> sgDailySlist(int sgNo) {
 		
 		return sgDao.sgDailySlist(sgNo);
+	}
+
+
+	/**이것슨 스터디 스케쥴 리스트 저장하기
+	 * 정호가 만든겨
+	 *
+	 */
+	@Override
+	public int dailyStudyinsert(DailyStudy ds) {
+		
+		return sgDao.dailyStudyinsert(ds);
 	}
 	
 	

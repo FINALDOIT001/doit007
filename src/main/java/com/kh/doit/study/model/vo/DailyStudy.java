@@ -7,25 +7,27 @@ public class DailyStudy {
 	
 	private int ssNo;
 	private int ssSgNo;
+	private int zipcode;
 	private String ssTitle;
 	private String ssDayDate;
 	private String ssTimeDate;
-	private String ssLocation;
 	private String ssAdd;
+	private String ssExAdd;
 	public DailyStudy() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DailyStudy(int ssNo, int ssSgNo, String ssTitle, String ssDayDate, String ssTimeDate, String ssLocation,
-			String ssAdd) {
+	public DailyStudy(int ssNo, int ssSgNo, int zipcode, String ssTitle, String ssDayDate, String ssTimeDate,
+			String ssAdd, String ssExAdd) {
 		super();
 		this.ssNo = ssNo;
 		this.ssSgNo = ssSgNo;
+		this.zipcode = zipcode;
 		this.ssTitle = ssTitle;
 		this.ssDayDate = ssDayDate;
 		this.ssTimeDate = ssTimeDate;
-		this.ssLocation = ssLocation;
 		this.ssAdd = ssAdd;
+		this.ssExAdd = ssExAdd;
 	}
 	public int getSsNo() {
 		return ssNo;
@@ -38,6 +40,12 @@ public class DailyStudy {
 	}
 	public void setSsSgNo(int ssSgNo) {
 		this.ssSgNo = ssSgNo;
+	}
+	public int getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(int zipcode) {
+		this.zipcode = zipcode;
 	}
 	public String getSsTitle() {
 		return ssTitle;
@@ -57,22 +65,23 @@ public class DailyStudy {
 	public void setSsTimeDate(String ssTimeDate) {
 		this.ssTimeDate = ssTimeDate;
 	}
-	public String getSsLocation() {
-		return ssLocation;
-	}
-	public void setSsLocation(String ssLocation) {
-		this.ssLocation = ssLocation;
-	}
 	public String getSsAdd() {
 		return ssAdd;
 	}
 	public void setSsAdd(String ssAdd) {
 		this.ssAdd = ssAdd;
 	}
+	public String getSsExAdd() {
+		return ssExAdd;
+	}
+	public void setSsExAdd(String ssExAdd) {
+		this.ssExAdd = ssExAdd;
+	}
 	@Override
 	public String toString() {
-		return "DailyStudy [ssNo=" + ssNo + ", ssSgNo=" + ssSgNo + ", ssTitle=" + ssTitle + ", ssDayDate=" + ssDayDate
-				+ ", ssTimeDate=" + ssTimeDate + ", ssLocation=" + ssLocation + ", ssAdd=" + ssAdd + "]";
+		return "DailyStudy [ssNo=" + ssNo + ", ssSgNo=" + ssSgNo + ", zipcode=" + zipcode + ", ssTitle=" + ssTitle
+				+ ", ssDayDate=" + ssDayDate + ", ssTimeDate=" + ssTimeDate + ", ssAdd=" + ssAdd + ", ssExAdd="
+				+ ssExAdd + "]";
 	}
-
+	
 }

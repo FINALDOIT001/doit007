@@ -353,7 +353,7 @@ css
 	<div id="myModal" class="modal">
 
 		<!-- Modal content -->
-		<div class="modal-content" style='width: 50%; height: 45%;'>
+		<div class="modal-content" style='width: 50%; height: 65%;'>
 			<section class="about_part">
 				<div class="container">
 
@@ -373,12 +373,13 @@ css
 							<div class="about_text">
 
 								<!-- 폼 태그 시작 부분 나중에 추가-->
-								<form name="studyDali" action="" class="was-validated">
+								<form id="studyDaily" action="dailyStudyinsert.go" method="post" class="was-validated">
 									<div class="row">
 
 										<div class="col">
+										<input type="hidden" name="ssSgNo" value="${sg.sgNo}">
 											<input type="text" class="form-control"
-												placeholder="공부 주제 입력" name="studytitle" pattern=".{2,10}" required>
+												placeholder="공부 주제 입력" name="ssTitle" pattern=".{2,10}" required>
 											<div class="valid-feedback">Valid.</div>
 											<div class="invalid-feedback" name="checkchar">공부 주제 10글자 이내 입력 요망</div>
 											<input type="text" class="form-control" vlaue="니돈먹튀"
@@ -391,7 +392,7 @@ css
 
 									<div class="row">
 										<div class="col">
-											<input type="time" class="form-control" name="stime" required>
+											<input type="time" class="form-control" name="ssTimeDate" required>
 											<div class="valid-feedback">Valid.</div>
 											<div class="invalid-feedback">만남 시간 설정</div>
 										</div>
@@ -402,7 +403,7 @@ css
 										<fmt:formatDate value="${eDataFmt}" var="sgEndDate" pattern="yyyy-MM-dd"/>
 										
 											<input type="date" class="form-control" id="dailyDate"
-												min="${sgStartDate}" max="${sgEndDate}" name="scdate" required>
+												min="${sgStartDate}" max="${sgEndDate}" name="ssDayDate" required>
 											<div class="valid-feedback">Valid.</div>
 											<div class="invalid-feedback">스터디 일정 설정</div>
 										</div>
@@ -412,7 +413,7 @@ css
 									<div class="row">
 										<div class="col">
 											<input type="text" class="form-control addressmagin"
-												placeholder="우편번호" id="postcode" name="postcode" required>
+												placeholder="우편번호" id="postcode" name="zipcode" required>
 										</div>
 										<div class="col">
 											<input type="button" class="genric-btn danger radius"
@@ -425,13 +426,13 @@ css
 									<div class="row">
 										<div class="col">
 											<input type="text" class="form-control addressmagin"
-												id="address" placeholder="주소" name="address" required>
+												id="address" placeholder="주소" name="ssAdd" required>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col">
 											<input type="text" class="form-control" placeholder="상세주소"
-												id="detailAddress" name="detailAddress" required>
+												id="detailAddress" name="ssExAdd" required>
 										</div>
 									</div>
 									<br> <br> <br>
@@ -472,16 +473,7 @@ css
 	<script src='${fullcalPath}/interaction/main.js'></script>
 
 
-	<!-- from 태그 값 넘기기 -->
-	<script>
-		
-	
-	function submitto(){
-		$("#studyDali").submit();
-		
-	}
-	</script>
-	<!-- from 태그 값 넘기기  끝-->
+
 
 	<!-- 다음 지도 와 주소 검색 시작-->
 	<script>
@@ -546,8 +538,11 @@ css
 	<script>
 	
 
-	
-		
+		function submitto(){
+
+			var sub=$("#studyDaily").submit();
+			console.log(sub);
+		}
 
 		function closebtn() {//모달창 닫기
 			$("#myModal").css("display", "none");
@@ -610,6 +605,7 @@ css
 								}	
 						});
 					},
+					<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 					customButtons: {
 					    myCustomButton: {
 					      text: '일정등록',
@@ -619,6 +615,7 @@ css
 					      }
 					    }
 					  },
+					  </c:if>
 					
 			});
 

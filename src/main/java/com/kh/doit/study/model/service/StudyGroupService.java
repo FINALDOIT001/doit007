@@ -87,7 +87,19 @@ public interface StudyGroupService {
 	 */
 	int sgStart(int sgNo);
 
+	/***이것슨 스터디 스케쥴 리스트 불러오기
+	 * 정호가 만든겨
+	 * @param sgNo
+	 * @return
+	 */
 	ArrayList<DailyStudy> sgDailySlist(int sgNo);
+
+	/**이것슨 스터디 스케쥴 리스트 저장하기
+	 * 정호가 만든겨
+	 * @param ds
+	 * @return
+	 */
+	int dailyStudyinsert(DailyStudy ds);
 	
 
 	

@@ -95,4 +95,9 @@ public class StudyGroupDao {
 		return (ArrayList)sqlSession.selectList("studyGroupMapper.sgDailySlist", sgNo);
 	}
 
+	public int dailyStudyinsert(DailyStudy ds) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("studyGroupMapper.sgDailyinsert",ds);
+	}
+
 }
