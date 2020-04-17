@@ -304,8 +304,14 @@ css
 														가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하</li>
 												</ul>
 											</h5>
-											<br> <br> <br> <a class="btn_1"
-												style="float: right;" href="studyPhotoInsert.go">사진 추가</a>
+											<br> <br> <br>
+
+											<c:url var="studyPhotoInsert" value="studyPhotoInsert.go">
+												<c:param name="sgNo" value="${sg.sgNo}" />
+											</c:url>
+
+											<a class="btn_1" style="float: right;"
+												href="${studyPhotoInsert}">사진 추가</a>
 											<div class="about_part_counter">
 												<div class="single_counter">
 													<p style="font-size: 30px; width: 390px;">
@@ -353,8 +359,7 @@ css
 	<div id="myModal" class="modal">
 
 		<!-- Modal content -->
-		<div class="modal-content" style='width: 60%; height: 60%;'>
-			<span class="close" onclick="closebtn();">&times;</span> <br>
+		<div class="modal-content" style='width: 50%; height: 65%;'>
 			<section class="about_part">
 				<div class="container">
 
@@ -374,14 +379,15 @@ css
 							<div class="about_text">
 
 								<!-- 폼 태그 시작 부분 나중에 추가-->
-								<form name="studyDali" action="" class="was-validated">
+								<form id="studyDaily" action="dailyStudyinsert.go" method="post" class="was-validated">
 									<div class="row">
 
 										<div class="col">
+										<input type="hidden" name="ssSgNo" value="${sg.sgNo}">
 											<input type="text" class="form-control"
-												placeholder="공부 주제 입력" name="studytitle" required>
+												placeholder="공부 주제 입력" name="ssTitle" pattern=".{2,10}" required>
 											<div class="valid-feedback">Valid.</div>
-											<div class="invalid-feedback">공부 주제 입력</div>
+											<div class="invalid-feedback" name="checkchar">공부 주제 10글자 이내 입력 요망</div>
 											<input type="text" class="form-control" vlaue="니돈먹튀"
 												name="userId" hidden>
 											<!-- 방 개설 자 아이디 자동 입력 구간-->
@@ -392,13 +398,18 @@ css
 
 									<div class="row">
 										<div class="col">
-											<input type="time" class="form-control" name="stime" required>
+											<input type="time" class="form-control" name="ssTimeDate" required>
 											<div class="valid-feedback">Valid.</div>
 											<div class="invalid-feedback">만남 시간 설정</div>
 										</div>
 										<div class="col">
-											<input type="text" class="form-control" id="dailyDate"
-												name="scdate" required>
+										<fmt:parseDate value="${sg.sgStartDate}" var="sDataFmt" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${sDataFmt}" var="sgStartDate" pattern="yyyy-MM-dd"/>
+										<fmt:parseDate value="${sg.sgEndDate}" var="eDataFmt" pattern="yyyy-MM-dd"/>
+										<fmt:formatDate value="${eDataFmt}" var="sgEndDate" pattern="yyyy-MM-dd"/>
+										
+											<input type="date" class="form-control" id="dailyDate"
+												min="${sgStartDate}" max="${sgEndDate}" name="ssDayDate" required>
 											<div class="valid-feedback">Valid.</div>
 											<div class="invalid-feedback">스터디 일정 설정</div>
 										</div>
@@ -408,7 +419,7 @@ css
 									<div class="row">
 										<div class="col">
 											<input type="text" class="form-control addressmagin"
-												placeholder="우편번호" id="postcode" name="postcode" required>
+												placeholder="우편번호" id="postcode" name="zipcode" required>
 										</div>
 										<div class="col">
 											<input type="button" class="genric-btn danger radius"
@@ -421,13 +432,13 @@ css
 									<div class="row">
 										<div class="col">
 											<input type="text" class="form-control addressmagin"
-												id="address" placeholder="주소" name="address" required>
+												id="address" placeholder="주소" name="ssAdd" required>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col">
 											<input type="text" class="form-control" placeholder="상세주소"
-												id="detailAddress" name="detailAddress" required>
+												id="detailAddress" name="ssExAdd" required>
 										</div>
 									</div>
 									<br> <br> <br>
@@ -439,8 +450,8 @@ css
 					<br>
 					<div style="text-align: center;">
 						<button onclick="submitto();" class="genric-btn danger circle"
-							style="font-size: 13px; margin-right: 10px;">등록</button>
-						<button type="reset" class="genric-btn danger circle"
+							style="font-size: 13px; margin-right: 10px;">등록</button> <!-- 정도씨가 구경 정호형이 ajax 할  예정  -->
+						<button onclick="closebtn();" class="genric-btn danger circle"
 							style="font-size: 13px;">취소</button>
 					</div>
 
@@ -451,7 +462,7 @@ css
 
 	</div>
 	<!--  모달이 꺼져 -->
-
+	
 
 	<!-- End Align Area -->
 
@@ -459,10 +470,8 @@ css
 
 
 	<!-- 지도 주소 검색  js-->
-	<script
-		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1b439b4a0ff0544fb67982c72bca1e3"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1b439b4a0ff0544fb67982c72bca1e3&libraries=services"></script>
 	<!-- 지도 주소 검색  js끝 -->
 
 	<script src='${fullcalPath}/core/main.js'></script>
@@ -470,84 +479,90 @@ css
 	<script src='${fullcalPath}/interaction/main.js'></script>
 
 
-	<!-- from 태그 값 넘기기 -->
-	<script>
-	
-	 
-	
-	function submitto(){
-		$("#studyDali").submit();
-		
-	}
-	</script>
-	<!-- from 태그 값 넘기기  끝-->
+
 
 	<!-- 다음 지도 와 주소 검색 시작-->
 	<script>
+
+	 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+     mapOption = {
+         center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+         level: 5 // 지도의 확대 레벨
+     };
+
+ //지도를 미리 생성
+	 var map = new daum.maps.Map(mapContainer, mapOption);
+ //주소-좌표 변환 객체를 생성
+		 var geocoder = new daum.maps.services.Geocoder();
+ //마커를 미리 생성
+ 		var marker = new daum.maps.Marker({
+    	 position: new daum.maps.LatLng(37.537187, 127.005476),
+     	map: map
+ });
+
+
+ function DaumPostcode() {
+     new daum.Postcode({
+         oncomplete: function(data) {
+             var addr = data.address;
+             var postcode = data.zonecode// 최종 주소 변수
+
+             // 주소 정보를 해당 필드에 넣는다.
+             document.getElementById("address").value = addr;
+             document.getElementById('postcode').value = postcode;
+             document.getElementById("detailAddress").focus();
+             
+             // 주소로 상세 정보를 검색
+             geocoder.addressSearch(data.address, function(results, status) {
+                 // 정상적으로 검색이 완료됐으면
+                 if (status === daum.maps.services.Status.OK) {
+
+                     var result = results[0]; //첫번째 결과의 값을 활용
+                     
+                     console.log(result);
+
+                     // 해당 주소에 대한 좌표를 받아서
+                     var coords = new daum.maps.LatLng(result.y, result.x);
+                     // 지도를 보여준다.
+                     
+                     map.relayout();
+                     // 지도 중심을 변경한다.
+                     map.setCenter(coords);
+                     // 마커를 결과값으로 받은 위치로 옮긴다.
+                     marker.setPosition(coords)
+                 }
+             });
+         }
+     }).open();
+ }
 	
-	function DaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-              
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("detailAddress").focus();
-            }
-        }).open();
-    }
-	
-	// 여기부터 다음 카카오 지도.
-	
-	var container = document.getElementById('map');
-	var options = {
-		center: new kakao.maps.LatLng(33.450701, 126.570667),
-		level: 3
-	};
-
-	var map = new kakao.maps.Map(container, options);
-
-
-
+	//다음 지도 와 주소 검색 끝 
 	</script>
-	<!-- 다음 지도 와 주소 검색 끝 -->
+	
 
 
 	<script>
-	var sgNo2 = ${sg.sgNo};
-		console.log("여긴 돌아감 : " + sgNo2);
 	
-		
-	
-	
+
+		function submitto(){
+
+			var sub=$("#studyDaily").submit();
+			console.log(sub);
+		}
 
 		function closebtn() {//모달창 닫기
 			$("#myModal").css("display", "none");
 		}
 
 		document.addEventListener('DOMContentLoaded', function() {
+
+			
 			var sgNo = ${sg.sgNo};
 			var dailystudy=new Array();
 			
 			var list;
 			
-			
-				
-			
 			console.log(sgNo);
-			
 			
 			var calendarEl = document.getElementById('calendar');
 			
@@ -556,32 +571,57 @@ css
 				header : {
 					left : 'prev,next',
 					center : 'title',
-					right : 'today',
+					
+					
+					right : 'today, myCustomButton',
+					
+				
+					
 				},
 				locale : 'ko',
 				defaultView : 'dayGridMonth',
 				selectable : true,
 				select : function() {
 
-					$('#myModal').css("display", "block");
 					
-					map.relayout();
+					
 
 				},
-				eventSources:[{
-					events: function(successCallback,failureCallback){
+				
+					events: function(fetchInfo, successCallback, failureCallback){
 						$.ajax({
 							  data:{sgNo:sgNo},
 							  url:"dailyStudyList.go",
 								dataType:"json",
-								success:function(data){
-																
-									successCallback(data);
-								}
+								success:function(result){
+									console.log(result);
+									var events=[];
+								$.each(result, function(i, data){
+									events.push({
+										id:data.ssNo,
+										title:data.ssTitle,
+										start:data.ssDayDate +"T"+ data.ssTimeDate
+									});
+								});
+								console.log(events);
+								successCallback(events);									
+								},
+								error: function(jqXHR, textStatus, errorThrown) {
+						            console.log( textStatus +" - "+ errorThrown );
+								}	
 						});
-					}
-					
-				}]
+					},
+					<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+					customButtons: {
+					    myCustomButton: {
+					      text: '일정등록',
+					      click: function() {
+					    	  $('#myModal').css("display", "block");
+					    	  map.relayout();
+					      }
+					    }
+					  },
+					</c:if>
 			});
 
 			calendar.render();

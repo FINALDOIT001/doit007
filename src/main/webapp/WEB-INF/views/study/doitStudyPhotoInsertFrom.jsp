@@ -56,14 +56,23 @@
         </section>
       <div class="row">
         <div class="col-lg-12">
-          <form class="form-contact contact_form" method="post" id="contactForm" novalidate="novalidate">
+          <form action="photoUpload.go" method="POST" enctype="multipart/form-data">
             <div class="row">
                <div class="col-12">
                   <div class="form-group">
-                     <input class="form-control placeholder hide-on-focus" name="subject1" id="subject1" type="text" placeholder="제목">
+                     <input class="form-control placeholder hide-on-focus" name="g_Title" type="text" placeholder="제목">
                   </div>
                   <div class="form-group">
-                     <input class="form-control placeholder hide-on-focus" name="subject1" id="subject1" type="text" placeholder="내용">
+                     <input class="form-control placeholder hide-on-focus" name="g_Con" type="text" placeholder="내용">
+                  </div>
+                  <div class="form-group">
+                     <input class="form-control placeholder hide-on-focus" name="g_Sg_No" type="text" placeholder="스터디 그룹 번호" value="${param.sgNo}"hidden>
+                  </div>
+                  <div class="form-group">
+                     <input class="form-control placeholder hide-on-focus" name="g_Writer" type="text" placeholder="작성자" value="${sessionScope.loginUser.mName}"hidden>
+                  </div>
+                  <div class="form-group">
+                     <input class="form-control placeholder hide-on-focus" name="g_Writer_No" type="text" placeholder="작성자 번호" value="${loginUser.mno}"hidden>
                   </div>
                </div>
                <div class="col-12">
@@ -71,21 +80,20 @@
                      <div class="body">
                          <!-- 첨부 버튼 -->
                          <div id="attach">
-                             <label class="genric-btn primary radius fs1em" for="uploadInputBox">사진 첨부</label>
-                             <input id="uploadInputBox" style="display: none" type="file" name="filedata" multiple />
+                             <!-- <label class="genric-btn primary radius fs1em" for="uploadInputBox">사진 첨부</label> -->
+                             <input id="uploadInputBox"  type="file" name="filedata" multiple />
                          </div>
                          
-                         <!-- 미리보기 영역 -->
-                         <div id="preview" class="content"></div>
+                          <!-- 미리보기 영역 -->
+                         <!--<div id="preview" class="content"></div> -->
                          
                          <!-- multipart 업로드시 영역 -->
-                         <form id="uploadForm" style="display: none;" />
+                         <!-- <form id="uploadForm" style="display: none;" /> -->
                      </div>
                  </div>
-                 
-                 
-                 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script> -->
+               
+                 <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"></script>
                  <script>
                      //임의의 file object영역
                      var files = {};
@@ -94,6 +102,10 @@
                      // image preview 기능 구현
                      // input = file object[]
                      function addPreview(input) {
+                    	 if($("#preview") != null){
+                          	$("#preview").removeChild($('.preview-box'));
+                          }
+                    	 
                          if (input[0].files) {
                              //파일 선택이 여러개였을 시의 대응
                              for (var fileIndex = 0; fileIndex < input[0].files.length; fileIndex++) {
@@ -107,17 +119,18 @@
                                      //div id="preview" 내에 동적코드추가.
                                      //이 부분을 수정해서 이미지 링크 외 파일명, 사이즈 등의 부가설명을 할 수 있을 것이다.
                                      var imgNum = previewIndex++;
+                                     
                                      $("#preview")
                                              .append(
                                                      "<div class=\"preview-box\" value=\"" + imgNum +"\">"
                                                              + "<img class=\"thumbnail\" src=\"" + img.target.result + "\"\/>"
-                                                             + "<p>"
+                                                             /* + "<p>"
                                                              + file.name
                                                              + "</p>"
                                                              + "<a href=\"javascript:\" value=\""
                                                              + imgNum
                                                              + "\" onclick=\"deletePreview(this)\">"
-                                                             + "삭제" + "</a>" + "</div>");
+                                                             + "삭제" + "</a>" */ + "</div>");
                                      files[imgNum] = file;
                                  };
                                  reader.readAsDataURL(file);
@@ -151,7 +164,7 @@
                      }
               
                      $(document).ready(function() {
-                         //submit 등록. 실제로 submit type은 아니다.
+                         /* //submit 등록. 실제로 submit type은 아니다.
                          $('.submit a').on('click',function() {                        
                              var form = $('#uploadForm')[0];
                              var formData = new FormData(form);
@@ -190,13 +203,13 @@
                                  }
                                  //전송실패에대한 핸들링은 고려하지 않음
                              });
-                         });
+                         }); */
                          // <input type=file> 태그 기능 구현
                          $('#attach input[type=file]').change(function() {
                              addPreview($(this)); //preview form 추가하기
                          });
                      });
-                 </script>
+                 </script> -->
                     
                 </div>  
                </div>
@@ -207,10 +220,10 @@
                        <input class="genric-btn primary radius fs1em" type="submit" value="작성">
                    </div>
                </div>
-            </div>
-            </form>
+            </div>   
         </div>
         </div>
+        </form>
       </div>
     </div>
   </section>

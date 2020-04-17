@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
@@ -86,8 +87,28 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	int sgStart(int sgNo);
+	
+	/**
+	 * 사진 업로드
+	 * 작성자 : 서정도
+	 * @param g
+	 * @return
+	 */
+	int photoUpload(Gallery g);
 
+	/***이것슨 스터디 스케쥴 리스트 불러오기
+	 * 정호가 만든겨
+	 * @param sgNo
+	 * @return
+	 */
 	ArrayList<DailyStudy> sgDailySlist(int sgNo);
+
+	/**이것슨 스터디 스케쥴 리스트 저장하기
+	 * 정호가 만든겨
+	 * @param ds
+	 * @return
+	 */
+	int dailyStudyinsert(DailyStudy ds);
 	
 
 	

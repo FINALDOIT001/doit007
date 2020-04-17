@@ -59,11 +59,24 @@
 	<resultMap id="dailyStudyResultSet" type="DailyStudy">
 		<id property="ssNo" column="SS_NO" />
 		<result property="ssSgNo" column="SS_SG_NO" />
-		<result property="sstitle" column="SS_TITLE"/>
+		<result property="zipcode" column="SS_ZIPCODE"/>
+		<result property="ssTitle" column="SS_TITLE"/>
 		<result property="ssDayDate" column="SS_DAY_DATE" />
 		<result property="ssTimeDate" column="SS_TIME_DATE" />
-		<result property="ssLocation" column="SS_LOCATION" />
-		<result property="ssAdd" column="SS_ADDR" />
+		<result property="ssAdd" column="SS_ADDRESS" />
+		<result property="ssExAdd" column="SS_EXADDRESS" />
+	</resultMap>
+	
+	<resultMap id="galleryResultSet" type="Gallery">
+		<id property="g_No" column="G_NO" />
+		<result property="g_Sg_No" column="G_SG_NO" />
+		<result property="g_Title" column="G_TITLE"/>
+		<result property="g_Writer" column="G_WRITER" />
+		<result property="g_Writer_No" column="G_WRITER_NO" />
+		<result property="g_Con" column="G_CON" />
+		<result property="g_Date" column="G_DATE" />
+		<result property="g_Original_FileName" column="G_ORGINAL_FILENAME" />
+		<result property="g_Rename_FileName" column="G_RENAME_FILENAME" />
 	</resultMap>
 
 	<select id="getlistCount" resultType="_int">
@@ -148,9 +161,19 @@
 	</update>
 	
 	<select id="sgDailySlist" parameterType="_int" resultMap="dailyStudyResultSet">
-	SELECT * FROM STUDY_SCHEDULE
-	WHERE SS_SG_NO= #{sgNo}
+		SELECT * FROM STUDY_SCHEDULE
+		WHERE SS_SG_NO= #{sgNo}
 	</select>
+	
+	<insert id="photoUpload" parameterType="Gallery">
+		INSERT INTO GALLERY
+		VALUES(SEQ_GNO.NEXTVAL,#{g_Sg_No},#{g_Title},#{g_Writer},#{g_Writer_No},#{g_Con},DEFAULT,#{g_Original_FileName},#{g_Rename_FileName})
+	</insert>
+	
+	<insert id="sgDailyinsert" parameterType="DailyStudy">
+	INSERT INTO STUDY_SCHEDULE
+	VALUES(SEQ_SSNO.NEXTVAL,#{ssSgNo},#{ssDayDate},#{ssTimeDate},#{ssTitle},#{ssAdd},#{ssExAdd},#{zipcode})
+	</insert>
 
 </mapper>
     
