@@ -29,6 +29,28 @@ public interface MemberService {
 	 * @return
 	 */
 	Member memberLogin(Member m);
+
+
+	/**
+	 * 아이디 찾기
+	 * 2020-04-14 김혜림
+	 * @param searchemail
+	 * @return
+	 */
+	String searchId(String email);
+
+
+	/**
+	 * 아이디 찾기 2
+	 * 2020-04-14 김혜림
+	 * @param email
+	 * @return
+	 */
+	int countId(String email);
+
+
+
+
 	
 	
 	

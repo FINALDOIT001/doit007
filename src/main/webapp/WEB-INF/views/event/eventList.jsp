@@ -59,7 +59,7 @@
                 </a>
                 <p>${ event.eIntro }</p>
                 <ul class="blog-info-link">
-                  <li><i class="far fa-user"></i> IT, AI</li>
+                  <li><i class="far fa-user"></i> ${ event.eTag }</li>
                   <li><i class="far fa-comments"></i> 03 Comments</li>
                   <li><i class="far fa-heart"></i> 21</li>
                   <li><i class="far fa-edit"></i> ${ event.eWriter }</li>
@@ -199,32 +199,16 @@
                   <p>2시간 전</p>
                 </div>
               </div>
-              <div class="media post_item">
-                <img class="img8080" src="${contextPath}/resources/img/blog/it_blog2.jpg" alt="post">
-                <div class="media-body">
-                  <a href="single-blog.html">
-                    <h3>[우리금융그룹] 2020 『디노랩』모집 공고</h3>
-                  </a>
-                  <p>2020년-2월-14일</p>
-                </div>
-              </div>
             </aside>
             <aside class="single_sidebar_widget tag_cloud_widget">
               <h4 class="widget_title">태그 모음</h4>
               <ul class="list">
-                <li>
-                  <a href="#">IT</a>
-                </li>
-                <li>
-                  <a href="#">AI</a>
-                </li>
-                <li>
-                  <a href="#">Bigdata</a>
-                </li>
-                <li>
-                  <a href="#">Blockchain</a>
-                </li>
-              </ul>
+	           		<c:forTokens  var="hhTag" items="${hashTag}" delims=", ">
+						<li>
+	           				<a class="evTag"><div class="evTagLink">${hhTag}</div></a>
+	           			</li>
+					</c:forTokens>
+               </ul>
             </aside>
           </div>
         </div>
@@ -243,14 +227,20 @@
 
 			location.href="eventView.ev?eNo="+eNo;
 		})
-		
 
 		$('#searching').on('click',function() {
 			var evSearch = $('#evSearch').val();
 			
 			location.href="evSearch.do?evSearch="+evSearch;
 		})
-	
+		
+		$('.evTagLink').on('click',function() {
+			var eTag = $(this).text();
+			
+			console.log(eTag);
+			
+			location.href="evTag.do?eTag="+eTag;
+		})
 	
 	</script>
 

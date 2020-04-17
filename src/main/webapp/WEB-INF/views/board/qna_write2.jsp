@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/datatables.css">
 	
 	<!-- include Summernote CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
 	
 	
 	
@@ -83,28 +83,28 @@
 	<script src="${contextPath}/resources/js/kwonCustom.js"></script>
 	
     <!-- include summernote js -->
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
     
 	
 	   <script>
-	   
-	   $(document).ready(function() {
-		   $('#summernote').summernote({
-			   height:600,
-			   placeholder:"사진 드래그&드롭 / 붙여넣기 가능합니다",
-		     popover: {
-		       image: [
+        $('#summernote').summernote({
+    	
+            tabsize: 5,
+            height: 300,
+            toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+            ],
+            placeholder: '상세 내용을 입력해주세요'
 
-		         // This is a Custom Button in a new Toolbar Area
-		         ['custom', ['examplePlugin']],
-		         ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
-		         ['float', ['floatLeft', 'floatRight', 'floatNone']],
-		         ['remove', ['removeMedia']]
-		       ]
-		     }
-		   });
-		 });
-	   
+        });
+        
+        $('#summernote').summernote('code');
+    
    </script>
 	
 

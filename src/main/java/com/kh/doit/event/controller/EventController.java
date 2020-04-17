@@ -2,6 +2,8 @@ package com.kh.doit.event.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +25,7 @@ import com.kh.doit.event.model.service.EventService;
 import com.kh.doit.event.model.vo.Event;
 import com.kh.doit.event.model.vo.EventPageInfo;
 import com.kh.doit.event.model.vo.EventReply;
+import com.kh.doit.event.model.vo.HashTag;
 
 @Controller
 public class EventController {
@@ -53,11 +56,27 @@ public class EventController {
 		
 		ArrayList<Event> list = eService.selectList(epi);
 		
-		System.out.println("Servlet 이벤트 리스트 : " + list);
-		System.out.println("Servlet epi : " + epi);
+		String tag = "";
+		System.out.println("list.get(0).geteTag() : " +  list.get(0).geteTag());
+		for(int i = 0 ; i < list.size() ; i++) {
+			tag += list.get(i).geteTag()+",";
+		}
+		
+		String tagArr[] = tag.split(","); // 태그를 하나로 합친 다음에, 배열로 하나하나 잘라서 넣어준다. 
+		
+		Set<String> hashArr = new HashSet<String>(); // hashSet으로 중복제거를 해 준다..... 근데 여기서 문제네 Iterator 써 줘야되나?
+		
+		for(int i = 0 ; i < tagArr.length ; i++) {
+			hashArr.add(tagArr[i]);
+		}
+		
+		String hashArr2 = hashArr.toString(); // 중복제거한 hashSet을 다시 String으로 바꿔줍니다.( 앞 뒤 [ ] 지워주기 위해서)
+			
+		hashArr2 = hashArr2.substring(1, hashArr2.length()-1); // 맨 앞과 맨 뒤에 [ ] 이 문자들을 지워줍니다.
 		
 		mv.addObject("elist",list);
 		mv.addObject("epi",epi);
+		mv.addObject("hashTag", hashArr2);
 		mv.setViewName("event/eventList");
 		
 		return mv;
@@ -221,7 +240,7 @@ public class EventController {
 	public ModelAndView updateEvent(ModelAndView mv, Event ev, HttpServletRequest request,
 			@RequestParam(name="eFileName", required=false) MultipartFile file) {
 
-		System.out.println("Serlvet Insert Event : " + ev);
+		System.out.println("Serlvet Update Event : " + ev);
 		
 		if (file != null && !file.isEmpty()) { // 새로 업로드된 파일이 있다면!
 			if (ev.geteRenameFileName() != null) { // 기존 업로드된 파일이 있었다면?
@@ -319,9 +338,34 @@ public class EventController {
 		mv.addObject("elist",list);
 		mv.addObject("epi",epi);
 		mv.setViewName("event/eventList");
-
 	
 		return mv;
 	}
+	
+	@RequestMapping("evTag.do")
+	public ModelAndView evTag(ModelAndView mv, String eTag,
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+		
+		System.out.println("찾아 올 태그명 : " + eTag);
+		
+		int listCount = eService.getTagListCount(eTag);
+		
+		System.out.println("태그로 찾아온 Event 개수 : " + listCount);
+		
+		EventPageInfo epi = EventPagination.getPageInfo(currentPage, listCount);
+
+		ArrayList<Event> list = eService.getTagList(epi, eTag);
+		
+		System.out.println("Servlet 이벤트 리스트 : " + list);
+		System.out.println("Servlet epi : " + epi);
+		
+		mv.addObject("elist",list);
+		mv.addObject("epi",epi);
+		mv.setViewName("event/eventList");
+		
+		return mv;
+	}
+	
+	
 	
 }

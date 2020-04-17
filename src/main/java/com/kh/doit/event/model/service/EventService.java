@@ -96,5 +96,22 @@ public interface EventService {
 	 */
 	ArrayList<Event> getSearchList(EventPageInfo epi, String evSearch);
 
+	/**
+	 * 9. 태그용 리스트 개수 가져오기 Kwon
+	 * 2020.04.16 KH
+	 * @param eTag
+	 * @return
+	 */
+	int getTagListCount(String eTag);
+
+	/**
+	 * 9-2. 태그로 리스트 가져오기 Kwon
+	 * 2020.4.16 KH
+	 * @param epi
+	 * @param eTag
+	 * @return
+	 */
+	ArrayList<Event> getTagList(EventPageInfo epi, String eTag);
+
 
 }

@@ -48,6 +48,21 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.memberLogin(m);
 	}
 
+
+	@Override
+	public String searchId(String email) {
+		return mDao.searchId(email);
+	}
+
+
+	@Override
+	public int countId(String email) {
+		return mDao.countId(email);
+	}
+
+
+
+
 	
 	
 

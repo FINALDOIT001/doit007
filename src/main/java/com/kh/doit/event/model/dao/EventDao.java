@@ -121,6 +121,13 @@ public class EventDao {
 		return sqlSession.selectOne("evMapper.getSearchListCount", evSearch);
 	}
 	
+	/**
+	 * 검색한 게시글 가져오기 Kwon
+	 * 2020.04.16 KH
+	 * @param epi
+	 * @param evSearch
+	 * @return
+	 */
 	public ArrayList<Event> getSearchList(EventPageInfo epi, String evSearch) {
 		
 		int offset = (epi.getCurrentPage() - 1) * epi.getBoardLimit();
@@ -128,6 +135,31 @@ public class EventDao {
 		RowBounds rowBounds = new RowBounds(offset, epi.getBoardLimit());
 
 		return (ArrayList)sqlSession.selectList("evMapper.SearchList", evSearch, rowBounds);
+	}
+
+	/**
+	 * 8. 태그로 게시글 찾아오기 카운트먼저 Kwon
+	 * 2020.04.16 KH
+	 * @param eTag
+	 * @return
+	 */
+	public int getTagListCount(String eTag) {
+		return sqlSession.selectOne("evMapper.TagCount", eTag);
+	}
+
+	/**
+	 * 8-2. 태그로 게시글 찾아오기 리스트 Kwon
+	 * 2020.04.16 KH
+	 * @param epi
+	 * @param eTag
+	 * @return
+	 */
+	public ArrayList<Event> getTagList(EventPageInfo epi, String eTag) {
+		int offset = (epi.getCurrentPage() - 1) * epi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, epi.getBoardLimit());
+
+		return (ArrayList)sqlSession.selectList("evMapper.TagList", eTag, rowBounds);
 	}
 	
 	

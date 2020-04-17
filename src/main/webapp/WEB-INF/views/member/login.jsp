@@ -13,7 +13,7 @@
 	<!-- login page start -->
 	<div class="container" style="margin-top:130px;">
 	      <!-- Nested Row within Card Body -->
-	      <div class="row" style="margin-top: 200px;">
+	      <div class="row" style="margin-top: 200px; margin-bottom: 150px;">
 	        <div class="" style="margin: auto;">
 	         <div class=" card o-hidden border-0 shadow-lg my-5" style="padding:50px; width:400px;">
 	           <div class="text-center">
@@ -41,8 +41,9 @@
 	           </form>
 	           <hr>
 	           <div class="text-center">
-	            <a class="small" href="moveJoin.go" data-target="" data-toggle="">회원가입</a> |
-	            <a class="small" href="#" data-target="#modal-login" data-toggle="modal">아이디 / 비밀번호 찾기</a> 
+	            <a class="small" href="moveJoin.go"><label style="font-size: small;">회원가입</label></a>&nbsp;&nbsp;|&nbsp;
+	            <a class="small" href="searchId.go" style=""><label style="font-size: small;">아이디</label></a> ·
+	            <a class="small" href="searchPwd.go"><label style="font-size: small;">비밀번호 찾기</label></a> 
 	           </div>
 	         </div>
 	        </div>

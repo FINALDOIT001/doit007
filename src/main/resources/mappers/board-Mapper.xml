@@ -251,5 +251,29 @@
 		)
 	</insert>
 	
+	<update id="updateQna" parameterType="Qna">
+		UPDATE	QNA
+		SET		Q_TITLE=#{qTitle}
+				,Q_CATEGORY=#{qCategory}
+				,Q_CON=#{qCon}
+				,Q_ORIGINAL_FILENAME=#{qOriginalFileName}
+				,Q_RENAME_FILENAME=#{qRenameFileName}
+		WHERE	1=1
+		AND		Q_NO=#{qNo}
+	</update>
+	
+	<update id="deleteQna" parameterType="_int">
+		UPDATE	QNA
+		SET		Q_STATUS='N'
+		WHERE	1=1
+		AND		Q_NO=#{qNo}
+	</update>
+	
+	<update id="endQna" parameterType="_int">
+		UPDATE	QNA
+		SET		Q_STATE='답변 완료'
+		WHERE	1=1
+		AND		Q_NO=#{qNo}
+	</update>
 
 </mapper>

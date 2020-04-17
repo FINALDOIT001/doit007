@@ -110,4 +110,16 @@
     	FROM MEMBER
     	WHERE M_NO=#{mno}
     </select>
+    
+    <select id="countId" resultType="_int">
+    	SELECT COUNT(*)
+    	FROM MEMBER
+    	WHERE M_EMAIL=#{email}
+    </select>
+    
+    <select id="searchId" resultType="string">
+    	SELECT M_ID
+    	FROM MEMBER
+    	WHERE M_EMAIL=#{email}
+    </select>
 </mapper>

@@ -71,4 +71,14 @@ public class EventServiceImpl implements EventService {
 		return eDao.getSearchList(epi,evSearch);
 	}
 
+	@Override
+	public int getTagListCount(String eTag) {
+		return eDao.getTagListCount(eTag);
+	}
+
+	@Override
+	public ArrayList<Event> getTagList(EventPageInfo epi, String eTag) {
+		return eDao.getTagList(epi,eTag);
+	}
+
 }

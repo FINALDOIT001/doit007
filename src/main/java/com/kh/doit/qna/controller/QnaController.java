@@ -1,16 +1,30 @@
 package com.kh.doit.qna.controller;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.doit.board.model.vo.Board;
 import com.kh.doit.common.CommonFile;
 import com.kh.doit.qna.model.service.QnaService;
 import com.kh.doit.qna.model.vo.Qna;
@@ -111,6 +125,117 @@ public class QnaController {
 		}
 		
 	}
+	
+	@RequestMapping("qnaUpdate.go")
+	public ModelAndView moveUpdateQna(ModelAndView mv, int qNo) {
+		qna = qService.selectQna(qNo);
+		
+		if (qna != null) {
+			mv.addObject("qna", qna);
+			mv.setViewName("board/qna_update");
+		} else {
+			mv.addObject("msg", "QNA 업데이트 페이지를 불러오는데 실패했습니다. %n 관리자에게 문의해주시기 바랍니다.");
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("updateQna.do")
+	public ModelAndView updateQna(ModelAndView mv, Qna qna, HttpServletRequest request,
+			@RequestParam(name="qFileName", required=false) MultipartFile file) {
+
+		System.out.println("Serlvete Update 들어온 qna : " + qna);
+
+		if (file != null && !file.isEmpty()) { // 새로 업로드된 파일이 있다면!
+			if (qna.getqRenameFileName() != null) { // 기존 업로드된 파일이 있었다면?
+				cf.deleteFile(qna.getqRenameFileName(), request, "qUploadFiles");
+			}
+			// 기존 파일을 지운 뒤, 새로 넣을 파일이 있으니까 renameFileName 으로 만들어준다.
+			String bsRenameFileName = cf.saveFile(file, request, "qUploadFiles"); // 아래쪽 메소드로 다시 달라고 한다
+			
+			if (bsRenameFileName != null) {
+				qna.setqOriginalFileName(file.getOriginalFilename());
+				qna.setqRenameFileName(bsRenameFileName);
+			}
+		}
+		System.out.println("Serlvet Update 수정 후 준비된 qna : " + qna);
+		
+		int result = qService.updateQna(qna);
+		
+		if (result > 0) {
+			qna = qService.selectQna(qna.getqNo());
+			mv.addObject("qna", qna);
+			mv.setViewName("board/qna_view");
+		} else {
+			mv.addObject("msg","질문 수정에 실패했습니다.");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+
+	@RequestMapping("deleteQna.do")
+	public ModelAndView deleteQna(ModelAndView mv, int qNo) {
+		System.out.println("servlet Delete qna : " + qNo);
+		
+		int result = qService.deleteQna(qNo);
+		
+		if (result > 0) {
+			mv.setViewName("redirect:qna.go");
+		} else {
+			mv.addObject("msg", "질문 삭제에 실패했습니다.");
+			mv.setViewName("common/errorPage");
+		}
+
+		return mv;
+	}
+	
+	@RequestMapping("endQna.do")
+	public ModelAndView endQna(ModelAndView mv, int qNo) {
+		System.out.println("Serlvet End QNA qno : " + qNo);
+		int result = qService.endQna(qNo);
+		
+		if (result > 0) {
+			qna = qService.selectQna(qNo);
+			mv.addObject("qna", qna);
+			mv.setViewName("board/qna_view");
+		} else {
+			mv.addObject("msg", "에러가 발생했습니다. 다시 시도해 주십시옼ㅋㅋㅋ");
+			mv.setViewName("common/errorPage");
+		}
+
+		return mv;
+		
+	}
+	
+	public void profileUpload(String email, MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		// 업로드할 폴더 경로
+		String realFolder = request.getSession().getServletContext().getRealPath("profileUpload");
+		UUID uuid = UUID.randomUUID();
+
+		// 업로드할 파일 이름
+		String org_filename = file.getOriginalFilename();
+		String str_filename = uuid.toString() + org_filename;
+
+		System.out.println("원본 파일명 : " + org_filename);
+		System.out.println("저장할 파일명 : " + str_filename);
+
+		String filepath = realFolder + "\\" + email + "\\" + str_filename;
+		System.out.println("파일경로 : " + filepath);
+
+		File f = new File(filepath);
+		if (!f.exists()) {
+			f.mkdirs();
+		}
+		file.transferTo(f);
+		out.println("profileUpload/"+email+"/"+str_filename);
+		out.close();
+	}
+	
+	
+	
 	
 	
 	
