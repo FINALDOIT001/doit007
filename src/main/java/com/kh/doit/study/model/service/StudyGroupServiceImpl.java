@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.dao.StudyGroupDao;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
@@ -127,6 +128,15 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	public int sgStart(int sgNo) {
 
 		return sgDao.sgStart(sgNo);
+	}
+	
+	/**
+	 * 사진 업로드
+	 * 작성자 : 서정도
+	 */
+	@Override
+	public int photoUpload(Gallery g) {
+		return sgDao.photoUpload(g);
 	}
 
 

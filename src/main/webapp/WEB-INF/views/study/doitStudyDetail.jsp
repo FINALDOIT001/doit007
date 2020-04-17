@@ -304,8 +304,14 @@ css
 														가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하</li>
 												</ul>
 											</h5>
-											<br> <br> <br> <a class="btn_1"
-												style="float: right;" href="studyPhotoInsert.go">사진 추가</a>
+											<br> <br> <br>
+
+											<c:url var="studyPhotoInsert" value="studyPhotoInsert.go">
+												<c:param name="sgNo" value="${sg.sgNo}" />
+											</c:url>
+
+											<a class="btn_1" style="float: right;"
+												href="${studyPhotoInsert}">사진 추가</a>
 											<div class="about_part_counter">
 												<div class="single_counter">
 													<p style="font-size: 30px; width: 390px;">
@@ -610,6 +616,8 @@ css
 								}	
 						});
 					},
+					
+					<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 					customButtons: {
 					    myCustomButton: {
 					      text: '일정등록',
@@ -619,7 +627,7 @@ css
 					      }
 					    }
 					  },
-					
+					</c:if>
 			});
 
 			calendar.render();

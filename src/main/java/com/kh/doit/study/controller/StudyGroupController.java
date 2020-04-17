@@ -26,6 +26,7 @@ import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.common.paginationJung;
 import com.kh.doit.study.model.service.StudyGroupService;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
@@ -316,8 +317,8 @@ public class StudyGroupController {
 	}
 	
 	/**
-	 * 스터디 시작
-	 * 작성자 : 서정도
+	 * 스터디 시작 작성자 : 서정도
+	 * 
 	 * @param model
 	 * @param sgNo
 	 * @param request
@@ -325,26 +326,98 @@ public class StudyGroupController {
 	 */
 	@RequestMapping("sgStart.go")
 	private String sgStart(Model model, int sgNo) {
-		
+
 		int result = sgService.sgStart(sgNo);
-		
-		if(result > 0) {
-			return "redirect:studyDetail.go?sgNo="+sgNo;
-		}else {
-			model.addAttribute("msg","시작 하기 실패");
+
+		if (result > 0) {
+			return "redirect:studyDetail.go?sgNo=" + sgNo;
+		} else {
+			model.addAttribute("msg", "시작 하기 실패");
 			return "common/errorPage";
 		}
 	}
+
 	@RequestMapping("dailyStudyList.go")
 	public void getdailyStudyList(HttpServletResponse response, int sgNo) throws JsonIOException, IOException {
 		ArrayList<DailyStudy> dsList = sgService.sgDailySlist(sgNo);
 		System.out.println(dsList);
 		response.setContentType("application/json; charset=UTF-8");
-		
+
 		Gson gson = new GsonBuilder().create();
-		
-		gson.toJson(dsList,response.getWriter());
-		
+
+		gson.toJson(dsList, response.getWriter());
+
+	}
 	
-}
+	/**
+	 * 갤러리 - 멀티 파일 저장 
+	 * 작성자 : 서정도
+	 * @param file
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 * @throws IllegalStateException
+	 */
+	@RequestMapping("photoUpload.go")
+	public String photoUpload(Gallery g, HttpServletRequest request,
+			@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
+		
+		int result = 0;
+		
+		for (int i = 0; i < file.length; i++) {
+			if (file.length > 0) {
+				
+				String g_RenameFile = saveMultiFile(file[i], request);
+				
+				if (g_RenameFile != null) {
+					
+					g.setG_Original_FileName(file[i].getOriginalFilename());
+					g.setG_Rename_FileName(g_RenameFile);
+
+					System.out.println("g.ori : " + g.getG_Original_FileName());
+					System.out.println("g.re : " + g.getG_Rename_FileName());
+					
+				}
+			}
+			result = sgService.photoUpload(g);
+		}
+
+		System.out.println("photoUpload : " + result);
+		
+		if(result > 0) {
+			return "redirect:sgList.go";
+		}else {
+			return "common/errorPage";
+		}
+	}
+
+	public String saveMultiFile(MultipartFile file, HttpServletRequest request)throws IllegalStateException, IOException {
+
+		String root = request.getSession().getServletContext().getRealPath("resources");
+
+		String savePath = root + "\\sgUploadFiles";
+		File folder = new File(savePath);
+
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+
+		String renameFileName = null;
+
+		String originFileName = file.getOriginalFilename();
+		System.out.println(originFileName);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS"); // yyyy : 년 / MM : 월 / dd : 일 / HH : 시 / mm : 분 / ss : 초 / SS : 1/1000초(0~999) 
+																		 // ==> 사진을 여러장 업로드 하기 때문에 초까지만 이름을 정해주면 이름 중접이 발생해 같은 파일명으로 파일 계속 생성된다.(덮어쓰기됨) 한개의 파일만 보임
+		renameFileName = originFileName.substring(0, originFileName.lastIndexOf(".")) + sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+				+ originFileName.substring(originFileName.lastIndexOf(".") + 1);
+
+		String renamePath = folder + "\\" + renameFileName;
+		System.out.println(renamePath);
+
+		file.transferTo(new File(renamePath));
+
+		System.out.println(renameFileName);
+
+		return renameFileName;
+	}
 }
