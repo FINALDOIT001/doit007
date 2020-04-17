@@ -9,6 +9,12 @@
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <title>Event</title>
+   
+<style>
+	.post_item {
+		cursor:pointer;
+	}
+</style>
 
 </head>
 
@@ -190,15 +196,15 @@
 
             <aside class="single_sidebar_widget popular_post_widget">
               <h3 class="widget_title">최근 게시물</h3>
+            <c:forEach var="event" items="${elist}" end="1">
               <div class="media post_item">
-                <img class="img8080" src="${contextPath}/resources/img/blog/it_blog1.jpg" alt="post">
+              	<input type="hidden" value="${ event.eNo }">
+                <img class="img8080" src="${contextPath}/resources/evUploadFiles/${ event.eRenameFileName }" alt="post">
                 <div class="media-body">
-                  <a href="single-blog.html">
-                    <h3>인공지능과의 연결고리, 그래프 기술 알아보기</h3>
-                  </a>
-                  <p>2시간 전</p>
+                    <h3>${ event.eTitle }</h3>
                 </div>
               </div>
+              </c:forEach>
             </aside>
             <aside class="single_sidebar_widget tag_cloud_widget">
               <h4 class="widget_title">태그 모음</h4>
@@ -227,6 +233,14 @@
 
 			location.href="eventView.ev?eNo="+eNo;
 		})
+		
+		
+		$('.post_item').on('click',function() {
+			var eNo = $(this).children().eq(0).val();
+
+			location.href="eventView.ev?eNo="+eNo;
+		})
+
 
 		$('#searching').on('click',function() {
 			var evSearch = $('#evSearch').val();

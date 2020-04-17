@@ -113,5 +113,11 @@ public interface EventService {
 	 */
 	ArrayList<Event> getTagList(EventPageInfo epi, String eTag);
 
+	/**
+	 * 9-1. 전체 리스트 가져오
+	 * @return
+	 */
+	ArrayList<Event> selectListAll();
+
 
 }

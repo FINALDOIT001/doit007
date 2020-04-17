@@ -81,4 +81,9 @@ public class EventServiceImpl implements EventService {
 		return eDao.getTagList(epi,eTag);
 	}
 
+	@Override
+	public ArrayList<Event> selectListAll() {
+		return eDao.selectListAll();
+	}
+
 }
