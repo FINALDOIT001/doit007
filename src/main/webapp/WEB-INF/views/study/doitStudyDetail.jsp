@@ -353,8 +353,7 @@ css
 	<div id="myModal" class="modal">
 
 		<!-- Modal content -->
-		<div class="modal-content" style='width: 60%; height: 60%;'>
-			<span class="close" onclick="closebtn();">&times;</span> <br>
+		<div class="modal-content" style='width: 50%; height: 45%;'>
 			<section class="about_part">
 				<div class="container">
 
@@ -379,9 +378,9 @@ css
 
 										<div class="col">
 											<input type="text" class="form-control"
-												placeholder="공부 주제 입력" name="studytitle" required>
+												placeholder="공부 주제 입력" name="studytitle" pattern=".{2,10}" required>
 											<div class="valid-feedback">Valid.</div>
-											<div class="invalid-feedback">공부 주제 입력</div>
+											<div class="invalid-feedback" name="checkchar">공부 주제 10글자 이내 입력 요망</div>
 											<input type="text" class="form-control" vlaue="니돈먹튀"
 												name="userId" hidden>
 											<!-- 방 개설 자 아이디 자동 입력 구간-->
@@ -445,7 +444,7 @@ css
 					<div style="text-align: center;">
 						<button onclick="submitto();" class="genric-btn danger circle"
 							style="font-size: 13px; margin-right: 10px;">등록</button>
-						<button type="reset" class="genric-btn danger circle"
+						<button onclick="closebtn();" class="genric-btn danger circle"
 							style="font-size: 13px;">취소</button>
 					</div>
 
@@ -456,7 +455,7 @@ css
 
 	</div>
 	<!--  모달이 꺼져 -->
-
+	
 
 	<!-- End Align Area -->
 
@@ -475,8 +474,7 @@ css
 
 	<!-- from 태그 값 넘기기 -->
 	<script>
-	
-	 
+		
 	
 	function submitto(){
 		$("#studyDali").submit();
@@ -546,28 +544,24 @@ css
 
 
 	<script>
-	var sgNo2 = ${sg.sgNo};
-		console.log("여긴 돌아감 : " + sgNo2);
+	
+
 	
 		
-	
-	
 
 		function closebtn() {//모달창 닫기
 			$("#myModal").css("display", "none");
 		}
 
 		document.addEventListener('DOMContentLoaded', function() {
+
+			
 			var sgNo = ${sg.sgNo};
 			var dailystudy=new Array();
 			
 			var list;
 			
-			
-				
-			
 			console.log(sgNo);
-			
 			
 			var calendarEl = document.getElementById('calendar');
 			
@@ -576,7 +570,12 @@ css
 				header : {
 					left : 'prev,next',
 					center : 'title',
+					
+					
 					right : 'today, myCustomButton',
+					
+				
+					
 				},
 				locale : 'ko',
 				defaultView : 'dayGridMonth',
