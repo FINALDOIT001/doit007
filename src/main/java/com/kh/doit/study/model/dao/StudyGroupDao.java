@@ -101,4 +101,9 @@ public class StudyGroupDao {
 		return sqlSession.insert("studyGroupMapper.photoUpload", g);
 	}
 
+	public int dailyStudyinsert(DailyStudy ds) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("studyGroupMapper.sgDailyinsert",ds);
+	}
+
 }
