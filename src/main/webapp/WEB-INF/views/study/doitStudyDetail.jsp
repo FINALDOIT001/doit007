@@ -450,7 +450,7 @@ css
 					<br>
 					<div style="text-align: center;">
 						<button onclick="submitto();" class="genric-btn danger circle"
-							style="font-size: 13px; margin-right: 10px;">등록</button>
+							style="font-size: 13px; margin-right: 10px;">등록</button> <!-- 정도씨가 구경 정호형이 ajax 할  예정  -->
 						<button onclick="closebtn();" class="genric-btn danger circle"
 							style="font-size: 13px;">취소</button>
 					</div>

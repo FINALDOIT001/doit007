@@ -374,9 +374,8 @@ public class StudyGroupController {
 		
 		int result = sgService.dailyStudyinsert(ds);
 		
-		 
 		 if(result > 0) {
-			 return "redirect:dailyStudyList.go";
+			 return "redirect:studyDetail.go?sgNo="+ds.getSsSgNo();
 		 }else {
 			 return "common/errorPage";
 		 }

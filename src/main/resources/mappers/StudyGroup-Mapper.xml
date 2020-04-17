@@ -173,7 +173,6 @@
 	<insert id="sgDailyinsert" parameterType="DailyStudy">
 	INSERT INTO STUDY_SCHEDULE
 	VALUES(SEQ_SSNO.NEXTVAL,#{ssSgNo},#{ssDayDate},#{ssTimeDate},#{ssTitle},#{ssAdd},#{ssExAdd},#{zipcode})
-
 	</insert>
 
 </mapper>
