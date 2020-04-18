@@ -58,23 +58,30 @@ public class EventController {
 		
 		String tag = "";
 		
-		ArrayList<Event> tagList = eService.selectListAll();
-		System.out.println("tagList.get(0).geteTag() : " +  tagList.get(0).geteTag());
-		for(int i = 0 ; i < tagList.size() ; i++) {
-			tag += tagList.get(i).geteTag()+",";
-		}
+		ArrayList<Event> tagList = null;
+		tagList = eService.selectListAll();
+		System.out.println("servlet TagList : " + tagList);
+		Set<String> hashArr = null;
+		String hashArr2 = "";
 		
-		String tagArr[] = tag.split(","); // 태그를 하나로 합친 다음에, 배열로 하나하나 잘라서 넣어준다. 
+		if (!tagList.isEmpty()) {
+			System.out.println("tagList.get(0).geteTag() : " +  tagList.get(0).geteTag());
+			for(int i = 0 ; i < tagList.size() ; i++) {
+				tag += tagList.get(i).geteTag()+",";
+			}
 		
-		Set<String> hashArr = new HashSet<String>(); // hashSet으로 중복제거를 해 준다..... 근데 여기서 문제네 Iterator 써 줘야되나?
-		
-		for(int i = 0 ; i < tagArr.length ; i++) {
-			hashArr.add(tagArr[i]);
-		}
-		
-		String hashArr2 = hashArr.toString(); // 중복제거한 hashSet을 다시 String으로 바꿔줍니다.( 앞 뒤 [ ] 지워주기 위해서)
+			String tagArr[] = tag.split(","); // 태그를 하나로 합친 다음에, 배열로 하나하나 잘라서 넣어준다. 
 			
-		hashArr2 = hashArr2.substring(1, hashArr2.length()-1); // 맨 앞과 맨 뒤에 [ ] 이 문자들을 지워줍니다.
+			hashArr = new HashSet<String>(); // hashSet으로 중복제거를 해 준다..... 근데 여기서 문제네 Iterator 써 줘야되나?
+			
+			for(int i = 0 ; i < tagArr.length ; i++) {
+				hashArr.add(tagArr[i]);
+			}
+			
+			hashArr2 = hashArr.toString(); // 중복제거한 hashSet을 다시 String으로 바꿔줍니다.( 앞 뒤 [ ] 지워주기 위해서)
+				
+			hashArr2 = hashArr2.substring(1, hashArr2.length()-1); // 맨 앞과 맨 뒤에 [ ] 이 문자들을 지워줍니다.
+		}
 		
 		mv.addObject("elist",list);
 		mv.addObject("epi",epi);
