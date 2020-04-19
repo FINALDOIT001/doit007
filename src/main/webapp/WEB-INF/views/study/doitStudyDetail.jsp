@@ -55,49 +55,8 @@
 	padding: 20px;
 	border: 1px solid #888;
 }
-/* The Close Button */
-.close {
-	color: #aaa;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
 
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-<!--
-모달
-
-
-
-
-
-
- 
-
-
-
-
-
-
-css
-
-
-
-
-
-
- 
-
-
-
-
-
-
--->
+<!--모달css-->
 </style>
 
 </head>
@@ -379,37 +338,43 @@ css
 							<div class="about_text">
 
 								<!-- 폼 태그 시작 부분 나중에 추가-->
-								<form id="studyDaily" action="dailyStudyinsert.go" method="post" class="was-validated">
+								<form id="studyDaily" action="dailyStudyinsert.go" method="post"
+									class="was-validated">
 									<div class="row">
 
 										<div class="col">
-										<input type="hidden" name="ssSgNo" value="${sg.sgNo}">
+											<input type="hidden" name="ssNo" id="ssNo"> <input
+												type="hidden" name="ssSgNo" id="ssSgNo" value="${sg.sgNo}">
 											<input type="text" class="form-control"
-												placeholder="공부 주제 입력" name="ssTitle" pattern=".{2,10}" required>
+												placeholder="공부 주제 입력" name="ssTitle" id="ssTitle"
+												pattern=".{2,15}" required>
 											<div class="valid-feedback">Valid.</div>
-											<div class="invalid-feedback" name="checkchar">공부 주제 10글자 이내 입력 요망</div>
-											<input type="text" class="form-control" vlaue="니돈먹튀"
-												name="userId" hidden>
+											<div class="invalid-feedback" name="checkchar">공부 주제
+												10글자 이내 입력 요망</div>
 											<!-- 방 개설 자 아이디 자동 입력 구간-->
 										</div>
 									</div>
 									<br>
-
-
 									<div class="row">
 										<div class="col">
-											<input type="time" class="form-control" name="ssTimeDate" required>
+											<input type="time" class="form-control" name="ssTimeDate"
+												id="ssTimeDate" required>
 											<div class="valid-feedback">Valid.</div>
 											<div class="invalid-feedback">만남 시간 설정</div>
 										</div>
 										<div class="col">
-										<fmt:parseDate value="${sg.sgStartDate}" var="sDataFmt" pattern="yyyy-MM-dd"/>
-										<fmt:formatDate value="${sDataFmt}" var="sgStartDate" pattern="yyyy-MM-dd"/>
-										<fmt:parseDate value="${sg.sgEndDate}" var="eDataFmt" pattern="yyyy-MM-dd"/>
-										<fmt:formatDate value="${eDataFmt}" var="sgEndDate" pattern="yyyy-MM-dd"/>
-										
+											<fmt:parseDate value="${sg.sgStartDate}" var="sDataFmt"
+												pattern="yyyy-MM-dd" />
+											<fmt:formatDate value="${sDataFmt}" var="sgStartDate"
+												pattern="yyyy-MM-dd" />
+											<fmt:parseDate value="${sg.sgEndDate}" var="eDataFmt"
+												pattern="yyyy-MM-dd" />
+											<fmt:formatDate value="${eDataFmt}" var="sgEndDate"
+												pattern="yyyy-MM-dd" />
+
 											<input type="date" class="form-control" id="dailyDate"
-												min="${sgStartDate}" max="${sgEndDate}" name="ssDayDate" required>
+												min="${sgStartDate}" max="${sgEndDate}" name="ssDayDate"
+												value="${sgStartDate}" required>
 											<div class="valid-feedback">Valid.</div>
 											<div class="invalid-feedback">스터디 일정 설정</div>
 										</div>
@@ -422,10 +387,12 @@ css
 												placeholder="우편번호" id="postcode" name="zipcode" required>
 										</div>
 										<div class="col">
-											<input type="button" class="genric-btn danger radius"
-												onclick="DaumPostcode();"
-												style="margin-bottom: 10px; font-size: 13px;"
-												value="우편번호 찾기">
+											<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+												<input type="button" class="genric-btn danger radius"
+													onclick="DaumPostcode();"
+													style="margin-bottom: 10px; font-size: 13px;"
+													value="우편번호 찾기">
+											</c:if>
 
 										</div>
 									</div>
@@ -449,10 +416,13 @@ css
 					<hr>
 					<br>
 					<div style="text-align: center;">
-						<button onclick="submitto();" class="genric-btn danger circle"
-							style="font-size: 13px; margin-right: 10px;">등록</button> <!-- 정도씨가 구경 정호형이 ajax 할  예정  -->
+						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+							<button id="insertGo_update;" class="genric-btn danger circle"
+								style="font-size: 13px; margin-right: 10px;">등록&수정</button>
+							<!-- 정도씨가 구경 정호형이 ajax 할  예정  -->
+						</c:if>
 						<button onclick="closebtn();" class="genric-btn danger circle"
-							style="font-size: 13px;">취소</button>
+							style="font-size: 13px;">닫기</button>
 					</div>
 
 				</div>
@@ -462,7 +432,8 @@ css
 
 	</div>
 	<!--  모달이 꺼져 -->
-	
+
+
 
 	<!-- End Align Area -->
 
@@ -470,8 +441,10 @@ css
 
 
 	<!-- 지도 주소 검색  js-->
-	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1b439b4a0ff0544fb67982c72bca1e3&libraries=services"></script>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d1b439b4a0ff0544fb67982c72bca1e3&libraries=services"></script>
 	<!-- 지도 주소 검색  js끝 -->
 
 	<script src='${fullcalPath}/core/main.js'></script>
@@ -483,23 +456,54 @@ css
 
 	<!-- 다음 지도 와 주소 검색 시작-->
 	<script>
+	function acctiveMap(data){
+		
+		var address;
+		var ssExAdd;
+		
+		 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+	     mapOption = {
+	         center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+	         level: 5 // 지도의 확대 레벨
+	     };
 
-	 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-     mapOption = {
-         center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-         level: 5 // 지도의 확대 레벨
-     };
-
- //지도를 미리 생성
-	 var map = new daum.maps.Map(mapContainer, mapOption);
- //주소-좌표 변환 객체를 생성
+	 //지도를 미리 생성
+		 var map = new daum.maps.Map(mapContainer, mapOption);
+	 	
+	if (data!=null){
+		address = data.ssAdd;
+		ssExAdd = data.ssExAdd;
+		
+		//주소-좌표 변환 객체를 생성
 		 var geocoder = new daum.maps.services.Geocoder();
- //마커를 미리 생성
- 		var marker = new daum.maps.Marker({
-    	 position: new daum.maps.LatLng(37.537187, 127.005476),
-     	map: map
- });
+//마커를 미리 생성
+	geocoder.addressSearch(address, function(result, status) {
 
+   // 정상적으로 검색이 완료됐으면 
+    if (status === kakao.maps.services.Status.OK) {
+
+       var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+       // 결과값으로 받은 위치를 마커로 표시합니다
+       var marker = new kakao.maps.Marker({
+           map: map,
+           position: coords
+       });
+
+       // 인포윈도우로 장소에 대한 설명을 표시합니다
+       var infowindow = new kakao.maps.InfoWindow({
+           content: '<div style="width:150px;text-align:center;padding:6px 0;">'+ssExAdd+'</div>'
+       });
+       infowindow.open(map, marker);
+
+       // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+       map.setCenter(coords);
+   }
+});    
+		
+
+	}
+	};
 
  function DaumPostcode() {
      new daum.Postcode({
@@ -518,8 +522,6 @@ css
                  if (status === daum.maps.services.Status.OK) {
 
                      var result = results[0]; //첫번째 결과의 값을 활용
-                     
-                     console.log(result);
 
                      // 해당 주소에 대한 좌표를 받아서
                      var coords = new daum.maps.LatLng(result.y, result.x);
@@ -538,25 +540,29 @@ css
 	
 	//다음 지도 와 주소 검색 끝 
 	</script>
-	
+
 
 
 	<script>
+		// 스터디 스케쥴 Update form 태그 post 방식으로 보내기 
+		function submitto1(){
+
+			var sub1=$("#studyDailyUpdate").submit();
+			console.log(sub);
+		}
 	
-
-		function submitto(){
-
+		// 스터디 스케쥴 insert form 태그 post 방식으로 보내기
+		function insertGo(){
 			var sub=$("#studyDaily").submit();
 			console.log(sub);
 		}
-
+		// 스터디 스케쥴 insert 모달장 display : none 처리 
 		function closebtn() {//모달창 닫기
 			$("#myModal").css("display", "none");
 		}
+		
 
 		document.addEventListener('DOMContentLoaded', function() {
-
-			
 			var sgNo = ${sg.sgNo};
 			var dailystudy=new Array();
 			
@@ -571,23 +577,12 @@ css
 				header : {
 					left : 'prev,next',
 					center : 'title',
-					
-					
-					right : 'today, myCustomButton',
-					
-				
-					
+					right : 'today, myCustomButton',	
 				},
 				locale : 'ko',
 				defaultView : 'dayGridMonth',
-				selectable : true,
-				select : function() {
-
-					
-					
-
-				},
-				
+				selectable : false,
+				// event 처리 Gson 으로 처리 후 리터럴 값 ecvents Array 변수에 넣어 출력 처리함. fullCalendal 4.0 적용.
 					events: function(fetchInfo, successCallback, failureCallback){
 						$.ajax({
 							  data:{sgNo:sgNo},
@@ -611,13 +606,45 @@ css
 								}	
 						});
 					},
+					//event cilck 시 상세 페이지 모탈창 구현 Gson 사용 각 리터럴 값을 Jquey 사용사여 값 입력 처리
+					eventClick : function(info){
+						var id = info.event.id;
+						console.log(id);
+						$.ajax({
+							data:{ssNo:id},
+							url:"dailyStudyView.go",
+							dataType:"json",
+							success:function(data){
+
+							    	  $('#myModal').css("display", "block");
+								      $("#ssNo").val(data.ssNo);
+								      $("#ssSgNo").val(data.ssSgNo);
+								      $("#ssTitle").val(data.ssTitle);
+								      $("#ssTimeDate").val(data.ssTimeDate);
+								      $("#dailyDate").val(data.ssDayDate);
+								      $("#postcode").val(data.zipcode);
+								      $("#address").val(data.ssAdd);
+								      $("#detailAddress").val(data.ssExAdd);
+								      
+								      acctiveMap(data);
+								      
+								      
+								
+							}
+						});
+						
+						
+					},
 					<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 					customButtons: {
 					    myCustomButton: {
 					      text: '일정등록',
 					      click: function() {
 					    	  $('#myModal').css("display", "block");
-					    	  map.relayout();
+					    	  $('form').each(function() {
+					    	      this.reset();
+					    	      acctiveMap();
+					    	  });
 					      }
 					    }
 					  },
@@ -625,12 +652,6 @@ css
 			});
 
 			calendar.render();
-			
-			/* 
-			
-			if(dailystudy.length > 0){
-				
-			} */
 			
 		});
 	</script>
@@ -669,9 +690,6 @@ css
 	<script src="${contextPath}/resources/js/datatables.js"></script>
 	<script src="${contextPath}/resources/js/kwonCustom.js"></script>
 	<script src="${contextPath}/resources/js/jungho.js"></script>
-
-
-
 
 </body>
 

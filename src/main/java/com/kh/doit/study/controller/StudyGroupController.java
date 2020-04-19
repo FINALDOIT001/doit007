@@ -454,4 +454,13 @@ public class StudyGroupController {
 
 		return renameFileName;
 	}
+	@RequestMapping("dailyStudyView.go")
+	public  void dailyStudyView(HttpServletResponse response, int ssNo) throws JsonIOException, IOException {
+		DailyStudy sd = sgService.dailyStudyView(ssNo);
+		System.out.println(sd);
+		response.setContentType("application/json; charset=UTF-8");
+		Gson gson = new GsonBuilder().create();
+		gson.toJson(sd, response.getWriter());
+		
+	}
 }

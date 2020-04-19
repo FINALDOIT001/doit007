@@ -160,6 +160,17 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		
 		return sgDao.dailyStudyinsert(ds);
 	}
+
+
+	/**이것은 스터디 스케쥴 디테일
+	 * 정호
+	 *
+	 */
+	@Override
+	public DailyStudy dailyStudyView(int ssNo) {
+		// TODO Auto-generated method stub
+		return sgDao.dailyStudyView(ssNo);
+	}
 	
 	
 

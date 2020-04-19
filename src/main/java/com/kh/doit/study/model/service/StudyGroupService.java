@@ -109,6 +109,13 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	int dailyStudyinsert(DailyStudy ds);
+
+	/*이것슨 스터디 스케줄 디테일
+	 * 정호
+	 * @param ssNo
+	 * @return
+	 */
+	DailyStudy dailyStudyView(int ssNo);
 	
 
 	

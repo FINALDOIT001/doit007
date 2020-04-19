@@ -106,4 +106,9 @@ public class StudyGroupDao {
 		return sqlSession.insert("studyGroupMapper.sgDailyinsert",ds);
 	}
 
+	public DailyStudy dailyStudyView(int ssNo) {
+		
+		return sqlSession.selectOne("studyGroupMapper.dailyStudyView",ssNo);
+	}
+
 }
