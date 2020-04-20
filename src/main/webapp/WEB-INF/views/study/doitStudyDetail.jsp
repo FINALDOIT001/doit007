@@ -559,21 +559,22 @@
 
 	<script>
 	function deleteDailyBtn(){
+		var ssSgNo = $("#ssSgNo").val();
 		var ssNo = $("#ssNo").val();
 		console.log(ssNo);
 		$.ajax({
 			url:"dailyStudyDelete.go",
 			data:{ssNo:ssNo},
-			type:"post",
-			success:function(date){
-				if(date=="ok"){
+			success:function(data){
+				if(data=="ok"){
 					alert("삭제성공")
+					location.href="studyDetail.go?sgNo="+ssSgNo;
 				}else{
 					alert("삭제실패")
 				}
 			},error:function(reqeust, status, errorDate){
 				alert("error code : "+ reqeust.status + "\n"
-						+"message : "+ request.responseText
+						+"message : "+ reqeust.responseText
 						+"error : "+errorDate);
 			}
 		

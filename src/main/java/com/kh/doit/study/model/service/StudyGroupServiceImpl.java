@@ -181,6 +181,16 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		
 		return sgDao.dailyStudyUpdate(ds);
 	}
+
+
+	/**이것은 스터디 스케쥴 지우기
+	 *정호
+	 */
+	@Override
+	public int dailyStudyDelete(String ssNo) {
+		
+		return sgDao.dailyStudyDelete(ssNo);
+	}
 	
 	
 

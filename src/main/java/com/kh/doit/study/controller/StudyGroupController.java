@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -477,11 +478,27 @@ public class StudyGroupController {
 		int result = sgService.dailyStudyUpdate(ds);
 		
 		if(result > 0) {
-			mv.addObject("ssNo",ds.getSsNo())
-			.setViewName("redirect:dailyStudyView.go");
+			mv.addObject("sgNo",ds.getSsSgNo())
+			.setViewName("redirect:studyDetail.go");
 		}else {
 			mv.addObject("msg", "스터디 스케줄 업데이트 실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
+	
+	@RequestMapping("dailyStudyDelete.go")
+	@ResponseBody
+	private String dailyStudyDelete(String ssNo, HttpServletRequest request) {
+	
+		int result = sgService.dailyStudyDelete(ssNo);
+		
+		if(result >0) {
+			return "ok";
+		}else{
+			return "fail";
+		}
+		
+	}
+		
+	
 }

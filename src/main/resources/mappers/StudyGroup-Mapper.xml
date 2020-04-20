@@ -189,6 +189,11 @@
 	SS_ZIPCODE = #{zipcode}
 	WHERE SS_NO = #{ssNo}
 	</update>
+	
+	<delete id="dailyStudyDelete" parameterType="String">
+	DELETE FROM STUDY_SCHEDULE
+	WHERE SS_NO = #{ssNo}
+	</delete>
 
 </mapper>
     

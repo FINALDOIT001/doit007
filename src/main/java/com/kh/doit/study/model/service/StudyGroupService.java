@@ -123,6 +123,13 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	int dailyStudyUpdate(DailyStudy ds);
+
+	/**이것슨 스터디 스케줄 지우기
+	 * 정호
+	 * @param ssNo
+	 * @return
+	 */
+	int dailyStudyDelete(String ssNo);
 	
 
 	

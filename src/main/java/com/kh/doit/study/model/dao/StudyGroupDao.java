@@ -116,4 +116,9 @@ public class StudyGroupDao {
 		return sqlSession.update("studyGroupMapper.dailyStudyUpdate", ds);
 	}
 
+	public int dailyStudyDelete(String ssNo) {
+		
+		return sqlSession.delete("studyGroupMapper.dailyStudyDelete",ssNo);
+	}
+
 }
