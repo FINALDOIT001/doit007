@@ -41,13 +41,14 @@
 			<section class="project_gallery">
 				<div class="project_gallery_tittle">
 					<h2>
-						<span>글</span> 작성
+						<span>이벤트 글</span> 작성
 					</h2>
 				</div>
 			</section>
 			<div class="row">
 				<div class="col-lg-12">
-					<form action="eventInsert.do" method="post" enctype="multipart/form-data">
+					<form action="eventInsert.do" method="post"
+						enctype="multipart/form-data">
 						<input type="hidden" name="eWriter" value="${ loginUser.mName }">
 						<input type="hidden" name="eWriterNo" value="${ loginUser.mno }">
 						<div class="row">
@@ -79,7 +80,7 @@
 							<div class="col-sm-3">
 								<div class="form-group">
 									<input class="form-control" name="eMonth" type="number" min="1"
-										max="12" placeholder="월">
+										max="12" placeholder="개최 월">
 								</div>
 							</div>
 							<div class="col-sm-3">
@@ -91,7 +92,7 @@
 							<div class="col-12">
 								<div class="form-group">
 									<textarea class="form-control w-100 placeholder hide-on-focus"
-										name="eIntro" id="eIntro" cols="30" rows="9"
+										name="eIntro" id="eIntro" cols="30" rows="6"
 										placeholder="인트로 내용을 입력하세요"></textarea>
 								</div>
 							</div>
@@ -103,11 +104,16 @@
 										placeholder="내용"></textarea>
 								</div>
 							</div>
-							<div class="offset-sm-9">
+							<div class="offset-sm-8">
 								<div>
-									<input type="submit" id="kwon-insert-204" class="genric-btn danger circle" style="font-size: 13px;" value="등록하기"></input>
-			                        <input type="reset" id="kwon-reset01" class="genric-btn danger circle" style="font-size: 13px;" value="취소하기"></input>
-			                        <input type="button" id="kwon-back01" class="genric-btn danger circle" style="font-size: 13px;" value="뒤로가기"></input>
+									<input type="submit" id="kwon-insert-204"
+										class="genric-btn danger circle" style="font-size: 13px;"
+										value="등록하기"></input> <input type="reset" id="kwon-reset01"
+										class="genric-btn danger circle"
+										style="font-size: 13px; margin-left: 10px; margin-right: 10px;"
+										value="취소하기"></input> <input type="button" id="kwon-back01"
+										class="genric-btn danger circle" style="font-size: 13px;"
+										value="뒤로가기"></input>
 								</div>
 							</div>
 						</div>
@@ -120,10 +126,11 @@
 
 
 	<jsp:include page="../common/footer.jsp" />
-	
-	
 
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
 	<script src="${contextPath}/resources/js/kwonCustom.js"></script>
 
 	<script>
@@ -147,14 +154,12 @@
 						});
 
 		$('#summernote3').summernote('code');
-
 	</script>
-	
+
 	<script>
- 	$('#kwon-insert-204').click(function() {
-		  location.href="eventInsert.do";
-	});
- 
+		$('#kwon-insert-204').click(function() {
+			location.href = "eventInsert.do";
+		});
 	</script>
 
 
