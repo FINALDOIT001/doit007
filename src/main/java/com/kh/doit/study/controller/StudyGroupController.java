@@ -454,6 +454,13 @@ public class StudyGroupController {
 
 		return renameFileName;
 	}
+	/**이거슨 스터티 스케줄 디테일 뷰 불러오기
+	 * 정호가 만든거
+	 * @param response
+	 * @param ssNo
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	@RequestMapping("dailyStudyView.go")
 	public  void dailyStudyView(HttpServletResponse response, int ssNo) throws JsonIOException, IOException {
 		DailyStudy sd = sgService.dailyStudyView(ssNo);
@@ -462,5 +469,19 @@ public class StudyGroupController {
 		Gson gson = new GsonBuilder().create();
 		gson.toJson(sd, response.getWriter());
 		
+	}
+	
+	@RequestMapping("dailyStudyUpdate.go")
+	private ModelAndView dailyStudyUpdate(ModelAndView mv, HttpServletRequest request, DailyStudy ds) {
+		
+		int result = sgService.dailyStudyUpdate(ds);
+		
+		if(result > 0) {
+			mv.addObject("ssNo",ds.getSsNo())
+			.setViewName("redirect:dailyStudyView.go");
+		}else {
+			mv.addObject("msg", "스터디 스케줄 업데이트 실패").setViewName("common/errorPage");
+		}
+		return mv;
 	}
 }

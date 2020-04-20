@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DailyStudy {
 	
-	private int ssNo;
+	private String ssNo;
 	private int ssSgNo;
 	private int zipcode;
 	private String ssTitle;
@@ -17,7 +17,7 @@ public class DailyStudy {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public DailyStudy(int ssNo, int ssSgNo, int zipcode, String ssTitle, String ssDayDate, String ssTimeDate,
+	public DailyStudy(String ssNo, int ssSgNo, int zipcode, String ssTitle, String ssDayDate, String ssTimeDate,
 			String ssAdd, String ssExAdd) {
 		super();
 		this.ssNo = ssNo;
@@ -29,10 +29,10 @@ public class DailyStudy {
 		this.ssAdd = ssAdd;
 		this.ssExAdd = ssExAdd;
 	}
-	public int getSsNo() {
+	public String getSsNo() {
 		return ssNo;
 	}
-	public void setSsNo(int ssNo) {
+	public void setSsNo(String ssNo) {
 		this.ssNo = ssNo;
 	}
 	public int getSsSgNo() {

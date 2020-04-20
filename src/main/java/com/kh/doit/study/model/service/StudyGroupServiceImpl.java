@@ -171,6 +171,16 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		// TODO Auto-generated method stub
 		return sgDao.dailyStudyView(ssNo);
 	}
+
+
+	/**이것은 스터디 스케쥴 업데이트
+	 *정호
+	 */
+	@Override
+	public int dailyStudyUpdate(DailyStudy ds) {
+		
+		return sgDao.dailyStudyUpdate(ds);
+	}
 	
 	
 

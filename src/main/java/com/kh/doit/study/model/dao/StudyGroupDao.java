@@ -111,4 +111,9 @@ public class StudyGroupDao {
 		return sqlSession.selectOne("studyGroupMapper.dailyStudyView",ssNo);
 	}
 
+	public int dailyStudyUpdate(DailyStudy ds) {
+		
+		return sqlSession.update("studyGroupMapper.dailyStudyUpdate", ds);
+	}
+
 }

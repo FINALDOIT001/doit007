@@ -55,8 +55,9 @@
 	padding: 20px;
 	border: 1px solid #888;
 }
-
-<!--모달css-->
+<!--
+모달css--
+>
 </style>
 
 </head>
@@ -417,19 +418,20 @@
 					<br>
 					<div style="text-align: center;">
 						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
-							<button id="insertGo_update;" class="genric-btn danger circle"
-								style="font-size: 13px; margin-right: 10px;">등록&수정</button>
+							<button id="insertbtn" onclick="ssinsertGo();" class="genric-btn danger circle"
+								style="font-size: 13px; margin-right: 10px;">등록</button>
+							<button id="updatebtn" onclick="ssupdatego();" class="genric-btn danger circle"
+							style="font-size: 13px; margin-right: 10px;">수정</button>
 							<!-- 정도씨가 구경 정호형이 ajax 할  예정  -->
+							<button id="deletebtn" onclick="deleteDailyBtn();" class="genric-btn danger circle"
+								style="font-size: 13px; margin-right: 10px;">삭제</button>
 						</c:if>
 						<button onclick="closebtn();" class="genric-btn danger circle"
 							style="font-size: 13px;">닫기</button>
 					</div>
-
 				</div>
 			</section>
-
 		</div>
-
 	</div>
 	<!--  모달이 꺼져 -->
 
@@ -510,6 +512,7 @@
          oncomplete: function(data) {
              var addr = data.address;
              var postcode = data.zonecode// 최종 주소 변수
+             var geocoder = new daum.maps.services.Geocoder();
 
              // 주소 정보를 해당 필드에 넣는다.
              document.getElementById("address").value = addr;
@@ -524,11 +527,22 @@
                      var result = results[0]; //첫번째 결과의 값을 활용
 
                      // 해당 주소에 대한 좌표를 받아서
-                     var coords = new daum.maps.LatLng(result.y, result.x);
-                     // 지도를 보여준다.
+            
                      
-                     map.relayout();
-                     // 지도 중심을 변경한다.
+                      var coords = new daum.maps.LatLng(result.y, result.x);
+                     var mapContainer = document.getElementById('map'),
+                     mapOption = {
+            	         center: coords, // 지도의 중심좌표
+            	         level: 5 // 지도의 확대 레벨
+            	     };
+                     var map = new daum.maps.Map(mapContainer, mapOption);
+                     
+                     var marker = new kakao.maps.Marker({
+                         map: map,
+                         position: coords
+                     });
+                     
+                    
                      map.setCenter(coords);
                      // 마커를 결과값으로 받은 위치로 옮긴다.
                      marker.setPosition(coords)
@@ -544,17 +558,42 @@
 
 
 	<script>
+	function deleteDailyBtn(){
+		var ssNo = $("#ssNo").val();
+		console.log(ssNo);
+		$.ajax({
+			url:"dailyStudyDelete.go",
+			data:{ssNo:ssNo},
+			type:"post",
+			success:function(date){
+				if(date=="ok"){
+					alert("삭제성공")
+				}else{
+					alert("삭제실패")
+				}
+			},error:function(reqeust, status, errorDate){
+				alert("error code : "+ reqeust.status + "\n"
+						+"message : "+ request.responseText
+						+"error : "+errorDate);
+			}
+		
+		});
+	};
+	
+	
 		// 스터디 스케쥴 Update form 태그 post 방식으로 보내기 
-		function submitto1(){
-
-			var sub1=$("#studyDailyUpdate").submit();
-			console.log(sub);
+		function ssupdatego(){
+			$("#studyDaily").attr("action","dailyStudyUpdate.go")
+			$("#studyDaily").submit();
+			console.log(sub1);
 		}
 	
 		// 스터디 스케쥴 insert form 태그 post 방식으로 보내기
-		function insertGo(){
-			var sub=$("#studyDaily").submit();
+		function ssinsertGo(){
+			$("#studyDaily").attr("action","dailyStudyinsert.go")
+			var sub = $("#studyDaily").submit();
 			console.log(sub);
+			
 		}
 		// 스터디 스케쥴 insert 모달장 display : none 처리 
 		function closebtn() {//모달창 닫기
@@ -617,6 +656,9 @@
 							success:function(data){
 
 							    	  $('#myModal').css("display", "block");
+							    	  $("#deletebtn").css("display", "inline");
+							    	  $("#updatebtn").css("display","inline");
+							    	  $("#insertbtn").css("display","none");
 								      $("#ssNo").val(data.ssNo);
 								      $("#ssSgNo").val(data.ssSgNo);
 								      $("#ssTitle").val(data.ssTitle);
@@ -626,7 +668,7 @@
 								      $("#address").val(data.ssAdd);
 								      $("#detailAddress").val(data.ssExAdd);
 								      
-								      acctiveMap(data);
+								      acctiveMap(data); 
 								      
 								      
 								
@@ -641,6 +683,9 @@
 					      text: '일정등록',
 					      click: function() {
 					    	  $('#myModal').css("display", "block");
+					    	  $("#deletebtn").css("display", "none");
+					    	  $("#updatebtn").css("display","none");
+					    	  $("#insertbtn").css("display","inline");
 					    	  $('form').each(function() {
 					    	      this.reset();
 					    	      acctiveMap();
@@ -655,13 +700,6 @@
 			
 		});
 	</script>
-
-
-	<script>
-		
-	</script>
-
-
 
 
 	<script>

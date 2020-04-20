@@ -179,6 +179,16 @@
 		SELECT * FROM STUDY_SCHEDULE
 		WHERE SS_NO =#{ssNo}
 	</select>
+	<update id="dailyStudyUpdate" parameterType="DailyStudy">
+	UPDATE STUDY_SCHEDULE SET
+	SS_DAY_DATE = #{ssDayDate},
+	SS_TIME_DATE = #{ssTimeDate},
+	SS_TITLE = #{ssTitle},
+	SS_ADDRESS = #{ssAdd},
+	SS_EXADDRESS = #{ssExAdd},
+	SS_ZIPCODE = #{zipcode}
+	WHERE SS_NO = #{ssNo}
+	</update>
 
 </mapper>
     
