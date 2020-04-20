@@ -48,6 +48,13 @@
         <div class="col-lg-8 mb-5 mb-lg-0">
           <div class="blog_left_sidebar">
           
+         	<c:if test="${ empty elist }">
+            <article class="blog_item eList001">
+            		<h2 style="text-align:center">게시글이 없습니다.</h2>
+            	</article>
+            </c:if>
+          
+          <c:if test="${ !empty elist  }">
 		<c:forEach var="event" items="${ elist }">
             <article class="blog_item eList001">
           	<input type="hidden" value="${ event.eNo }">
@@ -73,6 +80,8 @@
               </div>
             </article>
             </c:forEach>
+            
+            </c:if>
 <!-- 페이징 처리 -->
 
 	<table align="center">
@@ -118,6 +127,7 @@
 			</td>
 		</tr>
 		</table>
+		
 
 
 		<%-- <!-- 페이징 처리 -->
@@ -176,7 +186,7 @@
         <div class="col-lg-4">
           <div class="blog_right_sidebar">
             <aside class="single_sidebar_widget search_widget">
-			<c:if test="${ loginUser != null }">
+			<c:if test="${ loginUser.mUserroles == 777 }">
 			<c:url var="evInsert" value="evInsert.go">
 			</c:url>
              <a href="${ evInsert }"><button class="button rounded-0 primary-bg text-white w-100" type="button">글 작성하기</button></a><br><br>
@@ -196,6 +206,13 @@
 
             <aside class="single_sidebar_widget popular_post_widget">
               <h3 class="widget_title">최근 게시물</h3>
+            
+            <c:if test="${ empty elist }">
+            	<div class="media post_item">
+            		게시글이 없습니다.
+            	</div>
+            </c:if>
+            <c:if test="${ !empty elist  }">
             <c:forEach var="event" items="${elist}" end="1">
               <div class="media post_item">
               	<input type="hidden" value="${ event.eNo }">
@@ -205,6 +222,7 @@
                 </div>
               </div>
               </c:forEach>
+              </c:if>
             </aside>
             <aside class="single_sidebar_widget tag_cloud_widget">
               <h4 class="widget_title">태그 모음</h4>
