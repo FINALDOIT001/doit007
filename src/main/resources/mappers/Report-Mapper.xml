@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="ReportMapper">
+	
+<resultMap id="ReportResultSet" type="Report">
+	<id property="rpNo" column="RP_NO" />
+	<result property="rpWriter" column="RP_WRITER" />
+	<result property="rpUserID" column="RP_USERID" />
+	<result property="rpTitle" column="RP_TITLE" />
+	<result property="rpBno" column="RP_BNO" />
+	<result property="rpBType" column="RP_BTYPE" />
+	<result property="rpCotext" column="RP_CONTEXT" />
+	<result property="rpDate1" column="RP_DATE1" />
+	<result property="rpDate2" column="RP_DATE2" />
+	<result property="rpStatus" column="RP_STATUS" />
+</resultMap>
+	
+<insert id="Write" parameterType="Report">
+	INSERT INTO REPORTTABLE
+	VALUES(SEQ_RPNO.NEXTVAL,#{rpWriter},#{rpUserID},#{rpTitle},#{rpBno},#{rpBType},#{rpCotext},DEFAULT,DEFAULT,DEFAULT)
+</insert>
+
+</mapper>
