@@ -82,7 +82,7 @@ public class ReportController {
 		String resulrStr = "";
 		
 		if(result > 0) {
-			resulrStr = rpUserID + " 신고 완료.";
+			resulrStr = rpUserID + " 신고 완료. ";
 		}else {
 			resulrStr = "신고 실패";
 		}
