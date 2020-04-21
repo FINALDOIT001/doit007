@@ -2,15 +2,11 @@ package com.kh.doit.study.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +28,7 @@ import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
-
+import com.kh.doit.study.model.vo.StudyLike;
 
 @Controller
 public class StudyGroupController {
@@ -40,7 +36,9 @@ public class StudyGroupController {
 	@Autowired
 	private StudyGroupService sgService;
 
-	/**스터디 리스트 불러오기 (정호)
+	/**
+	 * 스터디 리스트 불러오기 (정호)
+	 * 
 	 * @param mv
 	 * @param currentPage
 	 * @return
@@ -65,8 +63,10 @@ public class StudyGroupController {
 
 		return mv;
 	}
-	
-	/** 스터디그룹 인설트(정호)
+
+	/**
+	 * 스터디그룹 인설트(정호)
+	 * 
 	 * @param sg
 	 * @param request
 	 * @param file
@@ -74,96 +74,96 @@ public class StudyGroupController {
 	 */
 	@RequestMapping("sgInsert.go")
 	public String sgInsert(StudyGroup sg, HttpServletRequest request,
-				@RequestParam(name="sbul", required=false)MultipartFile file) {
-				
-				
+			@RequestParam(name = "sbul", required = false) MultipartFile file) {
+
 		String join = sg.getSgJoin();
-		
-		if(join==null) {
+
+		if (join == null) {
 			sg.setSgJoin("N");
-			
-		}else {
+
+		} else {
 			sg.setSgJoin("Y");
 		}
-		
+
 		System.out.println(sg.getSgJoin());
 		System.out.println("사진 : " + file.getOriginalFilename());
-		
-		
-		if(!file.getOriginalFilename().equals("")) {
-			
+
+		if (!file.getOriginalFilename().equals("")) {
+
 			String renameFileName = saveFile(file, request);
-			
-			if(renameFileName !=null) {
+
+			if (renameFileName != null) {
 				sg.setSgOriginalFileName(file.getOriginalFilename());
 				sg.setSgRenameFileName(renameFileName);
 			}
-			
+
 		}
 		System.out.println(sg);
-		  int result = sgService.sgInsert(sg);
-		  
-		  if(result > 0) {
-			  return "redirect:sgList.go"; 
-			  }else { 
-				  return "common/errorPage";
-		
+		int result = sgService.sgInsert(sg);
+
+		if (result > 0) {
+			return "redirect:sgList.go";
+		} else {
+			return "common/errorPage";
+
+		}
 	}
-	}
-		  
-		  
-	/** 파일 저장 메소드(정호)
+
+	/**
+	 * 파일 저장 메소드(정호)
+	 * 
 	 * @param file
 	 * @param request
 	 * @return
 	 */
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
-		
+
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		
-		
+
 		String savePath = root + "\\sgloadFiles";
 		File folder = new File(savePath);
-		
-		if(!folder.exists()) {
+
+		if (!folder.exists()) {
 			folder.mkdir();
 		}
 		String originFileName = file.getOriginalFilename();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()))+"."
-				+ originFileName.substring(originFileName.lastIndexOf(".")+1);
-		
-		String renamePath = folder + "\\" +renameFileName;
+		String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+				+ originFileName.substring(originFileName.lastIndexOf(".") + 1);
+
+		String renamePath = folder + "\\" + renameFileName;
 		System.out.println(renamePath);
-		
+
 		try {
-			
+
 			file.transferTo(new File(renamePath));
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println("파일 전송 오류 :" + e.getMessage());
 		}
 		System.out.println(renameFileName);
 		return renameFileName;
 	}
-	
-	/**스터티 그룹 수정 뷰 불러오기 (정호)
+
+	/**
+	 * 스터티 그룹 수정 뷰 불러오기 (정호)
+	 * 
 	 * @param mv
 	 * @param sgNo
 	 * @return
 	 */
 	@RequestMapping("sgUpview.go")
-	public ModelAndView sgUpdateView(ModelAndView mv, int sgNo){
-		
-		
-		mv.addObject("sg", sgService.sgUpdateView(sgNo))
-		.setViewName("study/doitStudyUpdateFrom");
-		
+	public ModelAndView sgUpdateView(ModelAndView mv, int sgNo) {
+
+		mv.addObject("sg", sgService.sgUpdateView(sgNo)).setViewName("study/doitStudyUpdateFrom");
+
 		return mv;
-		
+
 	}
-	
-	/**스터티 그룹 수정 하기(정호)
+
+	/**
+	 * 스터티 그룹 수정 하기(정호)
+	 * 
 	 * @param mv
 	 * @param sg
 	 * @param request
@@ -171,111 +171,118 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("sgUdate.go")
-	public ModelAndView sgUpdate(ModelAndView mv, StudyGroup sg, HttpServletRequest request, 
-							@RequestParam(name="fileReLoader", required= false)MultipartFile file) {
-		
-		if(file != null && !file.isEmpty()) {
-			if(sg.getSgRenameFileName() != null) {
+	public ModelAndView sgUpdate(ModelAndView mv, StudyGroup sg, HttpServletRequest request,
+			@RequestParam(name = "fileReLoader", required = false) MultipartFile file) {
+
+		if (file != null && !file.isEmpty()) {
+			if (sg.getSgRenameFileName() != null) {
 				deleteFile(sg.getSgRenameFileName(), request);
-				
+
 			}
 			String renameFileName = saveFile(file, request);
-			
-			if(renameFileName != null) {
+
+			if (renameFileName != null) {
 				sg.setSgOriginalFileName(file.getOriginalFilename());
 				sg.setSgRenameFileName(renameFileName);
 			}
 		}
 		String join = sg.getSgJoin();
-		if(join==null) {
+		if (join == null) {
 			sg.setSgJoin("N");
-			
-		}else {
+
+		} else {
 			sg.setSgJoin("Y");
 		}
 		int result = sgService.sgUpdate(sg);
-		
-		if(result>0) {
-			mv.addObject("sgNo", sg.getSgNo())
-			.setViewName("redirect:studyDetail.go");
-		}else {
-			mv.addObject("msg","수정실패");
+
+		if (result > 0) {
+			mv.addObject("sgNo", sg.getSgNo()).setViewName("redirect:studyDetail.go");
+		} else {
+			mv.addObject("msg", "수정실패");
 		}
 		return mv;
 	}
-	
-	
-	/** 파일 지우기 메소드 (정호)
+
+	/**
+	 * 파일 지우기 메소드 (정호)
+	 * 
 	 * @param sgRenameFileName
 	 * @param request
 	 */
 	private void deleteFile(String sgRenameFileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "\\sgloadFiles";
-		
-		File f = new File(savePath+"\\"+ sgRenameFileName);
-		
-		if(f.exists()) {
+
+		File f = new File(savePath + "\\" + sgRenameFileName);
+
+		if (f.exists()) {
 			f.delete();
 		}
-		
+
 	}
-	
+
 	@RequestMapping("sgDelete.go")
 	private String sgDelete(Model model, int sgNo, HttpServletRequest request) {
 		StudyGroup sg = sgService.selectSg(sgNo);
-		
+
 		System.out.println(sg);
-		
-		if(sg.getSgRenameFileName() != null) {
+
+		if (sg.getSgRenameFileName() != null) {
 			deleteFile(sg.getSgRenameFileName(), request);
 		}
-		
+
 		int result = sgService.sgDelete(sgNo);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			return "redirect:sgList.go";
-		}else {
-			model.addAttribute("msg","삭제 하기 실패");
+		} else {
+			model.addAttribute("msg", "삭제 하기 실패");
 			return "common/errorPage";
 		}
 	}
 
 	/**
-	 * 디테일 상세내용 / 참석자
-	 * 작성자 : 서정도
+	 * 디테일 상세내용 / 참석자 작성자 : 서정도
+	 * 
 	 * @param mv
 	 * @param sgNo
 	 * @param currentPage
 	 * @return
 	 */
 	@RequestMapping("studyDetail.go")
-	public ModelAndView studyDetail(ModelAndView mv, int sgNo,
+	public ModelAndView studyDetail(ModelAndView mv, int sgNo, String mno,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
 		StudyGroup sg = sgService.selectSg(sgNo);
-		
+
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
+		StudyLike sl = new StudyLike();
+		if(mno != "") {
+		
+		String slNo= mno+sgNo;
+		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
+		
+			 sl = sgService.studyLikeList(slNo);
+			System.out.println("studyList" + sl);
+		}
+
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
-		
+
 		if (sg != null) {
-			mv.addObject("sg", sg)
-			  .addObject("ml",ml)
-			  .addObject("currentPage", currentPage)
-			  .setViewName("study/doitStudyDetail");
+			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl)
+					.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}
- 
+
 		return mv;
 	}
-	
-	
+
 	/**
-	 * 스터디 탈퇴
-	 * 작성자 : 서정도
+	 * 스터디 탈퇴 작성자 : 서정도
+	 * 
 	 * @param model
 	 * @param sgNo
 	 * @param request
@@ -283,20 +290,20 @@ public class StudyGroupController {
 	 */
 	@RequestMapping("sgGroupOut.go")
 	private String sgGroupOut(Model model, int mno, HttpServletRequest request) {
-		
+
 		int result = sgService.sgGroupOut(mno);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			return "redirect:sgList.go";
-		}else {
-			model.addAttribute("msg","탈퇴 하기 실패");
+		} else {
+			model.addAttribute("msg", "탈퇴 하기 실패");
 			return "common/errorPage";
 		}
 	}
-	
+
 	/**
-	 * 스터디 가입
-	 * 작성자 : 서정도
+	 * 스터디 가입 작성자 : 서정도
+	 * 
 	 * @param model
 	 * @param sgNo
 	 * @param request
@@ -304,20 +311,20 @@ public class StudyGroupController {
 	 */
 	@RequestMapping("sgJoin.go")
 	private String sgJoin(Model model, int sgNo, int mno) {
-		
-		GroupMember gm = new GroupMember(sgNo,mno);
-		
+
+		GroupMember gm = new GroupMember(sgNo, mno);
+
 		int result = sgService.sgJoin(gm);
-		
-		if(result > 0) {
-			return "redirect:studyDetail.go?sgNo="+sgNo;
-			
-		}else {
-			model.addAttribute("msg","가입 하기 실패");
+
+		if (result > 0) {
+			return "redirect:studyDetail.go?sgNo=" + sgNo;
+
+		} else {
+			model.addAttribute("msg", "가입 하기 실패");
 			return "common/errorPage";
 		}
 	}
-	
+
 	/**
 	 * 스터디 시작 작성자 : 서정도
 	 * 
@@ -339,9 +346,9 @@ public class StudyGroupController {
 		}
 	}
 
-
-	/**이것슨 스터디 스케쥴 리스트 불러오기
-	 * 정호가 만든겨
+	/**
+	 * 이것슨 스터디 스케쥴 리스트 불러오기 정호가 만든겨
+	 * 
 	 * @param response
 	 * @param sgNo
 	 * @throws JsonIOException
@@ -358,35 +365,34 @@ public class StudyGroupController {
 		gson.toJson(dsList, response.getWriter());
 
 	}
-		
-		
-	/**이것슨 스터디 스케쥴 리스트 저장하기
-	 * 정호가 만든겨
+
+	/**
+	 * 이것슨 스터디 스케쥴 리스트 저장하기 정호가 만든겨
+	 * 
 	 * @param ds
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("dailyStudyinsert.go")
-	private String dailyStudyinsert(DailyStudy ds, HttpServletRequest request 
-			,@RequestParam(value="ssTimeDate" ,required = false)String ssTimeDate) {
+	private String dailyStudyinsert(DailyStudy ds, HttpServletRequest request,
+			@RequestParam(value = "ssTimeDate", required = false) String ssTimeDate) {
 		System.out.println(ssTimeDate);
-		 
-		 System.out.println(ds);
-		
+
+		System.out.println(ds);
+
 		int result = sgService.dailyStudyinsert(ds);
-		
-		 if(result > 0) {
-			 return "redirect:studyDetail.go?sgNo="+ds.getSsSgNo();
-		 }else {
-			 return "common/errorPage";
-		 }
-		
-		
+
+		if (result > 0) {
+			return "redirect:studyDetail.go?sgNo=" + ds.getSsSgNo();
+		} else {
+			return "common/errorPage";
+		}
+
 	}
-	
+
 	/**
-	 * 갤러리 - 멀티 파일 저장 
-	 * 작성자 : 서정도
+	 * 갤러리 - 멀티 파일 저장 작성자 : 서정도
+	 * 
 	 * @param file
 	 * @param request
 	 * @return
@@ -396,37 +402,38 @@ public class StudyGroupController {
 	@RequestMapping("photoUpload.go")
 	public String photoUpload(Gallery g, HttpServletRequest request,
 			@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
-		
+
 		int result = 0;
-		
+
 		for (int i = 0; i < file.length; i++) {
 			if (file.length > 0) {
-				
+
 				String g_RenameFile = saveMultiFile(file[i], request);
-				
+
 				if (g_RenameFile != null) {
-					
+
 					g.setG_Original_FileName(file[i].getOriginalFilename());
 					g.setG_Rename_FileName(g_RenameFile);
 
 					System.out.println("g.ori : " + g.getG_Original_FileName());
 					System.out.println("g.re : " + g.getG_Rename_FileName());
-					
+
 				}
 			}
 			result = sgService.photoUpload(g);
 		}
 
 		System.out.println("photoUpload : " + result);
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			return "redirect:sgList.go";
-		}else {
+		} else {
 			return "common/errorPage";
 		}
 	}
 
-	public String saveMultiFile(MultipartFile file, HttpServletRequest request)throws IllegalStateException, IOException {
+	public String saveMultiFile(MultipartFile file, HttpServletRequest request)
+			throws IllegalStateException, IOException {
 
 		String root = request.getSession().getServletContext().getRealPath("resources");
 
@@ -441,9 +448,13 @@ public class StudyGroupController {
 
 		String originFileName = file.getOriginalFilename();
 		System.out.println(originFileName);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS"); // yyyy : 년 / MM : 월 / dd : 일 / HH : 시 / mm : 분 / ss : 초 / SS : 1/1000초(0~999) 
-																		 // ==> 사진을 여러장 업로드 하기 때문에 초까지만 이름을 정해주면 이름 중접이 발생해 같은 파일명으로 파일 계속 생성된다.(덮어쓰기됨) 한개의 파일만 보임
-		renameFileName = originFileName.substring(0, originFileName.lastIndexOf(".")) + sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS"); // yyyy : 년 / MM : 월 / dd : 일 / HH : 시 / mm : 분
+																			// / ss : 초 / SS : 1/1000초(0~999)
+																			// ==> 사진을 여러장 업로드 하기 때문에 초까지만 이름을 정해주면 이름
+																			// 중접이 발생해 같은 파일명으로 파일 계속 생성된다.(덮어쓰기됨) 한개의
+																			// 파일만 보임
+		renameFileName = originFileName.substring(0, originFileName.lastIndexOf("."))
+				+ sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
 				+ originFileName.substring(originFileName.lastIndexOf(".") + 1);
 
 		String renamePath = folder + "\\" + renameFileName;
@@ -455,50 +466,85 @@ public class StudyGroupController {
 
 		return renameFileName;
 	}
-	/**이거슨 스터티 스케줄 디테일 뷰 불러오기
-	 * 정호가 만든거
+
+	/**
+	 * 이거슨 스터티 스케줄 디테일 뷰 불러오기 정호가 만든거
+	 * 
 	 * @param response
 	 * @param ssNo
 	 * @throws JsonIOException
 	 * @throws IOException
 	 */
 	@RequestMapping("dailyStudyView.go")
-	public  void dailyStudyView(HttpServletResponse response, int ssNo) throws JsonIOException, IOException {
+	public void dailyStudyView(HttpServletResponse response, int ssNo) throws JsonIOException, IOException {
 		DailyStudy sd = sgService.dailyStudyView(ssNo);
 		System.out.println(sd);
 		response.setContentType("application/json; charset=UTF-8");
 		Gson gson = new GsonBuilder().create();
 		gson.toJson(sd, response.getWriter());
-		
+
 	}
-	
+
 	@RequestMapping("dailyStudyUpdate.go")
 	private ModelAndView dailyStudyUpdate(ModelAndView mv, HttpServletRequest request, DailyStudy ds) {
-		
+
 		int result = sgService.dailyStudyUpdate(ds);
-		
-		if(result > 0) {
-			mv.addObject("sgNo",ds.getSsSgNo())
-			.setViewName("redirect:studyDetail.go");
-		}else {
+
+		if (result > 0) {
+			mv.addObject("sgNo", ds.getSsSgNo()).setViewName("redirect:studyDetail.go");
+		} else {
 			mv.addObject("msg", "스터디 스케줄 업데이트 실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping("dailyStudyDelete.go")
 	@ResponseBody
 	private String dailyStudyDelete(String ssNo, HttpServletRequest request) {
-	
+
 		int result = sgService.dailyStudyDelete(ssNo);
-		
-		if(result >0) {
+
+		if (result > 0) {
 			return "ok";
-		}else{
+		} else {
 			return "fail";
+		}
+
+	}
+
+	@RequestMapping("studyLikeInsert.go")
+	@ResponseBody
+	private String studyLikeInsert(StudyLike sl, HttpServletRequest request) {
+
+		int slno = Integer.parseInt(Integer.toString(sl.getSlmNo()) + sl.getSlsgNo());
+
+		sl.setSlNo(slno);
+
+		System.out.println(sl);
+		int result = sgService.studyLikeInsert(sl);
+		System.out.println(result);
+
+		if (result > 0) {
+			return "ok";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@RequestMapping("studyLikeDelete.go")
+	@ResponseBody
+	private String studyLikeDelete(HttpServletRequest requset, int slmNo, int slsgNo ) {
+		int slNo = Integer.parseInt(Integer.toString(slmNo) + slsgNo);
+		
+		int result = sgService.studyLikeDelete(slNo);
+		
+		if(result > 0) {
+			return "ok";
+		}else {
+			return "fail";
+		
 		}
 		
 	}
-		
-	
+
 }

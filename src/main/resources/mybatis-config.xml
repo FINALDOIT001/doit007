@@ -23,6 +23,7 @@
 		<typeAlias type="com.kh.doit.event.model.vo.EventReply" alias="EventReply"/>
 		<typeAlias type="com.kh.doit.study.model.vo.DailyStudy" alias="DailyStudy"/>
 		<typeAlias type="com.kh.doit.study.model.vo.Gallery" alias="Gallery"/>
+		<typeAlias type="com.kh.doit.study.model.vo.StudyLike" alias="StudyLike"/>
 		
 		<typeAlias type="com.kh.doit.qna.model.vo.Qna" alias="Qna"/>
 		<typeAlias type="com.kh.doit.qna.model.vo.QnaReply" alias="QnaReply"/>

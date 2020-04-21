@@ -78,6 +78,12 @@
 		<result property="g_Original_FileName" column="G_ORGINAL_FILENAME" />
 		<result property="g_Rename_FileName" column="G_RENAME_FILENAME" />
 	</resultMap>
+	
+	<resultMap id="studyLikeResultSet" type="StudyLike">
+		<id property="slNo" column="SL_NO"/>
+		<result property="slmNo" column="M_NO"/>
+		<result property="slsgNo" column="SG_NO"/>
+	</resultMap>
 
 	<select id="getlistCount" resultType="_int">
 		SELECT COUNT(*)
@@ -194,6 +200,20 @@
 	DELETE FROM STUDY_SCHEDULE
 	WHERE SS_NO = #{ssNo}
 	</delete>
+	
+	<insert id="studyLikeInsert" parameterType="StudyLike">
+	INSERT INTO STUDY_LIKE
+	VALUES(#{slNo},#{slmNo},#{slsgNo})
+	</insert>
+	
+	<delete id="studyLikeDelete" parameterType="_int">
+	DELETE FROM STUDY_LIKE
+	WHERE SL_NO = #{slNo}
+	</delete>
+	<select id="studyLikeList" parameterType="String" resultMap="studyLikeResultSet">
+	SELECT * FROM STUDY_LIKE
+	WHERE SL_NO = #{slNo}
+	</select>
 
 </mapper>
     
