@@ -94,7 +94,14 @@
 								</div>
 								</a>
 								
-								<a id="reportAtag" class="dropdown-item d-flex align-items-center" href="report.rp?rpUserID=${b.b_writer}" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+								<%-- <c:url var="newReport" value="report.rp">
+	                  				<c:param name="rpUserID" value="${b.b_writer}"/>
+	                  				<c:param name="rpTitle" value="${ b.b_title }"/>
+	                  				<c:param name="rpBno" value="${ b.b_no }"/>
+	                  				<c:param name="rpBType" value="FREEBOARD"/>
+                  				</c:url> --%>
+								
+								<a id="reportAtag" class="dropdown-item d-flex align-items-center" href="report.rp?rpUserID=${b.b_writer}&rpTitle=${ b.b_title }&rpBno=${ b.b_no }&rpBType=FREEBOARD" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
 								<div class="mr-3"></div>
 								<div>
 									<i class="fas fa-user-alt-slash"></i>

@@ -26,6 +26,8 @@
 		
 		<typeAlias type="com.kh.doit.qna.model.vo.Qna" alias="Qna"/>
 		<typeAlias type="com.kh.doit.qna.model.vo.QnaReply" alias="QnaReply"/>
+		
+		<typeAlias type="com.kh.doit.report.model.vo.Report" alias="Report"/>
 
 	</typeAliases>
 	
@@ -44,6 +46,7 @@
 		<mapper resource="mappers/board-Mapper.xml"/>
 		<mapper resource="mappers/ev-mapper.xml"/>
 		<mapper resource="mappers/message-Mapper.xml"/>
+		<mapper resource="mappers/Report-Mapper.xml"/>
 	</mappers>
 	
 </configuration>
