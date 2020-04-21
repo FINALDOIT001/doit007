@@ -8,6 +8,7 @@
     border: 1px solid black; 
     width:100%;
     height:500px;
+    background-size : cover;
 }
  
 .filebox input[type="file"] {  /* 파일 필드 숨기기 */

@@ -2,7 +2,9 @@ package com.kh.doit.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.doit.member.model.service.MemberService;
+import com.kh.doit.member.model.service.myPageServiceImpl;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.message.model.service.MessageService;
 import com.kh.doit.message.model.vo.Message;
@@ -35,6 +38,7 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
+	
 	
 	// 암호화 처리 
 	@Autowired
@@ -189,11 +193,31 @@ public class MemberController {
 			
 		}
 		
+		/**
+		 * 아이디찾기 화면 이동
+		 * 김혜림
+		 * @return
+		 */
 		@RequestMapping("searchId.go")
 		public String searchId() {
 			return "member/SearchId";
 		}
 		
+		@RequestMapping("searchId2.go")
+		public ModelAndView searchId2(ModelAndView mv, @RequestParam(value="id", required=false) String id) {
+			mv.addObject("id",id);
+			mv.setViewName("member/SearchId2");
+			return mv;
+		}
+		
+		/**
+		 * 아이디 찾기 
+		 * 김혜림
+		 * @param response
+		 * @param email
+		 * @throws JsonIOException
+		 * @throws IOException
+		 */
 		@RequestMapping("startSearch.go")
 		public void startSearch(HttpServletResponse response, @RequestParam String email) throws JsonIOException, IOException {
 			
@@ -212,10 +236,35 @@ public class MemberController {
 		}
 
 		
+		/**
+		 * 비밀번호 찾기 화면 이동
+		 * 김혜림
+		 * @return
+		 */
 		@RequestMapping("searchPwd.go")
-		public String searchPwd() {
-			return "member/SearchPwd";
+		public ModelAndView searchPwd(ModelAndView mv) {
+			int ran = new Random().nextInt(900000) + 100000;
+			mv.addObject("random",ran);
+			mv.setViewName("member/SearchPwd");
+			return mv;
 		}
 		
+		@RequestMapping("startPwd.go")
+		public void startPwd( Member m,HttpServletResponse response, @RequestParam String id, @RequestParam String email) throws JsonIOException, IOException {
+			m.setmId(id);
+			m.setmEmail(email);
+			int result = mService.countPwd(m);
+			
+			response.setContentType("application/json; charset=utf-8");
+			
+			Gson gson = new GsonBuilder().create();
+			if(result > 0) {
+				gson.toJson("ok",response.getWriter());
+				
+			}else {
+				gson.toJson("no",response.getWriter());
+			}
+		}
 		
+
 }

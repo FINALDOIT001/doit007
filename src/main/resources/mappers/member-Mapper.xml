@@ -162,7 +162,12 @@
 		WHERE GM_M_NO=#{gm_m_no}
     </select>
     
-
+	 <select id="countPwd" resultType="_int">
+    	SELECT COUNT(*)
+    	FROM MEMBER
+    	WHERE M_ID=#{mId}
+    	AND M_EMAIL=#{mEmail}
+    </select>
     
     
     
