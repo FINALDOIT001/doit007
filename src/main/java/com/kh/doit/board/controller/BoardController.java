@@ -145,6 +145,12 @@ public class BoardController {
 		return mv;
 	}
 	
+	/**
+	 * 현아.자유게시판 수정폼
+	 * @param mv
+	 * @param b_no
+	 * @return
+	 */
 	@RequestMapping("fbUpdateForm.go")
 	public ModelAndView fboardUpdate(ModelAndView mv,int b_no) {
 		mv.addObject("b",bService.selectUpdateBoard(b_no)).setViewName("board/freeBoard_upwrite");
@@ -152,6 +158,14 @@ public class BoardController {
 		return mv;
 	}
 	
+	/**
+	 * 현아.자유게시판 수정하기
+	 * @param mv
+	 * @param b
+	 * @param request
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping("fbUpdate.go")
 	public ModelAndView updatefboard(ModelAndView mv,@ModelAttribute Board b,HttpServletRequest request,
 										@RequestParam(value="reloadFile",required=false) MultipartFile file) {
@@ -190,6 +204,13 @@ public class BoardController {
 		}
 	}
 	
+	/**
+	 * 현아.자유게시판 삭제
+	 * @param model
+	 * @param b_no
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("fbdelete.go")
 	public String fboardDelete(Model model,int b_no,HttpServletRequest request) {
 		Board b = bService.selectUpdateBoard(b_no);
@@ -208,6 +229,13 @@ public class BoardController {
 		}
 	}
 	
+	/**
+	 * 현아.댓글리스트 
+	 * @param response
+	 * @param b_no
+	 * @throws JsonIOException
+	 * @throws IOException
+	 */
 	@RequestMapping("bcList.go")
 	public void getCommentList(HttpServletResponse response,int b_no) throws JsonIOException, IOException {
 		
@@ -221,6 +249,11 @@ public class BoardController {
 	
 		
 	
+	/**
+	 * 현아.댓글등록
+	 * @param bc
+	 * @return
+	 */
 	@RequestMapping("addComment.go")
 	@ResponseBody
 	public String addComment(Board_Comments bc) {
@@ -232,7 +265,13 @@ public class BoardController {
 			return "fail";
 		}
 	}
-
+	
+	
+	/**
+	 * 현아.댓글삭제
+	 * @param bc_no
+	 * @return
+	 */
 	@RequestMapping("deleteComment.go")
 	@ResponseBody
 	public String deleteComment(int bc_no) {

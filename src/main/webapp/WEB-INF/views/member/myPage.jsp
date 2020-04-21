@@ -208,35 +208,54 @@
                </form>
             </div>
             <!-- tab1 end -->
+
 <!-- tab2 start -->
             <div class="tab-pane container fade" id="menu1">
                <div class="row" style="padding: 20px;">
-                  <!-- study list start -->
+             <!-- study list start -->
+             <c:forEach var="sg" items="${sglist}">
+                  <c:if test="${!empty sg.sgRenameFileName}">
                   <div class="col-md-2" style="text-align: center;">
-                     <img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
+                     <img src="${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
                   </div>
+                  </c:if>
+                 
                   <div class="col-md-9 mt-sm-20">
-                     <a href="studyDetail.go" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">JAVA 스터디 그룹</label>
+                     <a href="studyDetail.go" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">${sg.sgTitle}</label>
                      </a>
-                        <div class="starRev" style="width: 60px; display:inline;">
+                        <!-- <div class="starRev" style="width: 60px; display:inline;">
                            <span class="starR on" style="margin-left: 20px; width: 20px; height: 20px;"></span> 
-                        </div>
-                     <h5 class="mb-1 text-primary" style="font-weight: bold;">모집 중</h5>
+                        </div> -->
+                     	<c:if test="${sg.sgConfirm eq 'Y'}">
+							<h5 class="mb-2 text-primary" style="font-weight: bold;">모집중</h5>
+						</c:if>
+						<c:if test="${sg.sgConfirm eq 'N'}">
+							<h5 class="mb-1 text-danger" style="font-weight: bold; color: red;">모집 완료</h5>
+						</c:if>
                      <ul class="study_ul">
-                        <li class="study_li">조장 : 박정호</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">3/8</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">서울시 강남구</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png">20,000</li>
+                        <li class="study_li">${sg.sgWriter}</li>
+                        <li class="study_li">
+                        	<c:set var="maxPeople" value="${sg.sgMaxPeople}"/>
+							<c:set var="newPeople" value="${sg.sgNowPeople}"/>
+							<c:if test="${maxPeople == newPeople}">
+								<li class="study_li text-danger"><img src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+							</c:if>
+							<c:if test="${maxPeople != newPeople}">
+								<li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+							</c:if>
+                        
+                        </li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">${sg.sgAddr}</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 원</li>
                      </ul>
                      <ul class="study_">
-                        <li class="study_tag">Java</li>
-                        <li class="study_tag">오프라인</li>
-                        <li class="study_tag">스터디그룹</li>
-                        
-                     </ul>
+						<c:forTokens var="teg" items="${sg.sgTag}" delims="@">
+							<li class="study_tag">${teg}</li>
+						</c:forTokens>
+					</ul>
 
                   </div>
-
+				</c:forEach>
                   <div class="col-lg-12">
                      <hr>
                   </div>

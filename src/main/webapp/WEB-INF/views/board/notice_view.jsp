@@ -40,7 +40,7 @@
     <div class="container">
        <div class="row">
           <div class="section_tittle">
-             <h2><span>DO IT</span> &nbsp;NOTICE</h2>
+             <h2><span>DO IT</span> &nbsp;공지사항</h2>
           </div>
        </div>
        <table class="" width="1244" border="0" cellspacing="0" cellpadding="0">
@@ -78,7 +78,7 @@
 				</tr>
 				<tr>
       	   <tr>
-           <td colspan="6">                              
+           <td colspan="6" style="padding:15px;">                              
 		   <!-- 본문 내용 -->	
 		   <input type="textarea" class="" id="summernote" name="">
            </td>

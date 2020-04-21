@@ -458,7 +458,7 @@
 							<p>
 								<a href="#">Event</a> / March 18, 2020
 							</p>
-							<a href="blog.html">
+							<a href="elist.go">
 								<h4>인공지능의 연결고리, 그래프 기술 알아보기</h4>
 							</a>
 							<ul class="list-unstyled">
