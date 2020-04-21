@@ -122,4 +122,12 @@
     	FROM MEMBER
     	WHERE M_EMAIL=#{email}
     </select>
-</mapper>
+    
+    <select id="countPwd" resultType="_int">
+    	SELECT COUNT(*)
+    	FROM MEMBER
+    	WHERE M_ID=#{mId}
+    	AND M_EMAIL=#{mEmail}
+    </select>
+    
+    </mapper>

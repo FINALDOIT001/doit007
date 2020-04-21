@@ -33,4 +33,8 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.countId",email);
 	}
 
+	public int countPwd(Member m) {
+		return sqlSession.selectOne("memberMapper.countPwd",m);
+	}
+
 }

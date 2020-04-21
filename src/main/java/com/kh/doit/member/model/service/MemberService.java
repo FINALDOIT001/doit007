@@ -49,9 +49,18 @@ public interface MemberService {
 	int countId(String email);
 
 
+	/**
+	 * 비밀번호 찾기 
+	 * 2020-04-21 김혜림
+	 * @param id
+	 * @param email
+	 * @return
+	 */
+	int countPwd(Member m);
 
 
-	
+	public boolean send(String subject, String text, String from, String to, String filePath);
+
 	
 	
 }

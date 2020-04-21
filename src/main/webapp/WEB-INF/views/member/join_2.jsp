@@ -21,7 +21,7 @@
                      class="integrated-sign-inner card o-hidden border-0 shadow-lg my-5"
                      style="padding: 70px; width: 600px;">
                      <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4" style="font-weight: 800;">REGISTER</h1>
+                        <h1 class="h4 text-gray-900 mb-4" style="font-weight: 800;">회원가입</h1>
                      </div>
                      <form id="terms_form" action="joinform.go">
                      

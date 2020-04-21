@@ -37,6 +37,7 @@
 	            	<input type="text" style="width: 300px; display: inline;"
 	            			class="form-control hide-on-focus" id="numcheck" name="numcheck" 
 	            			placeholder="인증번호를 입력하세요." required/>
+	            	<input type="hidden" path="random" id="random" value="${ random }" />
 					<input type="button" style="margin-bottom: 6px;" class="btn btn-dark" value="인증하기"/>
 	            </div>
 	           </form>
@@ -54,7 +55,34 @@
 	$("#emailcheck").hide();
 	
 		function insertcheck() {
-			$("#emailcheck").show();
+ 			var id = $("#checkid").val();
+			var email = $("#searchEmail").val();
+			var exptext=/^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+			
+			if(id == ""){
+				alert("아이디를 입력해주세요.");
+				return false;
+			}else if(exptext.test(email)==false){
+				alert("이메일 형식이 아닙니다.");
+				return false;
+			}else{
+				$.ajax({
+					url:"startPwd.go",
+					data: {id:id, email:email},
+					type:"post",
+					success:function(data){
+						if(data == "no"){
+							alert("입력하신 아이디나 이메일이 틀렸습니다.");
+						}else{
+							$("#emailcheck").show();
+							
+						}
+					}
+				});
+			}
+			
+			
+			
 		}
 	</script>
 	<!-- login page end -->
