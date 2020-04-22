@@ -433,6 +433,8 @@
 							<button id="updatebtn" onclick="ssupdatego();"
 								class="genric-btn danger circle"
 								style="font-size: 13px; margin-right: 10px;">수정</button>
+							<button id="checkBtn" class="genric-btn danger circle"
+							style="font-size: 13px; margin-right: 10px;">출석</button>
 							<!-- 정도씨가 구경 정호형이 ajax 할  예정  -->
 							<button id="deletebtn" onclick="deleteDailyBtn();"
 								class="genric-btn danger circle"
@@ -781,6 +783,69 @@
 			return false;
 		});
 	</script>
+	
+	<script>
+      /* 출석체크지 새창 띄우기 */
+      $('#checkBtn').click(function(){
+         window.open("checkStudy.go?Type=New", "MESSAGE", "width=700, height=700, scrollbars=no;")
+         /* window.open("checkStudy.do?userID="+"${ sessionScope.loginUser.mId }"+"&Type=New", "MESSAGE", "width=700, height=700, scrollbars=no;") */
+      });
+      
+      $(function(){
+    	  
+    	  var userID = "${ sessionScope.loginUser.mId }";
+    	  
+    	  $.ajax({
+    		  url:"getHeadMS.ms",
+    		  data:{
+    			  userID:userID
+    		  },type:"post",
+    		  dataType:"json",
+    		  success:function(data){
+    			  
+    			  console.log(data);
+    			  
+    			  var datasize = data.length;
+    			  $('#msListSize').text(datasize + "+");
+    			  
+    			  if(datasize == 0){
+    				  
+    				  $('#msListSize').text("");
+    				  
+    				  $('#msContext0').text("메세지가 없습니다.");
+    				  
+    			  }else if(datasize > 4){
+    				  datasize = 4;
+    			  }
+    			  
+    			  var size = datasize;
+
+    			  for(var i=0; i<size; i++ ){
+    				  
+    				  var aID = "#msAtag" + i;
+    				  var dID = "#msDate" + i;
+    				  var cID = "#msContext" + i;
+    				  
+    				  var userID = "${ sessionScope.loginUser.mId }";
+						
+    				  $(aID).attr('href',"msDetailView.ms?ms_No="+data[i].msNo+"&ms_loginId="+userID+"&Type=New");
+    				  $(dID).text(data[i].msDate1);
+    				  $(cID).text(data[i].msContext);
+    			  }
+    			  
+    		  },error:function(request, status, errorData){
+					alert("error code : " + request.status + "\n"
+							+ "message : " + request.responseText
+							+ "error : " + errorData);
+				}
+    		  
+    	  });
+    	  
+      });
+      
+      
+      
+   </script>
 
 
 	<!-- dataTables js -->
