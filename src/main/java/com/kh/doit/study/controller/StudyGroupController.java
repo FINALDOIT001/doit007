@@ -546,5 +546,15 @@ public class StudyGroupController {
 		}
 		
 	}
+	
+	/**
+	 * 출석체크로 이동 Kwon
+	 * 2020.04.21 HOME
+	 * @return
+	 */
+	@RequestMapping("checkStudy.go")
+	private String moveStudyCheck() {
+		return "study/doitStudy_check";
+	}
 
 }
