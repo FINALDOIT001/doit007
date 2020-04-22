@@ -252,13 +252,13 @@ public class StudyGroupController {
 	@RequestMapping("studyDetail.go")
 	public ModelAndView studyDetail(ModelAndView mv, int sgNo, String mno,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-
+		
 		StudyGroup sg = sgService.selectSg(sgNo);
 
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
 		StudyLike sl = new StudyLike();
-		if(mno != "") {
+		if(mno != "" && mno !=null) {
 		
 		String slNo= mno+sgNo;
 		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
@@ -335,6 +335,8 @@ public class StudyGroupController {
 	 */
 	@RequestMapping("sgStart.go")
 	private String sgStart(Model model, int sgNo) {
+		
+		System.out.println(sgNo);
 
 		int result = sgService.sgStart(sgNo);
 

@@ -127,6 +127,7 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	 */
 	@Override
 	public int sgStart(int sgNo) {
+		
 
 		return sgDao.sgStart(sgNo);
 	}

@@ -88,6 +88,7 @@ public class StudyGroupDao {
 	}
 	
 	public int sgStart(int sgNo) {
+		System.out.println("dao : "+sgNo);
 		
 		return sqlSession.update("studyGroupMapper.sgStart", sgNo);
 	}
@@ -133,6 +134,7 @@ public class StudyGroupDao {
 	}
 
 	public StudyLike studyLikeList(String slNo) {
+	
 		
 		return sqlSession.selectOne("studyGroupMapper.studyLikeList", slNo);
 	}
