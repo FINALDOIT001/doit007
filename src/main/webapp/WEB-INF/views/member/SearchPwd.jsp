@@ -37,7 +37,7 @@
 	            	<input type="text" style="width: 300px; display: inline;"
 	            			class="form-control hide-on-focus" id="numcheck" name="numcheck" 
 	            			placeholder="인증번호를 입력하세요." required/>
-	            	<input type="hidden" path="random" id="random" value="${ random }" />
+	            	<input type="hidden" path="random" id="random" />
 					<input type="button" style="margin-bottom: 6px;" class="btn btn-dark" value="인증하기"/>
 	            </div>
 	           </form>
@@ -75,12 +75,23 @@
 							alert("입력하신 아이디나 이메일이 틀렸습니다.");
 						}else{
 							$("#emailcheck").show();
-							
+							$("#random").val(data);
+							var random = data;
+							emailgo();
+							function emailgo(){
+								$.ajax({
+									type:"get",
+									url:"emailsend.go",
+									data: {id:id, email:email, random:random},
+									success:function(data){
+									}
+								});
+							}
 						}
 					}
 				});
 			}
-			
+			                                    
 			
 			
 		}

@@ -292,9 +292,7 @@ public class myPageController {
 	@RequestMapping("sglist.go")
 	public ModelAndView sglist(ModelAndView mv,@RequestParam int sgNo,@RequestParam int gm_sgNo) {
 	
-		
-		
-		
+
 		return mv;
 	}
 	

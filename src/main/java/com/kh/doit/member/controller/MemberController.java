@@ -1,7 +1,6 @@
 package com.kh.doit.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,12 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.doit.member.model.service.MailService;
 import com.kh.doit.member.model.service.MemberService;
-import com.kh.doit.member.model.service.myPageServiceImpl;
 import com.kh.doit.member.model.vo.Member;
-import com.kh.doit.message.model.service.MessageService;
-import com.kh.doit.message.model.vo.Message;
-import com.kh.doit.util.UserSha256;
 
 @SessionAttributes("loginUser")
 
@@ -38,6 +33,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
+	
+	@Autowired
+	MailService mailService;
 	
 	
 	// 암호화 처리 
@@ -242,11 +240,8 @@ public class MemberController {
 		 * @return
 		 */
 		@RequestMapping("searchPwd.go")
-		public ModelAndView searchPwd(ModelAndView mv) {
-			int ran = new Random().nextInt(900000) + 100000;
-			mv.addObject("random",ran);
-			mv.setViewName("member/SearchPwd");
-			return mv;
+		public String searchPwd() {
+			return "member/SearchPwd";
 		}
 		
 		@RequestMapping("startPwd.go")
@@ -259,11 +254,27 @@ public class MemberController {
 			
 			Gson gson = new GsonBuilder().create();
 			if(result > 0) {
-				gson.toJson("ok",response.getWriter());
+				int ran = new Random().nextInt(900000) + 100000;
+				gson.toJson(ran,response.getWriter());
 				
 			}else {
 				gson.toJson("no",response.getWriter());
 			}
+		}
+		
+		@RequestMapping("emailsend.go")
+		public boolean createEmailCheck(@RequestParam String email,@RequestParam String id, @RequestParam int random, HttpServletRequest req) {
+			int ran = new Random().nextInt(900000) + 100000;
+			HttpSession session = req.getSession(true);
+			String authCode = String.valueOf(ran);
+			session.setAttribute("authCode", authCode);
+			session.setAttribute("random", random);
+			String subject="[Doit]비밀번호 찾기 인증번호 발급 안내 입니다.";
+			StringBuilder sb = new StringBuilder();
+			sb.append(id + "님의 인증번호는 " + authCode + "입니다.");
+			
+			return mailService.send(subject, sb.toString(), "dodoit2020", email, null);
+			
 		}
 		
 
