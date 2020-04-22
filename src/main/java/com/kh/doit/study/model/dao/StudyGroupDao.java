@@ -15,6 +15,7 @@ import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
+import com.kh.doit.study.model.vo.StudyLike;
 
 @Repository("sgDao")
 public class StudyGroupDao {
@@ -119,6 +120,21 @@ public class StudyGroupDao {
 	public int dailyStudyDelete(String ssNo) {
 		
 		return sqlSession.delete("studyGroupMapper.dailyStudyDelete",ssNo);
+	}
+
+	public int studyLikeInsert(StudyLike sl) {
+		
+		return sqlSession.insert("studyGroupMapper.studyLikeInsert", sl);
+	}
+
+	public int studyLikeDelete(int slNo) {
+		
+		return sqlSession.delete("studyGroupMapper.studyLikeDelete",slNo);
+	}
+
+	public StudyLike studyLikeList(String slNo) {
+		
+		return sqlSession.selectOne("studyGroupMapper.studyLikeList", slNo);
 	}
 
 }

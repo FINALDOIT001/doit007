@@ -128,6 +128,7 @@
 								<c:url var="sgDetail" value="studyDetail.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 									<c:param name="currentPage" value="${pi.currentPage}" />
+									<c:param name="mno" value="${sessionScope.loginUser.mno}"/>
 								</c:url>
 								<a href="${sgDetail}" style="display: block;"><label
 									style="font-size: x-large; font-weight: bold;">${sg.sgTitle}</label></a>

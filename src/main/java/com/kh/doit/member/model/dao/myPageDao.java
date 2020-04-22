@@ -11,6 +11,8 @@ import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.member.model.vo.TestHodu;
+import com.kh.doit.study.model.vo.GroupMember;
+import com.kh.doit.study.model.vo.StudyGroup;
 
 @Repository("mpDao")
 public class myPageDao {
@@ -64,5 +66,6 @@ public class myPageDao {
 	public Member selectHodunum(int mno) {
 		return sqlSession.selectOne("memberMapper.selectHodunum",mno);
 	}
+
 	
 }

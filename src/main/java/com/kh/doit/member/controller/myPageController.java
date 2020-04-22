@@ -28,6 +28,8 @@ import com.kh.doit.member.model.service.myPageService;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.member.model.vo.TestHodu;
+import com.kh.doit.study.model.vo.GroupMember;
+import com.kh.doit.study.model.vo.StudyGroup;
 
 @SessionAttributes("loginUser")
 
@@ -275,7 +277,7 @@ public class myPageController {
 	}
 	
 	public void deleteFile(String fileName, HttpServletRequest request) {
-String root = request.getSession().getServletContext().getRealPath("resources");
+		String root = request.getSession().getServletContext().getRealPath("resources");
 		
 		String savePath = root + "\\img" + "\\user";
 		
@@ -285,5 +287,18 @@ String root = request.getSession().getServletContext().getRealPath("resources");
 			f.delete();
 		}
 	}
+	
+	
+	@RequestMapping("sglist.go")
+	public ModelAndView sglist(ModelAndView mv,@RequestParam int sgNo,@RequestParam int gm_sgNo) {
+	
+		
+		
+		
+		return mv;
+	}
+	
+	
+	
 	
 }

@@ -7,6 +7,8 @@ import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.member.model.vo.TestHodu;
+import com.kh.doit.study.model.vo.GroupMember;
+import com.kh.doit.study.model.vo.StudyGroup;
 
 public interface myPageService {
 
@@ -87,6 +89,9 @@ public interface myPageService {
 	 * @return
 	 */
 	Member selectHodunum(int mno);
+
+	
+
 
 
 

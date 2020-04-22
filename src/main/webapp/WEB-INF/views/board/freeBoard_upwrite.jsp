@@ -34,7 +34,7 @@
       <div class="container">
          <div class="row">
             <div class="section_tittle">
-               <h2><span>DO IT</span> &nbsp;FREE BOARD 수정하기</h2>
+               <h2><span>DO IT</span> &nbsp;자유게시판 수정하기</h2>
             </div>
          </div>
       

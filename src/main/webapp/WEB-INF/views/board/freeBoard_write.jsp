@@ -35,7 +35,7 @@
       <div class="container">
          <div class="row">
             <div class="section_tittle">
-               <h2><span>DO IT</span> &nbsp;FREE BOARD</h2>
+               <h2><span>DO IT</span> &nbsp;자유게시판</h2>
             </div>
          </div>
       

@@ -12,6 +12,8 @@ import com.kh.doit.member.model.dao.myPageDao;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.member.model.vo.TestHodu;
+import com.kh.doit.study.model.vo.GroupMember;
+import com.kh.doit.study.model.vo.StudyGroup;
 
 @Service("mpService")
 public class myPageServiceImpl implements myPageService{
@@ -71,6 +73,8 @@ public class myPageServiceImpl implements myPageService{
 	public Member selectHodunum(int mno) {
 		return mpDao.selectHodunum(mno);
 	}
+
+	
 
 
 

@@ -107,6 +107,7 @@
 						<label
 							style="font-size: xx-large; font-weight: bold; margin-bottom: 20px;">
 							${sg.sgTitle} </label> <br>
+							<input type="hidden" name="sLmno" value="${loginUser.mno}">
 						<ul>
 							<!-- 아이콘 : font Awesome -->
 							<li style="margin-bottom: 3px;"><i
@@ -160,11 +161,19 @@
 									<button class="genric-btn danger radius" style="width: 130px;"
 										onclick="location.href='${sgGroupOut}'">스터디 탈퇴</button>
 								</c:if>
-
+								
+								<c:if test="${!empty sessionScope.loginUser}">
 								<div class="starRev"
 									style="width: 60px; display: inline; float: right;">
+									<c:if test ="${empty sl}">
 									<span class="starR"></span>
-								</div></li>
+									</c:if>
+									<c:if test="${!empty sl}">
+									<span class="starR on"></span>
+									</c:if>
+								</div>
+								</c:if>
+								</li>
 						</ul>
 					</div>
 					<div class="col-md-4 mt-sm-20">
@@ -418,12 +427,15 @@
 					<br>
 					<div style="text-align: center;">
 						<c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
-							<button id="insertbtn" onclick="ssinsertGo();" class="genric-btn danger circle"
+							<button id="insertbtn" onclick="ssinsertGo();"
+								class="genric-btn danger circle"
 								style="font-size: 13px; margin-right: 10px;">등록</button>
-							<button id="updatebtn" onclick="ssupdatego();" class="genric-btn danger circle"
-							style="font-size: 13px; margin-right: 10px;">수정</button>
+							<button id="updatebtn" onclick="ssupdatego();"
+								class="genric-btn danger circle"
+								style="font-size: 13px; margin-right: 10px;">수정</button>
 							<!-- 정도씨가 구경 정호형이 ajax 할  예정  -->
-							<button id="deletebtn" onclick="deleteDailyBtn();" class="genric-btn danger circle"
+							<button id="deletebtn" onclick="deleteDailyBtn();"
+								class="genric-btn danger circle"
 								style="font-size: 13px; margin-right: 10px;">삭제</button>
 						</c:if>
 						<button onclick="closebtn();" class="genric-btn danger circle"
@@ -706,9 +718,55 @@
 	<script>
 		/*** 별점 ****************************************************/
 		$('div.starRev').children('span').click(function() {
+			var mno = $("input[name=sLmno]").val();
+			var sgNo = $("input[name=ssSgNo]").val();
+			var star;
+			
 
 			$(this).toggleClass("on");
 			star = $('div.starRev').children('span.starR.on').length;
+			console.log(star);
+			
+			if(star==1){
+				$.ajax({
+					url:"studyLikeInsert.go",
+					data:{slmNo:mno,slsgNo:sgNo},
+					success:function(data){
+						console.log(data);
+						if(data=="ok"){
+							console.log("좋아요 완료");
+						}else{
+							console.log("좋아요 로직 실패");
+						}
+					},error:function(reqeust, status, errorDate){
+						alert("error code : "+ reqeust.status + "\n"
+								+"message : "+ reqeust.responseText
+								+"error : "+errorDate);
+					}
+				});
+				}else{
+					
+					$.ajax({
+						url:"studyLikeDelete.go",
+						data:{slmNo:mno,slsgNo:sgNo},
+						success:function(data){
+							console.log(data);
+							if(data=="ok"){
+								console.log("좋아요 지우기");
+							}else{
+								console.log("좋아요 지우기 실패");
+							}
+						},error:function(reqeust, status, errorDate){
+							alert("error code : "+ reqeust.status + "\n"
+									+"message : "+ reqeust.responseText
+									+"error : "+errorDate);
+						}
+					});
+					
+				}
+			
+			
+			
 			/*
 			  var star = 0;
 			if(star == 0){

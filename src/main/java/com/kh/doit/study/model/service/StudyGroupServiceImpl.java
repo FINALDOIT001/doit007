@@ -13,6 +13,7 @@ import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
+import com.kh.doit.study.model.vo.StudyLike;
 
 @Service("sgService")
 public class StudyGroupServiceImpl implements StudyGroupService {
@@ -190,6 +191,36 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	public int dailyStudyDelete(String ssNo) {
 		
 		return sgDao.dailyStudyDelete(ssNo);
+	}
+
+
+	/**이것은 스터디 좋아요 insert
+	 *정호가 만든것이여
+	 */
+	@Override
+	public int studyLikeInsert(StudyLike sl) {
+		
+		return sgDao.studyLikeInsert(sl);
+	}
+
+
+	/**이것은 스터디 좋아요 Delete
+	 * 정호가 만든것
+	 */
+	@Override
+	public int studyLikeDelete(int slNo) {
+		
+		return sgDao.studyLikeDelete(slNo);
+	}
+
+
+	/**이것은 스터디 좋아요 list
+	 * 정호가 만든것이여
+	 */
+	@Override
+	public StudyLike studyLikeList(String slNo) {
+		
+		return  sgDao.studyLikeList(slNo);
 	}
 	
 	

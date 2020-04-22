@@ -122,4 +122,53 @@
     	FROM MEMBER
     	WHERE M_EMAIL=#{email}
     </select>
+    
+    
+    
+    
+    <resultMap id="studyGroupResultSet" type="StudyGroup">
+		<id property="sgNo" column="SG_NO" />
+		<result property="sgTitle" column="SG_TITLE" />
+		<result property="sgWriter" column="SG_WRITER" />
+		<result property="sgWriterNo" column="SG_WRITER_NO" />
+		<result property="sgNowPeople" column="SG_NOWPEOPLE" />
+		<result property="sgMaxPeople" column="SG_MAXPEOPLE" />
+		<result property="sgAddr" column="SG_ADDR" />
+		<result property="sgDeposit" column="SG_DEPOSIT" />
+		<result property="sgCreateDate" column="SG_CREATE_DATE" />
+		<result property="sgStartDate" column="SG_START_DATE" />
+		<result property="sgEndDate" column="SG_END_DATE" />
+		<result property="sgLocation" column="SG_LOCATION" />
+		<result property="sgJoin" column="SG_JOIN_YN" />
+		<result property="sgCon" column="SG_CON" />
+		<result property="sgOriginalFileName" column="SG_ORIGINAL_FILENAME" />
+		<result property="sgRenameFileName" column="SG_RENAME_FILENAME" />
+		<result property="sgTag" column="SG_TAG" />
+		<result property="sgPayment" column="SG_PAYMENT_YN" />
+		<result property="sgStatus" column="SG_STATUS_YN" />
+		<result property="sgConfirm" column="SG_CONFIRM_YN" />
+	</resultMap>
+	
+	 <resultMap id="groupMemberResultSet" type="GroupMember">
+		<result property="gm_sgNo" column="GM_SG_NO" />
+		<result property="gm_mNo" column="GM_M_NO" />
+	</resultMap>
+    
+    <select id="selectsglist" resultMap="studyGroupResultSet">
+    	SELECT *
+		FROM STUDY_GROUP SG
+		JOIN
+		GROUP_MEMBER GM ON(GM.GM_SG_NO=SG.SG_NO)
+		WHERE GM_M_NO=#{gm_m_no}
+    </select>
+    
+	 <select id="countPwd" resultType="_int">
+    	SELECT COUNT(*)
+    	FROM MEMBER
+    	WHERE M_ID=#{mId}
+    	AND M_EMAIL=#{mEmail}
+    </select>
+    
+    
+    
 </mapper>

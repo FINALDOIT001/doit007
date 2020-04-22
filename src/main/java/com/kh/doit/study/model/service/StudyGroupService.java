@@ -8,6 +8,7 @@ import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
+import com.kh.doit.study.model.vo.StudyLike;
 
 public interface StudyGroupService {
 
@@ -130,6 +131,26 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	int dailyStudyDelete(String ssNo);
+
+	/**이것슨 스터디 좋아유 insert
+	 * 정호가 만든것이여
+	 * @param sl
+	 * @return
+	 */
+	int studyLikeInsert(StudyLike sl);
+
+	/**이것슨 스터디 좋아유 Delete
+	 * 정호가 만든것이여
+	 * @param slNo
+	 * @return
+	 */
+	int studyLikeDelete(int slNo);
+
+	/**이것슨 스터디 좋아유 list
+	 * @param slNo
+	 * @return
+	 */
+	StudyLike studyLikeList(String slNo);
 	
 
 	

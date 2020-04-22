@@ -54,7 +54,7 @@
 			<div class="row">
 				<div class="section_tittle">
 					<h2>
-						<span>DO IT</span> &nbsp;FREE BOARD
+						<span>DO IT</span> &nbsp;자유게시판
 					</h2>
 				</div>
 			</div>
@@ -95,7 +95,7 @@
 				</td>
 				</tr>
 				<tr>
-					<td colspan="6">
+					<td colspan="6" style="padding:15px;">
 						<!-- 본문 내용 --> 
 						<input type="textarea" class="" id="summernote" name=""> 
 					</td>
@@ -194,6 +194,7 @@
 				getCommentList();
 			},3000); */
 			
+			/* 댓글 등록 */
 			$("#bcSubmit").on("click",function(){
 				var bc_content = $("#bc_content").val();
 				var bc_b_no = ${ b.b_no };
