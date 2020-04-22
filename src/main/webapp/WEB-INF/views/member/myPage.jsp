@@ -220,7 +220,11 @@
                      <img src="${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
                   </div>
                   </c:if>
-                 
+                  <c:if test="${empty sg.sgRenameFileName}">
+					<div class="col-md-2" style="text-align: center;">
+						<img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
+					</div>
+				 </c:if>
                   <div class="col-md-9 mt-sm-20">
                      <a href="studyDetail.go" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">${sg.sgTitle}</label>
                      </a>

@@ -169,7 +169,7 @@
                                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  <button style="border:none; font-size: 14px; font-weight: 700; background-color:transparent;" 
-                                    onclick="location.href='myinfo.me?mId=${ sessionScope.loginUser.mId }'">MYPAGE</button>
+                                    onclick="location.href='myinfo.me?mId=${ sessionScope.loginUser.mId }&mno=${ loginUser.mno }'">MYPAGE</button>
                                  </a>
                                  <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="mylist.me?mId=${ sessionScope.loginUser.mId }&mno=${ sessionScope.loginUser.mno }">MYLIST</a>

@@ -67,5 +67,9 @@ public class myPageDao {
 		return sqlSession.selectOne("memberMapper.selectHodunum",mno);
 	}
 
+	public ArrayList<StudyGroup> selectsglist(int gm_mNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectsglist",gm_mNo);
+	}
+
 	
 }

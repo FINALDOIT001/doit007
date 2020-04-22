@@ -74,7 +74,11 @@ public class myPageServiceImpl implements myPageService{
 		return mpDao.selectHodunum(mno);
 	}
 
-	
+
+	@Override
+	public ArrayList<StudyGroup> selectsglist(int gm_mNo) {
+		return mpDao.selectsglist(gm_mNo);
+	}
 
 
 

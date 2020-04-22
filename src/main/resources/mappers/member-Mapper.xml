@@ -154,13 +154,18 @@
 		<result property="gm_mNo" column="GM_M_NO" />
 	</resultMap>
     
-    <select id="selectsglist" resultMap="studyGroupResultSet">
+    <!-- mypage 스터디 리스트 -->
+ 	<select id="selectsglist" resultMap="studyGroupResultSet">
     	SELECT *
 		FROM STUDY_GROUP SG
 		JOIN
 		GROUP_MEMBER GM ON(GM.GM_SG_NO=SG.SG_NO)
 		WHERE GM_M_NO=#{gm_m_no}
+		AND SG_STATUS_YN='Y'
     </select>
+    
+
+    
     
 	 <select id="countPwd" resultType="_int">
     	SELECT COUNT(*)
