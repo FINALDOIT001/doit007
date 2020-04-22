@@ -89,6 +89,14 @@ public interface myPageService {
 	 * @return
 	 */
 	Member selectHodunum(int mno);
+	
+	
+	/**
+	 * hyun 마이페이지스터디리스트
+	 * @param gm_mNo
+	 * @return
+	 */
+	ArrayList<StudyGroup> selectsglist(int gm_mNo);
 
 	
 
