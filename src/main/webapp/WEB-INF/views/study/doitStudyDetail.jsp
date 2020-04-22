@@ -700,6 +700,7 @@
 					    	  $('#myModal').css("display", "block");
 					    	  $("#deletebtn").css("display", "none");
 					    	  $("#updatebtn").css("display","none");
+					    	  $("#checkBtn").css("display","none");
 					    	  $("#insertbtn").css("display","inline");
 					    	  $('form').each(function() {
 					    	      this.reset();

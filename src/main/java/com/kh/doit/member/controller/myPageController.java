@@ -60,11 +60,12 @@ public class myPageController {
 	public ModelAndView myinfo(ModelAndView mv,@RequestParam String mId) {
 		Member m = mpService.selectOne(mId);
 		ArrayList<Hodu> hlist = mpService.selecthList(mId);
-		
+		ArrayList<StudyGroup> sglist = mpService.selectsglist(mno);
 		System.out.println("마이페이지 : " + m);
 		if(m != null) {
 			mv.addObject("m",m);
 			mv.addObject("hlist",hlist);
+			mv.addObject("sglist",sglist);
 			mv.setViewName("member/myPage");
 		}
 		return mv;
@@ -289,13 +290,7 @@ public class myPageController {
 	}
 	
 	
-	@RequestMapping("sglist.go")
-	public ModelAndView sglist(ModelAndView mv,@RequestParam int sgNo,@RequestParam int gm_sgNo) {
-	
 
-		return mv;
-	}
-	
 	
 	
 	
