@@ -136,7 +136,7 @@
 	<script>
 	
 		$(window).on('load',function(){
-			window.resizeTo(700, 600);
+			window.resizeTo(800, 700);
 		});
 		
 		$(function(){

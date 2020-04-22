@@ -105,7 +105,7 @@
                             <li>
                          </c:if>
                          
-                         <c:if test="${ !empty sessionScope.loginUser && (sessionScope.loginUser.mno != 0) }">
+                         <c:if test="${ !empty sessionScope.loginUser && (sessionScope.loginUser.mUserroles != 777) }">
                          
                       <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -179,7 +179,7 @@
                                <a class="nav-link" href="logout.do">LOGOUT</a>
                             </li>
                          </c:if>
-                         <c:if test="${ !empty sessionScope.loginUser && (sessionScope.loginUser.mno == 0) }">
+                         <c:if test="${ !empty sessionScope.loginUser && (sessionScope.loginUser.mUserroles == 777) }">
                             <li>
                                <a class="nav-link"><label><span style="color:#d64748 !important;">${ loginUser.mName }</span>&nbsp;님</label></a>
                             </li>

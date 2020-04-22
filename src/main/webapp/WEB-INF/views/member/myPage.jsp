@@ -346,20 +346,21 @@
 						<table id="hodu_list" class="table">
 							<thead>
 							  <tr>
-							  <th width="5%">No</th>
+							  	<th width="5%">No</th>
 								<th width="20%">충전호두</th>
 								<th width="20%">결제금액</th>
 								<th width="10%">구입일</th>
+								<th width="10%"></th>
 							  </tr>
 							</thead>
 							<tbody>
 								<c:forEach var ="h" items="${ hlist }" varStatus="status">
 								<tr class="kwon-tr1" style="text-align:center;">
-									
 									<td style="text-align:center;" class="kwon-td1">${ status.count }</td>
 									<td style="text-align:center;" class="kwon-td1">${ h.hoduNum }개</td>
 									<td style="text-align:center;" class="kwon-td1">${ h.hPrice }원</td>
 									<td style="text-align:center;" class="kwon-td1">${ h.hDate }</td>
+									<td style="text-align:center;" class="kwon-td1">뀨</td>
 								</tr>
 								</c:forEach>
 							</tbody>

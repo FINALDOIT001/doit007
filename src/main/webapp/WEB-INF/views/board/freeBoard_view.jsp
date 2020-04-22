@@ -68,7 +68,56 @@
 				</tr>
 				<tr>
 					<th width="134" height="50">작성자</th>
-					<td width="208" height="50">${ b.b_writer }</td>
+					
+					<c:choose>
+                  		<c:when test="${ b.b_writer eq sessionScope.loginUser.mId }">
+                  			<td width="208" height="50">${ b.b_writer }</td>
+                  		</c:when>
+                  		<c:otherwise>
+
+		                  	<td align="center">
+		                  	
+		                  	<ul>
+		                  	<li class="nav-item dropdown no-arrow mx-1">
+		                  		<!-- <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+		                  			<span>${ b.b_writer }</span>
+		                  		<!-- </a> -->
+		                  		<div style="right:auto;" class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+								<h6 class="dropdown-header">
+									${ b.b_writer }
+								</h6>
+								<a class="dropdown-item d-flex align-items-center" href="newMS.ms?recipientID=${ b.b_writer }" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+								<div class="mr-3"></div>
+								<div>
+									<i class="fas fa-envelope fa-fw"></i>
+								   <span class="font-weight-bold">쪽지보내기</span>
+								</div>
+								</a>
+								
+								<%-- <c:url var="newReport" value="report.rp">
+	                  				<c:param name="rpUserID" value="${b.b_writer}"/>
+	                  				<c:param name="rpTitle" value="${ b.b_title }"/>
+	                  				<c:param name="rpBno" value="${ b.b_no }"/>
+	                  				<c:param name="rpBType" value="FREEBOARD"/>
+                  				</c:url> --%>
+								
+								<a id="reportAtag" class="dropdown-item d-flex align-items-center" href="report.rp?rpUserID=${b.b_writer}&rpTitle=${ b.b_title }&rpBno=${ b.b_no }&rpBType=FREEBOARD" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+								<div class="mr-3"></div>
+								<div>
+									<i class="fas fa-user-alt-slash"></i>
+								   <span class="font-weight-bold">신고하기</span>
+								</div>
+								</a>
+								
+		                  	</li>
+		                  	</ul>
+							
+		                  	</td>
+		                  	
+                  		</c:otherwise>
+                  	</c:choose>
+					
+					
 					<!-- 작성자 -->
 					<th width="134" height="50">작성일</th>
 					<td width="208" height="50">${ b.b_modifydate }</td>
