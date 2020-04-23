@@ -660,10 +660,13 @@
 	
 	//다음 지도 와 주소 검색 끝 
 	</script>
+	
 
-
-
-	<script>
+		<script>
+	
+	var ssNo; // ssNo 스터티 데일리 번호 전역변수 선언
+	var ssDayDate; // ssDayDate 스터디 데일리 날짜 지역변수 선언
+	
 	function deleteDailyBtn(){
 		var ssSgNo = $("#ssSgNo").val();
 		var ssNo = $("#ssNo").val();
@@ -707,7 +710,6 @@
 			$("#myModal").css("display", "none");
 		}
 		
-
 		document.addEventListener('DOMContentLoaded', function() {
 			var sgNo = ${sg.sgNo};
 			var dailystudy=new Array();
@@ -754,14 +756,13 @@
 					},
 					//event cilck 시 상세 페이지 모탈창 구현 Gson 사용 각 리터럴 값을 Jquey 사용사여 값 입력 처리
 					eventClick : function(info){
-						var id = info.event.id;
-						console.log(id);
+						 ssNo = info.event.id;
+						console.log(ssNo);
 						$.ajax({
-							data:{ssNo:id},
+							data:{ssNo:ssNo},
 							url:"dailyStudyView.go",
 							dataType:"json",
 							success:function(data){
-
 							    	  $('#myModal').css("display", "block");
 							    	  $("#deletebtn").css("display", "inline");
 							    	  $("#updatebtn").css("display","inline");
@@ -774,7 +775,7 @@
 								      $("#postcode").val(data.zipcode);
 								      $("#address").val(data.ssAdd);
 								      $("#detailAddress").val(data.ssExAdd);
-								      
+								      ssDayDate = data.ssDayDate;
 								      acctiveMap(data); 
 								      
 								      
@@ -803,10 +804,17 @@
 					  },
 					</c:if>
 			});
-
 			calendar.render();
 			
 		});
+		
+		 
+	       
+	      $('#checkBtn').click(function(){
+	    	  var sgNo = ${sg.sgNo} ;
+	         window.open("checkStudy.go?sgNo="+sgNo+"&ssNo="+ssNo+"&ssDayDate="+ssDayDate, "출석체크", "status=no, location= no, width=700, height=700, scrollbars=yes;");
+	      });
+	      
 	</script>
 
 
