@@ -32,6 +32,15 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService bService;
+	
+	/**
+	 * about페이지 이동 (딱히 쓸곳없어서 보드에 끼워놈)
+	 * @return
+	 */
+	@RequestMapping("about.go")
+	public String about() {
+		return "common/about";
+	}
    
 	/**
 	 * 현아.자유게시판 리스트

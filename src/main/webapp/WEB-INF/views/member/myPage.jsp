@@ -226,7 +226,7 @@
 					</div>
 				 </c:if>
                   <div class="col-md-9 mt-sm-20">
-                     <a href="studyDetail.go" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">${sg.sgTitle}</label>
+                     <a href="studyDetail.go?sgNo=${sg.sgNo}" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">${sg.sgTitle}</label>
                      </a>
                         <!-- <div class="starRev" style="width: 60px; display:inline;">
                            <span class="starR on" style="margin-left: 20px; width: 20px; height: 20px;"></span> 
