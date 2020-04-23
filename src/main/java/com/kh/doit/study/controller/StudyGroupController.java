@@ -469,6 +469,39 @@ public class StudyGroupController {
 		
 	}
 	
+	
+
+	/**
+	 * 출석 체크 페이지 이동
+	 * 정호가 만든거
+	 * @return
+	 */
+	@RequestMapping("checkStudy.go")
+	public ModelAndView checkStudy(ModelAndView mv, int sgNo, int ssNo, String ssDayDate,
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+		
+		ArrayList<Member> ml = sgService.memberList(sgNo);
+		
+		System.out.println(sgNo);
+		System.out.println(ssNo);
+		System.out.println(ml);
+		
+		
+		if (ml != null) {
+			mv.addObject("sgNo", sgNo)
+			  .addObject("ml",ml)
+			  .addObject("ssNo", ssNo)
+			  .addObject("ssDayDate",ssDayDate)
+			  .setViewName("study/doitStudy_check");
+		} else {
+			mv.addObject("msg", "출석 불러오기 실패").setViewName("common/errorPage");
+		}
+ 
+		return mv;
+	}
+	
+	
+	
 	/**
 	 * Gallery / Multi-File Insert 
 	 * 작성자 : 서정도
