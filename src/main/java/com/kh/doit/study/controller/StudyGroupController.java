@@ -555,7 +555,7 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("checkStudy.go")
-	private String moveStudyCheck() {
+	private ModelAndView moveStudyCheck() {
 		return "study/doitStudy_check";
 	}
 
