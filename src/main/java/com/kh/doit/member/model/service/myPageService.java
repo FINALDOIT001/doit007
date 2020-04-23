@@ -7,6 +7,7 @@ import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.member.model.vo.TestHodu;
+import com.kh.doit.qna.model.vo.Qna;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.StudyGroup;
 
@@ -97,6 +98,22 @@ public interface myPageService {
 	 * @return
 	 */
 	ArrayList<StudyGroup> selectsglist(int gm_mNo);
+
+	/**
+	 * 위시리스트 보여주기
+	 * 2020-04-23 김혜림
+	 * @param mno
+	 * @return
+	 */
+	ArrayList<StudyGroup> selectsllist(int mno);
+
+	/**
+	 * QNA게시판 내가 쓴글 보여주기
+	 * 2020-04-23 김혜림
+	 * @param mno
+	 * @return
+	 */
+	ArrayList<Qna> selectqnalist(int mno);
 
 	
 

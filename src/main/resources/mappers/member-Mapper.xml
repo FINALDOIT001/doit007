@@ -153,6 +153,10 @@
 		<result property="gm_sgNo" column="GM_SG_NO" />
 		<result property="gm_mNo" column="GM_M_NO" />
 	</resultMap>
+	
+	<resultMap id="studyLikeResultSet" type="StudyLike">
+		<result property="slsgNo" column="SG_NO" />
+	</resultMap>
     
     <!-- mypage 스터디 리스트 -->
  	<select id="selectsglist" resultMap="studyGroupResultSet">
@@ -164,9 +168,6 @@
 		AND SG_STATUS_YN='Y'
     </select>
     
-
-    
-    
 	 <select id="countPwd" resultType="_int">
     	SELECT COUNT(*)
     	FROM MEMBER
@@ -174,6 +175,18 @@
     	AND M_EMAIL=#{mEmail}
     </select>
     
+    <select id="selectsllist" resultMap="studyGroupResultSet">
+    	SELECT *
+		FROM STUDY_GROUP SG JOIN STUDY_LIKE SL 
+		ON (SG.SG_NO = SL.SG_NO)
+		WHERE M_NO = #{mno}
+		AND SG_STATUS_YN='Y'
+    </select>
     
+    <update id="pwdUpdate">
+    	UPDATE 	MEMBER
+   		SET		M_PWD = #{mPwd}
+   		WHERE	M_ID = #{mId}
+    </update>
     
 </mapper>
