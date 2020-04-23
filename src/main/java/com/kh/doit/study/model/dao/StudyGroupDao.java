@@ -134,9 +134,23 @@ public class StudyGroupDao {
 	}
 
 	public StudyLike studyLikeList(String slNo) {
-	
 		
 		return sqlSession.selectOne("studyGroupMapper.studyLikeList", slNo);
+	}
+	
+	public ArrayList<Gallery> GalleryList(int sgNo) {
+		
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.GalleryList",sgNo);
+	}
+
+	public Gallery selectGallery(Gallery g) {
+
+		return sqlSession.selectOne("studyGroupMapper.selectGallery",g);
+	}
+
+	public ArrayList<Gallery> multiFile(int gNum) {
+
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.multiFile",gNum);
 	}
 
 }
