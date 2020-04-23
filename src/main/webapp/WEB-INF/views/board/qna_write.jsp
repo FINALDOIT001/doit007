@@ -58,7 +58,7 @@
                         
                     </table>
                     <div id="kwon-area1">
-                        <textarea class="form-control" id="summernote" name="qCon"></textarea>
+                        <textarea class="form-control" id="summernote4" name="qCon"></textarea>
                     </div>
         
                     <div style="text-align:center;">
@@ -89,9 +89,8 @@
 	   <script>
 	   
 	   $(document).ready(function() {
-		   $('#summernote').summernote({
+		   $('#summernote4').summernote({
 			   height:600,
-			   placeholder:"사진 드래그&드롭 / 붙여넣기 가능합니다",
 		     popover: {
 		       image: [
 

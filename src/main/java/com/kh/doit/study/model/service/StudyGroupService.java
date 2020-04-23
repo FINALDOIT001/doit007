@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Etc;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -151,6 +152,29 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	StudyLike studyLikeList(String slNo);
+
+	/**
+	 * 검색으로 리스트 카운트 가져오기 Kwon
+	 * 2020.04.23 KH
+	 * @param ssSearch
+	 * @return
+	 */
+	int getSearchListCount(String ssSearch);
+
+	/**
+	 * 검색으로 리스트 가져오기 Kwon
+	 * @param pi
+	 * @param ssSearch
+	 * @return
+	 */
+	ArrayList<StudyGroup> selectSearchList(PageInfojung pi, String ssSearch);
+
+	/**
+	 * 자료실 추가 Kwon
+	 * @param etc
+	 * @return
+	 */
+	int insertEtc(Etc etc);
 	
 
 	

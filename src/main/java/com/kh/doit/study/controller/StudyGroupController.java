@@ -24,6 +24,7 @@ import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.common.paginationJung;
 import com.kh.doit.study.model.service.StudyGroupService;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Etc;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -558,5 +559,102 @@ public class StudyGroupController {
 	private String moveStudyCheck() {
 		return "study/doitStudy_check";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 검색으로 스터디 리스트 찾기 Kwon
+	 * 2020.04.23 KH
+	 * @param mv
+	 * @param ssSearch
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("studySearch.do")
+	public ModelAndView studySearch(ModelAndView mv, String ssSearch,
+				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+		System.out.println(currentPage);
+
+		int listCount = sgService.getSearchListCount(ssSearch);
+
+		System.out.println("servlet 검색 스터디 카운트 : " + listCount);
+
+		PageInfojung pi = paginationJung.getPageInfo(currentPage, listCount);
+
+		ArrayList<StudyGroup> sgList = sgService.selectSearchList(pi, ssSearch);
+
+		mv.addObject("sgList", sgList);
+		mv.addObject("pi", pi);
+		mv.addObject("listCount", listCount);
+		mv.setViewName("study/doitStudyList");
+
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * 자료실 화면으로 Kwon
+	 * 2020.04.23 KH
+	 * @return
+	 */
+	@RequestMapping("insertEtc.go")
+	public String moveEtc() {
+		return "study/insertEtc";
+	}
+	
+	@RequestMapping("insertEtc.do")
+	public String insertEtc(Etc etc, HttpServletRequest request,
+				@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
+
+		int result = 0;
+
+		for (int i = 0; i < file.length; i++) {
+			if (file.length > 0) {
+
+				String g_RenameFile = saveMultiFile(file[i], request);
+
+				if (g_RenameFile != null) {
+
+					etc.setEtcOriginalFileName(file[i].getOriginalFilename());
+					etc.setEtcRenameFileName(g_RenameFile);
+
+					System.out.println("etc.ori : " + etc.getEtcOriginalFileName());
+					System.out.println("etc.re : " + etc.getEtcRenameFileName());
+
+				}
+			}
+			result = sgService.insertEtc(etc);
+		}
+
+		System.out.println("자료 업로드 : " + result);
+
+		if (result > 0) {
+			return "redirect:sgList.go";
+		} else {
+			return "common/errorPage";
+		}
+		
+	}
+	
+	
+ 
+	
 
 }

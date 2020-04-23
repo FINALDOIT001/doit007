@@ -66,6 +66,8 @@
 
 
 	<jsp:include page="../common/header.jsp" />
+	
+	
 
 	<!-- Kwon CSS -->
 	<link rel="stylesheet"
@@ -314,7 +316,47 @@
 
 
 					</div>
-					<div class="tab-pane container fade" id="menu3"></div>
+					<div class="tab-pane container fade" id="menu3">
+						<div id="studyEtcInsert" class="genric-btn danger circle">자료추가</div><br><br>
+					
+						<table id="test701" class="table table-bordered">
+							<thead class="kwon-thead1">
+								<tr class="kwon-tr1">
+									<th width="8%" class="th1">No</th>
+									<th width="40%" class="th1">제목</th>
+									<th width="10%" class="th1">글쓴이</th>
+									<th width="10%" class="th1">등록일</th>
+									<th width="8%" class="th1">첨부파일</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+		<c:forEach var="etc" items="${ etclist }">
+		<tr class="kwon-tr1">
+			<td align="center" class="kwon-td1">${ etc.bsNo }</td>
+			<td align="center" class="kwon-td1">${ etc.bsCategory }</td>
+			<td align="center" class="kwon-td1">
+				<c:url var="bsView" value="bsView.ev">
+					<c:param name="bsNo" value="${ etc.bsNo }"/>
+				</c:url>
+			
+				<a class="kwon-td1 tdtitle1" href="${ bsView }" 
+				style="color:#5b5b5b !important;">${ etc.bsTitle }</a>
+			
+			</td>
+			<td align="center" class="kwon-td1" value="${ etc.bsWriterNo }">${ etc.bsWriter }</td>
+			<td align="center" class="kwon-td1">${ etc.bsLocation }</td>
+			<td align="center" class="kwon-td1">${ etc.bsDate }</td>
+			<td align="center" class="kwon-td1">${ etc.bsState }</td>
+		</tr>
+		</c:forEach>
+		
+								
+							</tbody>
+						</table>
+					</div>
+					
+					</div>
 
 				</div>
 
@@ -846,6 +888,20 @@
       
       
       
+   </script>
+   
+   <script>
+   		$('#studyEtcInsert').on('click',function() {
+   			location.href="insertEtc.go";
+   		});
+   
+   
+   		/* $(document).ready(function() {
+   			$('#studyEtcInsert').click(function() {
+   				location.href="insertEtc.go";
+   			})
+   		}); */
+   
    </script>
 
 

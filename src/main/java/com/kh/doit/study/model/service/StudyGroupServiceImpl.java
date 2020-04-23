@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.dao.StudyGroupDao;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Etc;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -222,6 +223,33 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	public StudyLike studyLikeList(String slNo) {
 		
 		return  sgDao.studyLikeList(slNo);
+	}
+
+
+	/**
+	 * 스터디 검색 카운트 가져오기 Kwon
+	 */
+	@Override
+	public int getSearchListCount(String ssSearch) {
+		return sgDao.getSearchListCount(ssSearch);
+	}
+
+
+	/**
+	 * 검색한 스터디 리스트 가져오기 Kwon
+	 */
+	@Override
+	public ArrayList<StudyGroup> selectSearchList(PageInfojung pi, String ssSearch) {
+		return sgDao.selectSearchList(pi, ssSearch);
+	}
+
+
+	/**
+	 * 자료실 글 추가 Kwon
+	 */
+	@Override
+	public int insertEtc(Etc etc) {
+		return sgDao.inserEtc(etc);
 	}
 	
 	

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Etc;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -137,6 +138,41 @@ public class StudyGroupDao {
 	
 		
 		return sqlSession.selectOne("studyGroupMapper.studyLikeList", slNo);
+	}
+
+	/**
+	 * 검색 리스트 카운트 가져오기 Kwon
+	 * 2020.04.23 KH
+	 * @param ssSearch
+	 * @return
+	 */
+	public int getSearchListCount(String ssSearch) {
+		return sqlSession.selectOne("studyGroupMapper.searchCount", ssSearch);
+	}
+
+	/**
+	 * 검색 리스트 가져오기 Kwon
+	 * 2020.04.23 KH
+	 * @param pi
+	 * @param ssSearch
+	 * @return
+	 */
+	public ArrayList<StudyGroup> selectSearchList(PageInfojung pi, String ssSearch) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		
+		RowBounds rowBound = new RowBounds(offset,pi.getBoardLimit());
+		
+		return(ArrayList)sqlSession.selectList("studyGroupMapper.selectSearchList", ssSearch, rowBound);
+	}
+
+	/**
+	 * 자료실 글 추가 Kwon
+	 * 2020.04.23 KH
+	 * @param etc
+	 * @return
+	 */
+	public int inserEtc(Etc etc) {
+		return sqlSession.insert("studyGroupMapper.insertEtc", etc);
 	}
 
 }

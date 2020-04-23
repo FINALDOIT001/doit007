@@ -78,9 +78,10 @@
 							$("#random").val(data);
 							var random = data;
 							emailgo();
+							
 							function emailgo(){
 								$.ajax({
-									type:"get",
+									type:"post",
 									url:"emailsend.go",
 									data: {id:id, email:email, random:random},
 									success:function(data){

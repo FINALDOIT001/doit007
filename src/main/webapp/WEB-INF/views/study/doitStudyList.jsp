@@ -42,14 +42,14 @@
 				<div class="col-lg-3" style="float: left; margin-right: 30px;">
 					<div class="blog_right_sidebar_h" style="width: 300px;">
 						<aside class="single_sidebar_widget search_widget">
-							<form action="#">
+							<form action="studySearch.do">
 								<div class="form-group">
 									<div class="input-group mb-3">
-										<input type="text"
+										<input type="text" name="studySearch" id="stydySearch" 
 											class="form-control placeholder hide-on-focus"
 											placeholder="스터디 이름을 검색하세요.">
 										<div class="input-group-append">
-											<button class="btn" type="button">
+											<button class="btn" type="button" id="sSearch">
 												<i class="ti-search"></i>
 											</button>
 										</div>
@@ -254,7 +254,14 @@
 
 	<jsp:include page="../common/footer.jsp" />
 
-
+	<script>
+		$('#sSearch').on('click',function() {
+			var ssSearch = $('#stydySearch').val();
+			console.log(ssSearch);
+			
+			location.href="studySearch.do?ssSearch="+ssSearch;
+		})
+	</script>
 </body>
 
 </html>

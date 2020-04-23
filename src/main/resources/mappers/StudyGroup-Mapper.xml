@@ -214,6 +214,59 @@
 	SELECT * FROM STUDY_LIKE
 	WHERE SL_NO = #{slNo}
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="searchCount" parameterType="String" resultType="_int">
+		SELECT 	COUNT(*)
+		FROM	STUDY_GROUP
+		WHERE 	1=1
+		AND		SG_STATUS_YN='Y'
+		AND		SG_TITLE like '%' || #{ssSearch} || '%'
+	</select>
+	
+	<select id="selectSearchList" parameterType="String" resultMap="studyGroupResultSet">
+		SELECT	* 
+		FROM	STUDY_GROUP
+		WHERE	1=1
+		AND		SG_STATUS_YN='Y'
+		AND		SG_TITLE like '%' || #{ssSearch} || '%'
+		ORDER BY SG_NO DESC
+	</select>
+	
+	<insert id="insertEtc" parameterType="com.kh.doit.study.model.vo.Etc">
+		INSERT INTO STUDY_ETC VALUES(
+			SEQ_ETCNO.NEXTVAL
+			,#{etcTitle}
+			,#{etcCon}
+			,#{etcWriter}
+			,#{etcWriterNo}
+			,#{etcWriterId}
+			,DEFAULT
+			,#{etcOriginalFileName}
+			,#{etcRenameFileName}
+			,DEFAULT
+		)
+	</insert>
 
 </mapper>
     

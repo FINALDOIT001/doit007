@@ -160,8 +160,7 @@
 		FROM	EVENT
 		WHERE	1=1
 		AND		E_STATUS='Y'
-		<!-- AND		E_TAG like '%' || #{eTag} || '%' -->
-		AND		E_TAG like #{eTag}
+		AND		E_TAG like '%' || #{eTag} || '%'
 	</select>
 	
 	<select id="TagList" resultMap="eventResultSet" parameterType="String">
@@ -169,8 +168,7 @@
 		FROM	EVENT
 		WHERE	1=1
 		AND		E_STATUS='Y'
-		<!-- AND		E_TAG like '%' || #{eTag} || '%' -->
-		AND		E_TAG like #{eTag}
+		AND		E_TAG like '%' || #{eTag} || '%'
 	</select>
 	
 	<select id="selectListAll" resultMap="eventResultSet">
