@@ -57,6 +57,7 @@ public class myPageController {
 	 * @param mId
 	 * @return
 	 */
+
 	@RequestMapping("myinfo.me")
 	public ModelAndView myinfo(ModelAndView mv,@RequestParam String mId, int mno) {
 		Member m = mpService.selectOne(mId);

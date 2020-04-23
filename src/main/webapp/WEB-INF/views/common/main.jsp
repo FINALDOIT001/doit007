@@ -114,7 +114,7 @@
 								<div class="portfolio_box">
 									<a href="${contextPath}/resources/img/JAVA.png" class="img-gal">
 										<div class="single_portfolio">
-											<img class="img-fluid w-100" src="${contextPath}/resources/img/JAVA.png" alt="">
+											<img class="img-fluid w-100" src="${contextPath}/resources/img/JAVA4.png" alt="">
 										</div>
 									</a>
 									<div class="short_info">
