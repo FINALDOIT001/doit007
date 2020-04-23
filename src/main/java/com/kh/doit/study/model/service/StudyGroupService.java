@@ -152,7 +152,27 @@ public interface StudyGroupService {
 	 */
 	StudyLike studyLikeList(String slNo);
 	
+	/**
+	 * Gallery List
+	 * 작성자 : 서정도
+	 * @return
+	 */
+	ArrayList<Gallery> GalleryList(int sgNo);
 
+	/**
+	 * Gallery Detail
+	 * 작성자 : 서정도
+	 * @param g
+	 * @return
+	 */
+	Gallery selectGallery(Gallery g);
+
+	/**
+	 * Gallery Detail / Multi-File(Photo)
+	 * @param gNo
+	 * @return
+	 */
+	ArrayList<Gallery> multiFile(int gNum);
 	
 	
 	

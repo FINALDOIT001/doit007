@@ -224,6 +224,40 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		return  sgDao.studyLikeList(slNo);
 	}
 	
+	/**
+	 * Gallery List
+	 * 작성자 : 서정도
+	 * @return
+	 */
+	@Override
+	public ArrayList<Gallery> GalleryList(int sgNo) {
+
+		return sgDao.GalleryList(sgNo);
+	}
+
+	/**
+	 * Gallery Detail
+	 * 작성자 : 서정도
+	 * @param gNo
+	 * @return
+	 */
+	@Override
+	public Gallery selectGallery(Gallery g) {
+
+		return sgDao.selectGallery(g);
+	}
+
+	/**
+	 * Gallery Detail / Multi-File(Photo)
+	 * @param gNo
+	 * @return
+	 */
+	@Override
+	public ArrayList<Gallery> multiFile(int gNum) {
+		
+		return sgDao.multiFile(gNum);
+	}
+	
 	
 
 }

@@ -54,4 +54,12 @@ public class CommonController {
 	public String studyPhotoInsert() {
 		return "study/doitStudyPhotoInsertFrom";
 	}
+	
+	/** 
+	 * @return
+	 */
+	@RequestMapping("galleryInsertFrom.go")
+	public String galleryInsertFrom() {
+		return "study/galleryInsertFrom";
+	}
 }
