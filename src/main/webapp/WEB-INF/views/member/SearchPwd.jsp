@@ -38,7 +38,7 @@
 	            			class="form-control hide-on-focus" id="numcheck" name="numcheck" 
 	            			placeholder="인증번호를 입력하세요." required/>
 	            	<input type="hidden" path="random" id="random" />
-					<input type="button" style="margin-bottom: 6px;" class="btn btn-dark" value="인증하기"/>
+					<input type="button" style="margin-bottom: 6px;" class="btn btn-dark" id="checkpwd" value="인증하기"/>
 	            </div>
 	           </form>
 	           <hr>
@@ -85,6 +85,30 @@
 									url:"emailsend.go",
 									data: {id:id, email:email, random:random},
 									success:function(data){
+										
+										/*  $(document).on('click', function(){ 이 코드는 함수가 여러번 돕니다.
+											$(document).ready(function(){ 이 코드로 바꾸면 된다고 합니다.
+										*/
+										$(document).ready(function(){
+											$("#checkpwd").click(function(){
+											var numcheck = $("#numcheck").val();
+											/* 나중에 지우기 */
+/* 											console.log("numcheck =" +numcheck);
+											console.log("random ="+random); */
+											
+											if(numcheck == random){
+												alert("인증이 완료되었습니다.");
+												location.href="pwdnum.go?id="+id;
+												return false;
+											}else{
+												alert("인증번호가 틀렸습니다.");
+												return false;
+											}
+												
+											});
+											
+										});
+											
 									}
 								});
 							}

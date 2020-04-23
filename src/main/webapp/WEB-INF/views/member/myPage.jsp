@@ -203,7 +203,7 @@
                      		</c:url>
                            <input type="reset" class="btn btn-outline-danger" style="font-weight: 400; width: 150px; margin-right: 10px;" value="취소하기" />
                            <input type="submit" class="btn btn-dark" style="font-weight: 400; width: 150px; margin-right: 10px;" onclick="return validate();" value="수정하기"/>     
-                           <button type="button" class="btn btn-danger" style="text-align:center;" onclick="location.href='${ mdelete }';">회원 탈퇴</button>               
+                           <button type="button" class="btn btn-danger" style="text-align:center;" onclick="memberdelete();">회원 탈퇴</button>               
                      </div>
                   </div>
                </form>
@@ -226,7 +226,7 @@
 					</div>
 				 </c:if>
                   <div class="col-md-9 mt-sm-20">
-                     <a href="studyDetail.go" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">${sg.sgTitle}</label>
+                     <a href="studyDetail.go?sgNo=${sg.sgNo}&mno=${m.mno}" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">${sg.sgTitle}</label>
                      </a>
                         <!-- <div class="starRev" style="width: 60px; display:inline;">
                            <span class="starR on" style="margin-left: 20px; width: 20px; height: 20px;"></span> 
@@ -260,10 +260,10 @@
 					</ul>
 
                   </div>
-				</c:forEach>
                   <div class="col-lg-12">
                      <hr>
                   </div>
+				</c:forEach>
                   <!-- study list end -->
 
                   </div>
@@ -274,64 +274,58 @@
                <div class="tab-pane container fade" id="menu2">
                   <div class="row" style="padding: 20px;">
                   <!-- study list start -->
+
+                  <c:forEach var="sl" items="${sllist}">
+                  <c:if test="${!empty sl.sgRenameFileName}">
                   <div class="col-md-2" style="text-align: center;">
-                     <img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
+                     <img src="${contextPath}/resources/sgloadFiles/${sl.sgRenameFileName}" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
                   </div>
+                  </c:if>
+                  <c:if test="${empty sl.sgRenameFileName}">
+					<div class="col-md-2" style="text-align: center;">
+						<img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
+					</div>
+				 </c:if>
                   <div class="col-md-9 mt-sm-20">
-                     <a href="studyDetail.go" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">JAVA 스터디 그룹</label>
+                     <a href="studyDetail.go?sgNo=${sl.sgNo}" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">${sl.sgTitle}</label>
                      </a>
-                        <div class="starRev" style="width: 60px; display:inline;">
+                        <!-- <div class="starRev" style="width: 60px; display:inline;">
                            <span class="starR on" style="margin-left: 20px; width: 20px; height: 20px;"></span> 
-                        </div>
-                     <h5 class="mb-1 text-primary" style="font-weight: bold;">모집 중</h5>
+                        </div> -->
+                     	<c:if test="${sl.sgConfirm eq 'Y'}">
+							<h5 class="mb-2 text-primary" style="font-weight: bold;">모집중</h5>
+						</c:if>
+						<c:if test="${sl.sgConfirm eq 'N'}">
+							<h5 class="mb-1 text-danger" style="font-weight: bold; color: red;">모집 완료</h5>
+						</c:if>
                      <ul class="study_ul">
-                        <li class="study_li">조장 : 박정호</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">3/8</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">서울시 강남구</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png">20,000</li>
+                        <li class="study_li">${sl.sgWriter}</li>
+                        <li class="study_li">
+                        	<c:set var="maxPeople" value="${sl.sgMaxPeople}"/>
+							<c:set var="newPeople" value="${sl.sgNowPeople}"/>
+							<c:if test="${maxPeople == newPeople}">
+								<li class="study_li text-danger"><img src="${contextPath}/resources/img/user_icon2.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
+							</c:if>
+							<c:if test="${maxPeople != newPeople}">
+								<li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
+							</c:if>
+                        
+                        </li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">${sl.sgAddr}</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png"><fmt:formatNumber value="${sl.sgDeposit}" groupingUsed="true"/> 원</li>
                      </ul>
                      <ul class="study_">
-                        <li class="study_tag">Java</li>
-                        <li class="study_tag">오프라인</li>
-                        <li class="study_tag">스터디그룹</li>
-                        
-                     </ul>
+						<c:forTokens var="teg" items="${sl.sgTag}" delims="@">
+							<li class="study_tag">${teg}</li>
+						</c:forTokens>
+					</ul>
 
                   </div>
-
                   <div class="col-lg-12">
                      <hr>
                   </div>
-                  <!-- study list end -->
-                  <!-- study list start -->
-                  <div class="col-md-2" style="text-align: center;">
-                     <img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
-                  </div>
-                  <div class="col-md-9 mt-sm-20">
-                     <a href="studyDetail.go" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">JAVA 스터디 그룹</label>
-                     </a>
-                        <div class="starRev" style="width: 60px; display:inline;">
-                           <span class="starR on" style="margin-left: 20px; width: 20px; height: 20px;"></span> 
-                        </div>
-                     <h5 class="mb-1 text-primary" style="font-weight: bold;">모집 중</h5>
-                     <ul class="study_ul">
-                        <li class="study_li">조장 : 박정호</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">3/8</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">서울시 강남구</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png">20,000</li>
-                     </ul>
-                     <ul class="study_">
-                        <li class="study_tag">Java</li>
-                        <li class="study_tag">오프라인</li>
-                        <li class="study_tag">스터디그룹</li>
-                        
-                     </ul>
+				</c:forEach>
 
-                  </div>
-
-                  <div class="col-lg-12">
-                     <hr>
-                  </div>
                   <!-- study list end -->
                      </div>
                </div>
@@ -386,6 +380,16 @@
 <script src="${contextPath}/resources/js/datatables.js"></script>
  <script>
 
+ function memberdelete(){
+	 if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인
+		 	var mId = $("#userId").val();
+			location.href="mdelete.go?mId="+mId;
+
+		}else{   //취소
+
+		    return;
+		}
+ }
  	/* 사용자 이미지 변경 */
    function getThumbnailPrivew(html, $target) {
        if (html.files && html.files[0]) {

@@ -147,6 +147,22 @@ public class MemberController {
 
 		}
 	
+		/**
+		 * 회원가입 
+		 * 김혜림
+		 * @param m
+		 * @param mv
+		 * @param phone1
+		 * @param phone2
+		 * @param phone3
+		 * @param email
+		 * @param selbox
+		 * @param selboxDirect
+		 * @param address1
+		 * @param address2
+		 * @param address3
+		 * @return
+		 */
 		@RequestMapping("join.me")
 		public ModelAndView insertMember(@ModelAttribute Member m, ModelAndView mv, @RequestParam(value="phone1", required=false) String phone1,
 																@RequestParam(value="phone2", required=false) String phone2,
@@ -158,7 +174,7 @@ public class MemberController {
 																@RequestParam(value="address2",required=false) String address2,
 																@RequestParam(value="address3",required=false) String address3) {
 			
-			System.out.println(m);
+			System.out.println("회원가입 : " +m);
 			
 			// 비밀번호 암호화
 			String encPwd = bcryptPasswordEncoder.encode(m.getmPwd());
@@ -262,11 +278,21 @@ public class MemberController {
 			}
 		}
 		
+		/**
+		 * 이메일 보내는 메소드
+		 * 2020-04-23 김혜림
+		 * @param email
+		 * @param id
+		 * @param random
+		 * @param req
+		 * @return
+		 */
+		@ResponseBody
 		@RequestMapping("emailsend.go")
 		public boolean createEmailCheck(@RequestParam String email,@RequestParam String id, @RequestParam int random, HttpServletRequest req) {
-			int ran = new Random().nextInt(900000) + 100000;
+		/* int ran = new Random().nextInt(900000) + 100000; */
 			HttpSession session = req.getSession(true);
-			String authCode = String.valueOf(ran);
+			String authCode = String.valueOf(random);
 			session.setAttribute("authCode", authCode);
 			session.setAttribute("random", random);
 			String subject="[Doit]비밀번호 찾기 인증번호 발급 안내 입니다.";
@@ -277,5 +303,39 @@ public class MemberController {
 			
 		}
 		
-
+		/**
+		 * 임시비밀번호 페이지 
+		 * 2020-04-23 김혜림
+		 * @return
+		 */
+		@RequestMapping("pwdnum.go")
+		public ModelAndView pwdnum(ModelAndView mv,@RequestParam String id) {
+			mv.addObject("id",id);
+			mv.setViewName("member/SearchPwd2");
+			return mv;
+		}
+		
+		/**
+		 * 비밀번호 변경 
+		 * 2020-04-23 김혜림
+		 * @return
+		 */
+		@RequestMapping("rePwd.go")
+		public ModelAndView repwd(ModelAndView mv, Member m,String mPwd,String userid) {
+			// 비밀번호 암호화
+			String encPwd = bcryptPasswordEncoder.encode(mPwd);
+			m.setmPwd(encPwd);
+			m.setmId(userid);
+			
+			int result = mService.pwdUpdate(m);
+			if(result > 0) {
+				mv.setViewName("common/main");
+			}
+			else {
+				mv.addObject("msg","비밀번호 변경 실패!");
+				mv.setViewName("common/errorPage");
+			}
+			return mv;
+		}
+		
 }

@@ -28,6 +28,7 @@ import com.kh.doit.member.model.service.myPageService;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.member.model.vo.TestHodu;
+import com.kh.doit.qna.model.vo.Qna;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.StudyGroup;
 
@@ -61,11 +62,14 @@ public class myPageController {
 		Member m = mpService.selectOne(mId);
 		ArrayList<Hodu> hlist = mpService.selecthList(mId);
 		ArrayList<StudyGroup> sglist = mpService.selectsglist(mno);
+		ArrayList<StudyGroup> sllist = mpService.selectsllist(mno);
 		System.out.println("마이페이지 : " + m);
 		if(m != null) {
 			mv.addObject("m",m);
 			mv.addObject("hlist",hlist);
 			mv.addObject("sglist",sglist);
+			mv.addObject("sllist",sllist);
+			System.out.println("마이페이지 리스트 : " + sllist);
 			mv.setViewName("member/myPage");
 		}
 		return mv;
@@ -87,11 +91,14 @@ public class myPageController {
 		
 		ArrayList<Board> fblist = mpService.selectfbList(mId);
 		ArrayList<BookShare> bslist = mpService.selectbsList(mno);
+		ArrayList<Qna> qnalist = mpService.selectqnalist(mno);
 		
+
 		if(m != null) {
 			mv.addObject("m", m);
 			mv.addObject("fblist", fblist);
 			mv.addObject("bslist", bslist);
+			mv.addObject("qnalist",qnalist);
 			System.out.println(bslist);
 			mv.setViewName("member/myList");
 		}else {

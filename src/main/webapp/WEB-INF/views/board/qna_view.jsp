@@ -42,7 +42,7 @@
 				<div class="col-lg-12">
 					<div class="section_tittle">
 						<h2>
-							<span>QNA</span> 상세보기 
+							<span>DO IT</span> Q&A
 						</h2>
 					</div>
 					<form action="select.do" id="kwon-Form01"

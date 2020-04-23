@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section_tittle">
-                    <h2><span>질문!!</span> 있습니다!</h2>
+                    <h2><span>Q&A</span> 수정하기</h2>
                 </div>
                 <form action="updateQna.do" id="kwon-Form01" enctype="multipart/form-data" method="POST">
                     <input type="hidden" name="qWriterNo" value="${ loginUser.mno }">

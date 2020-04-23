@@ -23,7 +23,7 @@
 				<div class="col-lg-12">
 					<div class="section_tittle">
 						<h2>
-							<span>강아지</span> 멍멍!
+							<span>질문</span> 합시다
 						</h2>
 					</div>
 					<div>

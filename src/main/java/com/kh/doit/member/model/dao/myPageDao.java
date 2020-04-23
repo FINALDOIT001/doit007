@@ -11,6 +11,7 @@ import com.kh.doit.bookShare.model.vo.BookShare;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.member.model.vo.TestHodu;
+import com.kh.doit.qna.model.vo.Qna;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.StudyGroup;
 
@@ -69,6 +70,14 @@ public class myPageDao {
 
 	public ArrayList<StudyGroup> selectsglist(int gm_mNo) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectsglist",gm_mNo);
+	}
+
+	public ArrayList<StudyGroup> selectsllist(int mno) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectsllist",mno);
+	}
+
+	public ArrayList<Qna> selectqnalist(int mno) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectqnalist",mno);
 	}
 
 	
