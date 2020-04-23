@@ -251,29 +251,33 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("studyDetail.go")
-	public ModelAndView studyDetail(ModelAndView mv, int sgNo,
+	public ModelAndView studyDetail(ModelAndView mv, int sgNo, String mno,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-
+		
 		StudyGroup sg = sgService.selectSg(sgNo);
-		
+
 		ArrayList<Member> ml = sgService.memberList(sgNo);
-		ArrayList<Gallery> galleryList = sgService.GalleryList(sgNo);
 		
-		System.out.println("Controller memberList : " + galleryList);
+		StudyLike sl = new StudyLike();
+		if(mno != "" && mno !=null) {
 		
+		String slNo= mno+sgNo;
+		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
+		
+			 sl = sgService.studyLikeList(slNo);
+			System.out.println("studyList" + sl);
+		}
+
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
-		
+
 		if (sg != null) {
-			mv.addObject("sg", sg)
-			  .addObject("ml",ml)
-			  .addObject("currentPage", currentPage)
-			  .addObject("galleryList", galleryList)
-			  .setViewName("study/doitStudyDetail");
+			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl)
+					.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}
- 
+
 		return mv;
 	}
 
