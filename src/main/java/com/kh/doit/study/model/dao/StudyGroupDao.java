@@ -139,6 +139,21 @@ public class StudyGroupDao {
 		
 		return sqlSession.selectOne("studyGroupMapper.studyLikeList", slNo);
 	}
+	
+	public ArrayList<Gallery> GalleryList(int sgNo) {
+		
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.GalleryList",sgNo);
+	}
+
+	public Gallery selectGallery(Gallery g) {
+
+		return sqlSession.selectOne("studyGroupMapper.selectGallery",g);
+	}
+
+	public ArrayList<Gallery> multiFile(int gNum) {
+
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.multiFile",gNum);
+	}
 
 	/**
 	 * 검색 리스트 카운트 가져오기 Kwon

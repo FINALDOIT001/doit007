@@ -277,12 +277,12 @@
 											</h5>
 											<br> <br> <br>
 
-											<c:url var="studyPhotoInsert" value="studyPhotoInsert.go">
+											<c:url var="galleryInsertFrom" value="galleryInsertFrom.go">
 												<c:param name="sgNo" value="${sg.sgNo}" />
 											</c:url>
-
 											<a class="btn_1" style="float: right;"
-												href="${studyPhotoInsert}">사진 추가</a>
+												href="${galleryInsertFrom}">사진 추가</a>
+
 											<div class="about_part_counter">
 												<div class="single_counter">
 													<p style="font-size: 30px; width: 390px;">
@@ -296,22 +296,72 @@
 							</div>
 						</section>
 
-						<!-- The Modal -->
-						<div class="modal" id="sgPhoto">
-							<div class="modal-dialog modal-dialog-centered">
-								<div class="modal-content">
+						<div class="page-wrap">
+							<!-- Main -->
+							<section id="main">
 
-									<!-- Modal body -->
-									<div class="modal-body"></div>
+								<!-- Gallery -->
+								<section id="galleries">
 
-									<!-- Modal footer -->
-									<div class="modal-footer">
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal">Close</button>
+									<!-- Photo Galleries -->
+									<div class="gallery">
+										<div class="content"
+											style="display: inline-block; text-align: center;">
+
+
+											<c:forEach var="g" items="${galleryList}">
+												<c:url var="gDetail" value="galleryDetail.go">
+													<c:param name="sgNo" value="${sg.sgNo}" />
+													<c:param name="gNo" value="${g.g_No}" />
+													<c:param name="gNum" value="${g.g_Num}" />
+												</c:url>
+												<div class="media all people"
+													style="display: inline-block; max-width: 20%; margin: 5px;">
+													<a href="${gDetail}"> <img
+														src="${contextPath}/resources/sgUploadFiles/${g.g_Rename_FileName}"
+														style="width: 200px; height: 200px;"
+														title="This right here is a caption." /></a> <span hidden>${g.g_No}</span><span
+														hidden>${g.g_Num}</span>
+												</div>
+											</c:forEach>
+										</div>
+										<style>
+										.openPush {
+											-webkit-appearance: none;
+											width: 558px;
+											height: 102px;
+											background: url(${contextPath}/resources/img/push_back1.png);
+											outline: none;
+											-webkit-transition: .2s;
+											transition: opacity .2s;
+											border: 6px;
+											margin-top: 18%;
+											margin-left: 22%;
+										}
+										
+										.openPush::-webkit-slider-thumb {
+											-webkit-appearance: none;
+											appearance: none;
+											width: 120px;
+											height: 100px;
+											background: url(${contextPath}/resources/img/push_btn.png);
+											cursor: pointer;
+										}
+										
+										.openPush_back {
+											background-color: rgb(42, 42, 42);
+											height: 500px;
+										}
+									</style>
+
+									<img src="${contextPath}/resources/img/hodu2.png"
+										style="width: 200px; height: 200px;" /><br>
+									<p>호두로 프리미엄 게시판</p>
+									<div class="openPush_back">
+										<input type="range" class="openPush" min="0" max="100"
+											value="2" step="1">
 									</div>
-
-								</div>
-							</div>
+									</div>
 						</div>
 
 

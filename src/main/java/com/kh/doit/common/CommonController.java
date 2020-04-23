@@ -47,11 +47,11 @@ public class CommonController {
 		return "study/doitStudy_Schedule";
 	}
 	
-	/** 정호 스터디 뒤테 스케  링크
+	/** 
 	 * @return
 	 */
-	@RequestMapping("studyPhotoInsert.go")
-	public String studyPhotoInsert() {
-		return "study/doitStudyPhotoInsertFrom";
+	@RequestMapping("galleryInsertFrom.go")
+	public String galleryInsertFrom() {
+		return "study/galleryInsertFrom";
 	}
 }

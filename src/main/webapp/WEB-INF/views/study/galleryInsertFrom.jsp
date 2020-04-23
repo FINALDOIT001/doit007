@@ -74,6 +74,12 @@
                   <div class="form-group">
                      <input class="form-control placeholder hide-on-focus" name="g_Writer_No" type="text" placeholder="작성자 번호" value="${loginUser.mno}"hidden>
                   </div>
+                  <c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 1234)%></c:set>
+                  <jsp:useBean id="now" class="java.util.Date" />
+				  <fmt:formatDate value="${now}" pattern="yyMMdd" var="today" />
+                  <div class="form-group">
+                     <input class="form-control placeholder hide-on-focus" name="g_Num" type="text" placeholder="작성자 번호" value="${today}${ran}">
+                  </div>
                </div>
                <div class="col-12">
                   <div class="wrapper">

@@ -173,7 +173,7 @@
 	
 	<insert id="photoUpload" parameterType="Gallery">
 		INSERT INTO GALLERY
-		VALUES(SEQ_GNO.NEXTVAL,#{g_Sg_No},#{g_Title},#{g_Writer},#{g_Writer_No},#{g_Con},DEFAULT,#{g_Original_FileName},#{g_Rename_FileName})
+		VALUES(SEQ_GNO.NEXTVAL,#{g_Sg_No},#{g_Title},#{g_Writer},#{g_Writer_No},#{g_Con},DEFAULT,#{g_Original_FileName},#{g_Rename_FileName},#{g_Num})
 	</insert>
 	
 	<insert id="sgDailyinsert" parameterType="DailyStudy">
@@ -215,7 +215,24 @@
 	WHERE SL_NO = #{slNo}
 	</select>
 	
+	<select id="GalleryList" resultMap="galleryResultSet">
+		SELECT * 
+		FROM Gallery
+		WHERE G_SG_NO = #{sgNo}
+	</select>
 	
+	<select id="selectGallery" resultMap="galleryResultSet">
+		SELECT * 
+		FROM Gallery
+		WHERE G_NUM = #{g_Num}
+		AND G_NO = #{g_No}
+	</select>
+	
+	<select id="multiFile" resultMap="galleryResultSet">
+		SELECT * 
+		FROM Gallery
+		WHERE G_NUM = #{g_Num}
+	</select>
 	
 	
 	

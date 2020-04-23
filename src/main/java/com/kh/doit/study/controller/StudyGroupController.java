@@ -243,41 +243,37 @@ public class StudyGroupController {
 	}
 
 	/**
-	 * 디테일 상세내용 / 참석자 작성자 : 서정도
-	 * 
+	 * 디테일 상세내용 / 참석자
+	 * 작성자 : 서정도
 	 * @param mv
 	 * @param sgNo
 	 * @param currentPage
 	 * @return
 	 */
 	@RequestMapping("studyDetail.go")
-	public ModelAndView studyDetail(ModelAndView mv, int sgNo, String mno,
+	public ModelAndView studyDetail(ModelAndView mv, int sgNo,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-		
+
 		StudyGroup sg = sgService.selectSg(sgNo);
-
+		
 		ArrayList<Member> ml = sgService.memberList(sgNo);
+		ArrayList<Gallery> galleryList = sgService.GalleryList(sgNo);
 		
-		StudyLike sl = new StudyLike();
-		if(mno != "" && mno !=null) {
+		System.out.println("Controller memberList : " + galleryList);
 		
-		String slNo= mno+sgNo;
-		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
-		
-			 sl = sgService.studyLikeList(slNo);
-			System.out.println("studyList" + sl);
-		}
-
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
-
+		
 		if (sg != null) {
-			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl)
-					.setViewName("study/doitStudyDetail");
+			mv.addObject("sg", sg)
+			  .addObject("ml",ml)
+			  .addObject("currentPage", currentPage)
+			  .addObject("galleryList", galleryList)
+			  .setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}
-
+ 
 		return mv;
 	}
 
@@ -394,83 +390,6 @@ public class StudyGroupController {
 	}
 
 	/**
-	 * 갤러리 - 멀티 파일 저장 작성자 : 서정도
-	 * 
-	 * @param file
-	 * @param request
-	 * @return
-	 * @throws IOException
-	 * @throws IllegalStateException
-	 */
-	@RequestMapping("photoUpload.go")
-	public String photoUpload(Gallery g, HttpServletRequest request,
-			@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
-
-		int result = 0;
-
-		for (int i = 0; i < file.length; i++) {
-			if (file.length > 0) {
-
-				String g_RenameFile = saveMultiFile(file[i], request);
-
-				if (g_RenameFile != null) {
-
-					g.setG_Original_FileName(file[i].getOriginalFilename());
-					g.setG_Rename_FileName(g_RenameFile);
-
-					System.out.println("g.ori : " + g.getG_Original_FileName());
-					System.out.println("g.re : " + g.getG_Rename_FileName());
-
-				}
-			}
-			result = sgService.photoUpload(g);
-		}
-
-		System.out.println("photoUpload : " + result);
-
-		if (result > 0) {
-			return "redirect:sgList.go";
-		} else {
-			return "common/errorPage";
-		}
-	}
-
-	public String saveMultiFile(MultipartFile file, HttpServletRequest request)
-			throws IllegalStateException, IOException {
-
-		String root = request.getSession().getServletContext().getRealPath("resources");
-
-		String savePath = root + "\\sgUploadFiles";
-		File folder = new File(savePath);
-
-		if (!folder.exists()) {
-			folder.mkdir();
-		}
-
-		String renameFileName = null;
-
-		String originFileName = file.getOriginalFilename();
-		System.out.println(originFileName);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS"); // yyyy : 년 / MM : 월 / dd : 일 / HH : 시 / mm : 분
-																			// / ss : 초 / SS : 1/1000초(0~999)
-																			// ==> 사진을 여러장 업로드 하기 때문에 초까지만 이름을 정해주면 이름
-																			// 중접이 발생해 같은 파일명으로 파일 계속 생성된다.(덮어쓰기됨) 한개의
-																			// 파일만 보임
-		renameFileName = originFileName.substring(0, originFileName.lastIndexOf("."))
-				+ sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
-				+ originFileName.substring(originFileName.lastIndexOf(".") + 1);
-
-		String renamePath = folder + "\\" + renameFileName;
-		System.out.println(renamePath);
-
-		file.transferTo(new File(renamePath));
-
-		System.out.println(renameFileName);
-
-		return renameFileName;
-	}
-
-	/**
 	 * 이거슨 스터티 스케줄 디테일 뷰 불러오기 정호가 만든거
 	 * 
 	 * @param response
@@ -551,13 +470,115 @@ public class StudyGroupController {
 	}
 	
 	/**
-	 * 출석체크로 이동 Kwon
-	 * 2020.04.21 HOME
+	 * Gallery / Multi-File Insert 
+	 * 작성자 : 서정도
+	 * @param file
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 * @throws IllegalStateException
+	 */
+	@RequestMapping("photoUpload.go")
+	public String photoUpload(Gallery g, HttpServletRequest request,
+			@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
+		
+		int result = 0;
+		
+		for (int i = 0; i < file.length; i++) {
+			if (file.length > 0) {
+				
+				String g_RenameFile = saveMultiFile(file[i], request);
+				
+				if (g_RenameFile != null) {
+					
+					g.setG_Original_FileName(file[i].getOriginalFilename());
+					g.setG_Rename_FileName(g_RenameFile);
+
+					System.out.println("g.ori : " + g.getG_Original_FileName());
+					System.out.println("g.re : " + g.getG_Rename_FileName());
+					
+				}
+			}
+			result = sgService.photoUpload(g);
+		}
+
+		System.out.println("photoUpload : " + result);
+		
+		if(result > 0) {
+			return "redirect:sgList.go";
+		}else {
+			return "common/errorPage";
+		}
+	}
+
+	/**
+	 * Gallery / Multi-File Insert
+	 * 작성자 : 서정도
+	 * @param file
+	 * @param request
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	public String saveMultiFile(MultipartFile file, HttpServletRequest request)throws IllegalStateException, IOException {
+
+		String root = request.getSession().getServletContext().getRealPath("resources");
+
+		String savePath = root + "\\sgUploadFiles";
+		File folder = new File(savePath);
+
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+
+		String renameFileName = null;
+
+		String originFileName = file.getOriginalFilename();
+		System.out.println(originFileName);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS"); // yyyy : 년 / MM : 월 / dd : 일 / HH : 시 / mm : 분 / ss : 초 / SS : 1/1000초(0~999) 
+																		 // ==> 사진을 여러장 업로드 하기 때문에 초까지만 이름을 정해주면 이름 중접이 발생해 같은 파일명으로 파일 계속 생성된다.(덮어쓰기됨) 한개의 파일만 보임
+		renameFileName = originFileName.substring(0, originFileName.lastIndexOf(".")) + sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+				+ originFileName.substring(originFileName.lastIndexOf(".") + 1);
+
+		String renamePath = folder + "\\" + renameFileName;
+		System.out.println(renamePath);
+
+		file.transferTo(new File(renamePath));
+
+		System.out.println(renameFileName);
+
+		return renameFileName;
+	}
+	
+	/**
+	 * Gallery Detail
+	 * 작성자 : 서정도
+	 * @param mv
+	 * @param sgNo
+	 * @param currentPage
 	 * @return
 	 */
-	@RequestMapping("checkStudy.go")
-	private String moveStudyCheck() {
-		return "study/doitStudy_check";
+	@RequestMapping("galleryDetail.go")
+	public ModelAndView galleryDatail(ModelAndView mv, Gallery g, ArrayList<Gallery> multiFile, int sgNo, int gNo, int gNum) {
+		
+		g.setG_Sg_No(sgNo);
+		g.setG_No(gNo);
+		g.setG_Num(gNum);
+		g = sgService.selectGallery(g);
+		System.out.println("######"+g);
+		
+		multiFile = sgService.multiFile(gNum);
+		System.out.println("######"+multiFile);
+		
+		if (g != null /* && multiFile !=null */) {
+			mv.addObject("g", g)
+			  .addObject("multiFile",multiFile)
+			  .setViewName("study/galleryDetail");
+		} else {
+			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
+		}
+ 
+		return mv;
 	}
 	
 	
