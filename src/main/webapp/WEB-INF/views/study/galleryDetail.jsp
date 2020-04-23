@@ -80,9 +80,11 @@
 				<tr>
 				<th width="134" height="50">첨부파일</th>
 				<td colspan="5" width="1107" height="50">
-					<c:if test="${ !empty g.g_Original_FileName }">
-						<a href="${ contextPath }/resources/sgUploadFiles/${g.g_Rename_FileName}" download="${g.g_Rename_FileName}">${g.g_Rename_FileName}  <span style="color:gray; font-size:12px;">(다운로드 가능)</span></a>
-					</c:if>
+					<c:forEach var="mf" items="${multiFile}">
+						<c:if test="${ !empty mf.g_Original_FileName }">
+							<a href="${ contextPath }/resources/sgUploadFiles/${mf.g_Rename_FileName}" download="${mf.g_Rename_FileName}">${mf.g_Rename_FileName}  <span style="color:gray; font-size:12px;">(다운로드 가능)</span></a>
+						</c:if>
+					</c:forEach>
 				</td>
 				<!-- 첨부파일 -->
 				</tr>
