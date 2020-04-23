@@ -70,6 +70,7 @@ public class myPageController {
 			mv.addObject("hlist",hlist);
 			mv.addObject("sglist",sglist);
 			mv.addObject("sllist",sllist);
+			System.out.println("마이페이지 리스트 : " + sllist);
 			mv.setViewName("member/myPage");
 		}
 		return mv;
@@ -93,6 +94,7 @@ public class myPageController {
 		ArrayList<BookShare> bslist = mpService.selectbsList(mno);
 		ArrayList<Qna> qnalist = mpService.selectqnalist(mno);
 		
+
 		if(m != null) {
 			mv.addObject("m", m);
 			mv.addObject("fblist", fblist);
