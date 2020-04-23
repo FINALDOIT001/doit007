@@ -62,7 +62,7 @@
 
 </head>
 
-<body>
+<body onload="printClock()">
 
 
 	<jsp:include page="../common/header.jsp" />
@@ -334,9 +334,8 @@
 											outline: none;
 											-webkit-transition: .2s;
 											transition: opacity .2s;
-											border: 6px;
-											margin-top: 18%;
-											margin-left: 22%;
+											margin-top: 87%;
+											margin-left: 6%;
 										}
 										
 										.openPush::-webkit-slider-thumb {
@@ -349,16 +348,57 @@
 										}
 										
 										.openPush_back {
-											background-color: rgb(42, 42, 42);
-											height: 500px;
+											background: url(${contextPath}/resources/img/push_back_back.jpg);
+											width: 640px;
+											height: 960px;
 										}
 									</style>
-
+									
+									<script>
+										function printClock() {
+										    
+										    var clock = document.getElementById("clock");            // 출력할 장소 선택
+										    var currentDate = new Date();                                     // 현재시간
+										    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+										    var amPm = 'AM'; // 초기값 AM
+										    var currentHours = addZeros(currentDate.getHours(),2); 
+										    var currentMinute = addZeros(currentDate.getMinutes() ,2);
+										    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+										    
+										    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+										    	amPm = 'PM';
+										    	currentHours = addZeros(currentHours - 12,2);
+										    }
+										
+										    if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
+										       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
+										    }
+										    clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
+										    
+										    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+										}
+										
+										function addZeros(num, digit) { // 자릿수 맞춰주기
+											  var zero = '';
+											  num = num.toString();
+											  if (num.length < digit) {
+											    for (i = 0; i < digit - num.length; i++) {
+											      zero += '0';
+											    }
+											  }
+											  return zero + num;
+										}
+									</script>
+									
+									
 									<img src="${contextPath}/resources/img/hodu2.png"
 										style="width: 200px; height: 200px;" /><br>
 									<p>호두로 프리미엄 게시판</p>
 									<div class="openPush_back">
-										<input type="range" class="openPush" min="0" max="100"
+									<div
+												style="width: 600px; height: 250px; line-height: 250px; color: white; font-size: 100px; text-align: center; margin-left:30px;"
+												id="clock"></div>
+											<input type="range" class="openPush" min="0" max="100"
 											value="2" step="1">
 									</div>
 									</div>
