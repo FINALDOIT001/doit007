@@ -57,7 +57,7 @@ public class myPageController {
 	 * @return
 	 */
 	@RequestMapping("myinfo.me")
-	public ModelAndView myinfo(ModelAndView mv,@RequestParam String mId,int mno) {
+	public ModelAndView myinfo(ModelAndView mv,@RequestParam String mId, int mno) {
 		Member m = mpService.selectOne(mId);
 		ArrayList<Hodu> hlist = mpService.selecthList(mId);
 		ArrayList<StudyGroup> sglist = mpService.selectsglist(mno);
