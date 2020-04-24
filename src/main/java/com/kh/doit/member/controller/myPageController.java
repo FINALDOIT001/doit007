@@ -176,7 +176,7 @@ public class myPageController {
 		
 		if(result > 0) {
 			// 정보수정 했을 때 마이페이지로 돌아옴
-			return "redirect:myinfo.me?mId="+m.getmId();
+			return "redirect:myinfo.me?mId="+m.getmId()+"&mno="+m.getMno();
 		}else {
 			model.addAttribute("msg","정보수정 실패!");
 			return "common/errorPage";
