@@ -12,7 +12,10 @@ jQuery(function($){
         info: true,
         // 페이징 기능 숨기기
         paging: true,
-        serverSide: false
+        serverSide: false,
+        "language": {
+            "emptyTable":     "작성한 게시글이 없습니다."
+        }
 
         /* l:표시건수 f: 검색창, r: 이 뭐지?? 
            t: 테이블, i: 총 컬럼 갯수, p: 페이징 */ 
