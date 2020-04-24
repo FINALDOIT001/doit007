@@ -8,31 +8,29 @@ import org.springframework.stereotype.Component;
 public class Etc {
 	
 	private int etcNo;
+	private int etcSgNo; // 현재 스터디의 번호
 	private String etcTitle;
 	private String etcCon;
 	private String etcWriter;
 	private int etcWriterNo;
 	private String etcWriterId;
 	private Date etcDate;
-	private String etcOriginalFileName;
-	private String etcRenameFileName;
 	private String etcStatus;
 	
 	public Etc() {
 	}
 
-	public Etc(int etcNo, String etcTitle, String etcCon, String etcWriter, int etcWriterNo, String etcWriterId,
-			Date etcDate, String etcOriginalFileName, String etcRenameFileName, String etcStatus) {
+	public Etc(int etcNo, int etcSgNo, String etcTitle, String etcCon, String etcWriter, int etcWriterNo,
+			String etcWriterId, Date etcDate, String etcStatus) {
 		super();
 		this.etcNo = etcNo;
+		this.etcSgNo = etcSgNo;
 		this.etcTitle = etcTitle;
 		this.etcCon = etcCon;
 		this.etcWriter = etcWriter;
 		this.etcWriterNo = etcWriterNo;
 		this.etcWriterId = etcWriterId;
 		this.etcDate = etcDate;
-		this.etcOriginalFileName = etcOriginalFileName;
-		this.etcRenameFileName = etcRenameFileName;
 		this.etcStatus = etcStatus;
 	}
 
@@ -42,6 +40,14 @@ public class Etc {
 
 	public void setEtcNo(int etcNo) {
 		this.etcNo = etcNo;
+	}
+
+	public int getEtcSgNo() {
+		return etcSgNo;
+	}
+
+	public void setEtcSgNo(int etcSgNo) {
+		this.etcSgNo = etcSgNo;
 	}
 
 	public String getEtcTitle() {
@@ -92,22 +98,6 @@ public class Etc {
 		this.etcDate = etcDate;
 	}
 
-	public String getEtcOriginalFileName() {
-		return etcOriginalFileName;
-	}
-
-	public void setEtcOriginalFileName(String etcOriginalFileName) {
-		this.etcOriginalFileName = etcOriginalFileName;
-	}
-
-	public String getEtcRenameFileName() {
-		return etcRenameFileName;
-	}
-
-	public void setEtcRenameFileName(String etcRenameFileName) {
-		this.etcRenameFileName = etcRenameFileName;
-	}
-
 	public String getEtcStatus() {
 		return etcStatus;
 	}
@@ -118,11 +108,11 @@ public class Etc {
 
 	@Override
 	public String toString() {
-		return "Etc [etcNo=" + etcNo + ", etcTitle=" + etcTitle + ", etcCon=" + etcCon + ", etcWriter=" + etcWriter
-				+ ", etcWriterNo=" + etcWriterNo + ", etcWriterId=" + etcWriterId + ", etcDate=" + etcDate
-				+ ", etcOriginalFileName=" + etcOriginalFileName + ", etcRenameFileName=" + etcRenameFileName
-				+ ", etcStatus=" + etcStatus + "]";
+		return "Etc [etcNo=" + etcNo + ", etcSgNo=" + etcSgNo + ", etcTitle=" + etcTitle + ", etcCon=" + etcCon
+				+ ", etcWriter=" + etcWriter + ", etcWriterNo=" + etcWriterNo + ", etcWriterId=" + etcWriterId
+				+ ", etcDate=" + etcDate + ", etcStatus=" + etcStatus + "]";
 	}
+
 	
 	
 }

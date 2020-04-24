@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -197,6 +198,33 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	int insertEtc(Etc etc);
+
+	/**
+	 * 자료실 파일추가 Kwon
+	 * @param etcF
+	 * @return
+	 */
+	int insertEtcFile(EtcFile etcF);
+
+	/**
+	 * 자료실 리스트 가져오기 Kwon
+	 * @param sgNo
+	 * @return
+	 */
+	ArrayList<Etc> etcList(int sgNo);
+
+	
+	// 자료실 보기
+	Etc selectEtc(int etcNo);
+
+	ArrayList<EtcFile> selectEtcFile(int etcNo);
+
+	/**
+	 * 삭제하기 Kwon
+	 * @param etcNo
+	 * @return
+	 */
+	int deleteEtc(int etcNo);
 	
 
 	

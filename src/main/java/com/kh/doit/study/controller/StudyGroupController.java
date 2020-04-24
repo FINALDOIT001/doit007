@@ -28,6 +28,7 @@ import com.kh.doit.study.common.paginationJung;
 import com.kh.doit.study.model.service.StudyGroupService;
 import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -248,6 +249,7 @@ public class StudyGroupController {
 
 	/**
 	 * 디테일 상세내용 / 참석자 작성자 : 서정도
+	 * 권구현도 수정합니다~ 자료실 리스트 가져오기 2020.04.24 Kwon
 	 * 
 	 * @param mv
 	 * @param sgNo
@@ -271,12 +273,18 @@ public class StudyGroupController {
 			 sl = sgService.studyLikeList(slNo);
 			System.out.println("studyList" + sl);
 		}
+		
+		// 구현 추가 부분
+		ArrayList<Etc> etc = sgService.etcList(sgNo);
+		System.out.println("Servlet Kwon Etc : " + etc);
+	
 
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
 
 		if (sg != null) {
-			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl)
+			
+			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl).addObject("etc",etc)
 					.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
@@ -668,9 +676,6 @@ public class StudyGroupController {
 	
 	
 	
-	
-	
-	
 	/**
 	 * 자료실 화면으로 Kwon
 	 * 2020.04.23 KH
@@ -678,31 +683,37 @@ public class StudyGroupController {
 	 */
 	@RequestMapping("insertEtc.go")
 	public String moveEtc() {
-		return "study/insertEtc";
+		return "study/etcInsert";
 	}
 	
 	@RequestMapping("insertEtc.do")
-	public String insertEtc(Etc etc, HttpServletRequest request,
+	public String insertEtc(Etc etc, EtcFile etcF, HttpServletRequest request,
 				@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
 
 		int result = 0;
+		int result2 = 0;
+		
+		result = sgService.insertEtc(etc);
 
-		for (int i = 0; i < file.length; i++) {
-			if (file.length > 0) {
-
-				String g_RenameFile = saveMultiFile(file[i], request);
-
-				if (g_RenameFile != null) {
-
-					etc.setEtcOriginalFileName(file[i].getOriginalFilename());
-					etc.setEtcRenameFileName(g_RenameFile);
-
-					System.out.println("etc.ori : " + etc.getEtcOriginalFileName());
-					System.out.println("etc.re : " + etc.getEtcRenameFileName());
-
+		if (result > 0 ) {
+			for (int i = 0; i < file.length; i++) {
+				if (file.length > 0) {
+	
+					String g_RenameFile = saveMultiFile(file[i], request);
+	
+					if (g_RenameFile != null) {
+	
+						etcF.setEtcfOriginalFileName(file[i].getOriginalFilename());
+						etcF.setEtcfRenameFileName(g_RenameFile);
+	
+						System.out.println("etc.ori : " + etcF.getEtcfOriginalFileName());
+						System.out.println("etc.re : " + etcF.getEtcfRenameFileName());
+	
+					}
 				}
+				result2 = sgService.insertEtcFile(etcF);
 			}
-			result = sgService.insertEtc(etc);
+			
 		}
 
 		System.out.println("자료 업로드 : " + result);
@@ -726,6 +737,38 @@ public class StudyGroupController {
 		
 		
 	}
+	
+	
+	
+	
+	/**
+	 * 자료실 상세페이지 Kwon
+	 * 2020.04.24 HOME
+	 * @param mv
+	 * @param etc
+	 * @param multiFile
+	 * @param etcNo
+	 * @return
+	 */
+	@RequestMapping("etcView.do")
+	private ModelAndView etcView(ModelAndView mv, Etc etc, ArrayList<EtcFile> multiFile, int etcNo) {
+		etc = sgService.selectEtc(etcNo);
+		multiFile = sgService.selectEtcFile(etcNo);
+		
+		mv.addObject("etc", etc);
+		mv.addObject("multiFile",multiFile);
+		mv.setViewName("study/etcDetail");
+		
+		return mv;
+	}
+	
+	@RequestMapping("etcDelete.do")
+	private String etcDelete(int etcNo) {
+		int result = sgService.deleteEtc(etcNo);
+		return "redirect:sgList.go";
+	}
+	
+	
 	
 	
  

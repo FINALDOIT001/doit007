@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -188,6 +189,36 @@ public class StudyGroupDao {
 	 */
 	public int inserEtc(Etc etc) {
 		return sqlSession.insert("studyGroupMapper.insertEtc", etc);
+	}
+
+	/**
+	 * 자료실 파일 추가
+	 * @param etcF
+	 * @return
+	 */
+	public int insertEtcFile(EtcFile etcF) {
+		return sqlSession.insert("studyGroupMapper.insertEtcFile", etcF);
+	}
+
+	/**
+	 * 자료실 리스트 가져오기 Kwon
+	 * @param sgNo
+	 * @return
+	 */
+	public ArrayList<Etc> etcList(int sgNo) {
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.etcList", sgNo);
+	}
+
+	public Etc selectEtc(int etcNo) {
+		return sqlSession.selectOne("studyGroupMapper.selectEtc", etcNo);
+	}
+
+	public ArrayList<EtcFile> selectEtcFile(int etcNo) {
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.selectEtcFile",etcNo);
+	}
+
+	public int deleteEtc(int etcNo) {
+		return sqlSession.update("studyGroupMapper.deleteEtc", etcNo);
 	}
 
 }

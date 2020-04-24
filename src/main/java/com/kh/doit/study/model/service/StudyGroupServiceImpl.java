@@ -10,6 +10,7 @@ import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.dao.StudyGroupDao;
 import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
@@ -283,6 +284,45 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	@Override
 	public int insertEtc(Etc etc) {
 		return sgDao.inserEtc(etc);
+	}
+
+
+	/**
+	 * 자료실 파일추가 Kwon
+	 */
+	@Override
+	public int insertEtcFile(EtcFile etcF) {
+		return sgDao.insertEtcFile(etcF);
+	}
+
+
+	/**
+	 * 자료실 리스트 가져오기 Kwon
+	 */
+	@Override
+	public ArrayList<Etc> etcList(int sgNo) {
+		return sgDao.etcList(sgNo);
+	}
+
+
+	
+	// 자료실 가져오기 1
+	@Override
+	public Etc selectEtc(int etcNo) {
+		return sgDao.selectEtc(etcNo);
+	}
+
+
+	// 자료실 가져오기 2
+	@Override
+	public ArrayList<EtcFile> selectEtcFile(int etcNo) {
+		return sgDao.selectEtcFile(etcNo);
+	}
+
+
+	@Override
+	public int deleteEtc(int etcNo) {
+		return sgDao.deleteEtc(etcNo);
 	}
 	
 	

@@ -425,28 +425,26 @@
 									<th width="40%" class="th1">제목</th>
 									<th width="10%" class="th1">글쓴이</th>
 									<th width="10%" class="th1">등록일</th>
-									<th width="8%" class="th1">첨부파일</th>
 								</tr>
 							</thead>
 							<tbody>
 								
-		<c:forEach var="etc" items="${ etclist }">
+		<c:forEach var="etc" items="${ etc }">
 		<tr class="kwon-tr1">
-			<td align="center" class="kwon-td1">${ etc.bsNo }</td>
-			<td align="center" class="kwon-td1">${ etc.bsCategory }</td>
+			<td align="center" class="kwon-td1">${ etc.etcNo }</td>
 			<td align="center" class="kwon-td1">
-				<c:url var="bsView" value="bsView.ev">
-					<c:param name="bsNo" value="${ etc.bsNo }"/>
+				<c:url var="etcView" value="etcView.do">
+					<c:param name="etcNo" value="${ etc.etcNo }"/>
 				</c:url>
 			
-				<a class="kwon-td1 tdtitle1" href="${ bsView }" 
-				style="color:#5b5b5b !important;">${ etc.bsTitle }</a>
+				<a class="kwon-td1 tdtitle1" href="${ etcView }" 
+				style="color:#5b5b5b !important;">${ etc.etcTitle }</a>
 			
 			</td>
-			<td align="center" class="kwon-td1" value="${ etc.bsWriterNo }">${ etc.bsWriter }</td>
-			<td align="center" class="kwon-td1">${ etc.bsLocation }</td>
-			<td align="center" class="kwon-td1">${ etc.bsDate }</td>
-			<td align="center" class="kwon-td1">${ etc.bsState }</td>
+			<td align="center" class="kwon-td1" value="${ etc.etcWriterNo }">${ etc.etcWriterId }</td>
+			<td align="center" class="kwon-td1">${ etc.etcDate }</td>
+			
+			
 		</tr>
 		</c:forEach>
 		
@@ -1000,7 +998,8 @@
    
    <script>
    		$('#studyEtcInsert').on('click',function() {
-   			location.href="insertEtc.go";
+   			var sgNo = ${ sg.sgNo };
+   			location.href="insertEtc.go?sgNo="+sgNo;
    		});
    
    
