@@ -217,12 +217,12 @@
              <c:forEach var="sg" items="${sglist}">
                   <c:if test="${!empty sg.sgRenameFileName}">
                   <div class="col-md-2" style="text-align: center;">
-                     <img src="${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
+                     <img src="${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}" class="rounded" alt="Cinque Terre" style="width: 120px; height: 120px;">
                   </div>
                   </c:if>
                   <c:if test="${empty sg.sgRenameFileName}">
 					<div class="col-md-2" style="text-align: center;">
-						<img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
+						<img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 120px; height: 120px;">
 					</div>
 				 </c:if>
                   <div class="col-md-9 mt-sm-20">
@@ -264,6 +264,9 @@
                      <hr>
                   </div>
 				</c:forEach>
+				<c:if test="${empty sglist}">
+					<label style="font-size: larger; margin: auto;">가입한 스터디가 없습니다.</label>
+				</c:if>
                   <!-- study list end -->
 
                   </div>
@@ -278,16 +281,16 @@
                   <c:forEach var="sl" items="${sllist}">
                   <c:if test="${!empty sl.sgRenameFileName}">
                   <div class="col-md-2" style="text-align: center;">
-                     <img src="${contextPath}/resources/sgloadFiles/${sl.sgRenameFileName}" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
+                     <img src="${contextPath}/resources/sgloadFiles/${sl.sgRenameFileName}" class="rounded" alt="Cinque Terre" style="width: 120px; height: 120px;">
                   </div>
                   </c:if>
                   <c:if test="${empty sl.sgRenameFileName}">
 					<div class="col-md-2" style="text-align: center;">
-						<img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 90px; height: 90px;">
+						<img src="${contextPath}/resources/img/project-5.png" class="rounded" alt="Cinque Terre" style="width: 120px; height: 120px;">
 					</div>
 				 </c:if>
                   <div class="col-md-9 mt-sm-20">
-                     <a href="studyDetail.go?sgNo=${sl.sgNo}" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">${sl.sgTitle}</label>
+                     <a href="studyDetail.go?sgNo=${sl.sgNo}&mno=${m.mno}" style="display: inline;"><label style="font-size: x-large; font-weight: bold;">${sl.sgTitle}</label>
                      </a>
                         <!-- <div class="starRev" style="width: 60px; display:inline;">
                            <span class="starR on" style="margin-left: 20px; width: 20px; height: 20px;"></span> 
@@ -325,6 +328,9 @@
                      <hr>
                   </div>
 				</c:forEach>
+				<c:if test="${empty sllist}">
+					<label style="font-size: larger; margin: auto;">위시리스트가 없습니다.</label>
+				</c:if>
 
                   <!-- study list end -->
                      </div>
