@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +33,7 @@ import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
+
 
 @Controller
 public class StudyGroupController {
@@ -708,6 +712,18 @@ public class StudyGroupController {
 		} else {
 			return "common/errorPage";
 		}
+		
+	}
+	
+	
+	@RequestMapping(value="doitCheckInsert.go", method= RequestMethod.POST)
+	@ResponseBody
+	private void doitCheckInsert(ModelAndView mv,
+			@RequestParam(value="checklist") List<Integer> list) {
+		
+		System.out.println(list);
+		
+		
 		
 	}
 	
