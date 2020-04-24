@@ -35,8 +35,8 @@
 				<a>출석 날짜 : ${ssDayDate}</a>
 			</div>
 			<!-- CSS 적용 예정 -->
-			<input type="hidden" value="${ssNo}"> <input type="hidden"
-				value="${sgNo}">
+			<input type="hidden" value="${ssNo}" name="ssNo">
+			<input type="hidden" value="${sgNo}" name="sgNo">
 
 			<table id="table2" style="margin-left: 11%; width: 700px;"
 				class="table table-bordered">
@@ -88,7 +88,10 @@
 		
 		$("#doitCheck").on("click",function(){
 			
-			var Arr = new Array();
+			var ssNo = $("input[name=ssNo]").val();
+			var sgNo = $("input[name=sgNo]").val();
+			
+			var checklist = [];
 			
 			$("input:checkbox[name='checked']").each(function(){
 				if($(this).is(":checked") == true) {
@@ -98,11 +101,24 @@
 					 mId:$(this).parents("tr").children("td").eq(1).text(),
 					mName:$(this).parents("tr").children("td").eq(2).text()
 					}
+					checklist.push(i);
 				}
-				Arr.push(i);
+				
 				});
-			
-			console.log(Arr);
+			console.log(checklist);
+			jQuery.ajaxSettings.traditional = true;
+
+			$.ajax({
+				url:'doitCheckInsert.go',
+				type:'post',
+				data:{
+					checklist:checklist,
+						ssNo:ssNo,
+						sgNo:sgNo
+				
+					}
+				
+			})
 			
 			
 		});

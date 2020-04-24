@@ -779,6 +779,7 @@
 				locale : 'ko',
 				defaultView : 'dayGridMonth',
 				selectable : false,
+				eventColor: '#FFE5C2',
 				// event 처리 Gson 으로 처리 후 리터럴 값 ecvents Array 변수에 넣어 출력 처리함. fullCalendal 4.0 적용.
 					events: function(fetchInfo, successCallback, failureCallback){
 						$.ajax({
