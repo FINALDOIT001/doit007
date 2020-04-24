@@ -247,39 +247,43 @@ public class StudyGroupController {
 	}
 
 	/**
-	    * 디테일 상세내용 / 참석자
-	    * 작성자 : 서정도
-	    * @param mv
-	    * @param sgNo
-	    * @param currentPage
-	    * @return
-	    */
-	   @RequestMapping("studyDetail.go")
-	   public ModelAndView studyDetail(ModelAndView mv, int sgNo,
-	         @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+	 * 디테일 상세내용 / 참석자 작성자 : 서정도
+	 * 
+	 * @param mv
+	 * @param sgNo
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("studyDetail.go")
+	public ModelAndView studyDetail(ModelAndView mv, int sgNo, String mno,
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
-	      StudyGroup sg = sgService.selectSg(sgNo);
-	      
-	      ArrayList<Member> ml = sgService.memberList(sgNo);
-	      ArrayList<Gallery> galleryList = sgService.GalleryList(sgNo);
-	      
-	      System.out.println("Controller memberList : " + galleryList);
-	      
-	      System.out.println("Controller memberList : " + sg);
-	      System.out.println("Controller memberList : " + ml);
-	      
-	      if (sg != null) {
-	         mv.addObject("sg", sg)
-	           .addObject("ml",ml)
-	           .addObject("currentPage", currentPage)
-	           .addObject("galleryList", galleryList)
-	           .setViewName("study/doitStudyDetail");
-	      } else {
-	         mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
-	      }
-	 
-	      return mv;
-	   }
+		StudyGroup sg = sgService.selectSg(sgNo);
+
+		ArrayList<Member> ml = sgService.memberList(sgNo);
+		
+		StudyLike sl = new StudyLike();
+		if(mno != "") {
+		
+		String slNo= mno+sgNo;
+		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
+		
+			 sl = sgService.studyLikeList(slNo);
+			System.out.println("studyList" + sl);
+		}
+
+		System.out.println("Controller memberList : " + sg);
+		System.out.println("Controller memberList : " + ml);
+
+		if (sg != null) {
+			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl)
+					.setViewName("study/doitStudyDetail");
+		} else {
+			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
+		}
+
+		return mv;
+	}
 
 	/**
 	 * 스터디 탈퇴 작성자 : 서정도
