@@ -162,7 +162,6 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	 */
 	@Override
 	public int dailyStudyinsert(DailyStudy ds) {
-		
 		return sgDao.dailyStudyinsert(ds);
 	}
 

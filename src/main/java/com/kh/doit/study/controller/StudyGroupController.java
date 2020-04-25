@@ -266,7 +266,7 @@ public class StudyGroupController {
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
 		StudyLike sl = new StudyLike();
-		if(mno != "") {
+		if(mno != "" && mno !=null) {
 		
 		String slNo= mno+sgNo;
 		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
@@ -754,6 +754,14 @@ public class StudyGroupController {
 		return "redirect:sgList.go";
 	}
 	
+	/**스터디 출첵 인설트 
+	 * 정호
+	 * @param mv
+	 * @param sc
+	 * @param checkList
+	 * @param checkMember
+	 * @return
+	 */
 	@RequestMapping(value = "doitCheckInsert.go", method = RequestMethod.POST)
 	@ResponseBody
 	private String doitCheckInsert(ModelAndView mv, StudyCheck sc,
