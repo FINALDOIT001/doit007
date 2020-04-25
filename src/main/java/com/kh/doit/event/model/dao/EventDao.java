@@ -169,6 +169,11 @@ public class EventDao {
 	public ArrayList<Event> selectListAll() {
 		return (ArrayList)sqlSession.selectList("evMapper.selectListAll");
 	}
+
+	public int updateCount(int eNo) {
+		return sqlSession.update("evMapper.updateCount",eNo);
+		
+	}
 	
 	
 	

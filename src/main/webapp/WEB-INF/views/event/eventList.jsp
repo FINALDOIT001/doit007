@@ -73,8 +73,12 @@
                 <p>${ event.eIntro }</p>
                 <ul class="blog-info-link">
                   <li><i class="far fa-user"></i> ${ event.eTag }</li>
-                  <li><i class="far fa-comments"></i> 03 Comments</li>
-                  <li><i class="far fa-heart"></i> 21</li>
+                  <!-- <li><i class="far fa-comments"></i> 03 Comments</li>
+                  <li><i class="far fa-heart"></i> 21</li> 
+                  댓글수는 가져오고 싶은데.. 귀찮네
+                  조회수는 필요할 듯도 한데
+                  -->
+                  <li>조회수 : ${ event.eCount }</li>
                   <li><i class="far fa-edit"></i> ${ event.eWriter }</li>
                 </ul> 
               </div>
@@ -207,13 +211,13 @@
             <aside class="single_sidebar_widget popular_post_widget">
               <h3 class="widget_title">최근 게시물</h3>
             
-            <c:if test="${ empty elist }">
+            <c:if test="${ empty newlist }">
             	<div class="media post_item">
             		게시글이 없습니다.
             	</div>
             </c:if>
-            <c:if test="${ !empty elist  }">
-            <c:forEach var="event" items="${elist}" end="1">
+            <c:if test="${ !empty newlist  }">
+            <c:forEach var="event" items="${newlist}" end="1">
               <div class="media post_item">
               	<input type="hidden" value="${ event.eNo }">
                 <img class="img8080" src="${contextPath}/resources/evUploadFiles/${ event.eRenameFileName }" alt="post">
