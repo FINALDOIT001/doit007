@@ -14,6 +14,7 @@ import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -325,6 +326,27 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		return sgDao.deleteEtc(etcNo);
 	}
 	
+	/** 스터디 출첵 멤버 인설트 
+	 * 정호가 만든거
+	 *
+	 */
+	@Override
+	public int checkMemeberInsert(StudyCheck sc) {
+		
+		return sgDao.checkMemeberInsert(sc);
+	}
+
+
+	/** 스터디 출첵 인설트
+	 * 정호가 만든거
+	 */
+	@Override
+	public int studyCheckInsert(int scNo) {
+		// TODO Auto-generated method stub
+		return sgDao.studyCheckInsert(scNo);
+	}
+
+
 	
 
 }

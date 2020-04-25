@@ -84,6 +84,15 @@
 		<result property="slmNo" column="M_NO"/>
 		<result property="slsgNo" column="SG_NO"/>
 	</resultMap>
+	
+	<resultMap id="studyCheckResultSet" type="StudyCheck">
+	<id property="scNo" column="SC_NO"/>
+	<result property="ssNo" column="SS_NO"/>
+	<result property="sgNo" column="SG_NO"/>
+	<result property="scMno" column="SC_MNO"/>
+	<result property="scDate" column="SC_DATE"/>
+	<result property="scCheck" column="SC_CHECK"/>
+	</resultMap>
 
 	<select id="getlistCount" resultType="_int">
 		SELECT COUNT(*)
@@ -334,6 +343,17 @@
 		UPDATE STUDY_ETC SET
 		ETC_STATUS = 'N'
 		WHERE ETC_NO = #{etcNo}
+	</update>
+	
+	<insert id="cMemeberInsert" parameterType="StudyCheck">
+	INSERT INTO STUDY_CHECK 
+	VALUES(#{scNo},#{ssNo},#{sgNo},#{scMno},#{scDate},DEFAULT)
+	</insert>
+	
+	<update id="studyCheckUpdate" parameterType="_int">
+	UPDATE STUDY_CHECK SET
+	SC_CHECK = 'Y'
+	WHERE SC_NO = #{scNo}
 	</update>
 
 </mapper>

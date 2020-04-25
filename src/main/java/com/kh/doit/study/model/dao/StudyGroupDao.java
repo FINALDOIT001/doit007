@@ -16,6 +16,7 @@ import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -220,5 +221,25 @@ public class StudyGroupDao {
 	public int deleteEtc(int etcNo) {
 		return sqlSession.update("studyGroupMapper.deleteEtc", etcNo);
 	}
+	
+	/**스터디 출첵 멤버 인설트 
+	 * 정호가 만든거 
+	 * @param sc
+	 * @return
+	 */
+	public int checkMemeberInsert(StudyCheck sc) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("studyGroupMapper.cMemeberInsert",sc);
+	}
 
+	/**스터디 출첵 인설트 
+	 * 정호가 만든거
+	 * @param scNo
+	 * @return
+	 */
+	public int studyCheckInsert(int scNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("studyGroupMapper.studyCheckUpdate",scNo);
+
+}
 }

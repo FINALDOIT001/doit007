@@ -32,6 +32,7 @@ import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -725,22 +726,7 @@ public class StudyGroupController {
 		}
 		
 	}
-	
-	
-	@RequestMapping(value="doitCheckInsert.go", method= RequestMethod.POST)
-	@ResponseBody
-	private void doitCheckInsert(ModelAndView mv,
-			@RequestParam(value="checklist") List<Integer> list) {
-		
-		System.out.println(list);
-		
-		
-		
-	}
-	
-	
-	
-	
+
 	/**
 	 * 자료실 상세페이지 Kwon
 	 * 2020.04.24 HOME
@@ -768,10 +754,47 @@ public class StudyGroupController {
 		return "redirect:sgList.go";
 	}
 	
+	@RequestMapping(value = "doitCheckInsert.go", method = RequestMethod.POST)
+	@ResponseBody
+	private String doitCheckInsert(ModelAndView mv, StudyCheck sc,
+			@RequestParam(value = "checklist") List<String> checkList,
+			@RequestParam(value = "checkmember") List<String> checkMember) {
+
+		int cmiNumber = 0;
+		int sciNumber = 0;
+
+		for (int i = 0; i < checkMember.size(); ++i) {
+
+			sc.setScMno(Integer.parseInt(checkMember.get(i)));
+			sc.setScNo(Integer.parseInt(sc.getSsNo() + checkMember.get(i)));
+			cmiNumber += checkMemberInsert(sc);
+
+		}
+
+		for (int i = 0; i < checkList.size(); ++i) {
+			sciNumber += studyCheckInsert(Integer.parseInt(sc.getSsNo() + checkList.get(i)));
+		}
+		if (cmiNumber == checkMember.size() && sciNumber==checkList.size()) {
+			return "ok";
+
+		} else {
+			return "fail";
+		}
+
+	}
+
+	public int checkMemberInsert(StudyCheck sc) {
+		int result = sgService.checkMemeberInsert(sc);
+		return result;
+	}
+
+	public int studyCheckInsert(int scNo) {
+
+		int result = sgService.studyCheckInsert(scNo);
+
+		return result;
+	}
 	
-	
-	
- 
 	
 
 }

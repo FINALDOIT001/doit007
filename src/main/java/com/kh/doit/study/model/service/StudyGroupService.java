@@ -9,6 +9,7 @@ import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -226,7 +227,19 @@ public interface StudyGroupService {
 	 */
 	int deleteEtc(int etcNo);
 	
+	/** 스터디 출석체크 멤버 정보 인설트
+	 * 정호가 만듬
+	 * @param sc
+	 * @return
+	 */
+	int checkMemeberInsert(StudyCheck sc);
 
+	/** 스터디 출석 체크 정보 입력
+	 * 정호가 만듬
+	 * @param scNo
+	 * @return
+	 */
+	int studyCheckInsert(int scNo);
 	
 	
 	

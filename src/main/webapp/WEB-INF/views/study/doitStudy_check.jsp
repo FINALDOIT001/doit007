@@ -32,7 +32,7 @@
 		<form action="studyCheck.do" method="POST">
 
 			<div>
-				<a>출석 날짜 : ${ssDayDate}</a>
+				<a>출석 날짜 : </a><a id="ssDate">${ssDayDate}</a>
 			</div>
 			<!-- CSS 적용 예정 -->
 			<input type="hidden" value="${ssNo}" name="ssNo">
@@ -90,32 +90,44 @@
 			
 			var ssNo = $("input[name=ssNo]").val();
 			var sgNo = $("input[name=sgNo]").val();
+			var scDate = $("#ssDate").text();
 			
+			
+			var checkmember = [];
 			var checklist = [];
 			
 			$("input:checkbox[name='checked']").each(function(){
+				checkmember.push($(this).val());
 				if($(this).is(":checked") == true) {
-					
-					var i={
-					 mno : $(this).parents("tr").children("td").eq(0).text(),
-					 mId:$(this).parents("tr").children("td").eq(1).text(),
-					mName:$(this).parents("tr").children("td").eq(2).text()
-					}
-					checklist.push(i);
+					checklist.push($(this).val());
 				}
 				
 				});
 			console.log(checklist);
+			console.log(checkmember);
 			jQuery.ajaxSettings.traditional = true;
 
 			$.ajax({
 				url:'doitCheckInsert.go',
-				type:'post',
+				dataType:'json',
+				type:"post",
 				data:{
+					checkmember:checkmember,
 					checklist:checklist,
 						ssNo:ssNo,
-						sgNo:sgNo
-				
+						sgNo:sgNo,
+						scDate:scDate
+					},success:function(data){
+						console.log(data);
+						if(data=="ok"){
+							alert("출첵 완료");
+						}else{
+							alert("출첵 실패");
+						}
+					},error:function(reqeust, status, errorDate){
+						alert("error code : "+ reqeust.status + "\n"
+								+"message : "+ reqeust.responseText
+								+"error : "+errorDate);
 					}
 				
 			})
