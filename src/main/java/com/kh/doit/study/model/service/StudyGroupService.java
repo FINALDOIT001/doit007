@@ -248,6 +248,13 @@ public interface StudyGroupService {
 	 */
 	ArrayList<StudyCheck> studyCheckList(int ssNo);
 
+
+	/**출첵 수정 하기전 디폴트 만들기
+	 * @param ssNo
+	 * @return
+	 */
+	int StudyCheckDefault(int ssNo);
+
 	
 	
 	

@@ -354,6 +354,16 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		// TODO Auto-generated method stub
 		return sgDao.studyCheckList(ssNo);
 	}
+
+
+	/**출첵 수정하기전 디폴트 만들기
+	 *
+	 */
+	@Override
+	public int StudyCheckDefault(int ssNo) {
+		
+		return sgDao.StudyCheckDefault(ssNo);
+	}
 	
 
 

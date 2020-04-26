@@ -862,7 +862,7 @@
 		    	  var sgNo = ${sg.sgNo} ;
 		    	  var usermno = ${sessionScope.loginUser.mno};
 		    	  var sgWriterNo = ${sg.sgWriterNo};
-		         window.open("checkStudy.go?sgNo="+sgNo+"&ssNo="+ssNo+"&ssDayDate="+ssDayDate+"&sgWriterNo="+sgWriterNo+"&usermno="+usermno, "출석체크", "status=no, location= no, width=700, height=700, scrollbars=yes;");
+		         window.open("checkStudy.go?sgNo="+sgNo+"&ssNo="+ssNo+"&sgWriterNo="+sgWriterNo+"&usermno="+usermno+"&ssDayDate="+ssDayDate, "출석체크", "status=no, location= no, width=700, height=700, scrollbars=yes;");
 		      });
 	      
 	</script>

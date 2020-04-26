@@ -92,6 +92,8 @@
 	<result property="scMno" column="SC_MNO"/>
 	<result property="scDate" column="SC_DATE"/>
 	<result property="scCheck" column="SC_CHECK"/>
+	<result property="userId" column="M_ID"/>
+	<result property="userName" column="M_NAME"/>
 	</resultMap>
 
 	<select id="getlistCount" resultType="_int">
@@ -343,9 +345,18 @@
 	</select>
 	
 	<select id="studyCheckList" parameterType ="_int" resultMap="studyCheckResultSet">
-	SELECT * FROM STUDY_CHECK
-	WHERE SS_NO =#{ssNo} AND SC_CHECK ='Y'
+	SELECT SC_NO, SS_NO, SG_NO, SC_MNO, SC_DATE, SC_CHECK, M_ID, M_NAME
+	FROM STUDY_CHECK
+	JOIN MEMBER ON SC_MNO = M_NO
+	WHERE SS_NO=#{ssNo}
 	</select>
+	
+	<update id="StudyCheckDefault" parameterType="_int">
+	UPDATE STUDY_CHECK SET
+	SC_CHECK = 'N'
+	WHERE SS_NO = #{ssNo}
+	</update>
+	
 
 </mapper>
     

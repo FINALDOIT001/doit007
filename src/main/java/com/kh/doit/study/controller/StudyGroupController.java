@@ -494,20 +494,17 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("checkStudy.go")
-	public ModelAndView checkStudy(ModelAndView mv, int sgNo, int ssNo, String ssDayDate,
+	public ModelAndView checkStudy(ModelAndView mv, int sgNo, int ssNo, String ssDayDate, int sgWriterNo ,int usermno,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
 		ArrayList<StudyCheck> sc = studyCheckList(ssNo);
-		
-		System.out.println(sgNo);
-		System.out.println(ssNo);
-		System.out.println(ml);
-		
-		
+				
 		if (ml != null) {
 			mv.addObject("sgNo", sgNo)
+			  .addObject("sgWriterNo",sgWriterNo)
+			  .addObject("usermno",usermno)
 			  .addObject("ml",ml)
 			  .addObject("sc",sc)
 			  .addObject("ssNo", ssNo)
@@ -810,6 +807,8 @@ public class StudyGroupController {
 	}
 
 	/*Someone join to Sucks the name of group by made Jungho 
+	 * 스터디 출첵 업데이트에 제 사용함.
+	 * 정호
 	 * memememememememe~~~!
 	 * @param scNo
 	 * @return
@@ -827,6 +826,30 @@ public class StudyGroupController {
 	public ArrayList<StudyCheck> studyCheckList(int ssNo){
 		
 		return sgService.studyCheckList(ssNo);
+		
+	}
+	
+	@RequestMapping(value ="doitCheckUpdate.go", method = RequestMethod.POST)
+	@ResponseBody
+	private String doitCheckUpdate(int ssNo,
+			@RequestParam(value = "changelist") List<String> changelist) {
+		
+		
+		int result1 = sgService.StudyCheckDefault(ssNo);
+		
+		int result=0;
+		for (int i = 0; i < changelist.size(); ++i) {
+			int scNo = Integer.parseInt(ssNo+changelist.get(i));
+			
+			result += sgService.studyCheckInsert(scNo);
+		}
+		
+		
+		if(result == changelist.size()&& result1 > 0) {
+			return "ok";
+		}else {
+			return "fail";
+		}
 		
 	}
 	
