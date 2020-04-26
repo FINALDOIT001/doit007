@@ -499,6 +499,8 @@ public class StudyGroupController {
 		
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
+		ArrayList<StudyCheck> sc = studyCheckList(ssNo);
+		
 		System.out.println(sgNo);
 		System.out.println(ssNo);
 		System.out.println(ml);
@@ -507,6 +509,7 @@ public class StudyGroupController {
 		if (ml != null) {
 			mv.addObject("sgNo", sgNo)
 			  .addObject("ml",ml)
+			  .addObject("sc",sc)
 			  .addObject("ssNo", ssNo)
 			  .addObject("ssDayDate",ssDayDate)
 			  .setViewName("study/doitStudy_check");
