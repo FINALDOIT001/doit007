@@ -344,6 +344,18 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		// TODO Auto-generated method stub
 		return sgDao.studyCheckInsert(scNo);
 	}
+	
+	/**출첵한 member 리스트 불러오기 method
+	 * 정호
+	 *
+	 */
+	@Override
+	public ArrayList<StudyCheck> studyCheckList(int ssNo) {
+		// TODO Auto-generated method stub
+		return sgDao.studyCheckList(ssNo);
+	}
+	
+
 
 
 	

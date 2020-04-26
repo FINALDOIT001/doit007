@@ -242,26 +242,7 @@
 		FROM Gallery
 		WHERE G_NUM = #{g_Num}
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	<select id="searchCount" parameterType="String" resultType="_int">
 		SELECT 	COUNT(*)
 		FROM	STUDY_GROUP
@@ -355,6 +336,16 @@
 	SC_CHECK = 'Y'
 	WHERE SC_NO = #{scNo}
 	</update>
+	
+	<select id="studyCheckSearch" parameterType="_int">
+	SELECT * FROM STUDY_CHECK
+	WHERE SC_NO = #{scNo}
+	</select>
+	
+	<select id="studyCheckList" parameterType ="_int" resultMap="studyCheckResultSet">
+	SELECT * FROM STUDY_CHECK
+	WHERE SS_NO =#{ssNo} AND SC_CHECK ='Y'
+	</select>
 
 </mapper>
     

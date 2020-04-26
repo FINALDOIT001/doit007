@@ -770,7 +770,8 @@ public class StudyGroupController {
 
 		int cmiNumber = 0;
 		int sciNumber = 0;
-
+		int sccheck = 0;
+		
 		for (int i = 0; i < checkMember.size(); ++i) {
 
 			sc.setScMno(Integer.parseInt(checkMember.get(i)));
@@ -782,25 +783,48 @@ public class StudyGroupController {
 		for (int i = 0; i < checkList.size(); ++i) {
 			sciNumber += studyCheckInsert(Integer.parseInt(sc.getSsNo() + checkList.get(i)));
 		}
+		
+		
 		if (cmiNumber == checkMember.size() && sciNumber==checkList.size()) {
+			
 			return "ok";
 
 		} else {
+			
 			return "fail";
 		}
 
 	}
 
+	/** 스터디 출첵 멤머 DB 인설트 메소드 
+	 * 정호가 만듬
+	 * @param sc
+	 * @return
+	 */
 	public int checkMemberInsert(StudyCheck sc) {
 		int result = sgService.checkMemeberInsert(sc);
 		return result;
 	}
 
+	/*Someone join to Sucks the name of group by made Jungho 
+	 * memememememememe~~~!
+	 * @param scNo
+	 * @return
+	 */
 	public int studyCheckInsert(int scNo) {
-
 		int result = sgService.studyCheckInsert(scNo);
-
 		return result;
+	}
+	
+	/**출첵한 member 리스트 불러오기 method
+	 * 정호
+	 * @param sc
+	 * @return
+	 */
+	public ArrayList<StudyCheck> studyCheckList(int ssNo){
+		
+		return sgService.studyCheckList(ssNo);
+		
 	}
 	
 	

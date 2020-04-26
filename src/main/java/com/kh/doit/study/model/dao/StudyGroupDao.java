@@ -242,4 +242,12 @@ public class StudyGroupDao {
 		return sqlSession.update("studyGroupMapper.studyCheckUpdate",scNo);
 
 }
+	
+
+	public ArrayList<StudyCheck> studyCheckList(int ssNo) {
+		System.out.println("Dao 번호 들어가니? " +ssNo);
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.studyCheckList", ssNo);
+	}
+
 }

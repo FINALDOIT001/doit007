@@ -241,6 +241,15 @@ public interface StudyGroupService {
 	 */
 	int studyCheckInsert(int scNo);
 	
+	/**출첵한 member 리스트 불러오기 method
+	 * 정호
+	 * @param sc
+	 * @return
+	 */
+	ArrayList<StudyCheck> studyCheckList(int ssNo);
+
+	
+	
 	
 	
 
