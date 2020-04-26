@@ -26,13 +26,14 @@ public class Event implements Serializable{
 	private int eDays;
 	private Date eDate;
 	private String eStatus;
+	private int eCount;
 	
 	public Event() {
 	}
 
 	public Event(int eNo, String eIntro, String eTitle, String eCon, String eTag, String eOriginalFileName,
 			String eRenameFileName, String eWriter, int eWriterNo, String eType, int eMonth, int eDays, Date eDate,
-			String eStatus) {
+			String eStatus, int eCount) {
 		super();
 		this.eNo = eNo;
 		this.eIntro = eIntro;
@@ -48,6 +49,7 @@ public class Event implements Serializable{
 		this.eDays = eDays;
 		this.eDate = eDate;
 		this.eStatus = eStatus;
+		this.eCount = eCount;
 	}
 
 	public int geteNo() {
@@ -162,6 +164,14 @@ public class Event implements Serializable{
 		this.eStatus = eStatus;
 	}
 
+	public int geteCount() {
+		return eCount;
+	}
+
+	public void seteCount(int eCount) {
+		this.eCount = eCount;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -171,8 +181,10 @@ public class Event implements Serializable{
 		return "Event [eNo=" + eNo + ", eIntro=" + eIntro + ", eTitle=" + eTitle + ", eCon=" + eCon + ", eTag=" + eTag
 				+ ", eOriginalFileName=" + eOriginalFileName + ", eRenameFileName=" + eRenameFileName + ", eWriter="
 				+ eWriter + ", eWriterNo=" + eWriterNo + ", eType=" + eType + ", eMonth=" + eMonth + ", eDays=" + eDays
-				+ ", eDate=" + eDate + ", eStatus=" + eStatus + "]";
+				+ ", eDate=" + eDate + ", eStatus=" + eStatus + ", eCount=" + eCount + "]";
 	}
+
+	
 
 	
 }

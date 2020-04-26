@@ -11,9 +11,12 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -138,5 +141,105 @@ public class StudyGroupDao {
 		
 		return sqlSession.selectOne("studyGroupMapper.studyLikeList", slNo);
 	}
+	
+	public ArrayList<Gallery> GalleryList(int sgNo) {
+		
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.GalleryList",sgNo);
+	}
 
+	public Gallery selectGallery(Gallery g) {
+
+		return sqlSession.selectOne("studyGroupMapper.selectGallery",g);
+	}
+
+	public ArrayList<Gallery> multiFile(int gNum) {
+
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.multiFile",gNum);
+	}
+
+	/**
+	 * 검색 리스트 카운트 가져오기 Kwon
+	 * 2020.04.23 KH
+	 * @param ssSearch
+	 * @return
+	 */
+	public int getSearchListCount(String ssSearch) {
+		return sqlSession.selectOne("studyGroupMapper.searchCount", ssSearch);
+	}
+
+	/**
+	 * 검색 리스트 가져오기 Kwon
+	 * 2020.04.23 KH
+	 * @param pi
+	 * @param ssSearch
+	 * @return
+	 */
+	public ArrayList<StudyGroup> selectSearchList(PageInfojung pi, String ssSearch) {
+		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
+		
+		RowBounds rowBound = new RowBounds(offset,pi.getBoardLimit());
+		
+		return(ArrayList)sqlSession.selectList("studyGroupMapper.selectSearchList", ssSearch, rowBound);
+	}
+
+	/**
+	 * 자료실 글 추가 Kwon
+	 * 2020.04.23 KH
+	 * @param etc
+	 * @return
+	 */
+	public int inserEtc(Etc etc) {
+		return sqlSession.insert("studyGroupMapper.insertEtc", etc);
+	}
+
+	/**
+	 * 자료실 파일 추가
+	 * @param etcF
+	 * @return
+	 */
+	public int insertEtcFile(EtcFile etcF) {
+		return sqlSession.insert("studyGroupMapper.insertEtcFile", etcF);
+	}
+
+	/**
+	 * 자료실 리스트 가져오기 Kwon
+	 * @param sgNo
+	 * @return
+	 */
+	public ArrayList<Etc> etcList(int sgNo) {
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.etcList", sgNo);
+	}
+
+	public Etc selectEtc(int etcNo) {
+		return sqlSession.selectOne("studyGroupMapper.selectEtc", etcNo);
+	}
+
+	public ArrayList<EtcFile> selectEtcFile(int etcNo) {
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.selectEtcFile",etcNo);
+	}
+
+	public int deleteEtc(int etcNo) {
+		return sqlSession.update("studyGroupMapper.deleteEtc", etcNo);
+	}
+	
+	/**스터디 출첵 멤버 인설트 
+	 * 정호가 만든거 
+	 * @param sc
+	 * @return
+	 */
+	public int checkMemeberInsert(StudyCheck sc) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("studyGroupMapper.cMemeberInsert",sc);
+	}
+
+	/**스터디 출첵 인설트 
+	 * 정호가 만든거
+	 * @param scNo
+	 * @return
+	 */
+	public int studyCheckInsert(int scNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("studyGroupMapper.studyCheckUpdate",scNo);
+
+}
 }

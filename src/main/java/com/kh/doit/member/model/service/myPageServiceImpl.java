@@ -12,6 +12,7 @@ import com.kh.doit.member.model.dao.myPageDao;
 import com.kh.doit.member.model.vo.Hodu;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.member.model.vo.TestHodu;
+import com.kh.doit.qna.model.vo.Qna;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.StudyGroup;
 
@@ -78,6 +79,16 @@ public class myPageServiceImpl implements myPageService{
 	@Override
 	public ArrayList<StudyGroup> selectsglist(int gm_mNo) {
 		return mpDao.selectsglist(gm_mNo);
+	}
+
+	@Override
+	public ArrayList<StudyGroup> selectsllist(int mno) {
+		return mpDao.selectsllist(mno);
+	}
+
+	@Override
+	public ArrayList<Qna> selectqnalist(int mno) {
+		return mpDao.selectqnalist(mno);
 	}
 
 

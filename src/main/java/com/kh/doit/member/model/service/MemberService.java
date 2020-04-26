@@ -59,7 +59,26 @@ public interface MemberService {
 	int countPwd(Member m);
 
 
+	/**
+	 * 이메일 보내기
+	 * 2020-04-23 김혜림
+	 * @param subject
+	 * @param text
+	 * @param from
+	 * @param to
+	 * @param filePath
+	 * @return
+	 */
 	public boolean send(String subject, String text, String from, String to, String filePath);
+
+
+	/**
+	 * 비밀번호 변경
+	 * 2020-04-23 김혜림
+	 * @param m
+	 * @return
+	 */
+	int pwdUpdate(Member m);
 
 	
 	

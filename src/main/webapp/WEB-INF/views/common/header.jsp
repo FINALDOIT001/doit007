@@ -67,7 +67,7 @@
                            <a class="nav-link" href="main.go">home</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="#">about</a>
+                           <a class="nav-link" href="about.go">about</a>
                         </li>
                         <li class="nav-item">
                         <c:url var="sglist" value="sgList.go"/>

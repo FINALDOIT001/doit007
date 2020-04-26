@@ -275,5 +275,15 @@
 		WHERE	1=1
 		AND		Q_NO=#{qNo}
 	</update>
-
+	
+	<resultMap type="MEMBER" id="memberResultSet">
+		<result property="mno" column="M_NO"/>
+	</resultMap>
+	
+	<select id="selectqnalist" resultMap="QnaResultSet">
+		SELECT Q.*
+		FROM QNA Q JOIN MEMBER M
+		ON (Q.Q_WRITER_NO = M.M_NO)
+		WHERE M_NO = #{mno}
+	</select>
 </mapper>

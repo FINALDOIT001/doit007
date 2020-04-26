@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section_tittle">
-                    <h2><span>질문!!</span> 있습니다!</h2>
+                    <h2><span>DO IT</span> 질문하기</h2>
                 </div>
                 <form action="insertQna.do" id="kwon-Form01" enctype="multipart/form-data" method="POST">
                     <input type="hidden" name="qWriterNo" value="${ loginUser.mno }">
@@ -58,7 +58,7 @@
                         
                     </table>
                     <div id="kwon-area1">
-                        <textarea class="form-control" id="summernote" name="qCon"></textarea>
+                        <textarea class="form-control" id="summernote4" name="qCon"></textarea>
                     </div>
         
                     <div style="text-align:center;">
@@ -89,9 +89,8 @@
 	   <script>
 	   
 	   $(document).ready(function() {
-		   $('#summernote').summernote({
+		   $('#summernote4').summernote({
 			   height:600,
-			   placeholder:"사진 드래그&드롭 / 붙여넣기 가능합니다",
 		     popover: {
 		       image: [
 

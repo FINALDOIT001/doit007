@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,11 +27,15 @@ import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.common.paginationJung;
 import com.kh.doit.study.model.service.StudyGroupService;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
+
 
 @Controller
 public class StudyGroupController {
@@ -243,6 +250,7 @@ public class StudyGroupController {
 
 	/**
 	 * 디테일 상세내용 / 참석자 작성자 : 서정도
+	 * 권구현도 수정합니다~ 자료실 리스트 가져오기 2020.04.24 Kwon
 	 * 
 	 * @param mv
 	 * @param sgNo
@@ -252,7 +260,7 @@ public class StudyGroupController {
 	@RequestMapping("studyDetail.go")
 	public ModelAndView studyDetail(ModelAndView mv, int sgNo, String mno,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-		
+
 		StudyGroup sg = sgService.selectSg(sgNo);
 
 		ArrayList<Member> ml = sgService.memberList(sgNo);
@@ -266,12 +274,18 @@ public class StudyGroupController {
 			 sl = sgService.studyLikeList(slNo);
 			System.out.println("studyList" + sl);
 		}
+		
+		// 구현 추가 부분
+		ArrayList<Etc> etc = sgService.etcList(sgNo);
+		System.out.println("Servlet Kwon Etc : " + etc);
+	
 
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
 
 		if (sg != null) {
-			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl)
+			
+			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl).addObject("etc",etc)
 					.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
@@ -393,83 +407,6 @@ public class StudyGroupController {
 	}
 
 	/**
-	 * 갤러리 - 멀티 파일 저장 작성자 : 서정도
-	 * 
-	 * @param file
-	 * @param request
-	 * @return
-	 * @throws IOException
-	 * @throws IllegalStateException
-	 */
-	@RequestMapping("photoUpload.go")
-	public String photoUpload(Gallery g, HttpServletRequest request,
-			@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
-
-		int result = 0;
-
-		for (int i = 0; i < file.length; i++) {
-			if (file.length > 0) {
-
-				String g_RenameFile = saveMultiFile(file[i], request);
-
-				if (g_RenameFile != null) {
-
-					g.setG_Original_FileName(file[i].getOriginalFilename());
-					g.setG_Rename_FileName(g_RenameFile);
-
-					System.out.println("g.ori : " + g.getG_Original_FileName());
-					System.out.println("g.re : " + g.getG_Rename_FileName());
-
-				}
-			}
-			result = sgService.photoUpload(g);
-		}
-
-		System.out.println("photoUpload : " + result);
-
-		if (result > 0) {
-			return "redirect:sgList.go";
-		} else {
-			return "common/errorPage";
-		}
-	}
-
-	public String saveMultiFile(MultipartFile file, HttpServletRequest request)
-			throws IllegalStateException, IOException {
-
-		String root = request.getSession().getServletContext().getRealPath("resources");
-
-		String savePath = root + "\\sgUploadFiles";
-		File folder = new File(savePath);
-
-		if (!folder.exists()) {
-			folder.mkdir();
-		}
-
-		String renameFileName = null;
-
-		String originFileName = file.getOriginalFilename();
-		System.out.println(originFileName);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS"); // yyyy : 년 / MM : 월 / dd : 일 / HH : 시 / mm : 분
-																			// / ss : 초 / SS : 1/1000초(0~999)
-																			// ==> 사진을 여러장 업로드 하기 때문에 초까지만 이름을 정해주면 이름
-																			// 중접이 발생해 같은 파일명으로 파일 계속 생성된다.(덮어쓰기됨) 한개의
-																			// 파일만 보임
-		renameFileName = originFileName.substring(0, originFileName.lastIndexOf("."))
-				+ sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
-				+ originFileName.substring(originFileName.lastIndexOf(".") + 1);
-
-		String renamePath = folder + "\\" + renameFileName;
-		System.out.println(renamePath);
-
-		file.transferTo(new File(renamePath));
-
-		System.out.println(renameFileName);
-
-		return renameFileName;
-	}
-
-	/**
 	 * 이거슨 스터티 스케줄 디테일 뷰 불러오기 정호가 만든거
 	 * 
 	 * @param response
@@ -549,14 +486,323 @@ public class StudyGroupController {
 		
 	}
 	
+	
+
 	/**
-	 * 출석체크로 이동 Kwon
-	 * 2020.04.21 HOME
+	 * 출석 체크 페이지 이동
+	 * 정호가 만든거
 	 * @return
 	 */
 	@RequestMapping("checkStudy.go")
-	private String moveStudyCheck() {
-		return "study/doitStudy_check";
+	public ModelAndView checkStudy(ModelAndView mv, int sgNo, int ssNo, String ssDayDate,
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+		
+		ArrayList<Member> ml = sgService.memberList(sgNo);
+		
+		System.out.println(sgNo);
+		System.out.println(ssNo);
+		System.out.println(ml);
+		
+		
+		if (ml != null) {
+			mv.addObject("sgNo", sgNo)
+			  .addObject("ml",ml)
+			  .addObject("ssNo", ssNo)
+			  .addObject("ssDayDate",ssDayDate)
+			  .setViewName("study/doitStudy_check");
+		} else {
+			mv.addObject("msg", "출석 불러오기 실패").setViewName("common/errorPage");
+		}
+ 
+		return mv;
 	}
+	
+	
+	
+	/**
+	 * Gallery / Multi-File Insert 
+	 * 작성자 : 서정도
+	 * @param file
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 * @throws IllegalStateException
+	 */
+	@RequestMapping("photoUpload.go")
+	public String photoUpload(Gallery g, HttpServletRequest request,
+			@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
+		
+		int result = 0;
+		
+		for (int i = 0; i < file.length; i++) {
+			if (file.length > 0) {
+				
+				String g_RenameFile = saveMultiFile(file[i], request);
+				
+				if (g_RenameFile != null) {
+					
+					g.setG_Original_FileName(file[i].getOriginalFilename());
+					g.setG_Rename_FileName(g_RenameFile);
+
+					System.out.println("g.ori : " + g.getG_Original_FileName());
+					System.out.println("g.re : " + g.getG_Rename_FileName());
+					
+				}
+			}
+			result = sgService.photoUpload(g);
+		}
+
+		System.out.println("photoUpload : " + result);
+		
+		if(result > 0) {
+			return "redirect:sgList.go";
+		}else {
+			return "common/errorPage";
+		}
+	}
+
+	/**
+	 * Gallery / Multi-File Insert
+	 * 작성자 : 서정도
+	 * @param file
+	 * @param request
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	public String saveMultiFile(MultipartFile file, HttpServletRequest request)throws IllegalStateException, IOException {
+
+		String root = request.getSession().getServletContext().getRealPath("resources");
+
+		String savePath = root + "\\sgUploadFiles";
+		File folder = new File(savePath);
+
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+
+		String renameFileName = null;
+
+		String originFileName = file.getOriginalFilename();
+		System.out.println(originFileName);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS"); // yyyy : 년 / MM : 월 / dd : 일 / HH : 시 / mm : 분 / ss : 초 / SS : 1/1000초(0~999) 
+																		 // ==> 사진을 여러장 업로드 하기 때문에 초까지만 이름을 정해주면 이름 중접이 발생해 같은 파일명으로 파일 계속 생성된다.(덮어쓰기됨) 한개의 파일만 보임
+		renameFileName = originFileName.substring(0, originFileName.lastIndexOf(".")) + sdf.format(new java.sql.Date(System.currentTimeMillis())) + "."
+				+ originFileName.substring(originFileName.lastIndexOf(".") + 1);
+
+		String renamePath = folder + "\\" + renameFileName;
+		System.out.println(renamePath);
+
+		file.transferTo(new File(renamePath));
+
+		System.out.println(renameFileName);
+
+		return renameFileName;
+	}
+	
+	/**
+	 * Gallery Detail
+	 * 작성자 : 서정도
+	 * @param mv
+	 * @param sgNo
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("galleryDetail.go")
+	public ModelAndView galleryDatail(ModelAndView mv, Gallery g, ArrayList<Gallery> multiFile, int sgNo, int gNo, int gNum) {
+		
+		g.setG_Sg_No(sgNo);
+		g.setG_No(gNo);
+		g.setG_Num(gNum);
+		g = sgService.selectGallery(g);
+		System.out.println("######"+g);
+		
+		multiFile = sgService.multiFile(gNum);
+		System.out.println("######"+multiFile);
+		
+		if (g != null /* && multiFile !=null */) {
+			mv.addObject("g", g)
+			  .addObject("multiFile",multiFile)
+			  .setViewName("study/galleryDetail");
+		} else {
+			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
+		}
+ 
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 검색으로 스터디 리스트 찾기 Kwon
+	 * 2020.04.23 KH
+	 * @param mv
+	 * @param ssSearch
+	 * @param currentPage
+	 * @return
+	 */
+	@RequestMapping("studySearch.do")
+	public ModelAndView studySearch(ModelAndView mv, String ssSearch,
+				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+		System.out.println(currentPage);
+
+		int listCount = sgService.getSearchListCount(ssSearch);
+
+		System.out.println("servlet 검색 스터디 카운트 : " + listCount);
+
+		PageInfojung pi = paginationJung.getPageInfo(currentPage, listCount);
+
+		ArrayList<StudyGroup> sgList = sgService.selectSearchList(pi, ssSearch);
+
+		mv.addObject("sgList", sgList);
+		mv.addObject("pi", pi);
+		mv.addObject("listCount", listCount);
+		mv.setViewName("study/doitStudyList");
+
+		return mv;
+	}
+	
+	
+	
+	/**
+	 * 자료실 화면으로 Kwon
+	 * 2020.04.23 KH
+	 * @return
+	 */
+	@RequestMapping("insertEtc.go")
+	public String moveEtc() {
+		return "study/etcInsert";
+	}
+	
+	@RequestMapping("insertEtc.do")
+	public String insertEtc(Etc etc, EtcFile etcF, HttpServletRequest request,
+				@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
+
+		int result = 0;
+		int result2 = 0;
+		
+		result = sgService.insertEtc(etc);
+
+		if (result > 0 ) {
+			for (int i = 0; i < file.length; i++) {
+				if (file.length > 0) {
+	
+					String g_RenameFile = saveMultiFile(file[i], request);
+	
+					if (g_RenameFile != null) {
+	
+						etcF.setEtcfOriginalFileName(file[i].getOriginalFilename());
+						etcF.setEtcfRenameFileName(g_RenameFile);
+	
+						System.out.println("etc.ori : " + etcF.getEtcfOriginalFileName());
+						System.out.println("etc.re : " + etcF.getEtcfRenameFileName());
+	
+					}
+				}
+				result2 = sgService.insertEtcFile(etcF);
+			}
+			
+		}
+
+		System.out.println("자료 업로드 : " + result);
+
+		if (result > 0) {
+			return "redirect:sgList.go";
+		} else {
+			return "common/errorPage";
+		}
+		
+	}
+
+	/**
+	 * 자료실 상세페이지 Kwon
+	 * 2020.04.24 HOME
+	 * @param mv
+	 * @param etc
+	 * @param multiFile
+	 * @param etcNo
+	 * @return
+	 */
+	@RequestMapping("etcView.do")
+	private ModelAndView etcView(ModelAndView mv, Etc etc, ArrayList<EtcFile> multiFile, int etcNo) {
+		etc = sgService.selectEtc(etcNo);
+		multiFile = sgService.selectEtcFile(etcNo);
+		
+		mv.addObject("etc", etc);
+		mv.addObject("multiFile",multiFile);
+		mv.setViewName("study/etcDetail");
+		
+		return mv;
+	}
+	
+	@RequestMapping("etcDelete.do")
+	private String etcDelete(int etcNo) {
+		int result = sgService.deleteEtc(etcNo);
+		return "redirect:sgList.go";
+	}
+	
+	/**스터디 출첵 인설트 
+	 * 정호
+	 * @param mv
+	 * @param sc
+	 * @param checkList
+	 * @param checkMember
+	 * @return
+	 */
+	@RequestMapping(value = "doitCheckInsert.go", method = RequestMethod.POST)
+	@ResponseBody
+	private String doitCheckInsert(ModelAndView mv, StudyCheck sc,
+			@RequestParam(value = "checklist") List<String> checkList,
+			@RequestParam(value = "checkmember") List<String> checkMember) {
+
+		int cmiNumber = 0;
+		int sciNumber = 0;
+
+		for (int i = 0; i < checkMember.size(); ++i) {
+
+			sc.setScMno(Integer.parseInt(checkMember.get(i)));
+			sc.setScNo(Integer.parseInt(sc.getSsNo() + checkMember.get(i)));
+			cmiNumber += checkMemberInsert(sc);
+
+		}
+
+		for (int i = 0; i < checkList.size(); ++i) {
+			sciNumber += studyCheckInsert(Integer.parseInt(sc.getSsNo() + checkList.get(i)));
+		}
+		if (cmiNumber == checkMember.size() && sciNumber==checkList.size()) {
+			return "ok";
+
+		} else {
+			return "fail";
+		}
+
+	}
+
+	public int checkMemberInsert(StudyCheck sc) {
+		int result = sgService.checkMemeberInsert(sc);
+		return result;
+	}
+
+	public int studyCheckInsert(int scNo) {
+
+		int result = sgService.studyCheckInsert(scNo);
+
+		return result;
+	}
+	
+	
 
 }

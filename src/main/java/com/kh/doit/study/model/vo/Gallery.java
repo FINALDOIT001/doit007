@@ -16,6 +16,7 @@ public class Gallery {
 	private Date g_Date;
 	private String g_Original_FileName;
 	private String g_Rename_FileName;
+	private int g_Num;
 	
 	public Gallery() {
 		super();
@@ -23,7 +24,7 @@ public class Gallery {
 	}
 
 	public Gallery(int g_No, int g_Sg_No, String g_Title, String g_Writer, String g_Writer_No, String g_Con,
-			Date g_Date, String g_Original_FileName, String g_Rename_FileName) {
+			Date g_Date, String g_Original_FileName, String g_Rename_FileName, int g_Num) {
 		super();
 		this.g_No = g_No;
 		this.g_Sg_No = g_Sg_No;
@@ -34,6 +35,7 @@ public class Gallery {
 		this.g_Date = g_Date;
 		this.g_Original_FileName = g_Original_FileName;
 		this.g_Rename_FileName = g_Rename_FileName;
+		this.g_Num = g_Num;
 	}
 
 	public int getG_No() {
@@ -108,11 +110,21 @@ public class Gallery {
 		this.g_Rename_FileName = g_Rename_FileName;
 	}
 
+	public int getG_Num() {
+		return g_Num;
+	}
+
+	public void setG_Num(int g_Num) {
+		this.g_Num = g_Num;
+	}
+
 	@Override
 	public String toString() {
 		return "Gallery [g_No=" + g_No + ", g_Sg_No=" + g_Sg_No + ", g_Title=" + g_Title + ", g_Writer=" + g_Writer
 				+ ", g_Writer_No=" + g_Writer_No + ", g_Con=" + g_Con + ", g_Date=" + g_Date + ", g_Original_FileName="
-				+ g_Original_FileName + ", g_Rename_FileName=" + g_Rename_FileName + "]";
+				+ g_Original_FileName + ", g_Rename_FileName=" + g_Rename_FileName + ", g_Num=" + g_Num + "]";
 	}
+
+	
 
 }

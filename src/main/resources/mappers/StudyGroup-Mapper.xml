@@ -84,6 +84,15 @@
 		<result property="slmNo" column="M_NO"/>
 		<result property="slsgNo" column="SG_NO"/>
 	</resultMap>
+	
+	<resultMap id="studyCheckResultSet" type="StudyCheck">
+	<id property="scNo" column="SC_NO"/>
+	<result property="ssNo" column="SS_NO"/>
+	<result property="sgNo" column="SG_NO"/>
+	<result property="scMno" column="SC_MNO"/>
+	<result property="scDate" column="SC_DATE"/>
+	<result property="scCheck" column="SC_CHECK"/>
+	</resultMap>
 
 	<select id="getlistCount" resultType="_int">
 		SELECT COUNT(*)
@@ -173,7 +182,7 @@
 	
 	<insert id="photoUpload" parameterType="Gallery">
 		INSERT INTO GALLERY
-		VALUES(SEQ_GNO.NEXTVAL,#{g_Sg_No},#{g_Title},#{g_Writer},#{g_Writer_No},#{g_Con},DEFAULT,#{g_Original_FileName},#{g_Rename_FileName})
+		VALUES(SEQ_GNO.NEXTVAL,#{g_Sg_No},#{g_Title},#{g_Writer},#{g_Writer_No},#{g_Con},DEFAULT,#{g_Original_FileName},#{g_Rename_FileName},#{g_Num})
 	</insert>
 	
 	<insert id="sgDailyinsert" parameterType="DailyStudy">
@@ -214,6 +223,138 @@
 	SELECT * FROM STUDY_LIKE
 	WHERE SL_NO = #{slNo}
 	</select>
+	
+	<select id="GalleryList" resultMap="galleryResultSet">
+		SELECT * 
+		FROM Gallery
+		WHERE G_SG_NO = #{sgNo}
+	</select>
+	
+	<select id="selectGallery" resultMap="galleryResultSet">
+		SELECT * 
+		FROM Gallery
+		WHERE G_NUM = #{g_Num}
+		AND G_NO = #{g_No}
+	</select>
+	
+	<select id="multiFile" resultMap="galleryResultSet">
+		SELECT * 
+		FROM Gallery
+		WHERE G_NUM = #{g_Num}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="searchCount" parameterType="String" resultType="_int">
+		SELECT 	COUNT(*)
+		FROM	STUDY_GROUP
+		WHERE 	1=1
+		AND		SG_STATUS_YN='Y'
+		AND		SG_TITLE like '%' || #{ssSearch} || '%'
+	</select>
+	
+	<select id="selectSearchList" parameterType="String" resultMap="studyGroupResultSet">
+		SELECT	* 
+		FROM	STUDY_GROUP
+		WHERE	1=1
+		AND		SG_STATUS_YN='Y'
+		AND		SG_TITLE like '%' || #{ssSearch} || '%'
+		ORDER BY SG_NO DESC
+	</select>
+	
+	<insert id="insertEtc" parameterType="com.kh.doit.study.model.vo.Etc">
+		INSERT INTO STUDY_ETC VALUES(
+			SEQ_ETCNO.NEXTVAL
+			,#{etcSgNo}
+			,#{etcTitle}
+			,#{etcCon}
+			,#{etcWriter}
+			,#{etcWriterNo}
+			,#{etcWriterId}
+			,DEFAULT
+			,DEFAULT
+		)
+	</insert>
+	<insert id="insertEtcFile" parameterType="com.kh.doit.study.model.vo.EtcFile">
+		INSERT INTO STUDY_ETCFILE VALUES(
+			SEQ_ETCNO.CURRVAL
+			,#{etcfOriginalFileName}
+			,#{etcfRenameFileName}
+		)
+	</insert>
+	
+	
+	<resultMap type="com.kh.doit.study.model.vo.Etc" id="etcResultMap">
+		<id property="etcNo" column="ETC_NO"/>
+		<result property="etcSgNo" column="ETC_SG_NO"/>
+		<result property="etcTitle" column="ETC_TITLE"/>
+		<result property="etcCon" column="ETC_CON"/>
+		<result property="etcWriter" column="ETC_WRITER"/>
+		<result property="etcWriterNo" column="ETC_WRITER_NO"/>
+		<result property="etcWriterId" column="ETC_WRITER_ID"/>
+		<result property="etcDate" column="ETC_DATE"/>
+		<result property="etcStatus" column="ETC_STATUS"/>
+	</resultMap>
+	
+	<select id="etcList" parameterType="_int" resultMap="etcResultMap">
+		SELECT	*
+		FROM	STUDY_ETC
+		WHERE	1=1
+		AND		ETC_SG_NO = #{sgNo}
+		AND		ETC_STATUS='Y'
+	</select>
+	
+	<select id="selectEtc" parameterType="_int" resultMap="etcResultMap">
+		SELECT	*
+		FROM	STUDY_ETC
+		WHERE	ETC_NO=#{etcNo}
+	</select>
+	
+	<resultMap type="com.kh.doit.study.model.vo.EtcFile" id="etcFileResultMap">
+		<result property="etcfNo" column="ETCF_NO"/>
+		<result property="etcfOriginalFileName" column="ETCF_ORIGINALFILENAME"/>
+		<result property="etcfRenameFileName" column="ETCF_RENAMEFILENAME"/>
+	</resultMap>
+	
+	<select id="selectEtcFile" parameterType="_int" resultMap="etcFileResultMap">
+		SELECT	*
+		FROM	STUDY_ETCFILE
+		WHERE	ETCF_NO=#{etcNo}
+	</select>
+	
+	<update id="deleteEtc" parameterType="_int">
+		UPDATE STUDY_ETC SET
+		ETC_STATUS = 'N'
+		WHERE ETC_NO = #{etcNo}
+	</update>
+	
+	<insert id="cMemeberInsert" parameterType="StudyCheck">
+	INSERT INTO STUDY_CHECK 
+	VALUES(#{scNo},#{ssNo},#{sgNo},#{scMno},#{scDate},DEFAULT)
+	</insert>
+	
+	<update id="studyCheckUpdate" parameterType="_int">
+	UPDATE STUDY_CHECK SET
+	SC_CHECK = 'Y'
+	WHERE SC_NO = #{scNo}
+	</update>
 
 </mapper>
     

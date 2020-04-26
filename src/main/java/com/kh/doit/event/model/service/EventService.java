@@ -114,10 +114,17 @@ public interface EventService {
 	ArrayList<Event> getTagList(EventPageInfo epi, String eTag);
 
 	/**
-	 * 9-1. 전체 리스트 가져오
+	 * 9-1. 전체 리스트 가져오기
 	 * @return
 	 */
 	ArrayList<Event> selectListAll();
+
+	/**
+	 * 10. 조회수 추가
+	 * @param eNo
+	 * @return
+	 */
+	int updateCount(int eNo);
 
 
 }

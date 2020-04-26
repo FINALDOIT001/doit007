@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -152,7 +155,91 @@ public interface StudyGroupService {
 	 */
 	StudyLike studyLikeList(String slNo);
 	
+	/**
+	 * Gallery List
+	 * 작성자 : 서정도
+	 * @return
+	 */
+	ArrayList<Gallery> GalleryList(int sgNo);
 
+	/**
+	 * Gallery Detail
+	 * 작성자 : 서정도
+	 * @param g
+	 * @return
+	 */
+	Gallery selectGallery(Gallery g);
+
+	/**
+	 * Gallery Detail / Multi-File(Photo)
+	 * @param gNo
+	 * @return
+	 */
+	ArrayList<Gallery> multiFile(int gNum);
+	
+	/**
+	 * 검색으로 리스트 카운트 가져오기 Kwon
+	 * 2020.04.23 KH
+	 * @param ssSearch
+	 * @return
+	 */
+	int getSearchListCount(String ssSearch);
+
+	/**
+	 * 검색으로 리스트 가져오기 Kwon
+	 * @param pi
+	 * @param ssSearch
+	 * @return
+	 */
+	ArrayList<StudyGroup> selectSearchList(PageInfojung pi, String ssSearch);
+
+	/**
+	 * 자료실 추가 Kwon
+	 * @param etc
+	 * @return
+	 */
+	int insertEtc(Etc etc);
+
+	/**
+	 * 자료실 파일추가 Kwon
+	 * @param etcF
+	 * @return
+	 */
+	int insertEtcFile(EtcFile etcF);
+
+	/**
+	 * 자료실 리스트 가져오기 Kwon
+	 * @param sgNo
+	 * @return
+	 */
+	ArrayList<Etc> etcList(int sgNo);
+
+	
+	// 자료실 보기
+	Etc selectEtc(int etcNo);
+
+	ArrayList<EtcFile> selectEtcFile(int etcNo);
+
+	/**
+	 * 삭제하기 Kwon
+	 * @param etcNo
+	 * @return
+	 */
+	int deleteEtc(int etcNo);
+	
+	/** 스터디 출석체크 멤버 정보 인설트
+	 * 정호가 만듬
+	 * @param sc
+	 * @return
+	 */
+	int checkMemeberInsert(StudyCheck sc);
+
+	/** 스터디 출석 체크 정보 입력
+	 * 정호가 만듬
+	 * @param scNo
+	 * @return
+	 */
+	int studyCheckInsert(int scNo);
 	
 	
 	

@@ -25,6 +25,7 @@
 		<typeAlias type="com.kh.doit.study.model.vo.Gallery" alias="Gallery"/>
 		<typeAlias type="com.kh.doit.study.model.vo.StudyLike" alias="StudyLike"/>
 		
+		<typeAlias type="com.kh.doit.study.model.vo.StudyCheck" alias="StudyCheck"/>
 		<typeAlias type="com.kh.doit.qna.model.vo.Qna" alias="Qna"/>
 		<typeAlias type="com.kh.doit.qna.model.vo.QnaReply" alias="QnaReply"/>
 		

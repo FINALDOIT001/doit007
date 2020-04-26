@@ -92,7 +92,34 @@
             <!-- tab1 end -->
 			<!-- tab2 start -->
             <div class="tab-pane container fade" id="menu1">
-          
+          		<table id="qnalist" class="table table-bordered">
+          			<thead class="kwon-thead1">
+						<tr class="kwon-tr1">
+							<th width="5%" class="th1">No</th>
+							<th width="13%" class="th1">카테고리</th>
+							<th width="40%" class="th1">제목</th>
+							<th width="8%" class="th1">글쓴이</th>
+							<th width="10%" class="th1">등록일</th>
+							<th width="10%" class="th1">상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="qna" items="${ qnalist }">
+						<tr class="kwon-tr1" style="text-align:center;">
+							<td align="center" class="kwon-td1">${ qna.qNo }</td>
+							<td align="center" class="kwon-td1">${ qna.qCategory }</td>
+							<c:url var="qnaView" value="qnaView.ev">
+								<c:param name="qNo" value="${ qna.qNo }"></c:param>
+							</c:url>
+							<td align="center" class="kwon-td1"><a href="${qnaView}">${ qna.qTitle }</a></td>
+							<td align="center" class="kwon-td1">${ qna.qWriter }</td>
+							<td align="center" class="kwon-td1">${ qna.qDate }</td>
+							<td align="center" class="kwon-td1">${ qna.qStatus }</td>
+						</tr>
+							
+						</c:forEach>
+					</tbody>
+          		</table>
             </div>
             <!-- tab2 end -->
             <!-- tab3 start -->
@@ -181,6 +208,37 @@
          
 } );
 	$('#bookshare121').dataTable( {
+		lengthChange: false,
+		ordering: false,
+		info: false,
+		serverSide: false,
+        "language": {
+        "decimal":        "",
+        "emptyTable":     "작성한 게시글이 없습니다.",
+        "info":           "총 _TOTAL_명   _START_에서 _END_까지 표시",
+        "infoEmpty":      "0 개 항목 중 0 ~ 0 개 표시",
+        "infoFiltered":   "(_MAX_ 총 항목에서 필터링 됨)",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "_MENU_",
+        "loadingRecords": "로드 중 ...",
+        "processing":     "처리 중 ...",
+        "search":         "검색 : ",
+        "zeroRecords":    "일치하는 게시글이 없습니다.",
+        "paginate": {
+            "first":      "처음",
+            "last":       "마지막",
+            "next":       "다음",
+            "previous":   "이전"
+        },
+        "aria": {
+            "sortAscending":  ": 오름차순으로 정렬",
+            "sortDescending": ": 내림차순으로 정렬"
+        }
+    }
+         
+} );
+	$('#qnalist').dataTable( {
 		lengthChange: false,
 		ordering: false,
 		info: false,

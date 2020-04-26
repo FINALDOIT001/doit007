@@ -37,4 +37,8 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.countPwd",m);
 	}
 
+	public int pwdUpdate(Member m) {
+		return sqlSession.update("memberMapper.pwdUpdate",m);
+	}
+
 }

@@ -62,10 +62,12 @@
 
 </head>
 
-<body>
+<body onload="printClock()">
 
 
 	<jsp:include page="../common/header.jsp" />
+	
+	
 
 	<!-- Kwon CSS -->
 	<link rel="stylesheet"
@@ -185,10 +187,19 @@
 							<ul class="checkuser">
 								<c:forEach var="m" items="${ml}">
 									<li><div class="checkuserdiv">
+											<c:if test="${ empty m.mRenamefilename }">
 											<img
 												src="${contextPath}/resources/img/${m.mOriginalfilename}"
 												class="rounded-circle " style="height: 70px;"
 												alt="Cinque Terre">
+											</c:if>
+									
+											<c:if test="${ !empty m.mRenamefilename }">
+											<img
+												src="${contextPath}/resources/img/user/${m.mRenamefilename}"
+												class="rounded-circle " style="height: 70px;"
+												alt="Cinque Terre">
+											</c:if>
 											<c:out value="${m.mName}" />
 										</div></li>
 								</c:forEach>
@@ -275,12 +286,12 @@
 											</h5>
 											<br> <br> <br>
 
-											<c:url var="studyPhotoInsert" value="studyPhotoInsert.go">
+											<c:url var="galleryInsertFrom" value="galleryInsertFrom.go">
 												<c:param name="sgNo" value="${sg.sgNo}" />
 											</c:url>
-
 											<a class="btn_1" style="float: right;"
-												href="${studyPhotoInsert}">사진 추가</a>
+												href="${galleryInsertFrom}">사진 추가</a>
+
 											<div class="about_part_counter">
 												<div class="single_counter">
 													<p style="font-size: 30px; width: 390px;">
@@ -294,27 +305,155 @@
 							</div>
 						</section>
 
-						<!-- The Modal -->
-						<div class="modal" id="sgPhoto">
-							<div class="modal-dialog modal-dialog-centered">
-								<div class="modal-content">
+						<div class="page-wrap">
+							<!-- Main -->
+							<section id="main">
 
-									<!-- Modal body -->
-									<div class="modal-body"></div>
+								<!-- Gallery -->
+								<section id="galleries">
 
-									<!-- Modal footer -->
-									<div class="modal-footer">
-										<button type="button" class="btn btn-danger"
-											data-dismiss="modal">Close</button>
+									<!-- Photo Galleries -->
+									<div class="gallery">
+										<div class="content"
+											style="display: inline-block; text-align: center;">
+
+
+											<c:forEach var="g" items="${galleryList}">
+												<c:url var="gDetail" value="galleryDetail.go">
+													<c:param name="sgNo" value="${sg.sgNo}" />
+													<c:param name="gNo" value="${g.g_No}" />
+													<c:param name="gNum" value="${g.g_Num}" />
+												</c:url>
+												<div class="media all people"
+													style="display: inline-block; max-width: 20%; margin: 5px;">
+													<a href="${gDetail}"> <img
+														src="${contextPath}/resources/sgUploadFiles/${g.g_Rename_FileName}"
+														style="width: 200px; height: 200px;"
+														title="This right here is a caption." /></a> <span hidden>${g.g_No}</span><span
+														hidden>${g.g_Num}</span>
+												</div>
+											</c:forEach>
+										</div>
+										<style>
+										.openPush {
+											-webkit-appearance: none;
+											width: 558px;
+											height: 102px;
+											background: url(${contextPath}/resources/img/push_back1.png);
+											outline: none;
+											-webkit-transition: .2s;
+											transition: opacity .2s;
+											margin-top: 87%;
+											margin-left: 6%;
+										}
+										
+										.openPush::-webkit-slider-thumb {
+											-webkit-appearance: none;
+											appearance: none;
+											width: 120px;
+											height: 100px;
+											background: url(${contextPath}/resources/img/push_btn.png);
+											cursor: pointer;
+										}
+										
+										.openPush_back {
+											background: url(${contextPath}/resources/img/push_back_back.jpg);
+											width: 640px;
+											height: 960px;
+										}
+									</style>
+									
+									<script>
+										function printClock() {
+										    
+										    var clock = document.getElementById("clock");            // 출력할 장소 선택
+										    var currentDate = new Date();                                     // 현재시간
+										    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+										    var amPm = 'AM'; // 초기값 AM
+										    var currentHours = addZeros(currentDate.getHours(),2); 
+										    var currentMinute = addZeros(currentDate.getMinutes() ,2);
+										    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+										    
+										    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+										    	amPm = 'PM';
+										    	currentHours = addZeros(currentHours - 12,2);
+										    }
+										
+										    if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
+										       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
+										    }
+										    clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
+										    
+										    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+										}
+										
+										function addZeros(num, digit) { // 자릿수 맞춰주기
+											  var zero = '';
+											  num = num.toString();
+											  if (num.length < digit) {
+											    for (i = 0; i < digit - num.length; i++) {
+											      zero += '0';
+											    }
+											  }
+											  return zero + num;
+										}
+									</script>
+									
+									
+									<img src="${contextPath}/resources/img/hodu2.png"
+										style="width: 200px; height: 200px;" /><br>
+									<p>호두로 프리미엄 게시판</p>
+									<div class="openPush_back">
+									<div
+												style="width: 600px; height: 250px; line-height: 250px; color: white; font-size: 100px; text-align: center; margin-left:30px;"
+												id="clock"></div>
+											<input type="range" class="openPush" min="0" max="100"
+											value="2" step="1">
 									</div>
-
-								</div>
-							</div>
+									</div>
 						</div>
 
 
 					</div>
-					<div class="tab-pane container fade" id="menu3"></div>
+					<div class="tab-pane container fade" id="menu3">
+						<div id="studyEtcInsert" class="genric-btn danger circle">자료추가</div><br><br>
+					
+						<table id="test701" class="table table-bordered">
+							<thead class="kwon-thead1">
+								<tr class="kwon-tr1">
+									<th width="8%" class="th1">No</th>
+									<th width="40%" class="th1">제목</th>
+									<th width="10%" class="th1">글쓴이</th>
+									<th width="10%" class="th1">등록일</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+		<c:forEach var="etc" items="${ etc }">
+		<tr class="kwon-tr1">
+			<td align="center" class="kwon-td1">${ etc.etcNo }</td>
+			<td align="center" class="kwon-td1">
+				<c:url var="etcView" value="etcView.do">
+					<c:param name="etcNo" value="${ etc.etcNo }"/>
+				</c:url>
+			
+				<a class="kwon-td1 tdtitle1" href="${ etcView }" 
+				style="color:#5b5b5b !important;">${ etc.etcTitle }</a>
+			
+			</td>
+			<td align="center" class="kwon-td1" value="${ etc.etcWriterNo }">${ etc.etcWriterId }</td>
+			<td align="center" class="kwon-td1">${ etc.etcDate }</td>
+			
+			
+		</tr>
+		</c:forEach>
+		
+								
+							</tbody>
+						</table>
+					</div>
+					
+					</div>
 
 				</div>
 
@@ -568,10 +707,13 @@
 	
 	//다음 지도 와 주소 검색 끝 
 	</script>
+	
 
-
-
-	<script>
+		<script>
+	
+	var ssNo; // ssNo 스터티 데일리 번호 전역변수 선언
+	var ssDayDate; // ssDayDate 스터디 데일리 날짜 지역변수 선언
+	
 	function deleteDailyBtn(){
 		var ssSgNo = $("#ssSgNo").val();
 		var ssNo = $("#ssNo").val();
@@ -615,7 +757,6 @@
 			$("#myModal").css("display", "none");
 		}
 		
-
 		document.addEventListener('DOMContentLoaded', function() {
 			var sgNo = ${sg.sgNo};
 			var dailystudy=new Array();
@@ -636,6 +777,7 @@
 				locale : 'ko',
 				defaultView : 'dayGridMonth',
 				selectable : false,
+				eventColor: '#FFE5C2',
 				// event 처리 Gson 으로 처리 후 리터럴 값 ecvents Array 변수에 넣어 출력 처리함. fullCalendal 4.0 적용.
 					events: function(fetchInfo, successCallback, failureCallback){
 						$.ajax({
@@ -662,14 +804,13 @@
 					},
 					//event cilck 시 상세 페이지 모탈창 구현 Gson 사용 각 리터럴 값을 Jquey 사용사여 값 입력 처리
 					eventClick : function(info){
-						var id = info.event.id;
-						console.log(id);
+						 ssNo = info.event.id;
+						console.log(ssNo);
 						$.ajax({
-							data:{ssNo:id},
+							data:{ssNo:ssNo},
 							url:"dailyStudyView.go",
 							dataType:"json",
 							success:function(data){
-
 							    	  $('#myModal').css("display", "block");
 							    	  $("#deletebtn").css("display", "inline");
 							    	  $("#updatebtn").css("display","inline");
@@ -682,7 +823,7 @@
 								      $("#postcode").val(data.zipcode);
 								      $("#address").val(data.ssAdd);
 								      $("#detailAddress").val(data.ssExAdd);
-								      
+								      ssDayDate = data.ssDayDate;
 								      acctiveMap(data); 
 								      
 								      
@@ -711,10 +852,17 @@
 					  },
 					</c:if>
 			});
-
 			calendar.render();
 			
 		});
+		
+		 
+	       
+	      $('#checkBtn').click(function(){
+	    	  var sgNo = ${sg.sgNo} ;
+	         window.open("checkStudy.go?sgNo="+sgNo+"&ssNo="+ssNo+"&ssDayDate="+ssDayDate, "출석체크", "status=no, location= no, width=700, height=700, scrollbars=yes;");
+	      });
+	      
 	</script>
 
 
@@ -846,6 +994,21 @@
       
       
       
+   </script>
+   
+   <script>
+   		$('#studyEtcInsert').on('click',function() {
+   			var sgNo = ${ sg.sgNo };
+   			location.href="insertEtc.go?sgNo="+sgNo;
+   		});
+   
+   
+   		/* $(document).ready(function() {
+   			$('#studyEtcInsert').click(function() {
+   				location.href="insertEtc.go";
+   			})
+   		}); */
+   
    </script>
 
 

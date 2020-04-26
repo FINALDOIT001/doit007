@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.dao.StudyGroupDao;
 import com.kh.doit.study.model.vo.DailyStudy;
+import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -159,7 +162,6 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	 */
 	@Override
 	public int dailyStudyinsert(DailyStudy ds) {
-		
 		return sgDao.dailyStudyinsert(ds);
 	}
 
@@ -223,7 +225,127 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		
 		return  sgDao.studyLikeList(slNo);
 	}
+
+	/**
+	 * Gallery List
+	 * 작성자 : 서정도
+	 * @return
+	 */
+	@Override
+	public ArrayList<Gallery> GalleryList(int sgNo) {
+
+		return sgDao.GalleryList(sgNo);
+	}
+
+	/**
+	 * Gallery Detail
+	 * 작성자 : 서정도
+	 * @param gNo
+	 * @return
+	 */
+	@Override
+	public Gallery selectGallery(Gallery g) {
+
+		return sgDao.selectGallery(g);
+	}
+
+	/**
+	 * Gallery Detail / Multi-File(Photo)
+	 * @param gNo
+	 * @return
+	 */
+	@Override
+	public ArrayList<Gallery> multiFile(int gNum) {
+		
+		return sgDao.multiFile(gNum);
+	}
+
+	/**
+	 * 스터디 검색 카운트 가져오기 Kwon
+	 */
+	@Override
+	public int getSearchListCount(String ssSearch) {
+		return sgDao.getSearchListCount(ssSearch);
+	}
+
+
+	/**
+	 * 검색한 스터디 리스트 가져오기 Kwon
+	 */
+	@Override
+	public ArrayList<StudyGroup> selectSearchList(PageInfojung pi, String ssSearch) {
+		return sgDao.selectSearchList(pi, ssSearch);
+	}
+
+
+	/**
+	 * 자료실 글 추가 Kwon
+	 */
+	@Override
+	public int insertEtc(Etc etc) {
+		return sgDao.inserEtc(etc);
+	}
+
+
+	/**
+	 * 자료실 파일추가 Kwon
+	 */
+	@Override
+	public int insertEtcFile(EtcFile etcF) {
+		return sgDao.insertEtcFile(etcF);
+	}
+
+
+	/**
+	 * 자료실 리스트 가져오기 Kwon
+	 */
+	@Override
+	public ArrayList<Etc> etcList(int sgNo) {
+		return sgDao.etcList(sgNo);
+	}
+
+
 	
+	// 자료실 가져오기 1
+	@Override
+	public Etc selectEtc(int etcNo) {
+		return sgDao.selectEtc(etcNo);
+	}
+
+
+	// 자료실 가져오기 2
+	@Override
+	public ArrayList<EtcFile> selectEtcFile(int etcNo) {
+		return sgDao.selectEtcFile(etcNo);
+	}
+
+
+	@Override
+	public int deleteEtc(int etcNo) {
+		return sgDao.deleteEtc(etcNo);
+	}
+	
+	/** 스터디 출첵 멤버 인설트 
+	 * 정호가 만든거
+	 *
+	 */
+	@Override
+	public int checkMemeberInsert(StudyCheck sc) {
+		
+		return sgDao.checkMemeberInsert(sc);
+	}
+
+
+	/** 스터디 출첵 인설트
+	 * 정호가 만든거
+	 */
+	@Override
+	public int studyCheckInsert(int scNo) {
+		// TODO Auto-generated method stub
+		return sgDao.studyCheckInsert(scNo);
+	}
+
+
 	
 
 }
