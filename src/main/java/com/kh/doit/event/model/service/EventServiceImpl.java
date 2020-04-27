@@ -86,4 +86,9 @@ public class EventServiceImpl implements EventService {
 		return eDao.selectListAll();
 	}
 
+	@Override
+	public int updateCount(int eNo) {
+		return eDao.updateCount(eNo);
+	}
+
 }

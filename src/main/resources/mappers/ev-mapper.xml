@@ -19,6 +19,7 @@
 		<result property="eMonth" column="E_MONTH"/>
 		<result property="eDays" column="E_DAYS"/>
 		<result property="eStatus" column="E_STATUS"/>
+		<result property="eCount" column="E_COUNT"/>
 	</resultMap>
 	
     <resultMap type="EventReply" id="eventReplyResultSet" >
@@ -93,6 +94,7 @@
 			,#{eMonth}
 			,#{eDays}
 			,DEFAULT
+			,0
 		)
 	</insert>
 	
@@ -176,7 +178,15 @@
 		FROM	EVENT
 		WHERE	1=1
 		AND		E_STATUS='Y'
+		ORDER BY 1 DESC
 	</select>
+	
+	<update id="updateCount" parameterType="_int">
+		UPDATE	EVENT
+		SET		E_COUNT = E_COUNT+1
+		WHERE	1=1
+		AND		E_NO=#{eNo}
+	</update>
 	
 	
 	

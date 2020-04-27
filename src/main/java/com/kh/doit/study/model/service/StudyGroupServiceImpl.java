@@ -10,9 +10,11 @@ import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.dao.StudyGroupDao;
 import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -160,7 +162,6 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	 */
 	@Override
 	public int dailyStudyinsert(DailyStudy ds) {
-		
 		return sgDao.dailyStudyinsert(ds);
 	}
 
@@ -285,7 +286,84 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		return sgDao.inserEtc(etc);
 	}
 
+	/**
+	 * 자료실 파일추가 Kwon
+	 */
+	@Override
+	public int insertEtcFile(EtcFile etcF) {
+		return sgDao.insertEtcFile(etcF);
+	}
 
+
+	/**
+	 * 자료실 리스트 가져오기 Kwon
+	 */
+	@Override
+	public ArrayList<Etc> etcList(int sgNo) {
+		return sgDao.etcList(sgNo);
+	}
+
+
+	
+	// 자료실 가져오기 1
+	@Override
+	public Etc selectEtc(int etcNo) {
+		return sgDao.selectEtc(etcNo);
+	}
+
+
+	// 자료실 가져오기 2
+	@Override
+	public ArrayList<EtcFile> selectEtcFile(int etcNo) {
+		return sgDao.selectEtcFile(etcNo);
+	}
+
+
+	@Override
+	public int deleteEtc(int etcNo) {
+		return sgDao.deleteEtc(etcNo);
+	}
+	
+	/** 스터디 출첵 멤버 인설트 
+	 * 정호가 만든거
+	 *
+	 */
+	@Override
+	public int checkMemeberInsert(StudyCheck sc) {
+		
+		return sgDao.checkMemeberInsert(sc);
+	}
+
+
+	/** 스터디 출첵 인설트
+	 * 정호가 만든거
+	 */
+	@Override
+	public int studyCheckInsert(int scNo) {
+		// TODO Auto-generated method stub
+		return sgDao.studyCheckInsert(scNo);
+	}
+	
+	/**출첵한 member 리스트 불러오기 method
+	 * 정호
+	 *
+	 */
+	@Override
+	public ArrayList<StudyCheck> studyCheckList(int ssNo) {
+		// TODO Auto-generated method stub
+		return sgDao.studyCheckList(ssNo);
+	}
+
+
+	/**출첵 수정하기전 디폴트 만들기
+	 *
+	 */
+	@Override
+	public int StudyCheckDefault(int ssNo) {
+		
+		return sgDao.StudyCheckDefault(ssNo);
+	}
+	
 	@Override
 	public int sgDataBoardAndGalleryPayment(int sgNo) {
 
@@ -298,7 +376,8 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 
 		return sgDao.mDataBoardAndGalleryPayment(mNo);
 	}
-	
+
+
 	
 
 }

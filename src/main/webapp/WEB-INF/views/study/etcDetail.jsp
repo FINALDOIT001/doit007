@@ -70,95 +70,55 @@
                     <input type="hidden" name="etcWriterNo" value="${ loginUser.mno }">
                     <input type="hidden" name="etcWriter" value="${ loginUser.mName }">
                     <input type="hidden" name="etcWriterId" value="${ loginUser.mId }">
+                    <input type="hidden" name="etcNo" value="${ etc.etcNo }">
                     
                     
                     <table border="1" class="kwon-table202" cellpadding="10px" style="margin-left:57px;">
                         
                         <tr>
-                            <td class="th02" colspan="1">*제목</td>
-                        	<td class="td02" colspan="2"><input type="text" name="etcTitle" class="tdin02" required></td>
-                        
-                           <td colspan="1" class="th02">파일 추가</td>
-                           <td colspan="2"><input id="uploadInputBox"  type="file" name="filedata" multiple/></td>
+                            <td class="th02" colspan="1" style="width:200px;">제목</td>
+                        	<td class="td02" colspan="4" style="width:800px;">${ etc.etcTitle }</td>
                         </tr>
+   					
+   					
+   					<c:forEach var="etcf" items="${multiFile}">
+						<c:if test="${ !empty etcf.etcfOriginalFileName }">
+						<tr>
+                           <td colspan="1" class="th02">파일</td>
+                           <td colspan="4"><a href="${ contextPath }/resources/sgUploadFiles/${etcf.etcfRenameFileName}" download="${etcf.etcfOriginalFileName}">${etcf.etcfOriginalFileName}  
+                           <span style="color:gray; font-size:12px;">(다운로드 가능)</span></a></td>
+						</tr>
+							
+						</c:if>
+					</c:forEach>
+                        
                         
                     </table>
                     <div id="kwon-area1">
-                        <textarea class="form-control" id="summernote" name="etcCon"></textarea>
+                        <textarea class="form-control" id="summernote4" name="etcCon"></textarea>
                     </div>
         
                     <div style="text-align:center;">
-                        <input type="submit" id="kwon-submit207" class="genric-btn danger circle" style="font-size: 13px;" value="질문하기"></input>
-                        <input type="reset" id="kwon-reset01" class="genric-btn danger circle" style="font-size: 13px;" value="취소하기"></input>
-                        <input type="button" id="kwon-back01" class="genric-btn danger circle" style="font-size: 13px;" value="뒤로가기"></input>
+                        <!-- <input type="submit" id="kwon-submit207" class="genric-btn danger circle" style="font-size: 13px;" value="질문하기"></input> -->
+                        <c:if test="${ loginUser.mId eq etc.etcWriterId }">
+						<c:url var="etcDelete" value="etcDelete.do">
+							<c:param name="etcNo" value="${ etc.etcNo }"/>
+						</c:url>
+                        <input type="button" id="kwon-delete021" class="genric-btn danger circle" style="font-size: 13px;" 
+                        onclick="location.href='${etcDelete}'" value="삭제"></input>
+                        </c:if>
+                        <input type="button" id="kwon-back01" class="genric-btn danger circle" style="font-size: 13px;" value="BACK"></input>
                     </div>
                 </form>
-
             </div>
         </div>
+        <div id="disqus_thread"></div>
     </div>
 </section>
 <!--::project part end::-->
     
     
     
-    
-        <%-- <section class="project_gallery">
-            <div class="project_gallery_tittle">
-                <h2><span>글</span> 작성</h2>
-            </div>
-        </section>
-      <div class="row">
-        <div class="col-lg-12">
-          <form action="photoUpload.go" method="POST" enctype="multipart/form-data">
-            <div class="row">
-               <div class="col-12">
-                  <div class="form-group">
-                     <input class="form-control placeholder hide-on-focus" name="g_Title" type="text" placeholder="제목">
-                  </div>
-                  <div class="form-group">
-                     <input class="form-control placeholder hide-on-focus" name="g_Con" type="text" placeholder="내용">
-                  </div>
-                  <div class="form-group">
-                     <input class="form-control placeholder hide-on-focus" name="g_Sg_No" type="text" placeholder="스터디 그룹 번호" value="${param.sgNo}"hidden>
-                  </div>
-                  <div class="form-group">
-                     <input class="form-control placeholder hide-on-focus" name="g_Writer" type="text" placeholder="작성자" value="${sessionScope.loginUser.mName}"hidden>
-                  </div>
-                  <div class="form-group">
-                     <input class="form-control placeholder hide-on-focus" name="g_Writer_No" type="text" placeholder="작성자 번호" value="${loginUser.mno}"hidden>
-                  </div>
-               </div>
-               <div class="col-12">
-                  <div class="wrapper">
-                     <div class="body">
-                         <!-- 첨부 버튼 -->
-                         <div id="attach">
-                             <!-- <label class="genric-btn primary radius fs1em" for="uploadInputBox">사진 첨부</label> -->
-                             <input id="uploadInputBox"  type="file" name="filedata" multiple />
-                         </div>
-                         
-                     </div>
-                 </div>
-               
-                    
-                </div>  
-               </div>
-               <div class="offset-sm-9">
-                   <div>
-                       <input class="genric-btn primary radius fs1em" type="submit" value="취소">
-                       <input class="genric-btn primary radius fs1em" type="submit" value="목록">
-                       <input class="genric-btn primary radius fs1em" type="submit" value="작성">
-                   </div>
-               </div>
-            </div>   
-        </div>
-        </div>
-        </form>
-      </div>
-    </div> 
-  </section>--%>
-  
   
   
 	<jsp:include page="../common/footer.jsp"/>
@@ -192,8 +152,13 @@
             placeholder: '상세 내용을 입력해주세요'
 
         });
-        
-        $('#summernote').summernote('code');
+        var markupStr = '${etc.etcCon}';
+
+		$('#summernote4').summernote("code", markupStr);
+		$('#summernote4').summernote('disable');
+		$('#summernote4').summernote().css('display','none');
+
+        $('#summernote4').summernote('code');
     
 		var pic = $('#uploadFile').val();
         console.log(pic);
@@ -205,6 +170,29 @@
         
         
    </script>
+   <script>
+	/*
+	 * 댓글 등록하기(Ajax)
+	 */
+	
+	/**
+	*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+	*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+	/*
+	var disqus_config = function () {
+	this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+	this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+	*/
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://doit-2.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	(d.head || d.body).appendChild(s);
+	})();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
 

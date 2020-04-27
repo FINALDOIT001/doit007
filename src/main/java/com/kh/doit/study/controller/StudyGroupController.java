@@ -28,9 +28,11 @@ import com.kh.doit.study.common.paginationJung;
 import com.kh.doit.study.model.service.StudyGroupService;
 import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -248,6 +250,7 @@ public class StudyGroupController {
 
 	/**
 	 * 디테일 상세내용 / 참석자 작성자 : 서정도
+	 * 권구현도 수정합니다~ 자료실 리스트 가져오기 2020.04.24 Kwon
 	 * 
 	 * @param mv
 	 * @param sgNo
@@ -263,7 +266,7 @@ public class StudyGroupController {
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
 		StudyLike sl = new StudyLike();
-		if(mno != "") {
+		if(mno != "" && mno !=null) {
 		
 		String slNo= mno+sgNo;
 		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
@@ -271,16 +274,18 @@ public class StudyGroupController {
 			 sl = sgService.studyLikeList(slNo);
 			System.out.println("studyList" + sl);
 		}
+		
+		// 구현 추가 부분
+		ArrayList<Etc> etc = sgService.etcList(sgNo);
+		System.out.println("Servlet Kwon Etc : " + etc);
+	
 
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
 
 		if (sg != null) {
-			mv.addObject("sg", sg)
-			.addObject("ml", ml)
-			.addObject("currentPage", currentPage)
-			.addObject("sl",sl)
-			.setViewName("study/doitStudyDetail");
+			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl).addObject("etc",etc)
+					.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}
@@ -488,19 +493,19 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("checkStudy.go")
-	public ModelAndView checkStudy(ModelAndView mv, int sgNo, int ssNo, String ssDayDate,
+	public ModelAndView checkStudy(ModelAndView mv, int sgNo, int ssNo, String ssDayDate, int sgWriterNo ,int usermno,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
-		System.out.println(sgNo);
-		System.out.println(ssNo);
-		System.out.println(ml);
-		
-		
+		ArrayList<StudyCheck> sc = studyCheckList(ssNo);
+				
 		if (ml != null) {
 			mv.addObject("sgNo", sgNo)
+			  .addObject("sgWriterNo",sgWriterNo)
+			  .addObject("usermno",usermno)
 			  .addObject("ml",ml)
+			  .addObject("sc",sc)
 			  .addObject("ssNo", ssNo)
 			  .addObject("ssDayDate",ssDayDate)
 			  .setViewName("study/doitStudy_check");
@@ -671,9 +676,6 @@ public class StudyGroupController {
 	
 	
 	
-	
-	
-	
 	/**
 	 * 자료실 화면으로 Kwon
 	 * 2020.04.23 KH
@@ -681,31 +683,37 @@ public class StudyGroupController {
 	 */
 	@RequestMapping("insertEtc.go")
 	public String moveEtc() {
-		return "study/insertEtc";
+		return "study/etcInsert";
 	}
 	
 	@RequestMapping("insertEtc.do")
-	public String insertEtc(Etc etc, HttpServletRequest request,
+	public String insertEtc(Etc etc, EtcFile etcF, HttpServletRequest request,
 				@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
 
 		int result = 0;
+		int result2 = 0;
+		
+		result = sgService.insertEtc(etc);
 
-		for (int i = 0; i < file.length; i++) {
-			if (file.length > 0) {
-
-				String g_RenameFile = saveMultiFile(file[i], request);
-
-				if (g_RenameFile != null) {
-
-					etc.setEtcOriginalFileName(file[i].getOriginalFilename());
-					etc.setEtcRenameFileName(g_RenameFile);
-
-					System.out.println("etc.ori : " + etc.getEtcOriginalFileName());
-					System.out.println("etc.re : " + etc.getEtcRenameFileName());
-
+		if (result > 0 ) {
+			for (int i = 0; i < file.length; i++) {
+				if (file.length > 0) {
+	
+					String g_RenameFile = saveMultiFile(file[i], request);
+	
+					if (g_RenameFile != null) {
+	
+						etcF.setEtcfOriginalFileName(file[i].getOriginalFilename());
+						etcF.setEtcfRenameFileName(g_RenameFile);
+	
+						System.out.println("etc.ori : " + etcF.getEtcfOriginalFileName());
+						System.out.println("etc.re : " + etcF.getEtcfRenameFileName());
+	
+					}
 				}
+				result2 = sgService.insertEtcFile(etcF);
 			}
-			result = sgService.insertEtc(etc);
+			
 		}
 
 		System.out.println("자료 업로드 : " + result);
@@ -717,16 +725,130 @@ public class StudyGroupController {
 		}
 		
 	}
+
+	/**
+	 * 자료실 상세페이지 Kwon
+	 * 2020.04.24 HOME
+	 * @param mv
+	 * @param etc
+	 * @param multiFile
+	 * @param etcNo
+	 * @return
+	 */
+	@RequestMapping("etcView.do")
+	private ModelAndView etcView(ModelAndView mv, Etc etc, ArrayList<EtcFile> multiFile, int etcNo) {
+		etc = sgService.selectEtc(etcNo);
+		multiFile = sgService.selectEtcFile(etcNo);
+		
+		mv.addObject("etc", etc);
+		mv.addObject("multiFile",multiFile);
+		mv.setViewName("study/etcDetail");
+		
+		return mv;
+	}
 	
+	@RequestMapping("etcDelete.do")
+	private String etcDelete(int etcNo) {
+		int result = sgService.deleteEtc(etcNo);
+		return "redirect:sgList.go";
+	}
 	
-	@RequestMapping(value="doitCheckInsert.go", method= RequestMethod.POST)
+	/**스터디 출첵 인설트 
+	 * 정호
+	 * @param mv
+	 * @param sc
+	 * @param checkList
+	 * @param checkMember
+	 * @return
+	 */
+	@RequestMapping(value = "doitCheckInsert.go", method = RequestMethod.POST)
 	@ResponseBody
-	private void doitCheckInsert(ModelAndView mv,
-			@RequestParam(value="checklist") List<Integer> list) {
+	private String doitCheckInsert(ModelAndView mv, StudyCheck sc,
+			@RequestParam(value = "checklist") List<String> checkList,
+			@RequestParam(value = "checkmember") List<String> checkMember) {
+
+		int cmiNumber = 0;
+		int sciNumber = 0;
+		int sccheck = 0;
 		
-		System.out.println(list);
+		for (int i = 0; i < checkMember.size(); ++i) {
+
+			sc.setScMno(Integer.parseInt(checkMember.get(i)));
+			sc.setScNo(Integer.parseInt(sc.getSsNo() + checkMember.get(i)));
+			cmiNumber += checkMemberInsert(sc);
+
+		}
+
+		for (int i = 0; i < checkList.size(); ++i) {
+			sciNumber += studyCheckInsert(Integer.parseInt(sc.getSsNo() + checkList.get(i)));
+		}
 		
 		
+		if (cmiNumber == checkMember.size() && sciNumber==checkList.size()) {
+			
+			return "ok";
+
+		} else {
+			
+			return "fail";
+		}
+
+	}
+
+	/** 스터디 출첵 멤머 DB 인설트 메소드 
+	 * 정호가 만듬
+	 * @param sc
+	 * @return
+	 */
+	public int checkMemberInsert(StudyCheck sc) {
+		int result = sgService.checkMemeberInsert(sc);
+		return result;
+	}
+
+	/*Someone join to Sucks the name of group by made Jungho 
+	 * 스터디 출첵 업데이트에 제 사용함.
+	 * 정호
+	 * memememememememe~~~!
+	 * @param scNo
+	 * @return
+	 */
+	public int studyCheckInsert(int scNo) {
+		int result = sgService.studyCheckInsert(scNo);
+		return result;
+	}
+	
+	/**출첵한 member 리스트 불러오기 method
+	 * 정호
+	 * @param sc
+	 * @return
+	 */
+	public ArrayList<StudyCheck> studyCheckList(int ssNo){
+		
+		return sgService.studyCheckList(ssNo);
+		
+	}
+	
+	@RequestMapping(value ="doitCheckUpdate.go", method = RequestMethod.POST)
+	@ResponseBody
+	private String doitCheckUpdate(int ssNo,
+			@RequestParam(value = "changelist") List<String> changelist) {
+		
+		
+		int result1 = sgService.StudyCheckDefault(ssNo);
+		
+		int result=0;
+		for (int i = 0; i < changelist.size(); ++i) {
+			int scNo = Integer.parseInt(ssNo+changelist.get(i));
+			
+			result += sgService.studyCheckInsert(scNo);
+		}
+		
+		
+		if(result == changelist.size()&& result1 > 0) {
+			return "ok";
+		}else {
+			return "fail";
+		}
 		
 	}
 	
@@ -747,7 +869,6 @@ public class StudyGroupController {
 			return "common/errorPage";		
 		}
 	}
- 
 	
 
 }

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.DailyStudy;
 import com.kh.doit.study.model.vo.Etc;
+import com.kh.doit.study.model.vo.EtcFile;
 import com.kh.doit.study.model.vo.Gallery;
 import com.kh.doit.study.model.vo.GroupMember;
 import com.kh.doit.study.model.vo.PageInfojung;
+import com.kh.doit.study.model.vo.StudyCheck;
 import com.kh.doit.study.model.vo.StudyGroup;
 import com.kh.doit.study.model.vo.StudyLike;
 
@@ -198,11 +200,66 @@ public interface StudyGroupService {
 	 */
 	int insertEtc(Etc etc);
 
+
+
+	/**
+	 * 자료실 파일추가 Kwon
+	 * @param etcF
+	 * @return
+	 */
+	int insertEtcFile(EtcFile etcF);
+
+	/**
+	 * 자료실 리스트 가져오기 Kwon
+	 * @param sgNo
+	 * @return
+	 */
+	ArrayList<Etc> etcList(int sgNo);
+
+	
+	// 자료실 보기
+	Etc selectEtc(int etcNo);
+
+	ArrayList<EtcFile> selectEtcFile(int etcNo);
+
+	/**
+	 * 삭제하기 Kwon
+	 * @param etcNo
+	 * @return
+	 */
+	int deleteEtc(int etcNo);
+	
+	/** 스터디 출석체크 멤버 정보 인설트
+	 * 정호가 만듬
+	 * @param sc
+	 * @return
+	 */
+	int checkMemeberInsert(StudyCheck sc);
+
+	/** 스터디 출석 체크 정보 입력
+	 * 정호가 만듬
+	 * @param scNo
+	 * @return
+	 */
+	int studyCheckInsert(int scNo);
+	
+	/**출첵한 member 리스트 불러오기 method
+	 * 정호
+	 * @param sc
+	 * @return
+	 */
+	ArrayList<StudyCheck> studyCheckList(int ssNo);
+
+
+	/**출첵 수정 하기전 디폴트 만들기
+	 * @param ssNo
+	 * @return
+	 */
+	int StudyCheckDefault(int ssNo);
+
 	int sgDataBoardAndGalleryPayment(int sgNo);
 
 	int mDataBoardAndGalleryPayment(int mNo);
-	
-
 	
 	
 	

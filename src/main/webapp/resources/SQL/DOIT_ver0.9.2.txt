@@ -1051,6 +1051,7 @@ CREATE TABLE STUDY_ETCFILE(
 -- EVENT 조회수 추가 Kwon 2020.04.25
 ALTER TABLE EVENT ADD(E_COUNT NUMBER);
 
+<<<<<<< HEAD
 
 
 
@@ -1086,6 +1087,8 @@ ALTER TABLE EVENT ADD(E_COUNT NUMBER);
 
 
 
+=======
+>>>>>>> branch 'master' of https://github.com/FINALDOIT001/doit007.git
 ------------------------------------------------
 ------------- 여기까지 추가해주세요 END --------------
 ------------------------------------------------

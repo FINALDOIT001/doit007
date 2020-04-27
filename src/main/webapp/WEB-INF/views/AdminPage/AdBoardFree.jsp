@@ -13,7 +13,7 @@
 	
 	
 	
-	<!-- 자유게시판 content 메무리 -->
+	<!-- 자유게시판 content 메무리 ß-->
 	</div>
 </body>
 </html>
