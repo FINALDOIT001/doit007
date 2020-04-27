@@ -276,8 +276,11 @@ public class StudyGroupController {
 		System.out.println("Controller memberList : " + ml);
 
 		if (sg != null) {
-			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl)
-					.setViewName("study/doitStudyDetail");
+			mv.addObject("sg", sg)
+			.addObject("ml", ml)
+			.addObject("currentPage", currentPage)
+			.addObject("sl",sl)
+			.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}
@@ -727,7 +730,23 @@ public class StudyGroupController {
 		
 	}
 	
-	
+	@RequestMapping("DataBoardAndGalleryPayment.go")
+	private String DataBoardAndGalleryPayment(int sgNo, int mNo) {
+		
+		System.out.println("$$sgNo"+sgNo);
+		System.out.println("$$mNo"+mNo);
+		
+		int result1 = sgService.sgDataBoardAndGalleryPayment(sgNo);
+		int result2 = sgService.mDataBoardAndGalleryPayment(mNo);
+		
+		System.out.println("$$result1"+result1);
+		System.out.println("$$result2"+result2);
+		if (result1 > 0 && result2 > 0) {
+			return "redirect:studyDetail.go?sgNo="+sgNo+"&mno="+mNo;
+		}else {
+			return "common/errorPage";		
+		}
+	}
  
 	
 

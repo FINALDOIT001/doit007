@@ -197,6 +197,10 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	int insertEtc(Etc etc);
+
+	int sgDataBoardAndGalleryPayment(int sgNo);
+
+	int mDataBoardAndGalleryPayment(int mNo);
 	
 
 	

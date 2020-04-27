@@ -42,8 +42,7 @@
 		<result property="mAddr" column="M_ADDR" />
 		<result property="mPhone" column="M_PHONE" />
 		<result property="mEmail" column="M_EMAIL" />
-		<result property="mOriginalfilename"
-			column="M_ORIGINAL_FILENAME" />
+		<result property="mOriginalfilename" column="M_ORIGINAL_FILENAME" />
 		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
 		<result property="mEnrolldate" column="M_ENROLL_DATE" />
 		<result property="mUpdatedate" column="M_UPDATE_DATE" />
@@ -233,26 +232,7 @@
 		FROM Gallery
 		WHERE G_NUM = #{g_Num}
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	<select id="searchCount" parameterType="String" resultType="_int">
 		SELECT 	COUNT(*)
 		FROM	STUDY_GROUP
@@ -284,6 +264,18 @@
 			,DEFAULT
 		)
 	</insert>
+	
+	<update id="sgDataBoardAndGalleryPayment" parameterType="_int">
+		UPDATE STUDY_GROUP SET
+		SG_PAYMENT_YN = 'N'
+		WHERE SG_NO = #{sgNo}
+	</update>
+	
+	<update id="mDataBoardAndGalleryPayment" parameterType="_int">
+		UPDATE MEMBER SET
+		M_HODU = M_HODU - 2
+		WHERE M_NO = #{mNo}
+	</update>
 
 </mapper>
     

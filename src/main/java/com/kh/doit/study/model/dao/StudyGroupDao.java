@@ -190,4 +190,14 @@ public class StudyGroupDao {
 		return sqlSession.insert("studyGroupMapper.insertEtc", etc);
 	}
 
+	public int sgDataBoardAndGalleryPayment(int sgNo) {
+
+		return sqlSession.update("studyGroupMapper.sgDataBoardAndGalleryPayment", sgNo);
+	}
+
+	public int mDataBoardAndGalleryPayment(int mNo) {
+
+		return sqlSession.update("studyGroupMapper.mDataBoardAndGalleryPayment", mNo);
+	}
+
 }

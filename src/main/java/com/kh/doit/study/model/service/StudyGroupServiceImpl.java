@@ -284,6 +284,20 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	public int insertEtc(Etc etc) {
 		return sgDao.inserEtc(etc);
 	}
+
+
+	@Override
+	public int sgDataBoardAndGalleryPayment(int sgNo) {
+
+		return sgDao.sgDataBoardAndGalleryPayment(sgNo);
+	}
+
+
+	@Override
+	public int mDataBoardAndGalleryPayment(int mNo) {
+
+		return sgDao.mDataBoardAndGalleryPayment(mNo);
+	}
 	
 	
 

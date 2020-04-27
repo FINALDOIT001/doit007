@@ -250,6 +250,8 @@ public class BoardController {
 		
 		ArrayList<Board_Comments> bcList = bService.selectCommentList(b_no);
 		
+		
+		
 		response.setContentType("application/json; charset=utf-8");
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create(); 
