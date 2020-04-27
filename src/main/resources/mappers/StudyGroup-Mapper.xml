@@ -281,23 +281,6 @@
 		WHERE SG_NO = #{sgNo}
 	</update>
 	
-	<update id="mDataBoardAndGalleryPayment" parameterType="_int">
-		UPDATE MEMBER SET
-		M_HODU = M_HODU - 2
-		WHERE M_NO = #{mNo}
-	</update>
-	
-		<update id="sgDataBoardAndGalleryPayment" parameterType="_int">
-		UPDATE STUDY_GROUP SET
-		SG_PAYMENT_YN = 'N'
-		WHERE SG_NO = #{sgNo}
-	</update>
-	
-	<update id="mDataBoardAndGalleryPayment" parameterType="_int">
-		UPDATE MEMBER SET
-		M_HODU = M_HODU - 2
-		WHERE M_NO = #{mNo}
-	</update
 	<insert id="insertEtcFile" parameterType="com.kh.doit.study.model.vo.EtcFile">
 		INSERT INTO STUDY_ETCFILE VALUES(
 			SEQ_ETCNO.CURRVAL
@@ -380,7 +363,7 @@
 	WHERE SS_NO = #{ssNo}
 	</update>
 	
-		<update id="sgDataBoardAndGalleryPayment" parameterType="_int">
+	<update id="sgDataBoardAndGalleryPayment" parameterType="_int">
 		UPDATE STUDY_GROUP SET
 		SG_PAYMENT_YN = 'N'
 		WHERE SG_NO = #{sgNo}
@@ -390,7 +373,7 @@
 		UPDATE MEMBER SET
 		M_HODU = M_HODU - 2
 		WHERE M_NO = #{mNo}
-	</update
+	</update>
 	
 
 </mapper>
