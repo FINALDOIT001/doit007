@@ -94,6 +94,8 @@
 	<result property="userId" column="M_ID"/>
 	<result property="userName" column="M_NAME"/>
 	</resultMap>
+	
+	
 
 	<select id="getlistCount" resultType="_int">
 		SELECT COUNT(*)
@@ -275,12 +277,6 @@
 		)
 	</insert>
 	
-	<update id="sgDataBoardAndGalleryPayment" parameterType="_int">
-		UPDATE STUDY_GROUP SET
-		SG_PAYMENT_YN = 'N'
-		WHERE SG_NO = #{sgNo}
-	</update>
-	
 	<insert id="insertEtcFile" parameterType="com.kh.doit.study.model.vo.EtcFile">
 		INSERT INTO STUDY_ETCFILE VALUES(
 			SEQ_ETCNO.CURRVAL
@@ -317,10 +313,10 @@
 	</select>
 	
 	<resultMap type="com.kh.doit.study.model.vo.EtcFile" id="etcFileResultMap">
-		<result property="etcfNo" column="ETCF_NO"/>
-		<result property="etcfOriginalFileName" column="ETCF_ORIGINALFILENAME"/>
-		<result property="etcfRenameFileName" column="ETCF_RENAMEFILENAME"/>
-	</resultMap>
+      <result property="etcfNo" column="ETCF_NO"/>
+      <result property="etcfOriginalFileName" column="ETC_ORIGINALFILENAME"/>
+      <result property="etcfRenameFileName" column="ETC_RENAMEFILENAME"/>
+   </resultMap>
 	
 	<select id="selectEtcFile" parameterType="_int" resultMap="etcFileResultMap">
 		SELECT	*
@@ -375,6 +371,8 @@
 		WHERE M_NO = #{mNo}
 	</update>
 	
+	
+
 
 </mapper>
     

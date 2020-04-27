@@ -278,14 +278,20 @@ public class StudyGroupController {
 		// 구현 추가 부분
 		ArrayList<Etc> etc = sgService.etcList(sgNo);
 		System.out.println("Servlet Kwon Etc : " + etc);
-	
+		
+		ArrayList<Gallery> galleryList = sgService.GalleryList(sgNo);
 
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
 
 		if (sg != null) {
-			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl).addObject("etc",etc)
-					.setViewName("study/doitStudyDetail");
+			mv.addObject("sg", sg)
+			.addObject("ml", ml)
+			.addObject("currentPage", currentPage)
+			.addObject("sl",sl)
+			.addObject("etc",etc)
+			.addObject("galleryList",galleryList)
+			.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}
