@@ -152,7 +152,7 @@
 									class="rounded" style="width: 350px; height: 360px;">
 							</c:if>
 							<c:if test="${empty sg.sgRenameFileName}">
-								<img src="${contextPath}/resources/img/project-5.png"
+								<img src="${contextPath}/resources/img/camera.png"
 									class="rounded" style="width: 350px; height: 360px;">
 							</c:if>
 						</div>
@@ -873,12 +873,24 @@
 		
 		 
 	       
+		<c:if test="${empty sessionScope.loginUser.mno}">
+		   $('#checkBtn').click(function(){
+		    	alert("로그인 해주세요~!");
+		      });
+		   </c:if>
+		
+		
+		
+		
+		
+		<c:if test="${!empty sessionScope.loginUser.mno}">
 		   $('#checkBtn').click(function(){
 		    	  var sgNo = ${sg.sgNo} ;
-		    	  var usermno = ${sessionScope.loginUser.mno};
-		    	  var sgWriterNo = ${sg.sgWriterNo};
+		    	  var usermno =${sessionScope.loginUser.mno};
+		    	  var sgWriterNo = ${sg.sgWriterNo}; 	  
 		         window.open("checkStudy.go?sgNo="+sgNo+"&ssNo="+ssNo+"&sgWriterNo="+sgWriterNo+"&usermno="+usermno+"&ssDayDate="+ssDayDate, "출석체크", "status=no, location= no, width=700, height=700, scrollbars=yes;");
 		      });
+		   </c:if>
 	      
 	</script>
 

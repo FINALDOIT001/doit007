@@ -74,6 +74,7 @@
 
 </head>
 <body>
+
 	<jsp:include page="../common/header.jsp"/>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	
@@ -160,7 +161,9 @@
                            </div>
                         </div>
                      </div>
-                     
+                     <input type="hidden" id="phonesplit" value="${ m.mPhone }" />
+					 <input type="hidden" id="emailsplit" value="${ m.mEmail }" />    
+					 <input type="hidden" id="addsplit" value="${ m.mAddr }" />                    
                      <div class="form-group"> 
                         <label style="display: block;"><span style="color:red">*</span> 전화번호</label>
                         <input type="text" style="display: inline; width: 119px;" class="form-control form-control-user" id="phone1" name="phone1" required>
@@ -174,7 +177,7 @@
                         <span style="color: red">*</span>이메일</label> 
                         <input type="text" style="display: inline; width: 290px;"
 								class="form-control form-control-user" id="email" name="email"
-								placeholder="이메일" required> 
+								placeholder="이메일" required > 
 						<label style="font-weight: 600;">@</label> 
 						<select style="width: 185px; display: inline;" class="form-control" id="selbox" name="selbox">
 							<option value="naver.com">naver.com</option>
@@ -352,9 +355,10 @@
 							<thead>
 							  <tr>
 							  	<th width="5%">No</th>
-								<th width="20%">충전호두</th>
-								<th width="20%">결제금액</th>
-								<th width="10%">구입일</th>
+								<th width="15%">호두</th>
+								<th width="5%">상태</th>
+								<th width="20%">금액</th>
+								<th width="10%">날짜</th>
 								<th width="10%"></th>
 							  </tr>
 							</thead>
@@ -363,9 +367,30 @@
 								<tr class="kwon-tr1" style="text-align:center;">
 									<td style="text-align:center;" class="kwon-td1">${ status.count }</td>
 									<td style="text-align:center;" class="kwon-td1">${ h.hoduNum }개</td>
+									<td style="text-align:center;" class="kwon-td1">${ h.hDiscription }</td>
 									<td style="text-align:center;" class="kwon-td1">${ h.hPrice }원</td>
 									<td style="text-align:center;" class="kwon-td1">${ h.hDate }</td>
-									<td style="text-align:center;" class="kwon-td1">뀨</td>
+									
+									<td style="text-align:center;" class="kwon-td1">
+									
+										
+										<c:if test="${ (h.hRefundYN eq 'N') && (h.hDiscription eq '충전') }">
+										
+										<button class="genric-btn danger" style="float: inherit;font-size: 10px;padding:0px 20px;line-height:20px;" 
+										<%-- href="hRefund.me?hNo=${ h.hNo }&hmNo=${ h.hmNo }&hmId=${ h.hmId }&hoduNum=${ h.hoduNum }&hPrice=${ h.hPrice }&hDate=${ h.hDate }&hDateRefund=${ h.hDateRefund }&hDiscription=${ h.hDiscription }" --%>
+										<%-- href="'hRefund.me?hNo=' + '${ h.hNo }' + '&hmNo=' + '${ h.hmNo }' + '&hmId=' + '${ h.hmId }' + '&hoduNum=' + '${ h.hoduNum }' + '&hPrice=' + '${ h.hPrice }' + '&hDate=' + '${ h.hDate }' + '&hDateRefund=' + '${ h.hDateRefund }' + '&hDiscription=' + '${ h.hDiscription }'" --%>
+										onclick="window.open('hRefund.me?hNo=' + '${ h.hNo }' + '&hmNo=' + '${ h.hmNo }' + '&hmId=' + '${ h.hmId }' + '&hoduNum=' + '${ h.hoduNum }' + '&hPrice=' + '${ h.hPrice }' + '&hDate=' + '${ h.hDate }' + '&hDateRefund=' + '${ h.hDateRefund }' + '&hDiscription=' + '${ h.hDiscription }', '_blanck', 'width=500, height=200, scrollbars=no'); return false">환불</button>
+										
+										</c:if>
+										
+										<c:if test="${ h.hRefundYN eq 'Y' }">
+										
+											<b style="color:red;">${ h.hDateRefund }</b>
+											
+										</c:if>
+										
+									</td>
+									
 								</tr>
 								</c:forEach>
 							</tbody>
@@ -385,7 +410,25 @@
 	<!-- photo -->
 <script src="${contextPath}/resources/js/datatables.js"></script>
  <script>
-
+ 
+ $(function(){
+	 var phone = $("#phonesplit").val();
+	 var phonesp = phone.split("-");
+	 $("#phone1").val(phonesp[0]);
+	 $("#phone2").val(phonesp[1]);
+	 $("#phone3").val(phonesp[2]);
+	 
+	 var email = $("#emailsplit").val();
+	 var emailsp = email.split("@");
+	 $("#email").val(emailsp[0]);
+	 
+	 var add = $("#addsplit").val();
+	 var addsp = add.split("/");
+	 $("#address1").val(addsp[0]);
+	 $("#address2").val(addsp[1]);
+	 $("#address3").val(addsp[2]);
+ });
+ 
  function memberdelete(){
 	 if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인
 		 	var mId = $("#userId").val();

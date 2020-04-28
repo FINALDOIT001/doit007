@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -152,7 +153,7 @@ public class myPageController {
 			m.setmEmail(email + "@" + selboxDirect);
 		}
 		if(!address1.equals("")) {
-			m.setmAddr(address1 + "," + address2 +"," + address3);
+			m.setmAddr(address1 + "/" + address2 +"/" + address3);
 		}
 		
 		System.out.println("이미지 : " + file);
@@ -219,13 +220,14 @@ public class myPageController {
 	 * @throws IOException
 	 */
 	@RequestMapping("hpay.go")
-	public void hodupay(HttpServletResponse response,Hodu hodu,@RequestParam int hPrice, @RequestParam int hmNo,@RequestParam String hmId, @RequestParam int hoduNum) throws JsonIOException, IOException {
+	public void hodupay(HttpServletResponse response,Hodu hodu,@RequestParam int hPrice, @RequestParam int hmNo,@RequestParam String hmId, @RequestParam int hoduNum,@RequestParam String hDiscription) throws JsonIOException, IOException {
 		
 
 		hodu.setHmNo(hmNo);
 		hodu.setHmId(hmId);
 		hodu.sethPrice(hPrice); 
 		hodu.setHoduNum(hoduNum);
+		hodu.sethDiscription(hDiscription);
 		
 		TestHodu th = new TestHodu(hmNo, hoduNum);
 		
@@ -297,8 +299,88 @@ public class myPageController {
 	}
 	
 	
-
+	/**
+	  * @Method Name : hoduRefund
+	  * @작성일 : Apr 27, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 호두 환불
+	  * @param mv
+	  * @param h
+	  * @param request
+	  * @return
+	  */
+	@RequestMapping("hRefund.me")
+	public ModelAndView hoduRefund(
+					ModelAndView mv,
+					Hodu h,
+					HttpServletRequest request
+			) {
+		
+		Member m = mpService.selectOne(h.getHmId());
+		
+		h.setMember(m);
+		
+		mv.addObject("h", h);
+		mv.setViewName("member/hoduRefund");
+		
+		return mv;
+	}
 	
-	
-	
+	/**
+	  * @Method Name : hoduRefundgo
+	  * @작성일 : Apr 27, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 호두 환불 진행
+	  * @param response
+	  * @param hNo
+	  * @param hmNo
+	  * @param hoduNum
+	 * @throws IOException 
+	 * @throws JsonIOException 
+	  */
+	@RequestMapping(value="hRefund.go",method= {RequestMethod.GET, RequestMethod.POST})
+	public void hoduRefundgo(
+			HttpServletResponse response,
+			HttpServletRequest request,
+			@RequestParam int hNo,
+			@RequestParam int hmNo,
+			@RequestParam int hoduNum,
+			@RequestParam String hType
+			) throws JsonIOException, IOException {
+		
+		Hodu h = new Hodu(hNo,hmNo,hoduNum,hType);
+		
+		String check = "ok";
+		
+		int result1 = mpService.hoduRefundgo(h);
+		
+		int result2 = 0;
+		
+		if( result1 > 0 ){
+			
+			result2 = mpService.minusHodu(h);
+			
+			System.out.println("결제상태 변경 성공");
+			
+			if( result2 > 0 ) {
+				
+				System.out.println("호두 차감 성공");
+				
+			}else {
+				
+			}
+			
+		}else {
+			
+		}
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		Gson gson = new GsonBuilder().create();
+		
+		gson.toJson(result2,response.getWriter());
+		
+	}
 }

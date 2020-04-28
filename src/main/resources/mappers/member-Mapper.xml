@@ -23,10 +23,14 @@
     
     <resultMap id="hoduResultSet" type="Hodu">
     	<id property="hNo" column="H_NO"/>
+    	<result property="hmNo" column="H_MNO"/>
     	<result property="hmId" column="H_MID"/>
     	<result property="hoduNum" column="HODU"/>
     	<result property="hPrice" column="H_PRICE"/>
     	<result property="hDate" column="H_DATE"/>
+    	<result property="hDateRefund" column="H_REFUND_DATE"/>
+    	<result property="hRefundYN" column="H_REFUND_YN"/>
+    	<result property="hDiscription" column="H_DISCRIPTION"/>
     	
     	<association property="member" javaType="Member">
     		<result property="mId" column="M_ID"/>
@@ -78,11 +82,11 @@
     
     <insert id="inserthodu" parameterType="Hodu">
     	INSERT INTO HODU_TABLE
-    	VALUES (SEQ_HNO.NEXTVAL,#{hmNo}, #{hmId}, #{hoduNum}, #{hPrice}, SYSDATE)
+    	VALUES (SEQ_HNO.NEXTVAL,#{hmNo}, #{hmId}, #{hoduNum}, #{hPrice}, SYSDATE, SYSDATE, default, #{hDiscription})
     </insert>
     
     <select id="selecthList" resultMap="hoduResultSet">
-    	SELECT H.H_NO, H.HODU, H.H_PRICE, H.H_DATE
+    	SELECT H.H_NO, H.H_MNO, H.H_MID, H.HODU, H.H_PRICE, H.H_DATE, H.H_REFUND_DATE, H.H_REFUND_YN, H.H_DISCRIPTION
     	FROM HODU_TABLE H JOIN MEMBER M
     	ON H_MID = M.M_ID
     	WHERE H.H_MID = #{mId}
@@ -188,5 +192,23 @@
    		SET		M_PWD = #{mPwd}
    		WHERE	M_ID = #{mId}
     </update>
+    
+    <!-- 환불 업데이트 -->
+    <update id="hoduRefundgo" parameterType="Hodu">
+    	UPDATE 	HODU_TABLE
+   		SET		H_REFUND_DATE = SYSDATE,
+   				H_DISCRIPTION = #{hDiscription},
+   				H_REFUND_YN = 'Y'
+   		WHERE	H_NO = #{hNo}
+   		AND 	H_MNO = #{hmNo}
+    </update>
+    
+    <update id="minusHodu" parameterType="Hodu">
+    	UPDATE 	MEMBER
+   		SET		M_HODU = M_HODU - #{hoduNum}
+   		WHERE	M_NO = #{hmNo}
+    </update>
+    
+    
     
 </mapper>

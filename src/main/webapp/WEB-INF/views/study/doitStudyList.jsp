@@ -160,23 +160,24 @@
 
 
 								<ul class="study_ul">
-									<li class="study_li">${sg.sgWriter}</li>
+									<li class="study_li"><img
+										src="${contextPath}/resources/img/man.png">${sg.sgWriter}</li>
 									
 																	
 									<c:set var="maxPeople" value="${sg.sgMaxPeople}"/>
 									<c:set var="newPeople" value="${sg.sgNowPeople}"/>
 									<c:if test="${sg.sgMaxPeople == sg.sgNowPeople}">
 									<li class="study_li text-danger"><img
-										src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+										src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 									</c:if>
 									<c:if test="${sg.sgMaxPeople != sg.sgNowPeople}">
 									<li class="study_li"><img
-										src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+										src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 									</c:if>
 									<li class="study_li"><img
-										src="${contextPath}/resources/img/add_icon2.png">${sg.sgAddr}</li>
+										src="${contextPath}/resources/img/location.png">${sg.sgAddr}</li>
 									<li class="study_li"><img
-										src="${contextPath}/resources/img/money_icon3.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 원</li>
+										src="${contextPath}/resources/img/hodu.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 개</li>
 								</ul>
 
 
