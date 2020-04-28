@@ -48,28 +48,39 @@
                     <th>조회수</th>
                   </tr>
                 </thead>
-                <c:forEach var="n" items="${ nlist }">
+                
                 <tbody>
-                  <tr>
-                    <td align="center">${ n.n_no }</td>
-                    <td align="left">
-                    	<%-- <c:if test="${ !empty loginUser }"> --%>
-                    		<c:url var="nDetail" value="nDetail.ev">
-                    			<c:param name="n_no" value="${ n.n_no }"/>
-                    			<c:param name="currentPage" value="${ pi_n.currentPage }"/>
-                    		</c:url>
-                    		<a href="${ nDetail }">${ n.n_title }</a>
-                    	<%-- </c:if>
-                    	<c:if test="${ empty loginUser }">
-                    		${ n.n_title }
-                    	</c:if> --%>
-                    </td>
-                    <td align="center">${ n.n_writer }</td>
-                    <td align="center">${ n.n_modifydate }</td>
-                    <td align="center">${ n.n_count }</td>
-                  </tr>
+	                <c:if test="${ empty nlist }">  
+	                	<tr>
+	                  		<td colspan="5" align="center">작성된 공지사항이 없습니다.</td>
+	                  	</tr>
+	                </c:if>
                 </tbody>
-                </c:forEach>
+                
+                <c:if test="${ !empty nlist }">
+                	<c:forEach var="n" items="${ nlist }">
+                		<tbody>
+		                  	<tr>
+			                    <td align="center">${ n.n_no }</td>
+			                    <td align="left">
+			                    	<%-- <c:if test="${ !empty loginUser }"> --%>
+			                    		<c:url var="nDetail" value="nDetail.ev">
+			                    			<c:param name="n_no" value="${ n.n_no }"/>
+			                    			<c:param name="currentPage" value="${ pi_n.currentPage }"/>
+			                    		</c:url>
+			                    		<a href="${ nDetail }">${ n.n_title }</a>
+			                    	<%-- </c:if>
+			                    	<c:if test="${ empty loginUser }">
+			                    		${ n.n_title }
+			                    	</c:if> --%>
+			                    </td>
+			                    <td align="center">${ n.n_writer }</td>
+			                    <td align="center">${ n.n_modifydate }</td>
+			                    <td align="center">${ n.n_count }</td>
+			                   </tr>
+                		</tbody>
+                	</c:forEach>
+                </c:if>
                 
                 <!-- 페이징 -->
                 <tr align="center" height="20">
@@ -108,7 +119,7 @@
 						<c:url var="after" value="nlist.go">
 							<c:param name="currentPage" value="${ pi_n.currentPage + 1 }"/>
 						</c:url> 
-						<a href="${ after }">[다음]</a>
+						<a href="${ after }">next</a>
 					</c:if>
 					</td>
 				</tr>

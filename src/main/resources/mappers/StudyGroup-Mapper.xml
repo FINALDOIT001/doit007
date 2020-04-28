@@ -371,9 +371,19 @@
 		WHERE M_NO = #{mNo}
 	</update>
 	
-	
+	<update id="sgJoinMember">
+		UPDATE STUDY_GROUP SET
+		<if test="">
+		SG_NOWPEOPLE = SG_NOWPEOPLE + 1
+		</if>
+		WHERE SG_NO = #{sgNo}
+	</update>
 
-
+	<update id="sgJoinHodu">
+		UPDATE Member SET
+		M_HODU = M_HODU - #{mhodu}
+		WHERE M_NO = #{mno}
+	</update>
 </mapper>
     
     

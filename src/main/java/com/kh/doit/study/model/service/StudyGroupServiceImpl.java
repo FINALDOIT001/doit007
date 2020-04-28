@@ -378,6 +378,20 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	}
 
 
+	@Override
+	public void sgJoinMember(int sgNo) {
+		
+		sgDao.sgJoinMember(sgNo);
+	}
+
+
+	@Override
+	public void sgJoinHodu(Member m) {
+		
+		sgDao.sgJoinHodu(m);
+	}
+
+
 	
 
 }

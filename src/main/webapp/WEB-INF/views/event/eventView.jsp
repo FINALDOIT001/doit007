@@ -219,7 +219,7 @@
       $('#summernote2').summernote({
          
          tabsize: 5,
-         height: 300,
+         height: 600,
          toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],

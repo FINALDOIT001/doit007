@@ -260,6 +260,10 @@ public interface StudyGroupService {
 	int sgDataBoardAndGalleryPayment(int sgNo);
 
 	int mDataBoardAndGalleryPayment(int mNo);
+
+	void sgJoinMember(int sgNo);
+
+	void sgJoinHodu(Member m);
 	
 	
 	

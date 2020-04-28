@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -164,11 +165,11 @@
 																	
 									<c:set var="maxPeople" value="${sg.sgMaxPeople}"/>
 									<c:set var="newPeople" value="${sg.sgNowPeople}"/>
-									<c:if test="${maxPeople == newPeople}">
+									<c:if test="${sg.sgMaxPeople == sg.sgNowPeople}">
 									<li class="study_li text-danger"><img
 										src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 									</c:if>
-									<c:if test="${maxPeople != newPeople}">
+									<c:if test="${sg.sgMaxPeople != sg.sgNowPeople}">
 									<li class="study_li"><img
 										src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 									</c:if>

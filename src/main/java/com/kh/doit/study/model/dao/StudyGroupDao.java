@@ -275,4 +275,14 @@ public class StudyGroupDao {
 		return sqlSession.update("studyGroupMapper.mDataBoardAndGalleryPayment", mNo);
 	}
 
+	public void sgJoinMember(int sgNo) {
+		
+		sqlSession.update("studyGroupMapper.sgJoinMember", sgNo);
+	}
+
+	public void sgJoinHodu(Member m) {
+		
+		sqlSession.update("studyGroupMapper.sgJoinHodu", m);
+	}
+
 }

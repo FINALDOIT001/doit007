@@ -50,6 +50,16 @@
            
                   </tr>
                 </thead>
+                
+                <c:if test="${ empty list }">
+                	<tbody>
+                		<tr>
+                			<td colspan="5" align="center">작성된 게시글이 없습니다.</td>
+                		</tr>
+                	</tbody>
+                </c:if>
+                
+                <c:if test="${ !empty list }">
                 <c:forEach var="b" items="${ list }">
                 <tbody>
                   <tr>
@@ -131,6 +141,7 @@
                   </tr>
                 </tbody>
                 </c:forEach>
+                </c:if>
                 
                 <!-- 페이징 -->
                 <tr align="center" height="20">

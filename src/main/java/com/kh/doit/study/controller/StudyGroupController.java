@@ -275,6 +275,7 @@ public class StudyGroupController {
 			System.out.println("studyList" + sl);
 		}
 		
+		
 		// 구현 추가 부분
 		ArrayList<Etc> etc = sgService.etcList(sgNo);
 		System.out.println("Servlet Kwon Etc : " + etc);
@@ -329,9 +330,15 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("sgJoin.go")
-	private String sgJoin(Model model, int sgNo, int mno) {
+	private String sgJoin(Model model, int sgNo, int mno, int hodu) {
 
 		GroupMember gm = new GroupMember(sgNo, mno);
+		sgService.sgJoinMember(sgNo);
+		
+		Member m = new Member();
+		m.setMno(mno);
+		m.setMhodu(hodu);
+		sgService.sgJoinHodu(m);
 
 		int result = sgService.sgJoin(gm);
 
