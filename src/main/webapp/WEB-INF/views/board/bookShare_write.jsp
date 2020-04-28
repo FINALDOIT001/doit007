@@ -33,7 +33,7 @@
                 </div>
                 <form action="insertBook.do" id="kwon-Form01" enctype="multipart/form-data" method="POST">
                     <input type="hidden" name="bsWriterNo" value="${ loginUser.mno }">
-                    <input type="hidden" name="bsWriter" value="${ loginUser.mName }">
+                    <input type="hidden" name="bsWriter" value="${ loginUser.mId }">
                     <table border="1" class="kwon-table1" cellpadding="10px">
                         
                         <tr>

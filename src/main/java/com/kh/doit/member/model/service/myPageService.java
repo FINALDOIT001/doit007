@@ -115,6 +115,28 @@ public interface myPageService {
 	 */
 	ArrayList<Qna> selectqnalist(int mno);
 
+	/**
+	  * @Method Name : hoduRefundgo
+	  * @작성일 : Apr 27, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 환불처리
+	  * @param h
+	  * @return
+	  */
+	int hoduRefundgo(Hodu h);
+
+	/**
+	  * @Method Name : minusHodu
+	  * @작성일 : Apr 28, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 환불시 호두 차감
+	  * @param h
+	  * @return
+	  */
+	int minusHodu(Hodu h);
+
 	
 
 

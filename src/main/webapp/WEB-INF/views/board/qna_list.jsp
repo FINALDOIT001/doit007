@@ -68,7 +68,77 @@
 				style="color:#5b5b5b !important;">${ q.qTitle }</a>
 			
 			</td>
-			<td align="center" class="kwon-td1">${ q.qWriter }</td>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<c:choose>
+                  		<c:when test="${ q.qWriter eq sessionScope.loginUser.mId }">
+                  			
+                  			<td align="center" class="kwon-td1">${ q.qWriter }</td>
+                  			
+                  		</c:when>
+                  		<c:otherwise>
+
+		                  	<td align="center" class="kwon-td1">
+		                  	
+		                  	<ul>
+		                  	<li class="nav-item dropdown no-arrow mx-1">
+		                  		<!-- <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+		                  			<span>${ q.qWriter }</span>
+		                  		<!-- </a> -->
+		                  		<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+								<h6 class="dropdown-header">
+									${ q.qWriter }
+								</h6>
+								<a class="dropdown-item d-flex align-items-center" href="newMS.ms?recipientID=${ q.qWriter }" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+								<div class="mr-3"></div>
+								<div>
+									<i class="fas fa-envelope fa-fw"></i>
+								   <span class="font-weight-bold">쪽지보내기</span>
+								</div>
+								</a>
+								
+								<%-- <c:url var="newReport" value="report.rp">
+	                  				<c:param name="rpUserID" value="${b.b_writer}"/>
+	                  				<c:param name="rpTitle" value="${ b.b_title }"/>
+	                  				<c:param name="rpBno" value="${ b.b_no }"/>
+	                  				<c:param name="rpBType" value="FREEBOARD"/>
+                  				</c:url> --%>
+								
+								<a id="reportAtag" class="dropdown-item d-flex align-items-center" href="report.rp?rpUserID=${q.qWriter}&rpTitle=${ q.qTitle }&rpBno=${ q.qNo }&rpBType=QNA" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+								<div class="mr-3"></div>
+								<div>
+									<i class="fas fa-user-alt-slash"></i>
+								   <span class="font-weight-bold">신고하기</span>
+								</div>
+								</a>
+								
+		                  	</li>
+		                  	</ul>
+							
+		                  	</td>
+		                  	
+                  		</c:otherwise>
+                  	</c:choose>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<td align="center" class="kwon-td1">${ q.qDate }</td>
 			<td align="center" class="kwon-td1">${ q.qState }</td>
 		</tr>

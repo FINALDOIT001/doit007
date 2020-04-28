@@ -91,6 +91,16 @@ public class myPageServiceImpl implements myPageService{
 		return mpDao.selectqnalist(mno);
 	}
 
+	@Override
+	public int hoduRefundgo(Hodu h) {
+		return mpDao.hoduRefundgo(h);
+	}
+
+	@Override
+	public int minusHodu(Hodu h) {
+		return mpDao.minusHodu(h);
+	}
+
 
 
 }
