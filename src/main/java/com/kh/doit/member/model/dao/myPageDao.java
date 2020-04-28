@@ -80,5 +80,13 @@ public class myPageDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectqnalist",mno);
 	}
 
+	public int hoduRefundgo(Hodu h) {
+		return sqlSession.update("memberMapper.hoduRefundgo",h);
+	}
+
+	public int minusHodu(Hodu h) {
+		return sqlSession.update("memberMapper.minusHodu",h);
+	}
+
 	
 }

@@ -90,6 +90,7 @@
 	<div class="col-lg-12" style="margin-top:20px;">
 		<label style="font-size:large; font-weight:700;">구매하기</label><br>
 		<input type="hidden" id="mid" value="${sessionScope.loginUser.mId}"/>
+		<input type="hidden" id="hDiscription" value="충전"/>
 		
 		<div class="hodu_border">
 			<div style="width:50%">
@@ -161,12 +162,13 @@
     			var hodu = $("input:radio[name=hoduNum]:checked").val();
     			var hmNo = ${sessionScope.loginUser.mno};
     			var hmId = $('#mid').val();
+    			var hDiscription = $('#hDiscription').val();
 				paystart();
 				
 				function paystart(){
 					var IMP = window.IMP; // 생략가능
 					IMP.init('imp71796721');
-						
+					
 					IMP.request_pay({
 					    pg : 'kakaopay', // version 1.1.0부터 지원.
 					    pay_method : 'card',
@@ -212,7 +214,8 @@
 			    					hPrice:hPrice,
 			    					hmNo:hmNo,
 			    					hmId:hmId,
-			    					hoduNum:hodu
+			    					hoduNum:hodu,
+			    					hDiscription:hDiscription
 			    				},
 			    					type: "post",
 			    					dataType:"json",
@@ -229,7 +232,7 @@
 			    				
 			    			}
 			    			opener.document.location.reload();
-								window.close(); 
+								window.close();
 					    } else {
 					        alert("결제가 실패하였습니다.");
 					    }

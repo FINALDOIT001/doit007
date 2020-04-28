@@ -186,9 +186,9 @@
                             <li class="nav-item">
                                <a class="nav-link" href="go.ad">ADMINPAGE</a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                <a class="nav-link" href="myinfo.me">MYPAGE</a>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                <a class="nav-link" href="logout.do">LOGOUT</a>
                             </li>
@@ -250,6 +250,11 @@
     				  
     				  $('#msContext0').text("메세지가 없습니다.");
     				  
+    				  for(var i=0; i<4; i++ ){
+    					  var aID = "#msAtag" + i;
+    					  $(aID).attr('href',"ListPage.ms?userID="+"${ sessionScope.loginUser.mId }"+"&Type=New");
+    				  }
+  
     			  }else if(datasize > 4){
     				  datasize = 4;
     			  }
