@@ -152,7 +152,7 @@
 									class="rounded" style="width: 350px; height: 360px;">
 							</c:if>
 							<c:if test="${empty sg.sgRenameFileName}">
-								<img src="${contextPath}/resources/img/project-5.png"
+								<img src="${contextPath}/resources/img/camera.png"
 									class="rounded" style="width: 350px; height: 360px;">
 							</c:if>
 						</div>
@@ -173,7 +173,7 @@
 								&nbsp;:&nbsp; ${sg.sgWriter}</li>
 							<li style="margin-bottom: 3px;"><i class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;보&nbsp;&nbsp;증&nbsp;&nbsp;금
 								&nbsp;:&nbsp; <fmt:formatNumber value="${sg.sgDeposit}"
-									groupingUsed="true" />원</li>
+									groupingUsed="true" />개</li>
 							<li style="margin-bottom: 3px;"><i class="fas fa-spinner"></i>&nbsp;&nbsp;&nbsp;진&nbsp;&nbsp;행&nbsp;&nbsp;도
 								&nbsp;:&nbsp; <c:if test="${ sg.sgConfirm eq 'Y'}">모집중</c:if> <c:if
 									test="${ sg.sgConfirm ne 'Y'}">모집 종료</c:if></li>
@@ -858,12 +858,24 @@
 		
 		 
 	       
+		<c:if test="${empty sessionScope.loginUser.mno}">
+		   $('#checkBtn').click(function(){
+		    	alert("로그인 해주세요~!");
+		      });
+		   </c:if>
+		
+		
+		
+		
+		
+		<c:if test="${!empty sessionScope.loginUser.mno}">
 		   $('#checkBtn').click(function(){
 		    	  var sgNo = ${sg.sgNo} ;
-		    	  var usermno = ${sessionScope.loginUser.mno};
-		    	  var sgWriterNo = ${sg.sgWriterNo};
+		    	  var usermno =${sessionScope.loginUser.mno};
+		    	  var sgWriterNo = ${sg.sgWriterNo}; 	  
 		         window.open("checkStudy.go?sgNo="+sgNo+"&ssNo="+ssNo+"&sgWriterNo="+sgWriterNo+"&usermno="+usermno+"&ssDayDate="+ssDayDate, "출석체크", "status=no, location= no, width=700, height=700, scrollbars=yes;");
 		      });
+		   </c:if>
 	      
 	</script>
 
