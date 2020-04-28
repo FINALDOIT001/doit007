@@ -373,9 +373,7 @@
 	
 	<update id="sgJoinMember">
 		UPDATE STUDY_GROUP SET
-		<if test="">
 		SG_NOWPEOPLE = SG_NOWPEOPLE + 1
-		</if>
 		WHERE SG_NO = #{sgNo}
 	</update>
 
@@ -383,6 +381,12 @@
 		UPDATE Member SET
 		M_HODU = M_HODU - #{mhodu}
 		WHERE M_NO = #{mno}
+	</update>
+	
+	<update id="sgGroupOutCount" parameterType="_int">
+	UPDATE STUDY_GROUP SET
+	SG_NOWPEOPLE = SG_NOWPEOPLE-1
+	WHERE SG_NO = #{sgNo}
 	</update>
 </mapper>
     

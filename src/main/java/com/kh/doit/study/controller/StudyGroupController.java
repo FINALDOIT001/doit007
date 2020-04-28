@@ -260,10 +260,20 @@ public class StudyGroupController {
 	@RequestMapping("studyDetail.go")
 	public ModelAndView studyDetail(ModelAndView mv, int sgNo, String mno,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-
-		StudyGroup sg = sgService.selectSg(sgNo);
+    
+		
+		 int count = 0;
+		
+		 StudyGroup sg = sgService.selectSg(sgNo);
 
 		ArrayList<Member> ml = sgService.memberList(sgNo);
+		
+		for(Member m : ml) {
+			if(m.getMno() == Integer.parseInt(mno)) {
+				count++;
+			}
+		}
+		
 		
 		StudyLike sl = new StudyLike();
 		if(mno != "" && mno !=null) {
@@ -291,6 +301,7 @@ public class StudyGroupController {
 			.addObject("currentPage", currentPage)
 			.addObject("sl",sl)
 			.addObject("etc",etc)
+			.addObject("count",count)
 			.addObject("galleryList",galleryList)
 			.setViewName("study/doitStudyDetail");
 		} else {
@@ -309,11 +320,12 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("sgGroupOut.go")
-	private String sgGroupOut(Model model, int mno, HttpServletRequest request) {
+	private String sgGroupOut(Model model, int mno, int sgNo, HttpServletRequest request) {
 
 		int result = sgService.sgGroupOut(mno);
+		int result1 = sgService.sgGroupOutCount(sgNo);
 
-		if (result > 0) {
+		if (result > 0 && result1 >0 ) {
 			return "redirect:sgList.go";
 		} else {
 			model.addAttribute("msg", "탈퇴 하기 실패");
@@ -343,7 +355,7 @@ public class StudyGroupController {
 		int result = sgService.sgJoin(gm);
 
 		if (result > 0) {
-			return "redirect:studyDetail.go?sgNo=" + sgNo;
+			return "redirect:studyDetail.go?sgNo=" + sgNo +"&mno="+mno;
 
 		} else {
 			model.addAttribute("msg", "가입 하기 실패");

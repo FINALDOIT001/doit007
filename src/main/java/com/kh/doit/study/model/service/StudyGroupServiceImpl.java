@@ -392,6 +392,13 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	}
 
 
+	@Override
+	public int sgGroupOutCount(int sgNo) {
+		// TODO Auto-generated method stub
+		return sgDao.sgGroupOutCount(sgNo);
+	}
+
+
 	
 
 }

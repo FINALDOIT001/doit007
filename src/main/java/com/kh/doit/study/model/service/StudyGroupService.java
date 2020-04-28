@@ -264,6 +264,8 @@ public interface StudyGroupService {
 	void sgJoinMember(int sgNo);
 
 	void sgJoinHodu(Member m);
+
+	int sgGroupOutCount(int sgNo);
 	
 	
 	
