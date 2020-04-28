@@ -200,6 +200,8 @@ public interface StudyGroupService {
 	 */
 	int insertEtc(Etc etc);
 
+
+
 	/**
 	 * 자료실 파일추가 Kwon
 	 * @param etcF
@@ -240,6 +242,24 @@ public interface StudyGroupService {
 	 * @return
 	 */
 	int studyCheckInsert(int scNo);
+	
+	/**출첵한 member 리스트 불러오기 method
+	 * 정호
+	 * @param sc
+	 * @return
+	 */
+	ArrayList<StudyCheck> studyCheckList(int ssNo);
+
+
+	/**출첵 수정 하기전 디폴트 만들기
+	 * @param ssNo
+	 * @return
+	 */
+	int StudyCheckDefault(int ssNo);
+
+	int sgDataBoardAndGalleryPayment(int sgNo);
+
+	int mDataBoardAndGalleryPayment(int mNo);
 	
 	
 	

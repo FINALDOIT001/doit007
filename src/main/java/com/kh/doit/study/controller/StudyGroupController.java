@@ -278,15 +278,20 @@ public class StudyGroupController {
 		// 구현 추가 부분
 		ArrayList<Etc> etc = sgService.etcList(sgNo);
 		System.out.println("Servlet Kwon Etc : " + etc);
-	
+		
+		ArrayList<Gallery> galleryList = sgService.GalleryList(sgNo);
 
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
 
 		if (sg != null) {
-			
-			mv.addObject("sg", sg).addObject("ml", ml).addObject("currentPage", currentPage).addObject("sl",sl).addObject("etc",etc)
-					.setViewName("study/doitStudyDetail");
+			mv.addObject("sg", sg)
+			.addObject("ml", ml)
+			.addObject("currentPage", currentPage)
+			.addObject("sl",sl)
+			.addObject("etc",etc)
+			.addObject("galleryList",galleryList)
+			.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}
@@ -494,19 +499,19 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("checkStudy.go")
-	public ModelAndView checkStudy(ModelAndView mv, int sgNo, int ssNo, String ssDayDate,
+	public ModelAndView checkStudy(ModelAndView mv, int sgNo, int ssNo, String ssDayDate, int sgWriterNo ,int usermno,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
-		System.out.println(sgNo);
-		System.out.println(ssNo);
-		System.out.println(ml);
-		
-		
+		ArrayList<StudyCheck> sc = studyCheckList(ssNo);
+				
 		if (ml != null) {
 			mv.addObject("sgNo", sgNo)
+			  .addObject("sgWriterNo",sgWriterNo)
+			  .addObject("usermno",usermno)
 			  .addObject("ml",ml)
+			  .addObject("sc",sc)
 			  .addObject("ssNo", ssNo)
 			  .addObject("ssDayDate",ssDayDate)
 			  .setViewName("study/doitStudy_check");
@@ -770,7 +775,8 @@ public class StudyGroupController {
 
 		int cmiNumber = 0;
 		int sciNumber = 0;
-
+		int sccheck = 0;
+		
 		for (int i = 0; i < checkMember.size(); ++i) {
 
 			sc.setScMno(Integer.parseInt(checkMember.get(i)));
@@ -782,27 +788,93 @@ public class StudyGroupController {
 		for (int i = 0; i < checkList.size(); ++i) {
 			sciNumber += studyCheckInsert(Integer.parseInt(sc.getSsNo() + checkList.get(i)));
 		}
+		
+		
 		if (cmiNumber == checkMember.size() && sciNumber==checkList.size()) {
+			
 			return "ok";
 
 		} else {
+			
 			return "fail";
 		}
 
 	}
 
+	/** 스터디 출첵 멤머 DB 인설트 메소드 
+	 * 정호가 만듬
+	 * @param sc
+	 * @return
+	 */
 	public int checkMemberInsert(StudyCheck sc) {
 		int result = sgService.checkMemeberInsert(sc);
 		return result;
 	}
 
+	/*Someone join to Sucks the name of group by made Jungho 
+	 * 스터디 출첵 업데이트에 제 사용함.
+	 * 정호
+	 * memememememememe~~~!
+	 * @param scNo
+	 * @return
+	 */
 	public int studyCheckInsert(int scNo) {
-
 		int result = sgService.studyCheckInsert(scNo);
-
 		return result;
 	}
 	
+	/**출첵한 member 리스트 불러오기 method
+	 * 정호
+	 * @param sc
+	 * @return
+	 */
+	public ArrayList<StudyCheck> studyCheckList(int ssNo){
+		
+		return sgService.studyCheckList(ssNo);
+		
+	}
+	
+	@RequestMapping(value ="doitCheckUpdate.go", method = RequestMethod.POST)
+	@ResponseBody
+	private String doitCheckUpdate(int ssNo,
+			@RequestParam(value = "changelist") List<String> changelist) {
+		
+		
+		int result1 = sgService.StudyCheckDefault(ssNo);
+		
+		int result=0;
+		for (int i = 0; i < changelist.size(); ++i) {
+			int scNo = Integer.parseInt(ssNo+changelist.get(i));
+			
+			result += sgService.studyCheckInsert(scNo);
+		}
+		
+		
+		if(result == changelist.size()&& result1 > 0) {
+			return "ok";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	@RequestMapping("DataBoardAndGalleryPayment.go")
+	private String DataBoardAndGalleryPayment(int sgNo, int mNo) {
+		
+		System.out.println("$$sgNo"+sgNo);
+		System.out.println("$$mNo"+mNo);
+		
+		int result1 = sgService.sgDataBoardAndGalleryPayment(sgNo);
+		int result2 = sgService.mDataBoardAndGalleryPayment(mNo);
+		
+		System.out.println("$$result1"+result1);
+		System.out.println("$$result2"+result2);
+		if (result1 > 0 && result2 > 0) {
+			return "redirect:studyDetail.go?sgNo="+sgNo+"&mno="+mNo;
+		}else {
+			return "common/errorPage";		
+		}
+	}
 	
 
 }

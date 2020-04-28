@@ -42,8 +42,7 @@
 		<result property="mAddr" column="M_ADDR" />
 		<result property="mPhone" column="M_PHONE" />
 		<result property="mEmail" column="M_EMAIL" />
-		<result property="mOriginalfilename"
-			column="M_ORIGINAL_FILENAME" />
+		<result property="mOriginalfilename" column="M_ORIGINAL_FILENAME" />
 		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
 		<result property="mEnrolldate" column="M_ENROLL_DATE" />
 		<result property="mUpdatedate" column="M_UPDATE_DATE" />
@@ -92,7 +91,11 @@
 	<result property="scMno" column="SC_MNO"/>
 	<result property="scDate" column="SC_DATE"/>
 	<result property="scCheck" column="SC_CHECK"/>
+	<result property="userId" column="M_ID"/>
+	<result property="userName" column="M_NAME"/>
 	</resultMap>
+	
+	
 
 	<select id="getlistCount" resultType="_int">
 		SELECT COUNT(*)
@@ -242,26 +245,7 @@
 		FROM Gallery
 		WHERE G_NUM = #{g_Num}
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	<select id="searchCount" parameterType="String" resultType="_int">
 		SELECT 	COUNT(*)
 		FROM	STUDY_GROUP
@@ -292,6 +276,7 @@
 			,DEFAULT
 		)
 	</insert>
+	
 	<insert id="insertEtcFile" parameterType="com.kh.doit.study.model.vo.EtcFile">
 		INSERT INTO STUDY_ETCFILE VALUES(
 			SEQ_ETCNO.CURRVAL
@@ -328,10 +313,10 @@
 	</select>
 	
 	<resultMap type="com.kh.doit.study.model.vo.EtcFile" id="etcFileResultMap">
-		<result property="etcfNo" column="ETCF_NO"/>
-		<result property="etcfOriginalFileName" column="ETCF_ORIGINALFILENAME"/>
-		<result property="etcfRenameFileName" column="ETCF_RENAMEFILENAME"/>
-	</resultMap>
+      <result property="etcfNo" column="ETCF_NO"/>
+      <result property="etcfOriginalFileName" column="ETC_ORIGINALFILENAME"/>
+      <result property="etcfRenameFileName" column="ETC_RENAMEFILENAME"/>
+   </resultMap>
 	
 	<select id="selectEtcFile" parameterType="_int" resultMap="etcFileResultMap">
 		SELECT	*
@@ -355,6 +340,39 @@
 	SC_CHECK = 'Y'
 	WHERE SC_NO = #{scNo}
 	</update>
+	
+	<select id="studyCheckSearch" parameterType="_int">
+	SELECT * FROM STUDY_CHECK
+	WHERE SC_NO = #{scNo}
+	</select>
+	
+	<select id="studyCheckList" parameterType ="_int" resultMap="studyCheckResultSet">
+	SELECT SC_NO, SS_NO, SG_NO, SC_MNO, SC_DATE, SC_CHECK, M_ID, M_NAME
+	FROM STUDY_CHECK
+	JOIN MEMBER ON SC_MNO = M_NO
+	WHERE SS_NO=#{ssNo}
+	</select>
+	
+	<update id="StudyCheckDefault" parameterType="_int">
+	UPDATE STUDY_CHECK SET
+	SC_CHECK = 'N'
+	WHERE SS_NO = #{ssNo}
+	</update>
+	
+	<update id="sgDataBoardAndGalleryPayment" parameterType="_int">
+		UPDATE STUDY_GROUP SET
+		SG_PAYMENT_YN = 'N'
+		WHERE SG_NO = #{sgNo}
+	</update>
+	
+	<update id="mDataBoardAndGalleryPayment" parameterType="_int">
+		UPDATE MEMBER SET
+		M_HODU = M_HODU - 2
+		WHERE M_NO = #{mNo}
+	</update>
+	
+	
+
 
 </mapper>
     

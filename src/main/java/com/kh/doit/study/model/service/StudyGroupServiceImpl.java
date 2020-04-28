@@ -286,7 +286,6 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		return sgDao.inserEtc(etc);
 	}
 
-
 	/**
 	 * 자료실 파일추가 Kwon
 	 */
@@ -343,6 +342,39 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	public int studyCheckInsert(int scNo) {
 		// TODO Auto-generated method stub
 		return sgDao.studyCheckInsert(scNo);
+	}
+	
+	/**출첵한 member 리스트 불러오기 method
+	 * 정호
+	 *
+	 */
+	@Override
+	public ArrayList<StudyCheck> studyCheckList(int ssNo) {
+		// TODO Auto-generated method stub
+		return sgDao.studyCheckList(ssNo);
+	}
+
+
+	/**출첵 수정하기전 디폴트 만들기
+	 *
+	 */
+	@Override
+	public int StudyCheckDefault(int ssNo) {
+		
+		return sgDao.StudyCheckDefault(ssNo);
+	}
+	
+	@Override
+	public int sgDataBoardAndGalleryPayment(int sgNo) {
+
+		return sgDao.sgDataBoardAndGalleryPayment(sgNo);
+	}
+
+
+	@Override
+	public int mDataBoardAndGalleryPayment(int mNo) {
+
+		return sgDao.mDataBoardAndGalleryPayment(mNo);
 	}
 
 

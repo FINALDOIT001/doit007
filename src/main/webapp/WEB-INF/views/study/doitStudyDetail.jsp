@@ -59,10 +59,62 @@
 모달css--
 >
 </style>
+<style>
+	.openPush {
+	    -webkit-appearance: none;
+	    width: 558px;
+	    height: 102px;
+	    background: url(${contextPath}/resources/img/push_back1.png);
+	    outline: none;
+	    -webkit-transition: .2s;
+	    transition: opacity .2s;
+	    margin-top: 37%;
+	}
+	
+	.openPush::-webkit-slider-thumb {
+	    -webkit-appearance: none;
+	    appearance: none;
+	    width: 120px;
+	    height: 100px;
+	    background: url(${contextPath}/resources/img/push_btn.png);
+	    cursor: pointer;
+	}
+	
+	.openPush_back {
+	    background: url(${contextPath}/resources/img/push_back_back.jpg);
+	    width: 640px;
+	    height: 960px;
+	    text-align: center;
+	    margin-left: 20%;
+	}
+	
+	.openNow {
+	    -webkit-appearance: none;
+	    width: 100%;
+	    height: 102px;
+	    outline: none;
+	    background-color: rgba( 255, 255, 255, 0.0 );
+	    -webkit-transition: .2s;
+	    transition: opacity .2s;
+	    margin-top: 0%;
+	    margin-right: 25%;
+	}
+	
+	.openNow::-webkit-slider-thumb {
+	    -webkit-appearance: none;
+	    appearance: none;
+	    max-width: 570px;
+	    height: 135px;
+	    background: url(${contextPath}/resources/img/push_now1.png);
+	    cursor: pointer;
+	}
+</style>
+                    
+                    
 
 </head>
 
-<body onload="printClock()">
+<body onload="printClock(); printClock2();">
 
 
 	<jsp:include page="../common/header.jsp" />
@@ -222,246 +274,194 @@
 					<li class="nav-item"><a class="nav-link"
 						style="width: 200px; text-align: center; font-weight: bold;"
 						data-toggle="tab" href="#menu1">스터디 소개</a></li>
-					<c:if test="${sg.sgPayment eq 'Y'}">
 						<li class="nav-item"><a class="nav-link"
 							style="width: 200px; text-align: center; font-weight: bold;"
 							data-toggle="tab" href="#menu3">자료실</a></li>
 						<li class="nav-item"><a class="nav-link"
 							style="width: 200px; text-align: center; font-weight: bold;"
 							data-toggle="tab" href="#menu2">갤러리</a></li>
-					</c:if>
 				</ul>
 
 				<br> <br>
 				<!-- Tab panes -->
 				<div class="tab-content">
-					<div class="tab-pane container active" id="home">
-						<div class="col-lg-12 div_border">
-							<div id='calendar'></div>
-						</div>
-					</div>
-					<div class="tab-pane container fade" id="menu1">
-						<span
-							style="font-size: x-large; font-weight: bold; display: block; margin-bottom: 30px;">활동계획</span>
-						${sg.sgCon}
-					</div>
+    <!------------------------------------- 켈린더 --------------------------------------->
+    <div class="tab-pane container active" id="home">
+        <div class="col-lg-12 div_border">
+            <div id='calendar'></div>
+        </div>
+    </div>
+    <!------------------------------------- /켈린더 --------------------------------------->
 
-					<!------------------------------------- 사진 파트 --------------------------------------->
-					<div class="tab-pane container fade" id="menu2">
+    <!------------------------------------- 활동계획 --------------------------------------->
+    <div class="tab-pane container fade" id="menu1">
+        <span
+            style="font-size: x-large; font-weight: bold; display: block; margin-bottom: 30px;">활동계획</span>
+        ${sg.sgCon}
+    </div>
+    <!------------------------------------- /활동계획 --------------------------------------->
+	<!------------------------------------- 자료실 --------------------------------------->
+                        <div class="tab-pane container fade" id="menu3">
+                        <c:if test="${sg.sgPayment eq 'N'}">
+                            <div id="studyEtcInsert" class="genric-btn danger circle">자료추가</div><br><br>
 
-						<section class="about_part section">
-							<div class="container">
-								<div class="row">
-									<div class="section_tittle">
-										<h2>
-											<span>NEW</span> PHOTO
-										</h2>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6 col-md-6">
-										<div class="about_img">
-											<img src="${contextPath}/resources/img/about.png" alt="">
-										</div>
-									</div>
-									<div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
-										<div class="about_text">
-											<h2>
-												새로 업로드된 <span>사진</span>
-											</h2>
-											<h5>
-												<ul>
-													<!-- 아이콘 : font Awesome -->
-													<li style="margin-bottom: 3px;"><i
-														class="fas fa-street-view"></i>&nbsp;&nbsp;&nbsp;지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역
-														&nbsp;:&nbsp; ${sg.sgAddr}</li>
-													<li style="margin-bottom: 3px;"><i
-														class="fas fa-medal"></i>&nbsp;&nbsp;&nbsp;작&nbsp;&nbsp;성&nbsp;&nbsp;자
-														&nbsp;:&nbsp; ${sg.sgWriter}</li>
-													<li style="margin-bottom: 3px;"><i
-														class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용
-														&nbsp;:&nbsp;
-														가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하</li>
-												</ul>
-											</h5>
-											<br> <br> <br>
+							<table id="test701" class="table table-bordered">
+                     <thead class="kwon-thead1">
+                        <tr class="kwon-tr1">
+                           <th width="8%" class="th1">No</th>
+                           <th width="40%" class="th1">제목</th>
+                           <th width="10%" class="th1">글쓴이</th>
+                           <th width="10%" class="th1">등록일</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        
+      <c:forEach var="etc" items="${ etc }">
+      <tr class="kwon-tr1">
+         <td align="center" class="kwon-td1">${ etc.etcNo }</td>
+         <td align="center" class="kwon-td1">
+            <c:url var="etcView" value="etcView.do">
+               <c:param name="etcNo" value="${ etc.etcNo }"/>
+            </c:url>
+         
+            <a class="kwon-td1 tdtitle1" href="${ etcView }" 
+            style="color:#5b5b5b !important;">${ etc.etcTitle }</a>
+         
+         </td>
+         <td align="center" class="kwon-td1" value="${ etc.etcWriterNo }">${ etc.etcWriterId }</td>
+         <td align="center" class="kwon-td1">${ etc.etcDate }</td>
+         
+         
+      </tr>
+      </c:forEach>
+      
+                        
+                     </tbody>
+                  </table>
 
-											<c:url var="galleryInsertFrom" value="galleryInsertFrom.go">
-												<c:param name="sgNo" value="${sg.sgNo}" />
-											</c:url>
-											<a class="btn_1" style="float: right;"
-												href="${galleryInsertFrom}">사진 추가</a>
+						</c:if>
+        
+				        <c:if test="${sg.sgPayment eq 'Y'}">
+				            <br>
+				            <div class="openPush_back">
+				                <div class="bat" style="color:rgb(200,200,200); font-size:1.5em; margin-left: 475px;">99%</div>
+				                <div style="width: 600px; height: 215px; line-height: 215px; color: white; font-size: 100px; text-align: center; margin-left: 30px;" id="clock"></div>
+				                <%-- <img src="${contextPath}/resources/img/push_now.png" style="max-width:90%"/> --%>
+				                <input type="range" class="openNow" min="0" max="100" value="50" step="1" onchange="openNow(this);">
+				                
+				                <br>
+				                <img src="${contextPath}/resources/img/hodu2.png" style="width: 150px; height: 150px; margin-top: 10%;"/>
+				                <input type="range" class="openPush" min="0" max="100" value="2" step="1" onchange="openPay(this);">
+				            </div>
+				        </c:if>
+    			</div>
+    <!------------------------------------- /자료실 --------------------------------------->
+    
+    <!------------------------------------- 사진 --------------------------------------->
+    <div class="tab-pane container fade" id="menu2">
+        <c:if test="${sg.sgPayment eq 'N'}">
+        <section class="about_part section">
+            <div class="container">
+                <div class="row">
+                    <div class="section_tittle">
+                        <h2>
+                            <span>NEW</span> PHOTO
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="about_img">
+                            <img src="${contextPath}/resources/img/about.png" alt="">
+                        </div>
+                    </div>
+                    <div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
+                        <div class="about_text">
+                            <h2>
+                                새로 업로드된 <span>사진</span>
+                            </h2>
+                            <h5>
+                                <ul>
+                                    <!-- 아이콘 : font Awesome -->
+                                    <li style="margin-bottom: 3px;"><i
+                                        class="fas fa-street-view"></i>&nbsp;&nbsp;&nbsp;지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역
+                                        &nbsp;:&nbsp; ${sg.sgAddr}</li>
+                                    <li style="margin-bottom: 3px;"><i
+                                        class="fas fa-medal"></i>&nbsp;&nbsp;&nbsp;작&nbsp;&nbsp;성&nbsp;&nbsp;자
+                                        &nbsp;:&nbsp; ${sg.sgWriter}</li>
+                                    <li style="margin-bottom: 3px;"><i
+                                        class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용
+                                        &nbsp;:&nbsp;
+                                        가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하</li>
+                                </ul>
+                            </h5>
+                            <br> <br> <br>
 
-											<div class="about_part_counter">
-												<div class="single_counter">
-													<p style="font-size: 30px; width: 390px;">
-														저장된 사진&nbsp;<span class="counter" style="color: red;">1000</span>&nbsp;장
-													</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
+                            <c:url var="galleryInsertFrom" value="galleryInsertFrom.go">
+                                <c:param name="sgNo" value="${sg.sgNo}" />
+                            </c:url>
+                            <a class="btn_1" style="float: right;"
+                                href="${galleryInsertFrom}">사진 추가</a>
 
-						<div class="page-wrap">
-							<!-- Main -->
-							<section id="main">
+                            <div class="about_part_counter">
+                                <div class="single_counter">
+                                    <p style="font-size: 30px; width: 390px;">
+                                        저장된 사진&nbsp;<span class="counter" style="color: red;">1000</span>&nbsp;장
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-								<!-- Gallery -->
-								<section id="galleries">
+        <div class="page-wrap">
+            <!-- Main -->
+            <section id="main">
 
-									<!-- Photo Galleries -->
-									<div class="gallery">
-										<div class="content"
-											style="display: inline-block; text-align: center;">
+                <!-- Gallery -->
+                <section id="galleries">
 
-
-											<c:forEach var="g" items="${galleryList}">
-												<c:url var="gDetail" value="galleryDetail.go">
-													<c:param name="sgNo" value="${sg.sgNo}" />
-													<c:param name="gNo" value="${g.g_No}" />
-													<c:param name="gNum" value="${g.g_Num}" />
-												</c:url>
-												<div class="media all people"
-													style="display: inline-block; max-width: 20%; margin: 5px;">
-													<a href="${gDetail}"> <img
-														src="${contextPath}/resources/sgUploadFiles/${g.g_Rename_FileName}"
-														style="width: 200px; height: 200px;"
-														title="This right here is a caption." /></a> <span hidden>${g.g_No}</span><span
-														hidden>${g.g_Num}</span>
-												</div>
-											</c:forEach>
-										</div>
-										<style>
-										.openPush {
-											-webkit-appearance: none;
-											width: 558px;
-											height: 102px;
-											background: url(${contextPath}/resources/img/push_back1.png);
-											outline: none;
-											-webkit-transition: .2s;
-											transition: opacity .2s;
-											margin-top: 87%;
-											margin-left: 6%;
-										}
-										
-										.openPush::-webkit-slider-thumb {
-											-webkit-appearance: none;
-											appearance: none;
-											width: 120px;
-											height: 100px;
-											background: url(${contextPath}/resources/img/push_btn.png);
-											cursor: pointer;
-										}
-										
-										.openPush_back {
-											background: url(${contextPath}/resources/img/push_back_back.jpg);
-											width: 640px;
-											height: 960px;
-										}
-									</style>
-									
-									<script>
-										function printClock() {
-										    
-										    var clock = document.getElementById("clock");            // 출력할 장소 선택
-										    var currentDate = new Date();                                     // 현재시간
-										    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
-										    var amPm = 'AM'; // 초기값 AM
-										    var currentHours = addZeros(currentDate.getHours(),2); 
-										    var currentMinute = addZeros(currentDate.getMinutes() ,2);
-										    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
-										    
-										    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
-										    	amPm = 'PM';
-										    	currentHours = addZeros(currentHours - 12,2);
-										    }
-										
-										    if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
-										       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
-										    }
-										    clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
-										    
-										    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
-										}
-										
-										function addZeros(num, digit) { // 자릿수 맞춰주기
-											  var zero = '';
-											  num = num.toString();
-											  if (num.length < digit) {
-											    for (i = 0; i < digit - num.length; i++) {
-											      zero += '0';
-											    }
-											  }
-											  return zero + num;
-										}
-									</script>
-									
-									
-									<img src="${contextPath}/resources/img/hodu2.png"
-										style="width: 200px; height: 200px;" /><br>
-									<p>호두로 프리미엄 게시판</p>
-									<div class="openPush_back">
-									<div
-												style="width: 600px; height: 250px; line-height: 250px; color: white; font-size: 100px; text-align: center; margin-left:30px;"
-												id="clock"></div>
-											<input type="range" class="openPush" min="0" max="100"
-											value="2" step="1">
-									</div>
-									</div>
-						</div>
+                    <!-- Photo Galleries -->
+                    <div class="gallery">
+                        <div class="content"
+                            style="display: inline-block; text-align: center;">
 
 
-					</div>
-					<div class="tab-pane container fade" id="menu3">
-						<div id="studyEtcInsert" class="genric-btn danger circle">자료추가</div><br><br>
-					
-						<table id="test701" class="table table-bordered">
-							<thead class="kwon-thead1">
-								<tr class="kwon-tr1">
-									<th width="8%" class="th1">No</th>
-									<th width="40%" class="th1">제목</th>
-									<th width="10%" class="th1">글쓴이</th>
-									<th width="10%" class="th1">등록일</th>
-								</tr>
-							</thead>
-							<tbody>
-								
-		<c:forEach var="etc" items="${ etc }">
-		<tr class="kwon-tr1">
-			<td align="center" class="kwon-td1">${ etc.etcNo }</td>
-			<td align="center" class="kwon-td1">
-				<c:url var="etcView" value="etcView.do">
-					<c:param name="etcNo" value="${ etc.etcNo }"/>
-				</c:url>
-			
-				<a class="kwon-td1 tdtitle1" href="${ etcView }" 
-				style="color:#5b5b5b !important;">${ etc.etcTitle }</a>
-			
-			</td>
-			<td align="center" class="kwon-td1" value="${ etc.etcWriterNo }">${ etc.etcWriterId }</td>
-			<td align="center" class="kwon-td1">${ etc.etcDate }</td>
-			
-			
-		</tr>
-		</c:forEach>
-		
-								
-							</tbody>
-						</table>
-					</div>
-					
-					</div>
+                            <c:forEach var="g" items="${galleryList}">
+                                <c:url var="gDetail" value="galleryDetail.go">
+                                    <c:param name="sgNo" value="${sg.sgNo}" />
+                                    <c:param name="gNo" value="${g.g_No}" />
+                                    <c:param name="gNum" value="${g.g_Num}" />
+                                </c:url>
+                                <div class="media all people"
+                                    style="display: inline-block; max-width: 20%; margin: 5px;">
+                                    <a href="${gDetail}"> <img
+                                        src="${contextPath}/resources/sgUploadFiles/${g.g_Rename_FileName}"
+                                        style="width: 200px; height: 200px;"
+                                        title="This right here is a caption." /></a> <span hidden>${g.g_No}</span><span
+                                        hidden>${g.g_Num}</span>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        </c:if>
 
-				</div>
-
-				<br> <br> <br> <br>
-
-
-			</div>
-		</div>
+                    <c:if test="${sg.sgPayment eq 'Y'}">
+                            <br>
+                            <div class="openPush_back">
+                                <div class="bat" style="color:rgb(200,200,200); font-size:1.5em; margin-left: 475px;">99%</div>
+                                <div style="width: 600px; height: 215px; line-height: 215px; color: white; font-size: 100px; text-align: center; margin-left: 30px;" id="clock2"></div>
+                                <%-- <img src="${contextPath}/resources/img/push_now.png" style="max-width:90%"/> --%>
+                                <input type="range" class="openNow" min="0" max="100" value="50" step="1" onchange="openNow(this);">
+                                
+                                <br>
+                                <img src="${contextPath}/resources/img/hodu2.png" style="width: 150px; height: 150px; margin-top: 10%;"/>
+                                <input type="range" class="openPush" min="0" max="100" value="2" step="1" onchange="openPay(this);">
+                            </div>
+                    </c:if>
+                </div>
+    </div>
 	</section>
 	<!-- 모달이 가자 -->
 	<div id="myModal" class="modal">
@@ -572,13 +572,13 @@
 							<button id="updatebtn" onclick="ssupdatego();"
 								class="genric-btn danger circle"
 								style="font-size: 13px; margin-right: 10px;">수정</button>
-							<button id="checkBtn" class="genric-btn danger circle"
-							style="font-size: 13px; margin-right: 10px;">출석</button>
 							<!-- 정도씨가 구경 정호형이 ajax 할  예정  -->
 							<button id="deletebtn" onclick="deleteDailyBtn();"
 								class="genric-btn danger circle"
 								style="font-size: 13px; margin-right: 10px;">삭제</button>
 						</c:if>
+						<button id="checkBtn" class="genric-btn danger circle"
+							style="font-size: 13px; margin-right: 10px;">출석</button>
 						<button onclick="closebtn();" class="genric-btn danger circle"
 							style="font-size: 13px;">닫기</button>
 					</div>
@@ -858,10 +858,12 @@
 		
 		 
 	       
-	      $('#checkBtn').click(function(){
-	    	  var sgNo = ${sg.sgNo} ;
-	         window.open("checkStudy.go?sgNo="+sgNo+"&ssNo="+ssNo+"&ssDayDate="+ssDayDate, "출석체크", "status=no, location= no, width=700, height=700, scrollbars=yes;");
-	      });
+		   $('#checkBtn').click(function(){
+		    	  var sgNo = ${sg.sgNo} ;
+		    	  var usermno = ${sessionScope.loginUser.mno};
+		    	  var sgWriterNo = ${sg.sgWriterNo};
+		         window.open("checkStudy.go?sgNo="+sgNo+"&ssNo="+ssNo+"&sgWriterNo="+sgWriterNo+"&usermno="+usermno+"&ssDayDate="+ssDayDate, "출석체크", "status=no, location= no, width=700, height=700, scrollbars=yes;");
+		      });
 	      
 	</script>
 
@@ -916,85 +918,11 @@
 					
 				}
 			
-			
-			
-			/*
-			  var star = 0;
-			if(star == 0){
-				$(this).addClass('on').prevAll('span').addClass('on');
-				star = $('div.starRev').children('span.starR.on').length;
-				
-			}else{
-				$('div.starRev').children('span').className = "starR"; 
-				star = 0;
-			} */
-
 			return false;
 		});
 	</script>
 	
-	<script>
-      /* 출석체크지 새창 띄우기 */
-      $('#checkBtn').click(function(){
-         window.open("checkStudy.go?Type=New", "MESSAGE", "width=700, height=700, scrollbars=no;")
-         /* window.open("checkStudy.do?userID="+"${ sessionScope.loginUser.mId }"+"&Type=New", "MESSAGE", "width=700, height=700, scrollbars=no;") */
-      });
-      
-      $(function(){
-    	  
-    	  var userID = "${ sessionScope.loginUser.mId }";
-    	  
-    	  $.ajax({
-    		  url:"getHeadMS.ms",
-    		  data:{
-    			  userID:userID
-    		  },type:"post",
-    		  dataType:"json",
-    		  success:function(data){
-    			  
-    			  console.log(data);
-    			  
-    			  var datasize = data.length;
-    			  $('#msListSize').text(datasize + "+");
-    			  
-    			  if(datasize == 0){
-    				  
-    				  $('#msListSize').text("");
-    				  
-    				  $('#msContext0').text("메세지가 없습니다.");
-    				  
-    			  }else if(datasize > 4){
-    				  datasize = 4;
-    			  }
-    			  
-    			  var size = datasize;
-
-    			  for(var i=0; i<size; i++ ){
-    				  
-    				  var aID = "#msAtag" + i;
-    				  var dID = "#msDate" + i;
-    				  var cID = "#msContext" + i;
-    				  
-    				  var userID = "${ sessionScope.loginUser.mId }";
-						
-    				  $(aID).attr('href',"msDetailView.ms?ms_No="+data[i].msNo+"&ms_loginId="+userID+"&Type=New");
-    				  $(dID).text(data[i].msDate1);
-    				  $(cID).text(data[i].msContext);
-    			  }
-    			  
-    		  },error:function(request, status, errorData){
-					alert("error code : " + request.status + "\n"
-							+ "message : " + request.responseText
-							+ "error : " + errorData);
-				}
-    		  
-    	  });
-    	  
-      });
-      
-      
-      
-   </script>
+	
    
    <script>
    		$('#studyEtcInsert').on('click',function() {
@@ -1010,6 +938,100 @@
    		}); */
    
    </script>
+   
+   <script>
+	   function printClock() {
+	       
+	       var clock = document.getElementById("clock");            // 출력할 장소 선택
+	       var currentDate = new Date();                                     // 현재시간
+	       var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+	       var amPm = 'AM'; // 초기값 AM
+	       var currentHours = addZeros(currentDate.getHours(),2); 
+	       var currentMinute = addZeros(currentDate.getMinutes() ,2);
+	       var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+	       
+	       if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+	           amPm = 'PM';
+	           currentHours = addZeros(currentHours - 12,2);
+	       }
+	   
+	       if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
+	          currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
+	       }
+	       clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
+	
+	       setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+	   }
+	   
+	   function printClock2() {
+	       
+	       var clock = document.getElementById("clock2");            // 출력할 장소 선택
+	       var currentDate = new Date();                                     // 현재시간
+	       var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+	       var amPm = 'AM'; // 초기값 AM
+	       var currentHours = addZeros(currentDate.getHours(),2); 
+	       var currentMinute = addZeros(currentDate.getMinutes() ,2);
+	       var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+	       
+	       if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+	           amPm = 'PM';
+	           currentHours = addZeros(currentHours - 12,2);
+	       }
+	   
+	       if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
+	          currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
+	       }
+	       clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
+	
+	       setTimeout("printClock2()",1000);         // 1초마다 printClock() 함수 호출
+	   }
+	   
+	   function addZeros(num, digit) { // 자릿수 맞춰주기
+	         var zero = '';
+	         num = num.toString();
+	         if (num.length < digit) {
+	           for (i = 0; i < digit - num.length; i++) {
+	             zero += '0';
+	           }
+	         }
+	         return zero + num;
+	   }
+	   
+	   function openNow(test) {
+	       if(test.value >= 51){
+	            test.style.width = '0px';
+	            /* test.style.overflow = 'hidden'; */
+	       }
+	   }
+	
+	   var num = 101; 
+	   
+	   var inter = setInterval(function(){
+	       
+	       
+	       $('.bat').append(num + "%");
+	       $('.bat').empty();
+	       $('.bat').append("");
+	       if(num > 0) {
+	           num--;
+	       }
+	       $('.bat').append(num + "%");
+	       
+	   },1000)
+	   
+	   function openPay(pay) {
+	       if(pay.value == 100) {
+	           if(${loginUser.mhodu > 0}) {
+	               location.href="DataBoardAndGalleryPayment.go?sgNo="+"${sg.sgNo}&mNo="+"${loginUser.mno}";
+	           }else{
+	               alert("호두를 충전하세요");
+	           }
+	       }else {
+	           alert("끝까지 밀어주세요.");
+	       }
+	   }
+	
+	</script>
 
 
 	<!-- dataTables js -->

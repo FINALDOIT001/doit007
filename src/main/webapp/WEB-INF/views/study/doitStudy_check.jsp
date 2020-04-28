@@ -35,38 +35,85 @@
 				<a>출석 날짜 : </a><a id="ssDate">${ssDayDate}</a>
 			</div>
 			<!-- CSS 적용 예정 -->
-			<input type="hidden" value="${ssNo}" name="ssNo">
-			<input type="hidden" value="${sgNo}" name="sgNo">
+			<input type="hidden" value="${ssNo}" name="ssNo"> <input
+				type="hidden" value="${sgNo}" name="sgNo"> <input
+				type="hidden" value="${sgWriterNo}" name="sgWriterNo"> <input
+				type="hidden" value="${usermno}" name="usermno">
+
 
 			<table id="table2" style="margin-left: 11%; width: 700px;"
 				class="table table-bordered">
 
-				<thead>
-					<tr style="text-align: center;">
-						<th width="5%" class="th1">No.</th>
-						<th width="20%" class="th1">ID</th>
-						<th width="20%" class="th1">이름</th>
-						<th width="15%" class="th1">출석여부</th>
-					</tr>
-				</thead>
+				<c:if test="${empty sc}">
 
-				<tbody>
-					<c:forEach var="ml" items="${ml}">
+					<thead>
 						<tr style="text-align: center;">
-							<td align="center" style="text-align: center;">${ml.mno}</td>
-							<td align="center" style="text-align: center;">${ml.mId}</td>
-							<td align="center" style="text-align: center;">${ml.mName}</td>
-							<td align="center" style="text-align: center;">
-							<input id="${ml.mno}" type="checkbox" name="checked" value="${ml.mno}">
-							</td>
+							<th width="5%" class="th1">No.</th>
+							<th width="20%" class="th1">ID</th>
+							<th width="20%" class="th1">이름</th>
+							<th width="15%" class="th1">출석여부</th>
+
 						</tr>
-					</c:forEach>
-				</tbody>
+					</thead>
+
+					<tbody>
+						<c:forEach var="ml" items="${ml}">
+							<tr style="text-align: center;">
+								<td align="center" style="text-align: center;">${ml.mno}</td>
+								<td align="center" style="text-align: center;">${ml.mId}</td>
+								<td align="center" style="text-align: center;">${ml.mName}</td>
+								<td align="center" style="text-align: center;"><input
+									id="${ml.mno}" type="checkbox" name="checked" value="${ml.mno}">
+								</td>
+
+							</tr>
+						</c:forEach>
+					</tbody>
+
+				</c:if>
+
+				<c:if test="${!empty sc}">
+
+					<thead>
+						<tr style="text-align: center;">
+							<th width="5%" class="th1">No.</th>
+							<th width="20%" class="th1">ID</th>
+							<th width="20%" class="th1">이름</th>
+							<th width="15%" class="th1">출석여부</th>
+							<th width="15%" class="th1">출석확인</th>
+
+
+						</tr>
+					</thead>
+
+					<tbody>
+						<c:forEach var="sc" items="${sc}">
+							<tr style="text-align: center;">
+								<td align="center" style="text-align: center;">${sc.scMno}</td>
+								<td align="center" style="text-align: center;">${sc.userId}</td>
+								<td align="center" style="text-align: center;">${sc.userName}</td>
+								<td align="center" style="text-align: center;"><input
+									id="${sc.scMno}" type="checkbox" name="checked"
+									value="${sc.scMno}"></td>
+								<td align="center" style="text-align: center;">${sc.scCheck}</td>
+
+							</tr>
+						</c:forEach>
+					</tbody>
+				</c:if>
+
 			</table>
 		</form>
-		<div class="button-group-area mt-40">
-				<button id="doitCheck" class="genric-btn primary">확인</button>
+		<c:if test="${usermno == sgWriterNo}">
+			<div class="button-group-area mt-40">
+				<c:if test="${empty sc}">
+					<button id="doitCheck" class="genric-btn primary">확인</button>
+				</c:if>
+				<c:if test="${!empty sc}">
+					<button id="doitCheckUpdate" class="genric-btn primary">수정</button>
+				</c:if>
 			</div>
+		</c:if>
 
 
 
@@ -78,66 +125,106 @@
 	<script src="${contextPath}/resources/js/MSbootstrap.min_inseok.js"></script>
 
 	<script>
-	
-	
-	
-		$(window).on('load',function(){
+		$(window).on('load', function() {
 			window.resizeTo(850, 700);
-		});
-		
-		
-		$("#doitCheck").on("click",function(){
-			
-			var ssNo = $("input[name=ssNo]").val();
-			var sgNo = $("input[name=sgNo]").val();
-			var scDate = $("#ssDate").text();
-			
-			
-			var checkmember = [];
-			var checklist = [];
-			
-			$("input:checkbox[name='checked']").each(function(){
-				checkmember.push($(this).val());
-				if($(this).is(":checked") == true) {
-					checklist.push($(this).val());
-				}
-				
-				});
-			console.log(checklist);
-			console.log(checkmember);
-			jQuery.ajaxSettings.traditional = true;
 
-			$.ajax({
-				url:'doitCheckInsert.go',
-				dataType:'json',
-				type:"post",
-				data:{
-					checkmember:checkmember,
-					checklist:checklist,
-						ssNo:ssNo,
-						sgNo:sgNo,
-						scDate:scDate
-					},success:function(data){
-						console.log(data);
-						if(data=="ok"){
-							alert("출첵 완료");
-						}else{
-							alert("출첵 실패");
-						}
-					},error:function(reqeust, status, errorDate){
-						alert("error code : "+ reqeust.status + "\n"
-								+"message : "+ reqeust.responseText
-								+"error : "+errorDate);
-					}
-				
-			})
-			
-			
 		});
-		
+
+		var ssNo = $("input[name=ssNo]").val();
+		var sgNo = $("input[name=sgNo]").val();
+		var scDate = $("#ssDate").text();
+
+		$("#doitCheck").on(
+				"click",
+				function() {
+
+					var checkmember = [];
+					var checklist = [];
+
+					$("input:checkbox[name='checked']").each(function() {
+						checkmember.push($(this).val());
+						if ($(this).is(":checked") == true) {
+							checklist.push($(this).val());
+						}
+
+					});
+					console.log(checklist);
+					console.log(checkmember);
+					jQuery.ajaxSettings.traditional = true;
+
+					$.ajax({
+						url : 'doitCheckInsert.go',
+						type : "post",
+						data : {
+							checkmember : checkmember,
+							checklist : checklist,
+							ssNo : ssNo,
+							sgNo : sgNo,
+							scDate : scDate
+						},
+						success : function(data) {
+							console.log(data);
+							if (data == "ok") {
+								alert("출첵 완료");
+								alert("출첵 안하면 니 호두 내가 냠냠");
+								window.close();
+							} else {
+								alert("출첵 실패");
+							}
+						},
+						error : function(reqeust, status, errorDate) {
+							alert("error code : " + reqeust.status + "\n"
+									+ "message : " + reqeust.responseText
+									+ "error : " + errorDate);
+						}
+
+					})
+
+				});
+
+		$("#doitCheckUpdate").on(
+				"click",
+				function() {
+					var changelist = [];
+
+					$("input:checkbox[name='checked']").each(function() {
+						if ($(this).is(":checked") == true) {
+							changelist.push($(this).val());
+						}
+					});
+					jQuery.ajaxSettings.traditional = true;
+
+					$.ajax({
+						url : 'doitCheckUpdate.go',
+						type : "post",
+						data : {
+							changelist : changelist,
+							ssNo : ssNo
+
+						},
+						success : function(data) {
+							console.log(data);
+							if (data == "ok") {
+								alert("출첵 수정 완료");
+								alert("출첵 안한사람 호두 너랑 나랑 냠냠");
+								window.close();
+							} else {
+								alert("출첵 실패");
+							}
+						},
+						error : function(reqeust, status, errorDate) {
+							alert("error code : " + reqeust.status + "\n"
+									+ "message : " + reqeust.responseText
+									+ "error : " + errorDate);
+						}
+
+					})
+
+				});
 	</script>
 
-	<script src="https://kit.fontawesome.com/849a01517e.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/849a01517e.js"
+		crossorigin="anonymous"></script>
 	<script src="${contextPath}/resources/js/datatables.js"></script>
 	<script src="${contextPath}/resources/js/contact.js"></script>
 

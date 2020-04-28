@@ -242,4 +242,37 @@ public class StudyGroupDao {
 		return sqlSession.update("studyGroupMapper.studyCheckUpdate",scNo);
 
 }
+	
+
+	/** 스터디 출첵 저장된 리스트 불러오기
+	 *  정호
+	 * @param ssNo
+	 * @return
+	 */
+	public ArrayList<StudyCheck> studyCheckList(int ssNo) {
+		System.out.println("Dao 번호 들어가니? " +ssNo);
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.studyCheckList", ssNo);
+	}
+
+	/**스터디 출첵 수정 가즈아~
+	 * 정호
+	 * @param scNo
+	 * @return
+	 */
+	public int StudyCheckDefault(int ssNo) {
+		
+		return sqlSession.update("studyGroupMapper.StudyCheckDefault",ssNo);
+	}
+	
+	public int sgDataBoardAndGalleryPayment(int sgNo) {
+
+		return sqlSession.update("studyGroupMapper.sgDataBoardAndGalleryPayment", sgNo);
+	}
+
+	public int mDataBoardAndGalleryPayment(int mNo) {
+
+		return sqlSession.update("studyGroupMapper.mDataBoardAndGalleryPayment", mNo);
+	}
+
 }
