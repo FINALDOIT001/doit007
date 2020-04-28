@@ -160,7 +160,9 @@
                            </div>
                         </div>
                      </div>
-                     
+                     <input type="hidden" id="phonesplit" value="${ m.mPhone }" />
+					 <input type="hidden" id="emailsplit" value="${ m.mEmail }" />    
+					 <input type="hidden" id="addsplit" value="${ m.mAddr }" />                    
                      <div class="form-group"> 
                         <label style="display: block;"><span style="color:red">*</span> 전화번호</label>
                         <input type="text" style="display: inline; width: 119px;" class="form-control form-control-user" id="phone1" name="phone1" required>
@@ -174,7 +176,7 @@
                         <span style="color: red">*</span>이메일</label> 
                         <input type="text" style="display: inline; width: 290px;"
 								class="form-control form-control-user" id="email" name="email"
-								placeholder="이메일" required> 
+								placeholder="이메일" required > 
 						<label style="font-weight: 600;">@</label> 
 						<select style="width: 185px; display: inline;" class="form-control" id="selbox" name="selbox">
 							<option value="naver.com">naver.com</option>
@@ -385,7 +387,25 @@
 	<!-- photo -->
 <script src="${contextPath}/resources/js/datatables.js"></script>
  <script>
-
+ 
+ $(function(){
+	 var phone = $("#phonesplit").val();
+	 var phonesp = phone.split("-");
+	 $("#phone1").val(phonesp[0]);
+	 $("#phone2").val(phonesp[1]);
+	 $("#phone3").val(phonesp[2]);
+	 
+	 var email = $("#emailsplit").val();
+	 var emailsp = email.split("@");
+	 $("#email").val(emailsp[0]);
+	 
+	 var add = $("#addsplit").val();
+	 var addsp = add.split("/");
+	 $("#address1").val(addsp[0]);
+	 $("#address2").val(addsp[1]);
+	 $("#address3").val(addsp[2]);
+ });
+ 
  function memberdelete(){
 	 if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인
 		 	var mId = $("#userId").val();
