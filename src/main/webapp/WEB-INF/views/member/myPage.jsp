@@ -16,10 +16,10 @@
       }
 	   .filebox label {
     display: inline-block;
-    background-size: 60px;
+    background-size: 100% 100%;
     cursor: pointer;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
 }
 
 .filebox input[type="file"] {  /* 파일 필드 숨기기 */
@@ -445,7 +445,7 @@
                $target.css('display', '');
                //$target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시
                $('label[id="imglabel"]').css('background-image','url("")');
-               $target.html('<img src="' + e.target.result + '" border="0" style="width:60px; height: 60px;" class="rounded-circle" alt="Cinque Terre" />');
+               $target.html('<img src="' + e.target.result + '" border="0" style="width:70px; height: 70px;" class="rounded-circle" alt="Cinque Terre" />');
            }
            reader.readAsDataURL(html.files[0]);
        }
