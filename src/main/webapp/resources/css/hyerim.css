@@ -134,11 +134,6 @@
         border: 0;
     }
 
-    .dropdown-menu.show {
-        display: block;
-        width: 600px;
-    }
-
     .detail_li{
         margin-bottom: 8px;
     }

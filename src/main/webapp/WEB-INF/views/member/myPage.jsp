@@ -16,10 +16,10 @@
       }
 	   .filebox label {
     display: inline-block;
-    background-size: 60px;
+    background-size: 100% 100%;
     cursor: pointer;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
 }
 
 .filebox input[type="file"] {  /* 파일 필드 숨기기 */
@@ -161,7 +161,9 @@
                            </div>
                         </div>
                      </div>
-                     
+                     <input type="hidden" id="phonesplit" value="${ m.mPhone }" />
+					 <input type="hidden" id="emailsplit" value="${ m.mEmail }" />    
+					 <input type="hidden" id="addsplit" value="${ m.mAddr }" />                    
                      <div class="form-group"> 
                         <label style="display: block;"><span style="color:red">*</span> 전화번호</label>
                         <input type="text" style="display: inline; width: 119px;" class="form-control form-control-user" id="phone1" name="phone1" required>
@@ -175,7 +177,7 @@
                         <span style="color: red">*</span>이메일</label> 
                         <input type="text" style="display: inline; width: 290px;"
 								class="form-control form-control-user" id="email" name="email"
-								placeholder="이메일" required> 
+								placeholder="이메일" required > 
 						<label style="font-weight: 600;">@</label> 
 						<select style="width: 185px; display: inline;" class="form-control" id="selbox" name="selbox">
 							<option value="naver.com">naver.com</option>
@@ -239,20 +241,19 @@
 							<h5 class="mb-1 text-danger" style="font-weight: bold; color: red;">모집 완료</h5>
 						</c:if>
                      <ul class="study_ul">
-                        <li class="study_li">${sg.sgWriter}</li>
-                        <li class="study_li">
+                        <li class="study_li"><img
+										src="${contextPath}/resources/img/man.png">${sg.sgWriter}</li>
                         	<c:set var="maxPeople" value="${sg.sgMaxPeople}"/>
 							<c:set var="newPeople" value="${sg.sgNowPeople}"/>
 							<c:if test="${maxPeople == newPeople}">
-								<li class="study_li text-danger"><img src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+								<li class="study_li text-danger"><img src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 							</c:if>
 							<c:if test="${maxPeople != newPeople}">
-								<li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+								<li class="study_li"><img src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 							</c:if>
                         
-                        </li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">${sg.sgAddr}</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 원</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/location.png">${sg.sgAddr}</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/hodu.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 원</li>
                      </ul>
                      <ul class="study_">
 						<c:forTokens var="teg" items="${sg.sgTag}" delims="@">
@@ -303,20 +304,19 @@
 							<h5 class="mb-1 text-danger" style="font-weight: bold; color: red;">모집 완료</h5>
 						</c:if>
                      <ul class="study_ul">
-                        <li class="study_li">${sl.sgWriter}</li>
-                        <li class="study_li">
+                        <li class="study_li"><img
+										src="${contextPath}/resources/img/man.png">${sl.sgWriter}</li>
                         	<c:set var="maxPeople" value="${sl.sgMaxPeople}"/>
 							<c:set var="newPeople" value="${sl.sgNowPeople}"/>
 							<c:if test="${maxPeople == newPeople}">
-								<li class="study_li text-danger"><img src="${contextPath}/resources/img/user_icon2.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
+								<li class="study_li text-danger"><img src="${contextPath}/resources/img/classroom.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
 							</c:if>
 							<c:if test="${maxPeople != newPeople}">
-								<li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
+								<li class="study_li"><img src="${contextPath}/resources/img/classroom.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
 							</c:if>
                         
-                        </li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">${sl.sgAddr}</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png"><fmt:formatNumber value="${sl.sgDeposit}" groupingUsed="true"/> 원</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/location.png">${sl.sgAddr}</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/hodu.png"><fmt:formatNumber value="${sl.sgDeposit}" groupingUsed="true"/> 원</li>
                      </ul>
                      <ul class="study_">
 						<c:forTokens var="teg" items="${sl.sgTag}" delims="@">
@@ -408,7 +408,25 @@
 	<!-- photo -->
 <script src="${contextPath}/resources/js/datatables.js"></script>
  <script>
-
+ 
+ $(function(){
+	 var phone = $("#phonesplit").val();
+	 var phonesp = phone.split("-");
+	 $("#phone1").val(phonesp[0]);
+	 $("#phone2").val(phonesp[1]);
+	 $("#phone3").val(phonesp[2]);
+	 
+	 var email = $("#emailsplit").val();
+	 var emailsp = email.split("@");
+	 $("#email").val(emailsp[0]);
+	 
+	 var add = $("#addsplit").val();
+	 var addsp = add.split("/");
+	 $("#address1").val(addsp[0]);
+	 $("#address2").val(addsp[1]);
+	 $("#address3").val(addsp[2]);
+ });
+ 
  function memberdelete(){
 	 if (confirm("정말 탈퇴하시겠습니까?") == true){    //확인
 		 	var mId = $("#userId").val();
@@ -427,7 +445,7 @@
                $target.css('display', '');
                //$target.css('background-image', 'url(\"' + e.target.result + '\")'); // 배경으로 지정시
                $('label[id="imglabel"]').css('background-image','url("")');
-               $target.html('<img src="' + e.target.result + '" border="0" style="width:60px; height: 60px;" class="rounded-circle" alt="Cinque Terre" />');
+               $target.html('<img src="' + e.target.result + '" border="0" style="width:70px; height: 70px;" class="rounded-circle" alt="Cinque Terre" />');
            }
            reader.readAsDataURL(html.files[0]);
        }

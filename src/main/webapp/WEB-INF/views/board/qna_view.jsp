@@ -15,6 +15,14 @@
 	cursor:pointer;
 }
 
+.note-editable { background-color:white !important; }
+
+
+</style>
+
+
+
+
 </style>
 
 </head>
@@ -90,7 +98,7 @@
 						</div>
 
 						<div style="text-align: center;">
-							<c:if test="${ loginUser.mName eq qna.qWriter }">
+							<c:if test="${ loginUser.mId eq qna.qWriter }">
 							
 							<c:url var="qnaUpdate" value="qnaUpdate.go">
 								<c:param name="qNo" value="${ qna.qNo }"/>

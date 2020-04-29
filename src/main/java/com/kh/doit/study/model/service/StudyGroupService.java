@@ -261,6 +261,13 @@ public interface StudyGroupService {
 
 	int mDataBoardAndGalleryPayment(int mNo);
 
+	void sgJoinMember(int sgNo);
+
+	void sgJoinHodu(Member m);
+
+	int sgGroupOutCount(int sgNo);
+	
+
 	/**
 	  * @Method Name : AdDepositeManager
 	  * @작성일 : Apr 29, 2020

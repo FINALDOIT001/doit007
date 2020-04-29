@@ -153,7 +153,7 @@ public class myPageController {
 			m.setmEmail(email + "@" + selboxDirect);
 		}
 		if(!address1.equals("")) {
-			m.setmAddr(address1 + "," + address2 +"," + address3);
+			m.setmAddr(address1 + "/" + address2 +"/" + address3);
 		}
 		
 		System.out.println("이미지 : " + file);

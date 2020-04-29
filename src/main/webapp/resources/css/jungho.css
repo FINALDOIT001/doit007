@@ -3,7 +3,7 @@
 
 .filebox label {
     display: inline-block;
-    background-image: url("../img/codedisply.jpg");
+    background-image: url("../img/camera.png");
     cursor: pointer;
     border: 1px solid black; 
     width:100%;

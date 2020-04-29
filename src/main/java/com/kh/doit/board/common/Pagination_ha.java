@@ -13,7 +13,7 @@ public class Pagination_ha {
 		int startPage;
 		int endPage;
 		
-		int boardLimit = 5;
+		int boardLimit = 10;
 		
 		// * maxPage : 총 페이지 수
 		maxPage = (int)Math.ceil((double)listCount/boardLimit);

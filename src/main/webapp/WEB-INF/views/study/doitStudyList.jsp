@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,6 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/jungho.css">
 <link rel="stylesheet" href="${contextPath}/resources/css/hyerim.css">
 <script src="${contextPath}/resources/js/jungho.js"></script>
-
 
 </head>
 
@@ -59,35 +59,7 @@
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-4">
-					<button type="button"
-						class="btn btn-block btn-light btn-filter dropdown-toggle"
-						style="width: 80px; height: 50px;" data-toggle="dropdown"
-						aria-expanded="false">태그</button>
-					<div class="dropdown-menu">
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Java</label> <label
-							class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">HTML</label> <label
-							class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">C+</label> <label
-							class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-					</div>
-				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-8" style="margin-left: auto;">
 					<c:if test="${!empty sessionScope.loginUser}">
 						<input type="button" class="genric-btn danger"
 							style="float: right; width: 120px;" value="스터디 개설"
@@ -159,23 +131,24 @@
 
 
 								<ul class="study_ul">
-									<li class="study_li">${sg.sgWriter}</li>
+									<li class="study_li"><img
+										src="${contextPath}/resources/img/man.png">${sg.sgWriter}</li>
 									
 																	
 									<c:set var="maxPeople" value="${sg.sgMaxPeople}"/>
 									<c:set var="newPeople" value="${sg.sgNowPeople}"/>
-									<c:if test="${maxPeople == newPeople}">
+									<c:if test="${sg.sgMaxPeople == sg.sgNowPeople}">
 									<li class="study_li text-danger"><img
-										src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+										src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 									</c:if>
-									<c:if test="${maxPeople != newPeople}">
+									<c:if test="${sg.sgMaxPeople != sg.sgNowPeople}">
 									<li class="study_li"><img
-										src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+										src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 									</c:if>
 									<li class="study_li"><img
-										src="${contextPath}/resources/img/add_icon2.png">${sg.sgAddr}</li>
+										src="${contextPath}/resources/img/location.png">${sg.sgAddr}</li>
 									<li class="study_li"><img
-										src="${contextPath}/resources/img/money_icon3.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 원</li>
+										src="${contextPath}/resources/img/hodu.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 개</li>
 								</ul>
 
 

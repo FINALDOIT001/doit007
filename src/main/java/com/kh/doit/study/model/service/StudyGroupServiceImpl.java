@@ -379,12 +379,30 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 
 
 	@Override
+	public void sgJoinMember(int sgNo) {
+		
+		sgDao.sgJoinMember(sgNo);
+	}
+
+
+	@Override
+	public void sgJoinHodu(Member m) {
+		
+		sgDao.sgJoinHodu(m);
+	}
+
+
+	@Override
+	public int sgGroupOutCount(int sgNo) {
+		// TODO Auto-generated method stub
+		return sgDao.sgGroupOutCount(sgNo);
+	}
+
+	@Override
 	public ArrayList<StudyGroup> AdDepositeManager() {
 		
 		return sgDao.AdDepositeManager();
 	}
-
-
 	
 
 }

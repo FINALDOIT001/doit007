@@ -89,9 +89,9 @@
                     </div>
         
                     <div style="text-align:center;">
-                        <input type="submit" id="kwon-submit207" class="genric-btn danger circle" style="font-size: 13px;" value="질문하기"></input>
-                        <input type="reset" id="kwon-reset01" class="genric-btn danger circle" style="font-size: 13px;" value="취소하기"></input>
-                        <input type="button" id="kwon-back01" class="genric-btn danger circle" style="font-size: 13px;" value="뒤로가기"></input>
+                        <input type="submit" id="kwon-submit207" class="genric-btn danger circle" style="font-size: 13px;" value="작성"></input>
+                        <input type="reset" id="kwon-reset01" class="genric-btn danger circle" style="font-size: 13px;" value="취소"></input>
+                        <input type="button" id="kwon-back01" class="genric-btn danger circle" style="font-size: 13px;" value="BACK"></input>
                     </div>
                 </form>
 

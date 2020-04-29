@@ -275,9 +275,25 @@ public class StudyGroupDao {
 		return sqlSession.update("studyGroupMapper.mDataBoardAndGalleryPayment", mNo);
 	}
 
+<<<<<<< HEAD
 	public ArrayList<StudyGroup> AdDepositeManager() {
 		
 		return (ArrayList)sqlSession.selectList("studyGroupMapper.AdDepositeManager");
+=======
+	public void sgJoinMember(int sgNo) {
+		
+		sqlSession.update("studyGroupMapper.sgJoinMember", sgNo);
+	}
+
+	public void sgJoinHodu(Member m) {
+		
+		sqlSession.update("studyGroupMapper.sgJoinHodu", m);
+	}
+
+	public int sgGroupOutCount(int sgNo) {
+		
+		return sqlSession.update("studyGroupMapper.sgGroupOutCount", sgNo);
+>>>>>>> branch 'master' of https://github.com/FINALDOIT001/doit007.git
 	}
 
 }

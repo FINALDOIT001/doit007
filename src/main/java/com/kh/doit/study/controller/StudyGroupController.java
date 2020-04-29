@@ -260,10 +260,22 @@ public class StudyGroupController {
 	@RequestMapping("studyDetail.go")
 	public ModelAndView studyDetail(ModelAndView mv, int sgNo, String mno,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-
-		StudyGroup sg = sgService.selectSg(sgNo);
+    
+		
+		 int count = 0;
+		
+		 StudyGroup sg = sgService.selectSg(sgNo);
 
 		ArrayList<Member> ml = sgService.memberList(sgNo);
+		
+		
+		if(mno!=null) {
+		for(Member m : ml) {
+			if(m.getMno() == Integer.parseInt(mno)) {
+				count++;
+			}
+		}
+		}
 		
 		StudyLike sl = new StudyLike();
 		if(mno != "" && mno !=null) {
@@ -274,6 +286,7 @@ public class StudyGroupController {
 			 sl = sgService.studyLikeList(slNo);
 			System.out.println("studyList" + sl);
 		}
+		
 		
 		// 구현 추가 부분
 		ArrayList<Etc> etc = sgService.etcList(sgNo);
@@ -290,6 +303,7 @@ public class StudyGroupController {
 			.addObject("currentPage", currentPage)
 			.addObject("sl",sl)
 			.addObject("etc",etc)
+			.addObject("count",count)
 			.addObject("galleryList",galleryList)
 			.setViewName("study/doitStudyDetail");
 		} else {
@@ -308,11 +322,12 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("sgGroupOut.go")
-	private String sgGroupOut(Model model, int mno, HttpServletRequest request) {
+	private String sgGroupOut(Model model, int mno, int sgNo, HttpServletRequest request) {
 
 		int result = sgService.sgGroupOut(mno);
+		int result1 = sgService.sgGroupOutCount(sgNo);
 
-		if (result > 0) {
+		if (result > 0 && result1 >0 ) {
 			return "redirect:sgList.go";
 		} else {
 			model.addAttribute("msg", "탈퇴 하기 실패");
@@ -329,14 +344,20 @@ public class StudyGroupController {
 	 * @return
 	 */
 	@RequestMapping("sgJoin.go")
-	private String sgJoin(Model model, int sgNo, int mno) {
+	private String sgJoin(Model model, int sgNo, int mno, int hodu) {
 
 		GroupMember gm = new GroupMember(sgNo, mno);
+		sgService.sgJoinMember(sgNo);
+		
+		Member m = new Member();
+		m.setMno(mno);
+		m.setMhodu(hodu);
+		sgService.sgJoinHodu(m);
 
 		int result = sgService.sgJoin(gm);
 
 		if (result > 0) {
-			return "redirect:studyDetail.go?sgNo=" + sgNo;
+			return "redirect:studyDetail.go?sgNo=" + sgNo +"&mno="+mno;
 
 		} else {
 			model.addAttribute("msg", "가입 하기 실패");

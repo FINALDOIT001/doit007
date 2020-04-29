@@ -14,6 +14,8 @@
 	cursor:pointer;
 }
 
+.note-editable { background-color:white !important; }
+
 </style>
 
 </head>
@@ -99,31 +101,6 @@
                            <div class="arrow">
                               <a href="#">
                                  <span class="lnr text-white ti-arrow-left"></span>
-                              </a>
-                           </div>
-                           <div class="detials">
-                              <p>이전 게시물</p>
-                              <a href="#">
-                                 <h4 class=>[우리금융그룹] 2020 ...</h4>
-                              </a>
-                           </div>
-                        </div>
-                        <div
-                           class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                           <div class="detials">
-                              <p>다음 게시물</p>
-                              <a href="#">
-                                 <h4>인공지능과의 연결고리...</h4>
-                              </a>
-                           </div>
-                           <div class="arrow">
-                              <a href="#">
-                                 <span class="lnr text-white ti-arrow-right"></span>
-                              </a>
-                           </div>
-                           <div class="thumb">
-                              <a href="#">
-                                 <img class="img6060" src="" alt="">
                               </a>
                            </div>
                         </div>
@@ -219,7 +196,7 @@
       $('#summernote2').summernote({
          
          tabsize: 5,
-         height: 300,
+         height: 600,
          toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],

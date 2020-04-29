@@ -190,7 +190,7 @@ public class MemberController {
 			
 			
 			if(!address1.equals("")) {
-				m.setmAddr(address1 + "," + address2 +"," + address3);
+				m.setmAddr(address1 + "/" + address2 +"/" + address3);
 			}
 			
 			int result = mService.insertMember(m);

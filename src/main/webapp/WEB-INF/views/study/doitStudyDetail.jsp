@@ -152,7 +152,7 @@
 									class="rounded" style="width: 350px; height: 360px;">
 							</c:if>
 							<c:if test="${empty sg.sgRenameFileName}">
-								<img src="${contextPath}/resources/img/project-5.png"
+								<img src="${contextPath}/resources/img/camera.png"
 									class="rounded" style="width: 350px; height: 360px;">
 							</c:if>
 						</div>
@@ -168,12 +168,12 @@
 								class="fas fa-street-view"></i>&nbsp;&nbsp;&nbsp;지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역
 								&nbsp;:&nbsp; ${sg.sgAddr}</li>
 							<li style="margin-bottom: 3px;"><i class="fas fa-users"></i>&nbsp;&nbsp;모집인원
-								&nbsp;:&nbsp; ${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+								&nbsp;:&nbsp; ${fn:length(ml)}/${sg.sgMaxPeople}</li>
 							<li style="margin-bottom: 3px;"><i class="fas fa-medal"></i>&nbsp;&nbsp;&nbsp;팀&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장
 								&nbsp;:&nbsp; ${sg.sgWriter}</li>
-							<li style="margin-bottom: 3px;"><i class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;보&nbsp;&nbsp;증&nbsp;&nbsp;금
+							<li style="margin-bottom: 3px;"><i class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;호&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;두
 								&nbsp;:&nbsp; <fmt:formatNumber value="${sg.sgDeposit}"
-									groupingUsed="true" />원</li>
+									groupingUsed="true" />개</li>
 							<li style="margin-bottom: 3px;"><i class="fas fa-spinner"></i>&nbsp;&nbsp;&nbsp;진&nbsp;&nbsp;행&nbsp;&nbsp;도
 								&nbsp;:&nbsp; <c:if test="${ sg.sgConfirm eq 'Y'}">모집중</c:if> <c:if
 									test="${ sg.sgConfirm ne 'Y'}">모집 종료</c:if></li>
@@ -189,22 +189,46 @@
 							<li><c:url var="sgJoin" value="sgJoin.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 									<c:param name="mno" value="${loginUser.mno}" />
+									<c:param name="hodu" value="${sg.sgDeposit}" />
 								</c:url> <c:url var="sgStart" value="sgStart.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 								</c:url> <c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
-									<button class="genric-btn info radius"
-										style="margin-bottom: 10px; width: 130px;"
-										onclick="location.href='${sgJoin}'">스터디 가입</button>
-								</c:if> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+								
+								
+										<c:if test="${count > 0}">
+										
+										<button class="genric-btn info radius"
+												style="margin-bottom: 10px; width: 130px;"
+												disabled='disabled'> 참여 완료</button>
+											
+										</c:if>
+										<c:if test="${count== 0}">
+											<button class="genric-btn info radius"
+												style="margin-bottom: 10px; width: 130px;"
+												<%-- onclick="location.href='${sgJoin}'" --%>
+												onclick="noHodu();">스터디 참여</button>
+												 
+											
+										</c:if>
+										
+									
+								</c:if>
+										
+										
+								 <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 									<button class="genric-btn info radius"
 										style="margin-bottom: 10px; width: 130px;"
 										onclick="location.href='${sgStart}'">스터디 시작</button>
-								</c:if> <c:url var="sgUpview" value="sgUpview.go">
+								</c:if> 
+
+								
+								<c:url var="sgUpview" value="sgUpview.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 								</c:url> <c:url var="sgDelete" value="sgDelete.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 								</c:url> <c:url var="sgGroupOut" value="sgGroupOut.go">
 									<c:param name="mno" value="${loginUser.mno}" />
+									<c:param name="sgNo" value="${sg.sgNo}"/>
 								</c:url> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 									<button class="genric-btn danger radius" style="width: 130px;"
 										onclick="location.href='${sgUpview}'">스터디 수정</button>
@@ -242,14 +266,14 @@
 											<c:if test="${ empty m.mRenamefilename }">
 											<img
 												src="${contextPath}/resources/img/${m.mOriginalfilename}"
-												class="rounded-circle " style="height: 70px;"
+												class="rounded-circle " style="height: 70px; width: 70px;"
 												alt="Cinque Terre">
 											</c:if>
 									
 											<c:if test="${ !empty m.mRenamefilename }">
 											<img
 												src="${contextPath}/resources/img/user/${m.mRenamefilename}"
-												class="rounded-circle " style="height: 70px;"
+												class="rounded-circle " style="height: 70px; width: 70px;"
 												alt="Cinque Terre">
 											</c:if>
 											<c:out value="${m.mName}" />
@@ -314,9 +338,18 @@
                            <th width="10%" class="th1">등록일</th>
                         </tr>
                      </thead>
-                     <tbody>
-                        
+                
+                <c:if test="${ empty etc }">
+                <tbody>
+                	<tr>
+                	<td colspan="4" align="center">작성된 게시글이 없습니다.</td>
+                	</tr>
+                </tbody>
+                </c:if>
+                <c:if test="${ !empty etc }">
       <c:forEach var="etc" items="${ etc }">
+                <tbody>
+                        
       <tr class="kwon-tr1">
          <td align="center" class="kwon-td1">${ etc.etcNo }</td>
          <td align="center" class="kwon-td1">
@@ -333,10 +366,11 @@
          
          
       </tr>
+                     </tbody>
       </c:forEach>
+      </c:if>
       
                         
-                     </tbody>
                   </table>
 
 						</c:if>
@@ -858,12 +892,24 @@
 		
 		 
 	       
+		<c:if test="${empty sessionScope.loginUser.mno}">
+		   $('#checkBtn').click(function(){
+		    	alert("로그인 해주세요~!");
+		      });
+		   </c:if>
+		
+		
+		
+		
+		
+		<c:if test="${!empty sessionScope.loginUser.mno}">
 		   $('#checkBtn').click(function(){
 		    	  var sgNo = ${sg.sgNo} ;
-		    	  var usermno = ${sessionScope.loginUser.mno};
-		    	  var sgWriterNo = ${sg.sgWriterNo};
+		    	  var usermno =${sessionScope.loginUser.mno};
+		    	  var sgWriterNo = ${sg.sgWriterNo}; 	  
 		         window.open("checkStudy.go?sgNo="+sgNo+"&ssNo="+ssNo+"&sgWriterNo="+sgWriterNo+"&usermno="+usermno+"&ssDayDate="+ssDayDate, "출석체크", "status=no, location= no, width=700, height=700, scrollbars=yes;");
 		      });
+		   </c:if>
 	      
 	</script>
 
@@ -1031,6 +1077,18 @@
 	       }
 	   }
 	
+	</script>
+	
+	<script>
+		function noHodu(){
+			
+			if(${loginUser.mhodu} == 0) {
+				alert("호두를 충전해주세요.");
+				location.href="myinfo.me?mId="+"${loginUser.mId}"+"&mno="+"${loginUser.mno}";
+			}else{
+				location.href='${sgJoin}';
+			}
+		};
 	</script>
 
 
