@@ -268,7 +268,6 @@ public class StudyGroupController {
 
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
-		
 		if(mno != "" && mno !=null) {
 			for(Member m : ml) {
 				if(m.getMno() == Integer.parseInt(mno)) {
@@ -278,13 +277,16 @@ public class StudyGroupController {
 		}
 		
 		StudyLike sl = new StudyLike();
+		Member mem = new Member();
 		if(mno != "" && mno !=null) {
 		
 		String slNo= mno+sgNo;
 		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
 		
-			 sl = sgService.studyLikeList(slNo);
+			sl = sgService.studyLikeList(slNo);
 			System.out.println("studyList" + sl);
+			
+			mem = sgService.memberHodu(Integer.parseInt(mno));
 		}
 		
 		
@@ -305,6 +307,7 @@ public class StudyGroupController {
 			.addObject("etc",etc)
 			.addObject("count",count)
 			.addObject("galleryList",galleryList)
+			.addObject("mem", mem)
 			.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
