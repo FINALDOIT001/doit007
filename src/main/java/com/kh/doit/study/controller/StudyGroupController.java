@@ -268,12 +268,14 @@ public class StudyGroupController {
 
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
+		
+		if(mno!=null) {
 		for(Member m : ml) {
 			if(m.getMno() == Integer.parseInt(mno)) {
 				count++;
 			}
 		}
-		
+		}
 		
 		StudyLike sl = new StudyLike();
 		if(mno != "" && mno !=null) {
