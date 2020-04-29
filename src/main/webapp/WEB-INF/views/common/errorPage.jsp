@@ -16,7 +16,7 @@
 		
 		
 		<h1 align="center" style="margin-top:100px; margin-bottom:300px; padding-top:200px;">
-<img src="${pageContext.request.contextPath}/resources/img/error_logo.png" alt="logo"><br><br><br>${ msg }</h1>
+		<img src="${pageContext.request.contextPath}/resources/img/error_logo.png" alt="logo"><br><br><br>${ msg }</h1>
 	
 	</div>
 

@@ -149,6 +149,10 @@
 										src="${contextPath}/resources/img/location.png">${sg.sgAddr}</li>
 									<li class="study_li"><img
 										src="${contextPath}/resources/img/hodu.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 개</li>
+									<c:if test="${sg.sgPayment eq 'N'}">
+									<li class="study_li"><img
+										src="${contextPath}/resources/img/premium.png">Premium</li>
+									</c:if>
 								</ul>
 
 
