@@ -72,4 +72,14 @@ public interface BoardService {
 	 */
 	int deleteComment(int bc_no);
 
+	/**
+	  * @Method Name : AdBoardFree
+	  * @작성일 : Apr 29, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 관리자 보드 리스트 불러오기
+	  * @return
+	  */
+	ArrayList<Board> AdBoardFree();
+
 }

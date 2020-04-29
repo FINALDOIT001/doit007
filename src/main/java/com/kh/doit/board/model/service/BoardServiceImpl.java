@@ -71,4 +71,10 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.deleteComment(bc_no);
 	}
 
+	@Override
+	public ArrayList<Board> AdBoardFree() {
+		
+		return bDao.AdBoardFree();
+	}
+
 }

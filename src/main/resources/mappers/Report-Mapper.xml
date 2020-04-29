@@ -23,4 +23,11 @@
 	VALUES(SEQ_RPNO.NEXTVAL,#{rpWriter},#{rpUserID},#{rpTitle},#{rpBno},#{rpBType},#{rpCotext},DEFAULT,DEFAULT,DEFAULT)
 </insert>
 
+<select id="gogoAdmin" resultMap="ReportResultSet">
+	SELECT * FROM REPORTTABLE
+	WHERE RP_DATE1 = SYSDATE
+	ORDER BY 1
+</select>
+
+
 </mapper>

@@ -61,4 +61,8 @@ public class BoardDao {
 		return sqlSession.update("boardMapper.deleteComment",bc_no);
 	}
 
+	public ArrayList<Board> AdBoardFree() {
+		return (ArrayList)sqlSession.selectList("boardMapper.AdBoardFree");
+	}
+
 }

@@ -268,4 +268,23 @@ public class BookShareController {
 		}
 	}
 	
+	/**
+	  * @Method Name : 북쉐어 관리 접근
+	  * @작성일 : Apr 2, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @return
+	  */
+	@RequestMapping("AdBNotice.ad")
+	public ModelAndView AdBoardNotice(ModelAndView mv) {
+		
+		ArrayList<BookShare> bsList = bsService.AdBoardNotice();
+		
+		mv.setViewName("AdminPage/AdBoardBookShare");
+		mv.addObject("bsList", bsList);
+		
+		return mv;
+	}
+	
 }

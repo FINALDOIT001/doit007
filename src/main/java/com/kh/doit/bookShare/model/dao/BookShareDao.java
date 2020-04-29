@@ -109,4 +109,8 @@ public class BookShareDao {
 		return sqlSession.update("msMapper.deleteReply",bscNo);
 	}
 
+	public ArrayList<BookShare> AdBoardNotice() {
+		return (ArrayList)sqlSession.selectList("msMapper.AdBoardNotice");
+	}
+
 }

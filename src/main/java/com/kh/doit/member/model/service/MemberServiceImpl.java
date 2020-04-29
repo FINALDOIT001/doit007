@@ -1,6 +1,7 @@
 package com.kh.doit.member.model.service;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -110,6 +111,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int pwdUpdate(Member m) {
 		return mDao.pwdUpdate(m);
+	}
+
+
+	@Override
+	public ArrayList<Member> AdMemberManager() {
+		return mDao.AdMemberManager();
 	}
 
 

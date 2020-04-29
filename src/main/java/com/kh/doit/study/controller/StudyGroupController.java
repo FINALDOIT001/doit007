@@ -262,19 +262,19 @@ public class StudyGroupController {
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
     
 		
-		 int count = 0;
+		int count = 0;
 		
-		 StudyGroup sg = sgService.selectSg(sgNo);
+		StudyGroup sg = sgService.selectSg(sgNo);
 
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
 		
-		if(mno!=null) {
-		for(Member m : ml) {
-			if(m.getMno() == Integer.parseInt(mno)) {
-				count++;
+		if(mno != "" && mno !=null) {
+			for(Member m : ml) {
+				if(m.getMno() == Integer.parseInt(mno)) {
+					count++;
+				}
 			}
-		}
 		}
 		
 		StudyLike sl = new StudyLike();
@@ -897,5 +897,30 @@ public class StudyGroupController {
 		}
 	}
 	
-
+	
+	/**
+	  * @Method Name : 그룹 관리 접근
+	  * @작성일 : Apr 2, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @return
+	  */
+	@RequestMapping(value ="AdDepositeManager.ad", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView AdDepositeManager(
+					ModelAndView mv
+				) {
+		
+		ArrayList<StudyGroup> sgList = sgService.AdDepositeManager();
+		
+		mv.setViewName("AdminPage/AdDepositeManager");
+		mv.addObject("sgList", sgList);
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
 }

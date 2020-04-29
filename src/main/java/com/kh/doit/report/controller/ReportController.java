@@ -1,6 +1,7 @@
 package com.kh.doit.report.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -94,4 +95,39 @@ public class ReportController {
 		gson.toJson(resulrStr,response.getWriter());
 		
 	}
+	
+	
+	/**
+	  * @Method Name : 메인페이지 접근
+	  * @작성일 : Apr 2, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : haeder에서 admin 접근
+	  * @return
+	  */
+	@RequestMapping("go.ad")
+	public ModelAndView gogoAdmin(
+			ModelAndView mv,
+			HttpServletRequest request,
+			HttpServletResponse response
+			) {
+		
+		ArrayList<Report> rpList = rpService.gogoAdmin();
+		
+		if( rpList.size() == 0 ) {
+			Report r = new Report();
+			
+			r.setRpNo(0);
+			
+			rpList.add(r);
+		}
+		
+		mv.addObject("rpList", rpList);
+		mv.setViewName("AdminPage/Admain");
+		
+		return mv;
+	}
+	
+	
+	
 }

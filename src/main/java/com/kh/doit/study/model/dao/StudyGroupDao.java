@@ -275,6 +275,12 @@ public class StudyGroupDao {
 		return sqlSession.update("studyGroupMapper.mDataBoardAndGalleryPayment", mNo);
 	}
 
+
+	public ArrayList<StudyGroup> AdDepositeManager() {
+		
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.AdDepositeManager");
+	}
+
 	public void sgJoinMember(int sgNo) {
 		
 		sqlSession.update("studyGroupMapper.sgJoinMember", sgNo);
@@ -288,6 +294,7 @@ public class StudyGroupDao {
 	public int sgGroupOutCount(int sgNo) {
 		
 		return sqlSession.update("studyGroupMapper.sgGroupOutCount", sgNo);
+
 	}
 
 }

@@ -87,7 +87,7 @@
 
 		                  	<td align="center" class="kwon-td1">
 		                  	
-		                  	<ul>
+		                  	<ul style="margin-bottom:0;">
 		                  	<li class="nav-item dropdown no-arrow mx-1">
 		                  		<!-- <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
 		                  			<span>${ q.qWriter }</span>

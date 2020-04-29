@@ -1,5 +1,7 @@
 package com.kh.doit.member.model.service;
 
+import java.util.ArrayList;
+
 import com.kh.doit.member.model.vo.Member;
 
 
@@ -79,6 +81,17 @@ public interface MemberService {
 	 * @return
 	 */
 	int pwdUpdate(Member m);
+
+
+	/**
+	  * @Method Name : AdMemberManager
+	  * @작성일 : Apr 28, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 관리자 회원페이지 접근
+	  * @return
+	  */
+	ArrayList<Member> AdMemberManager();
 
 	
 	

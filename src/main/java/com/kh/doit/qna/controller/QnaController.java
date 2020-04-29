@@ -234,7 +234,24 @@ public class QnaController {
 		out.close();
 	}
 	
-	
+	/**
+	  * @Method Name : QnA게시판 관리 접근
+	  * @작성일 : Apr 2, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @return
+	  */
+	@RequestMapping("AdBQnA.ad")
+	public ModelAndView AdBoardQnA(ModelAndView mv) {
+		
+		ArrayList<Qna> qaList = qService.AdBoardQnA();
+		
+		mv.setViewName("AdminPage/AdBoardQnA");
+		mv.addObject("qaList", qaList);
+		
+		return mv;
+	}
 	
 	
 	
