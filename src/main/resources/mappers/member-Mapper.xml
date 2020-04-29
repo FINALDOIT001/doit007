@@ -209,6 +209,10 @@
    		WHERE	M_NO = #{hmNo}
     </update>
     
+    <select id="AdMemberManager" resultMap="memberResultSet">
+    	SELECT * FROM MEMBER
+    	WHERE M_USERROLES NOT IN 777
+    </select>
     
     
 </mapper>

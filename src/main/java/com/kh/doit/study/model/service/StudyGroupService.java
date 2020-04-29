@@ -260,6 +260,16 @@ public interface StudyGroupService {
 	int sgDataBoardAndGalleryPayment(int sgNo);
 
 	int mDataBoardAndGalleryPayment(int mNo);
+
+	/**
+	  * @Method Name : AdDepositeManager
+	  * @작성일 : Apr 29, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 그룹 리스트 불러오기
+	  * @return
+	  */
+	ArrayList<StudyGroup> AdDepositeManager();
 	
 	
 	

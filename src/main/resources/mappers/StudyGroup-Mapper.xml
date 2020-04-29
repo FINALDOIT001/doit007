@@ -371,9 +371,11 @@
 		WHERE M_NO = #{mNo}
 	</update>
 	
+	<select id="AdDepositeManager" resultMap="studyGroupResultSet">
+		SELECT *
+		FROM STUDY_GROUP
+	</select>
 	
-
-
 </mapper>
     
     

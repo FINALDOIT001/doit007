@@ -74,6 +74,11 @@ public class QnaDao {
 		return sqlSession.update("boardMapper.endQna", qNo);
 	}
 
+	public ArrayList<Qna> AdBoardQnA() {
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.AdBoardQnA");
+	}
+
 	
 
 }

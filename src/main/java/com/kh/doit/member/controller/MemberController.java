@@ -1,6 +1,7 @@
 package com.kh.doit.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -335,6 +336,29 @@ public class MemberController {
 				mv.addObject("msg","비밀번호 변경 실패!");
 				mv.setViewName("common/errorPage");
 			}
+			return mv;
+		}
+		
+		/**
+		  * @Method Name : 회원 정보 관리 페이지 접근
+		  * @작성일 : Apr 2, 2020
+		  * @작성자 : songinseok
+		  * @변경이력 : 
+		  * @Method 설명 :
+		  * @return
+		  */
+		@RequestMapping("AdMemMani.ad")
+		public ModelAndView AdMemberManager(
+					ModelAndView mv,
+					HttpServletRequest request,
+					HttpServletResponse response
+				) {
+			
+			ArrayList<Member> mList = mService.AdMemberManager();
+			
+			mv.addObject("mList", mList);
+			mv.setViewName("AdminPage/AdMemberManager");
+			
 			return mv;
 		}
 		

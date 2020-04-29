@@ -275,4 +275,9 @@ public class StudyGroupDao {
 		return sqlSession.update("studyGroupMapper.mDataBoardAndGalleryPayment", mNo);
 	}
 
+	public ArrayList<StudyGroup> AdDepositeManager() {
+		
+		return (ArrayList)sqlSession.selectList("studyGroupMapper.AdDepositeManager");
+	}
+
 }

@@ -378,6 +378,13 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	}
 
 
+	@Override
+	public ArrayList<StudyGroup> AdDepositeManager() {
+		
+		return sgDao.AdDepositeManager();
+	}
+
+
 	
 
 }

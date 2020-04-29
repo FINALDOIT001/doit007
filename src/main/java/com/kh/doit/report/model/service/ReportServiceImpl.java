@@ -1,5 +1,7 @@
 package com.kh.doit.report.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,12 @@ public class ReportServiceImpl implements ReportService{
 	public int Write(Report r) {
 		
 		return rpDao.Write(r);
+	}
+
+	@Override
+	public ArrayList<Report> gogoAdmin() {
+		
+		return rpDao.gogoAdmin();
 	}
 	
 	

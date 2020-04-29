@@ -876,5 +876,30 @@ public class StudyGroupController {
 		}
 	}
 	
-
+	
+	/**
+	  * @Method Name : 그룹 관리 접근
+	  * @작성일 : Apr 2, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @return
+	  */
+	@RequestMapping(value ="AdDepositeManager.ad", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView AdDepositeManager(
+					ModelAndView mv
+				) {
+		
+		ArrayList<StudyGroup> sgList = sgService.AdDepositeManager();
+		
+		mv.setViewName("AdminPage/AdDepositeManager");
+		mv.addObject("sgList", sgList);
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
 }

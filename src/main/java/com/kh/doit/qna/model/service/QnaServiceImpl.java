@@ -43,6 +43,11 @@ public class QnaServiceImpl implements QnaService {
 	public int endQna(int qNo) {
 		return qDao.endQna(qNo);
 	}
+
+	@Override
+	public ArrayList<Qna> AdBoardQnA() {
+		return qDao.AdBoardQnA();
+	}
 	
 	
 
