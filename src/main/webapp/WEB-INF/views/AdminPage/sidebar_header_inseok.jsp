@@ -79,7 +79,7 @@
         <div id="collapseUtilities1" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-            <a class="collapse-item" href="AdDepositeManager.ad">보증금 관리</a>
+            <a class="collapse-item" href="AdDepositeManager.ad">그룹 관리</a>
           </div>
         </div>
       </li>
@@ -93,7 +93,7 @@
         <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-            <a class="collapse-item" href="AdBNotice.ad">공지사항</a>
+            <a class="collapse-item" href="AdBNotice.ad">책나눔 관리</a>
             <a class="collapse-item" href="AdBFree.ad">자유게시판</a>
 <!--        <a class="collapse-item" href="utilities-color.html">행사게시판</a> -->
             <a class="collapse-item" href="AdBQnA.ad">Q & A</a>

@@ -162,4 +162,9 @@
     	AND		BSC_NO=#{bscNo}
     </update>
     
+    <select id="AdBoardNotice" resultMap="BSResultSet">
+    	SELECT *
+    	FROM BOOK_SHARE
+    </select>
+    
 </mapper>

@@ -295,5 +295,24 @@ public class BoardController {
 		}
 	}
 	
+	/**
+	  * @Method Name : 자유게시판 관리 접근
+	  * @작성일 : Apr 2, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @return
+	  */
+	@RequestMapping("AdBFree.ad")
+	public ModelAndView AdBoardFree(ModelAndView mv) {
+		
+		ArrayList<Board> bList = bService.AdBoardFree();
+		
+		mv.setViewName("AdminPage/AdBoardFree");
+		mv.addObject("bList", bList);
+		
+		return mv;
+	}
+	
 	
 }

@@ -53,4 +53,14 @@ public interface QnaService {
 	 */
 	int endQna(int qNo);
 
+	/**
+	  * @Method Name : AdBoardQnA
+	  * @작성일 : Apr 29, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 관리자 리슼트 불러오기
+	  * @return
+	  */
+	ArrayList<Qna> AdBoardQnA();
+
 }

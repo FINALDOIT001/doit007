@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA 관리</title>
+<title>책나눔 관리</title>
 
 <link rel="stylesheet" href="${contextPath}/resources/css/MSdatatables_inseok.css">
 
@@ -28,14 +28,14 @@
 		</thead>
 		
 		<tbody>
-			<c:forEach var="qaList" items="${ qaList }">
+			<c:forEach var="bsList" items="${ bsList }">
 			<tr style="text-align:center;">
 			
-				<td>${ qaList.qNo }</td>
-				<td>${ qaList.qWriter }</td>
-				<td>${ qaList.qTitle }</td>
-				<td>${ qaList.qDate }</td>
-				<td>${ qaList.qStatus }</td>
+				<td>${ bsList.bsNo }</td>
+				<td>${ bsList.bsWriter }</td>
+				<td>${ bsList.bsTitle }</td>
+				<td>${ bsList.bsDate }</td>
+				<td>${ bsList.bsStatus }</td>
 				
 			</tr>
 				

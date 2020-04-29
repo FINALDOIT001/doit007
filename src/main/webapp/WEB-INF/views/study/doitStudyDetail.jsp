@@ -266,14 +266,14 @@
 											<c:if test="${ empty m.mRenamefilename }">
 											<img
 												src="${contextPath}/resources/img/${m.mOriginalfilename}"
-												class="rounded-circle " style="height: 70px;"
+												class="rounded-circle " style="height: 70px; width: 70px;"
 												alt="Cinque Terre">
 											</c:if>
 									
 											<c:if test="${ !empty m.mRenamefilename }">
 											<img
 												src="${contextPath}/resources/img/user/${m.mRenamefilename}"
-												class="rounded-circle " style="height: 70px;"
+												class="rounded-circle " style="height: 70px; width: 70px;"
 												alt="Cinque Terre">
 											</c:if>
 											<c:out value="${m.mName}" />

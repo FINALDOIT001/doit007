@@ -371,7 +371,7 @@
 		WHERE M_NO = #{mNo}
 	</update>
 	
-	<update id="sgJoinMember">
+		<update id="sgJoinMember">
 		UPDATE STUDY_GROUP SET
 		SG_NOWPEOPLE = SG_NOWPEOPLE + 1
 		WHERE SG_NO = #{sgNo}
@@ -388,6 +388,12 @@
 	SG_NOWPEOPLE = SG_NOWPEOPLE-1
 	WHERE SG_NO = #{sgNo}
 	</update>
+	
+	<select id="AdDepositeManager" resultMap="studyGroupResultSet">
+		SELECT *
+		FROM STUDY_GROUP
+	</select>
+	
 </mapper>
     
     

@@ -398,7 +398,11 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		return sgDao.sgGroupOutCount(sgNo);
 	}
 
-
+	@Override
+	public ArrayList<StudyGroup> AdDepositeManager() {
+		
+		return sgDao.AdDepositeManager();
+	}
 	
 
 }

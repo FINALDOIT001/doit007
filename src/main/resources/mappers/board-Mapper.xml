@@ -170,7 +170,10 @@
 		WHERE B.B_WRITER=#{mId}
 	</select> 
 	
-	
+	<select id="AdBoardFree" resultMap="boardResultSet">
+		SELECT *
+		FROM BOARD
+	</select>
 	
 	
 	
@@ -285,5 +288,10 @@
 		FROM QNA Q JOIN MEMBER M
 		ON (Q.Q_WRITER_NO = M.M_NO)
 		WHERE M_NO = #{mno}
+	</select>
+	
+	<select id="AdBoardQnA" resultMap="QnaResultSet">
+		SELECT *
+		FROM QNA
 	</select>
 </mapper>
