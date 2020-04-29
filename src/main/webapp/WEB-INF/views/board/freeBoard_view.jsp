@@ -22,6 +22,8 @@
 		width:350px;
 		padding:10px;
 	}
+	.note-editable { background-color:white !important; }
+	
 	
 </style>
 </head>

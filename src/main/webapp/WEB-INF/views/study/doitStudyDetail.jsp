@@ -374,8 +374,8 @@
                   </table>
 
 						</c:if>
-        
-				        <c:if test="${sg.sgPayment eq 'Y'}">
+        				<!-- 로그인 했을때 -->
+				        <c:if test="${sg.sgPayment eq 'Y' && sessionScope.loginUser.mno eq sg.sgWriterNo}">
 				            <br>
 				            <div class="openPush_back">
 				                <div class="bat" style="color:rgb(200,200,200); font-size:1.5em; margin-left: 475px;">99%</div>
