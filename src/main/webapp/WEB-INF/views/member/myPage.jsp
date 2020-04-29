@@ -241,20 +241,19 @@
 							<h5 class="mb-1 text-danger" style="font-weight: bold; color: red;">모집 완료</h5>
 						</c:if>
                      <ul class="study_ul">
-                        <li class="study_li">${sg.sgWriter}</li>
-                        <li class="study_li">
+                        <li class="study_li"><img
+										src="${contextPath}/resources/img/man.png">${sg.sgWriter}</li>
                         	<c:set var="maxPeople" value="${sg.sgMaxPeople}"/>
 							<c:set var="newPeople" value="${sg.sgNowPeople}"/>
 							<c:if test="${maxPeople == newPeople}">
-								<li class="study_li text-danger"><img src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+								<li class="study_li text-danger"><img src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 							</c:if>
 							<c:if test="${maxPeople != newPeople}">
-								<li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+								<li class="study_li"><img src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 							</c:if>
                         
-                        </li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">${sg.sgAddr}</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 원</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/location.png">${sg.sgAddr}</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/hodu.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 원</li>
                      </ul>
                      <ul class="study_">
 						<c:forTokens var="teg" items="${sg.sgTag}" delims="@">
@@ -305,20 +304,19 @@
 							<h5 class="mb-1 text-danger" style="font-weight: bold; color: red;">모집 완료</h5>
 						</c:if>
                      <ul class="study_ul">
-                        <li class="study_li">${sl.sgWriter}</li>
-                        <li class="study_li">
+                        <li class="study_li"><img
+										src="${contextPath}/resources/img/man.png">${sl.sgWriter}</li>
                         	<c:set var="maxPeople" value="${sl.sgMaxPeople}"/>
 							<c:set var="newPeople" value="${sl.sgNowPeople}"/>
 							<c:if test="${maxPeople == newPeople}">
-								<li class="study_li text-danger"><img src="${contextPath}/resources/img/user_icon2.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
+								<li class="study_li text-danger"><img src="${contextPath}/resources/img/classroom.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
 							</c:if>
 							<c:if test="${maxPeople != newPeople}">
-								<li class="study_li"><img src="${contextPath}/resources/img/user_icon2.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
+								<li class="study_li"><img src="${contextPath}/resources/img/classroom.png">${sl.sgNowPeople}/${sl.sgMaxPeople}</li>
 							</c:if>
                         
-                        </li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/add_icon2.png">${sl.sgAddr}</li>
-                        <li class="study_li"><img src="${contextPath}/resources/img/money_icon3.png"><fmt:formatNumber value="${sl.sgDeposit}" groupingUsed="true"/> 원</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/location.png">${sl.sgAddr}</li>
+                        <li class="study_li"><img src="${contextPath}/resources/img/hodu.png"><fmt:formatNumber value="${sl.sgDeposit}" groupingUsed="true"/> 원</li>
                      </ul>
                      <ul class="study_">
 						<c:forTokens var="teg" items="${sl.sgTag}" delims="@">

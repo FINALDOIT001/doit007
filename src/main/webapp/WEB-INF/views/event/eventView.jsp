@@ -14,6 +14,8 @@
 	cursor:pointer;
 }
 
+.note-editable { background-color:white !important; }
+
 </style>
 
 </head>

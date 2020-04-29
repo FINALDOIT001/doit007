@@ -59,7 +59,7 @@
 						</aside>
 					</div>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-8">
 					<c:if test="${!empty sessionScope.loginUser}">
 						<input type="button" class="genric-btn danger"
 							style="float: right; width: 120px;" value="스터디 개설"

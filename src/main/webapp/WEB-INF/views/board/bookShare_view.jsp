@@ -15,6 +15,8 @@
 	cursor:pointer;
 }
 
+.note-editable { background-color:white !important; }
+
 </style>
 
 </head>
@@ -90,7 +92,7 @@
 						</div>
 
 						<div style="text-align: center;">
-							<c:if test="${ loginUser.mName eq bs.bsWriter }">
+							<c:if test="${ loginUser.mId eq bs.bsWriter }">
 							
 							<c:url var="bsUpdate" value="bsUpdate.go">
 								<c:param name="bsNo" value="${ bs.bsNo }"/>
