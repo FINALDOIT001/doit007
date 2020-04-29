@@ -73,7 +73,6 @@
 								<div class="col">
 									<input type="text" class="form-control" placeholder="공부방 제목 입력"
 										name="sgTitle" required>
-									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">공부방 제목 입역</div>
 									<input type="text" class="form-control" value="${loginUser.mName}"
 										name="sgWriter" hidden>
@@ -89,13 +88,11 @@
 								<div class="col">
 									<input type="text" id="from" class="form-control"
 										placeholder="시작 날짜 설정" name="sgStartDate" required>
-									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">시작 기간 설정</div>
 								</div>
 								<div class="col">
 									<input type="text" id="to" class="form-control"
 										placeholder="종료 날짜 설정" name="sgEndDate" required>
-									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">종료 기간 설정</div>
 								</div>
 							</div>
@@ -105,13 +102,11 @@
 								<div class="col">
 									<input type="text" class="form-control" placeholder="지역 입력"
 										name="sgAddr" required>
-									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">지역입력 예) 서울</div>
 								</div>
 								<div class="col">
 									<input type="text" class="form-control" placeholder="장소 입력"
 										name="sgLocation" required>
-									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">장소입력 예) xxx커피집</div>
 								</div>
 							</div>
@@ -120,14 +115,12 @@
 							<div class="row">
 								<div class="col">
 									<input type="number" min="0" class="form-control"
-										placeholder="보증금 입력" name="sgDeposit" required>
-									<div class="valid-feedback">Valid.</div>
-									<div class="invalid-feedback">인당 보증급 설정</div>
+										placeholder="가입시 호두 필요 갯수" name="sgDeposit" required>
+									<div class="invalid-feedback">가입시 호두 필요 갯수</div>
 								</div>
 								<div class="col">
 									<input type="number" min="1" class="form-control"
 										placeholder="모집 인원" name="sgMaxPeople" required>
-									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">모집 인원 설정</div>
 								</div>
 							</div>
@@ -136,7 +129,6 @@
 								<div class="col">
 									<input type="text" id="teg" class="form-control"
 										placeholder="검색어 등록" name="sgTag" required>
-									<div class="valid-feedback">Valid.</div>
 									<div class="invalid-feedback">검색어 입력 예) @JAVA</div>
 								</div>
 							</div>

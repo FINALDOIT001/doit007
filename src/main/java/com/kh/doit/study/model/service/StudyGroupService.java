@@ -277,6 +277,8 @@ public interface StudyGroupService {
 	  * @return
 	  */
 	ArrayList<StudyGroup> AdDepositeManager();
+
+	Member memberHodu(int mno);
 	
 	
 	

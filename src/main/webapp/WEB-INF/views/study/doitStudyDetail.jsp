@@ -542,7 +542,7 @@
 											<input type="text" class="form-control"
 												placeholder="공부 주제 입력" name="ssTitle" id="ssTitle"
 												pattern=".{2,15}" required>
-											<div class="valid-feedback">Valid.</div>
+											<div class="valid-feedback"> </div>
 											<div class="invalid-feedback" name="checkchar">공부 주제
 												10글자 이내 입력 요망</div>
 											<!-- 방 개설 자 아이디 자동 입력 구간-->
@@ -553,7 +553,7 @@
 										<div class="col">
 											<input type="time" class="form-control" name="ssTimeDate"
 												id="ssTimeDate" required>
-											<div class="valid-feedback">Valid.</div>
+											<div class="valid-feedback"> </div>
 											<div class="invalid-feedback">만남 시간 설정</div>
 										</div>
 										<div class="col">
@@ -569,7 +569,7 @@
 											<input type="date" class="form-control" id="dailyDate"
 												min="${sgStartDate}" max="${sgEndDate}" name="ssDayDate"
 												value="${sgStartDate}" required>
-											<div class="valid-feedback">Valid.</div>
+											<div class="valid-feedback"> </div>
 											<div class="invalid-feedback">스터디 일정 설정</div>
 										</div>
 									</div>
@@ -1092,8 +1092,7 @@
 	
 	<script>
 		function noHodu(){
-			
-			if(${loginUser.mhodu} == 0) {
+			if( (${mem.mhodu} - ${sg.sgDeposit}) < 0 ) {
 				alert("호두를 충전해주세요.");
 				location.href="myinfo.me?mId="+"${loginUser.mId}"+"&mno="+"${loginUser.mno}";
 			}else{

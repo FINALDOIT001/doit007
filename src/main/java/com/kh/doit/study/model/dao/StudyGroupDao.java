@@ -297,4 +297,9 @@ public class StudyGroupDao {
 
 	}
 
+	public Member memberHodu(int mno) {
+		
+		return sqlSession.selectOne("memberMapper.selectHodunum", mno);
+	}
+
 }

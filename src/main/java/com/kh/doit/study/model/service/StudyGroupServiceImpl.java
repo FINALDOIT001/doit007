@@ -403,6 +403,13 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		
 		return sgDao.AdDepositeManager();
 	}
+
+
+	@Override
+	public Member memberHodu(int mno) {
+
+		return sgDao.memberHodu(mno);
+	}
 	
 
 }
