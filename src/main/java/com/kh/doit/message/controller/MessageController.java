@@ -81,7 +81,7 @@ public class MessageController {
 		
 		Gson gson = new GsonBuilder().create();
 		
-		gson.toJson(list,response.getWriter());
+		gson.toJson(list,response.getWriter()); 
 		
 	}
 	

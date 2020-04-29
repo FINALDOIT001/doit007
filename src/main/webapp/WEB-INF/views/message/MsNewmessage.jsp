@@ -241,7 +241,7 @@
 										console.log("성공 : " + data[1] );
 										successList.push(data[1]);
 									}else{
-										
+										 
 										console.log("실패 : " + data[1] );
 										failList.push(data[1]);
 										

@@ -22,9 +22,9 @@
 				<th width="5%" class="th1">회원번호</th>
 				<th width="10%" class="th1">이름</th>
 				<th width="10%" class="th1">아이디</th>
-				<th width="15%" class="th1">호두</th>
-				<th width="15%" class="th1">가입날짜</th>
-				<th width="15%" class="th1">최근접속일</th>
+				<th width="10%" class="th1">호두</th>
+				<th width="10%" class="th1">가입날짜</th>
+				<th width="10%" class="th1">최근접속일</th>
 				
 			</tr>
 		</thead>
