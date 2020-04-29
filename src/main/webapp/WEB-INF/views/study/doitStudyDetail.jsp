@@ -1062,6 +1062,7 @@
 	
 	<script>
 		function noHodu(){
+			
 			if(${loginUser.mhodu} == 0) {
 				alert("호두를 충전해주세요.");
 				location.href="myinfo.me?mId="+"${loginUser.mId}"+"&mno="+"${loginUser.mno}";

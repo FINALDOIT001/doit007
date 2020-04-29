@@ -373,9 +373,7 @@
 	
 	<update id="sgJoinMember">
 		UPDATE STUDY_GROUP SET
-		<if test="">
 		SG_NOWPEOPLE = SG_NOWPEOPLE + 1
-		</if>
 		WHERE SG_NO = #{sgNo}
 	</update>
 
