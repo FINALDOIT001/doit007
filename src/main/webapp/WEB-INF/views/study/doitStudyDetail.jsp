@@ -193,23 +193,42 @@
 								</c:url> <c:url var="sgStart" value="sgStart.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 								</c:url> <c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
-									<button class="genric-btn info radius"
-										style="margin-bottom: 10px; width: 130px;"
-										<%-- onclick="location.href='${sgJoin}'" --%>
-										onclick="noHodu();">스터디 가입</button>
+								
+								
+										<c:if test="${count > 0}">
+										
+										<button class="genric-btn info radius"
+												style="margin-bottom: 10px; width: 130px;"
+												disabled='disabled'> 참여 완료</button>
+											
+										</c:if>
+										<c:if test="${count== 0}">
+											<button class="genric-btn info radius"
+												style="margin-bottom: 10px; width: 130px;"
+												<%-- onclick="location.href='${sgJoin}'" --%>
+												onclick="noHodu();">스터디 참여</button>
+												 
+											
+										</c:if>
+										
+									
+								</c:if>
 										
 										
-										
-								</c:if> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+								 <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 									<button class="genric-btn info radius"
 										style="margin-bottom: 10px; width: 130px;"
 										onclick="location.href='${sgStart}'">스터디 시작</button>
-								</c:if> <c:url var="sgUpview" value="sgUpview.go">
+								</c:if> 
+
+								
+								<c:url var="sgUpview" value="sgUpview.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 								</c:url> <c:url var="sgDelete" value="sgDelete.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 								</c:url> <c:url var="sgGroupOut" value="sgGroupOut.go">
 									<c:param name="mno" value="${loginUser.mno}" />
+									<c:param name="sgNo" value="${sg.sgNo}"/>
 								</c:url> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 									<button class="genric-btn danger radius" style="width: 130px;"
 										onclick="location.href='${sgUpview}'">스터디 수정</button>

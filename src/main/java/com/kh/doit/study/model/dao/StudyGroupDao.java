@@ -285,4 +285,9 @@ public class StudyGroupDao {
 		sqlSession.update("studyGroupMapper.sgJoinHodu", m);
 	}
 
+	public int sgGroupOutCount(int sgNo) {
+		
+		return sqlSession.update("studyGroupMapper.sgGroupOutCount", sgNo);
+	}
+
 }

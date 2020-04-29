@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="${contextPath}/resources/css/hyerim.css">
 <script src="${contextPath}/resources/js/jungho.js"></script>
 
-
 </head>
 
 
@@ -58,34 +57,6 @@
 								</div>
 							</form>
 						</aside>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<button type="button"
-						class="btn btn-block btn-light btn-filter dropdown-toggle"
-						style="width: 80px; height: 50px;" data-toggle="dropdown"
-						aria-expanded="false">태그</button>
-					<div class="dropdown-menu">
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Java</label> <label
-							class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">HTML</label> <label
-							class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">C+</label> <label
-							class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
-						<label class="dropdown-item_h" href="#" style="display: inline;"><input
-							type="checkbox" class="form-check-input" value="">Spring</label>
 					</div>
 				</div>
 				<div class="col-lg-4">
