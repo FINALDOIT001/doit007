@@ -388,6 +388,12 @@
 				                <input type="range" class="openPush" min="0" max="100" value="2" step="1" onchange="openPay(this);">
 				            </div>
 				        </c:if>
+				        <c:if test="${sg.sgPayment eq 'Y' && sessionScope.loginUser.mno ne sg.sgWriterNo}">
+		                    <div style="height:400px; margin:auto;">
+								<h1 align="center" style="margin-bottom:300px;">
+								<img src="${pageContext.request.contextPath}/resources/img/fail.jpeg" alt="logo"><br>팀장님의 호두결제가 필요합니다 . <br><br>
+							</div>
+						</c:if>
     			</div>
     <!------------------------------------- /자료실 --------------------------------------->
     
@@ -480,8 +486,7 @@
                             </c:forEach>
                         </div>
                         </c:if>
-
-                    <c:if test="${sg.sgPayment eq 'Y'}">
+                    <c:if test="${sg.sgPayment eq 'Y' && sessionScope.loginUser.mno eq sg.sgWriterNo}">
                             <br>
                             <div class="openPush_back">
                                 <div class="bat" style="color:rgb(200,200,200); font-size:1.5em; margin-left: 475px;">99%</div>
@@ -494,6 +499,12 @@
                                 <input type="range" class="openPush" min="0" max="100" value="2" step="1" onchange="openPay(this);">
                             </div>
                     </c:if>
+                    <c:if test="${sg.sgPayment eq 'Y' && sessionScope.loginUser.mno ne sg.sgWriterNo}">
+	                    <div style="height:400px; margin:auto;">
+							<h1 align="center" style="margin-bottom:300px;">
+							<img src="${pageContext.request.contextPath}/resources/img/fail.jpeg" alt="logo"><br>팀장님의 호두결제가 필요합니다 . <br><br>
+						</div>
+					</c:if>
                 </div>
     </div>
 	</section>
