@@ -48,6 +48,11 @@ public class QnaServiceImpl implements QnaService {
 	public ArrayList<Qna> AdBoardQnA() {
 		return qDao.AdBoardQnA();
 	}
+
+	@Override
+	public int QNAdelete(String[] delList) {
+		return qDao.QNAdelete(delList);
+	}
 	
 	
 

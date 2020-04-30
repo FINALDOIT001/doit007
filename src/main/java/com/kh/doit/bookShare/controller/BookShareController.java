@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -247,6 +248,32 @@ public class BookShareController {
 			return "common/errorPage.jsp";
 		}
 		
+	}
+	
+	/**
+	  * @Method Name : BSDelete
+	  * @작성일 : Apr 30, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 신고 게시판 삭제
+	  * @param request
+	  * @param response
+	  * @param delList
+	  * @throws JsonIOException
+	  * @throws IOException
+	  */
+	@RequestMapping(value="deleteBs2.do",method= {RequestMethod.GET, RequestMethod.POST})
+	public void BSDelete(HttpServletRequest request,
+							  HttpServletResponse response,
+							  @RequestParam String[] delList
+							  ) throws JsonIOException, IOException {
+		
+		int result = bsService.BSDelete(delList);
+
+		Gson gson = new GsonBuilder().create();
+		
+		gson.toJson(result,response.getWriter());
+			
 	}
 	
 	/**

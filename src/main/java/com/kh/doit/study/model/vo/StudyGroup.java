@@ -69,7 +69,6 @@ public class StudyGroup {
 	public void setSgNo(int sgNo) {
 		this.sgNo = sgNo;
 	}
-
 	public String getSgTitle() {
 		return sgTitle;
 	}

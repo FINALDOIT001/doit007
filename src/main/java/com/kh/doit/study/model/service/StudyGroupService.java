@@ -277,6 +277,17 @@ public interface StudyGroupService {
 	  * @return
 	  */
 	ArrayList<StudyGroup> AdDepositeManager();
+
+	/**
+	  * @Method Name : FSGDelete
+	  * @작성일 : May 1, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 :
+	  * @param delList
+	  * @return
+	  */
+	int FSGDelete(String[] delList);
 	
 	
 	

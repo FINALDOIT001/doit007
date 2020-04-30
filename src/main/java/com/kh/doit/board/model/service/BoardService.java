@@ -82,4 +82,15 @@ public interface BoardService {
 	  */
 	ArrayList<Board> AdBoardFree();
 
+	/**
+	  * @Method Name : BSDelete
+	  * @작성일 : Apr 30, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 보드 일괄 삭제
+	  * @param delList
+	  * @return
+	  */
+	int BSDelete(String[] delList);
+
 }

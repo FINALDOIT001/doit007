@@ -394,6 +394,16 @@
 		FROM STUDY_GROUP
 	</select>
 	
+	<update id="FSGDelete" parameterType="java.util.ArrayList">
+		UPDATE STUDY_GROUP
+		SET SG_STATUS_YN='N'
+		WHERE SG_NO IN (
+	<foreach collection="array" item="item" index="index" separator=",">
+		${item}
+	</foreach>
+	)
+</update>
+	
 </mapper>
     
     

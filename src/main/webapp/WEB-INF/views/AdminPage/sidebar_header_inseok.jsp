@@ -65,6 +65,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <!-- <h6 class="collapse-header">Custom Components:</h6> -->
             <a class="collapse-item" href="AdMemMani.ad">회원 정보 조회</a>
+            <a class="collapse-item" href="MemberReport.ad">신고 회원 조회</a>
             <!-- <a class="collapse-item" href="cards.html">Cards</a> -->
           </div>
         </div>
@@ -92,11 +93,12 @@
         </a>
         <div id="collapseUtilities2" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
-            <a class="collapse-item" href="AdBNotice.ad">책나눔 관리</a>
+            <!-- <a class="collapse-item" href="AdBNotice.ad">책나눔 관리</a>
             <a class="collapse-item" href="AdBFree.ad">자유게시판</a>
-<!--        <a class="collapse-item" href="utilities-color.html">행사게시판</a> -->
-            <a class="collapse-item" href="AdBQnA.ad">Q & A</a>
+            <a class="collapse-item" href="AdBQnA.ad">Q & A</a> -->
+            <a class="collapse-item" href="BookShareReport.ad">책나눔 관리</a>
+            <a class="collapse-item" href="FreeBoardReport.ad">자유게시판</a>
+            <a class="collapse-item" href="QnaReport.ad">Q & A</a>
           </div>
         </div>
       </li>
@@ -150,13 +152,13 @@
             </li>
 
             <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
+           <!-- <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
+                Counter - Alerts
                 <span class="badge badge-danger badge-counter">알람+</span>
               </a>
-              <!-- Dropdown - Alerts -->
+              Dropdown - Alerts
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                   긴급처리 알람
@@ -198,14 +200,14 @@
               </div>
             </li>
 
-            <!-- Nav Item - Messages -->
+            Nav Item - Messages
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
-                <!-- Counter - Messages -->
+                Counter - Messages
                 <span class="badge badge-danger badge-counter">쪽지+</span>
               </a>
-              <!-- Dropdown - Messages -->
+              Dropdown - Messages
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
                   쪽지
@@ -256,13 +258,13 @@
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
-            <!-- Nav Item - User Information -->
+            Nav Item - User Information
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrator</span>
                 <img class="img-profile rounded-circle" src="https://newsimg.sedaily.com/2019/01/23/1VE5F3W5WP_18.png">
               </a>
-              <!-- Dropdown - User Information -->
+              Dropdown - User Information
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -284,7 +286,7 @@
               </div>
             </li>
 
-          </ul>
+          </ul>  -->
 
         </nav>
         <!-- End of Topbar -->

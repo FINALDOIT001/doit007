@@ -102,8 +102,12 @@
 									<c:param name="currentPage" value="${pi.currentPage}" />
 									<c:param name="mno" value="${sessionScope.loginUser.mno}"/>
 								</c:url>
+								
 								<a href="${sgDetail}" style="display: block;"><label
-									style="font-size: x-large; font-weight: bold;">${sg.sgTitle}</label></a>
+									style="font-size: x-large; font-weight: bold;">${sg.sgTitle}
+									
+									</label>
+								</a>
 								
 								<c:if test="${sg.sgConfirm eq 'Y'}">
 									<h5 class="mb-2 text-primary" style="font-weight: bold;">모집
@@ -161,8 +165,11 @@
 
 										<li class="study_tag">${teg}</li>
 									</c:forTokens>
-
 								</ul>
+								<a href="report.rp?rpUserID=${sg.sgTitle}&rpTitle=${ sg.sgTitle }&rpBno=${sg.sgNo}&rpBType=STUDYGROUP" onclick="window.open(this.href, '_blanck', 'width=700, height=700, scrollbars=no'); return false">
+									<i class="fas fa-exclamation-circle" style="color:#ffa8a8;">&nbsp;신고하기</i>
+								</a>
+								
 							</div>
 							<div class="col-lg-12">
 								<hr>

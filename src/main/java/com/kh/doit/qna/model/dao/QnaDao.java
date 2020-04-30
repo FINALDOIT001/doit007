@@ -79,6 +79,10 @@ public class QnaDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.AdBoardQnA");
 	}
 
+	public int QNAdelete(String[] delList) {
+		return sqlSession.update("boardMapper.QNAdelete", delList);
+	}
+
 	
 
 }

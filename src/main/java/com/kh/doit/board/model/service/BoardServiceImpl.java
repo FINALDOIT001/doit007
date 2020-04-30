@@ -77,4 +77,9 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.AdBoardFree();
 	}
 
+	@Override
+	public int BSDelete(String[] delList) {
+		return bDao.BSDelete(delList);
+	}
+
 }

@@ -403,6 +403,12 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 		
 		return sgDao.AdDepositeManager();
 	}
+
+
+	@Override
+	public int FSGDelete(String[] delList) {
+		return sgDao.FSGDelete(delList);
+	}
 	
 
 }

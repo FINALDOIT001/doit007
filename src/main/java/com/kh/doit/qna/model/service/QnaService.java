@@ -63,4 +63,15 @@ public interface QnaService {
 	  */
 	ArrayList<Qna> AdBoardQnA();
 
+	/**
+	  * @Method Name : QNAdelete
+	  * @작성일 : Apr 30, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 :QNA 삭제
+	  * @param delList
+	  * @return
+	  */
+	int QNAdelete(String[] delList);
+
 }

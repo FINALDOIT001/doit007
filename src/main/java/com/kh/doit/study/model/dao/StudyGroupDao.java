@@ -297,4 +297,8 @@ public class StudyGroupDao {
 
 	}
 
+	public int FSGDelete(String[] delList) {
+		return sqlSession.update("studyGroupMapper.FSGDelete", delList);
+	}
+
 }
