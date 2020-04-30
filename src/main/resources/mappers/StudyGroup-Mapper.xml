@@ -78,6 +78,9 @@
 		<result property="g_Original_FileName"
 			column="G_ORGINAL_FILENAME" />
 		<result property="g_Rename_FileName" column="G_RENAME_FILENAME" />
+		<result property="g_Num" column="G_NUM" />
+		<result property="g_Status" column="G_STATUS" />
+		<result property="count" column="COUNT" />
 	</resultMap>
 
 	<resultMap id="studyLikeResultSet" type="StudyLike">
@@ -189,7 +192,7 @@
 
 	<insert id="photoUpload" parameterType="Gallery">
 		INSERT INTO GALLERY
-		VALUES(SEQ_GNO.NEXTVAL,#{g_Sg_No},#{g_Title},#{g_Writer},#{g_Writer_No},#{g_Con},DEFAULT,#{g_Original_FileName},#{g_Rename_FileName},#{g_Num})
+		VALUES(SEQ_GNO.NEXTVAL,#{g_Sg_No},#{g_Title},#{g_Writer},#{g_Writer_No},#{g_Con},DEFAULT,#{g_Original_FileName},#{g_Rename_FileName},#{g_Num},DEFAULT)
 	</insert>
 
 	<insert id="sgDailyinsert" parameterType="DailyStudy">
@@ -244,6 +247,7 @@
 		FROM Gallery
 		WHERE
 		G_SG_NO = #{sgNo}
+		AND G_STATUS = 'Y'
 	</select>
 
 	<select id="selectGallery" resultMap="galleryResultSet">
@@ -259,6 +263,7 @@
 		FROM Gallery
 		WHERE G_NUM
 		= #{g_Num}
+		AND G_STATUS = 'Y'
 	</select>
 
 	<select id="searchCount" parameterType="hashmap"
@@ -454,6 +459,21 @@
 		FROM
 		STUDY_GROUP
 	</select>
+	
+	<select id="viewPhoto" resultMap="galleryResultSet">
+		SELECT (select count(*) from gallery where g_status = 'Y') as COUNT, G_NO, G_SG_NO, G_TITLE, G_WRITER, G_WRITER_NO, G_CON, G_DATE, G_ORGINAL_FILENAME, G_RENAME_FILENAME, G_NUM
+		FROM gallery
+		WHERE g_no = (SELECT MAX(g_no)
+              		  FROM gallery)
+        AND G_STATUS = 'Y'
+	</select>
+	
+	<update id="gDelete" parameterType="_int">
+		UPDATE GALLERY
+		SET G_STATUS = 'N'
+		WHERE G_NUM = #{g_Num}
+	</update>
+	
 
 </mapper>
     

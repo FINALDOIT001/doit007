@@ -302,4 +302,14 @@ public class StudyGroupDao {
 		return sqlSession.selectOne("memberMapper.selectHodunum", mno);
 	}
 
+	public Gallery viewPhoto() {
+		
+		return sqlSession.selectOne("studyGroupMapper.viewPhoto");
+	}
+
+	public int gDelete(int gNum) {
+
+		return sqlSession.update("studyGroupMapper.gDelete",gNum);
+	}
+
 }

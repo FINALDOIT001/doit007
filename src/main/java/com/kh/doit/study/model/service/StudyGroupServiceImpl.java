@@ -411,6 +411,20 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 
 		return sgDao.memberHodu(mno);
 	}
+
+
+	@Override
+	public Gallery viewPhoto() {
+		
+		return sgDao.viewPhoto();
+	}
+
+
+	@Override
+	public int gDelete(int gNum) {
+
+		return sgDao.gDelete(gNum);
+	}
 	
 
 }

@@ -299,6 +299,8 @@ public class StudyGroupController {
 
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
+		
+		Gallery gal = sgService.viewPhoto();
 
 		if (sg != null) {
 			mv.addObject("sg", sg)
@@ -309,6 +311,7 @@ public class StudyGroupController {
 			.addObject("count",count)
 			.addObject("galleryList",galleryList)
 			.addObject("mem", mem)
+			.addObject("gal", gal)
 			.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
@@ -560,12 +563,14 @@ public class StudyGroupController {
 	 */
 	@RequestMapping("photoUpload.go")
 	public String photoUpload(Gallery g, HttpServletRequest request,
-			@RequestParam(name = "filedata") MultipartFile[] file) throws Exception {
+			@RequestParam(name = "filedata") MultipartFile[] file , int g_Sg_No, int g_Writer_No) throws Exception {
 		
 		int result = 0;
 		
+		System.out.println("rnrnrn11 : "+file.length);
+		
 		for (int i = 0; i < file.length; i++) {
-			if (file.length > 0) {
+			if (file[i].getOriginalFilename() != "") {
 				
 				String g_RenameFile = saveMultiFile(file[i], request);
 				
@@ -585,7 +590,7 @@ public class StudyGroupController {
 		System.out.println("photoUpload : " + result);
 		
 		if(result > 0) {
-			return "redirect:sgList.go";
+			return "redirect:studyDetail.go?sgNo=" + g_Sg_No + "&mno=" + g_Writer_No;
 		}else {
 			return "common/errorPage";
 		}
@@ -934,7 +939,18 @@ public class StudyGroupController {
 	}
 	
 	
-	
+	@RequestMapping("gDelete.go")
+	private String gDelete(ModelAndView mv, int gNum, int sgNo, int mNo) {
+
+		int result = sgService.gDelete(gNum);
+
+		if (result > 0) {
+			return "redirect:studyDetail.go?sgNo="+sgNo+"&mno="+mNo;
+		} else {
+			mv.addObject("msg", "삭제 하기 실패");
+			return "common/errorPage";
+		}
+	}
 	
 	
 }

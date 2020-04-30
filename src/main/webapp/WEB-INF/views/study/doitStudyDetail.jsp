@@ -411,8 +411,13 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <div class="about_img">
-                            <img src="${contextPath}/resources/img/about.png" alt="">
+                        <div>
+                        	<c:if test="${!empty gal.g_Rename_FileName}">
+                            <img src="${contextPath}/resources/sgUploadFiles/${gal.g_Rename_FileName}" alt="" style="width:500px; height:500px;">
+                            </c:if>
+                            <c:if test="${empty gal.g_Rename_FileName}">
+                            <img src="${contextPath}/resources/img/noimg.gif" alt="" style="width:600px; height:350px;">
+                            </c:if>
                         </div>
                     </div>
                     <div class="offset-lg-1 col-lg-5 col-sm-8 col-md-6">
@@ -423,22 +428,27 @@
                             <h5>
                                 <ul>
                                     <!-- 아이콘 : font Awesome -->
-                                    <li style="margin-bottom: 3px;"><i
-                                        class="fas fa-street-view"></i>&nbsp;&nbsp;&nbsp;지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;역
-                                        &nbsp;:&nbsp; ${sg.sgAddr}</li>
-                                    <li style="margin-bottom: 3px;"><i
-                                        class="fas fa-medal"></i>&nbsp;&nbsp;&nbsp;작&nbsp;&nbsp;성&nbsp;&nbsp;자
-                                        &nbsp;:&nbsp; ${sg.sgWriter}</li>
+                                    <c:if test="${!empty gal.g_Writer}">
+			                            <li style="margin-bottom: 3px;"><i
+	                                        class="fas fa-medal"></i>&nbsp;&nbsp;&nbsp;작&nbsp;&nbsp;성&nbsp;&nbsp;자
+	                                        &nbsp;:&nbsp;${gal.g_Writer}</li>
+		                            </c:if> 
+                                    <c:if test="${empty gal.g_Writer}">
+			                            <li style="margin-bottom: 3px;"><i
+	                                        class="fas fa-medal"></i>&nbsp;&nbsp;&nbsp;작&nbsp;&nbsp;성&nbsp;&nbsp;자
+	                                        &nbsp;&nbsp;</li>
+		                            </c:if>    
+                                        
                                     <li style="margin-bottom: 3px;"><i
                                         class="fas fa-coins"></i>&nbsp;&nbsp;&nbsp;내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용
-                                        &nbsp;:&nbsp;
-                                        가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하</li>
+                                        &nbsp;&nbsp;${gal.g_Con}</li>
                                 </ul>
                             </h5>
                             <br> <br> <br>
 
                             <c:url var="galleryInsertFrom" value="galleryInsertFrom.go">
                                 <c:param name="sgNo" value="${sg.sgNo}" />
+                                <c:param name="mno" value="${loginUser.mno}" />
                             </c:url>
                             <a class="btn_1" style="float: right;"
                                 href="${galleryInsertFrom}">사진 추가</a>
@@ -446,7 +456,7 @@
                             <div class="about_part_counter">
                                 <div class="single_counter">
                                     <p style="font-size: 30px; width: 390px;">
-                                        저장된 사진&nbsp;<span class="counter" style="color: red;">1000</span>&nbsp;장
+                                        저장된 사진&nbsp;<span class="counter" style="color: red;">${gal.count}</span>&nbsp;장
                                     </p>
                                 </div>
                             </div>
@@ -455,7 +465,7 @@
                 </div>
             </div>
         </section>
-
+		<br><br><br>
         <div class="page-wrap">
             <!-- Main -->
             <section id="main">
@@ -475,13 +485,16 @@
                                     <c:param name="gNo" value="${g.g_No}" />
                                     <c:param name="gNum" value="${g.g_Num}" />
                                 </c:url>
-                                <div class="media all people"
-                                    style="display: inline-block; max-width: 20%; margin: 5px;">
-                                    <a href="${gDetail}"> <img
-                                        src="${contextPath}/resources/sgUploadFiles/${g.g_Rename_FileName}"
-                                        style="width: 200px; height: 200px;"
-                                        title="This right here is a caption." /></a> <span hidden>${g.g_No}</span><span
-                                        hidden>${g.g_Num}</span>
+                                <div style="display:inline-block; margin:5px;">
+                                    <a href="${gDetail}">
+                                    <c:if test="${g.g_Rename_FileName eq null}">
+                                    	<img src="${contextPath}/resources/img/noimg.gif" style="width: 200px; height: 200px;"/></a>
+                                    </c:if>
+                                    <c:if test="${g.g_Rename_FileName ne null}">
+                                    	<img src="${contextPath}/resources/sgUploadFiles/${g.g_Rename_FileName}" style="width: 200px; height: 200px;" /></a>
+                                    </c:if>
+                                    <span hidden>${g.g_No}</span>
+                                    <span hidden>${g.g_Num}</span>
                                 </div>
                             </c:forEach>
                         </div>

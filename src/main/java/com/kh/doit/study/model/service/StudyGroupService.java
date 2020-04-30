@@ -284,6 +284,10 @@ public interface StudyGroupService {
 	ArrayList<StudyGroup> AdDepositeManager();
 
 	Member memberHodu(int mno);
+
+	Gallery viewPhoto();
+
+	int gDelete(int gNum);
 	
 	
 	
