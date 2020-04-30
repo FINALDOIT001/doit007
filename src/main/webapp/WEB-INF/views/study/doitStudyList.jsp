@@ -44,7 +44,8 @@
 							<aside class="single_sidebar_widget search_widget">
 								<div class="form-group">
 									<div class="input-group mb-3">
-										<select class="form-control" name="selectoption" id="selectoption">
+										<select class="form-control" name="selectoption"
+											id="selectoption">
 											<option>-----</option>
 											<option value="title">제목</option>
 											<option value="city">지역</option>
@@ -62,7 +63,7 @@
 								<div class="form-group">
 									<div class="input-group mb-3">
 										<input type="text" name="searchName" id="searchName"
-											class="form-control placeholder hide-on-focus"
+											class="form-control" onkeydown="JavaScript:"
 											placeholder="스터디 이름을 검색하세요.">
 										<div class="input-group-append">
 											<button class="btn" type="button" id="searchBtn">
@@ -252,23 +253,34 @@
 	<jsp:include page="../common/footer.jsp" />
 
 	<script>
-
 		$('#searchBtn').on('click', function() {
+			enterkey();
+		});
+
+		$("#searchName").keydown(function(event) {
+			if (event.keyCode == 13) {
+				enterkey();
+
+			}
+			;
+		});
+
+		function enterkey() {
+
 			var searchName = $("#searchName").val();
 			var selectOption = $("#selectoption").val();
-			if(searchName == '' || searchName == null){
+			if (searchName == '' || searchName == null) {
 				alert("검색어를 입력해주세요");
 				return;
 			}
-			if(selectOption=='' || selectOption== null){
+			if (selectOption == '-----' || selectOption == null) {
 				alert("SELETC OPTION 선택해주세요!!");
 				return;
 			}
 			$("#studySearch").attr("action", "studySearch.go");
-			$("#studySearch").attr("method", "POST");
 			$("#studySearch").submit();
-			
-		});
+
+		};
 	</script>
 </body>
 

@@ -686,7 +686,7 @@ public class StudyGroupController {
 	 * @param currentPage
 	 * @return
 	 */
-	@RequestMapping(value="studySearch.go", method = RequestMethod.POST)
+	@RequestMapping("studySearch.go")
 	public ModelAndView studySearch(ModelAndView mv, String searchName, String selectoption,
 				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		
