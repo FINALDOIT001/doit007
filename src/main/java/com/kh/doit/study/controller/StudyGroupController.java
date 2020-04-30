@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -268,7 +269,6 @@ public class StudyGroupController {
 
 		ArrayList<Member> ml = sgService.memberList(sgNo);
 		
-		
 		if(mno != "" && mno !=null) {
 			for(Member m : ml) {
 				if(m.getMno() == Integer.parseInt(mno)) {
@@ -278,13 +278,16 @@ public class StudyGroupController {
 		}
 		
 		StudyLike sl = new StudyLike();
+		Member mem = new Member();
 		if(mno != "" && mno !=null) {
 		
 		String slNo= mno+sgNo;
 		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
 		
-			 sl = sgService.studyLikeList(slNo);
+			sl = sgService.studyLikeList(slNo);
 			System.out.println("studyList" + sl);
+			
+			mem = sgService.memberHodu(Integer.parseInt(mno));
 		}
 		
 		
@@ -305,6 +308,7 @@ public class StudyGroupController {
 			.addObject("etc",etc)
 			.addObject("count",count)
 			.addObject("galleryList",galleryList)
+			.addObject("mem", mem)
 			.setViewName("study/doitStudyDetail");
 		} else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
@@ -742,30 +746,40 @@ public class StudyGroupController {
 	
 	/**
 	 * 검색으로 스터디 리스트 찾기 Kwon
+	 * Select 옵션으로 검색 조건 추가 정호 수정함
+	 * 2020.04.30 jungho
 	 * 2020.04.23 KH
 	 * @param mv
 	 * @param ssSearch
 	 * @param currentPage
 	 * @return
 	 */
-	@RequestMapping("studySearch.do")
-	public ModelAndView studySearch(ModelAndView mv, String ssSearch,
+	@RequestMapping("studySearch.go")
+	public ModelAndView studySearch(ModelAndView mv, String searchName, String selectoption,
 				@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-		System.out.println(currentPage);
-
-		int listCount = sgService.getSearchListCount(ssSearch);
-
-		System.out.println("servlet 검색 스터디 카운트 : " + listCount);
-
-		PageInfojung pi = paginationJung.getPageInfo(currentPage, listCount);
-
-		ArrayList<StudyGroup> sgList = sgService.selectSearchList(pi, ssSearch);
-
-		mv.addObject("sgList", sgList);
-		mv.addObject("pi", pi);
-		mv.addObject("listCount", listCount);
-		mv.setViewName("study/doitStudyList");
-
+		
+			HashMap<String, String> slSearch = new HashMap<>();
+			
+			slSearch.put("selectoption", selectoption);
+			slSearch.put("searchName", searchName);
+			
+			System.out.println(slSearch.values());
+			System.out.println(slSearch);
+		
+		
+		  int listCount = sgService.getSearchListCount(slSearch);
+		  
+		  System.out.println("servlet 검색 스터디 카운트 : " + listCount);
+		  
+		  PageInfojung pi = paginationJung.getPageInfo(currentPage, listCount);
+		  
+		
+		 ArrayList<StudyGroup> sgList = sgService.selectSearchList(pi, slSearch);
+		
+		 mv.addObject("sgList", sgList); mv.addObject("pi", pi);
+		 mv.addObject("listCount", listCount); mv.setViewName("study/doitStudyList");
+		 
+		 
 		return mv;
 	}
 	

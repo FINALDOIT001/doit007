@@ -2,6 +2,7 @@ package com.kh.doit.study.model.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -264,8 +265,8 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	 * 스터디 검색 카운트 가져오기 Kwon
 	 */
 	@Override
-	public int getSearchListCount(String ssSearch) {
-		return sgDao.getSearchListCount(ssSearch);
+	public int getSearchListCount(HashMap<String, String> slSearch) {
+		return sgDao.getSearchListCount(slSearch);
 	}
 
 
@@ -273,8 +274,8 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	 * 검색한 스터디 리스트 가져오기 Kwon
 	 */
 	@Override
-	public ArrayList<StudyGroup> selectSearchList(PageInfojung pi, String ssSearch) {
-		return sgDao.selectSearchList(pi, ssSearch);
+	public ArrayList<StudyGroup> selectSearchList(PageInfojung pi, HashMap<String, String> slSearch) {
+		return sgDao.selectSearchList(pi, slSearch);
 	}
 
 
@@ -408,6 +409,11 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 	@Override
 	public int FSGDelete(String[] delList) {
 		return sgDao.FSGDelete(delList);
+	}
+
+	public Member memberHodu(int mno) {
+
+		return sgDao.memberHodu(mno);
 	}
 	
 

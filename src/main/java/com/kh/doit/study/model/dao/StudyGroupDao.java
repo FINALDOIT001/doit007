@@ -2,7 +2,7 @@ package com.kh.doit.study.model.dao;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -160,11 +160,11 @@ public class StudyGroupDao {
 	/**
 	 * 검색 리스트 카운트 가져오기 Kwon
 	 * 2020.04.23 KH
-	 * @param ssSearch
+	 * @param slSearch
 	 * @return
 	 */
-	public int getSearchListCount(String ssSearch) {
-		return sqlSession.selectOne("studyGroupMapper.searchCount", ssSearch);
+	public int getSearchListCount(HashMap<String, String> slSearch) {
+		return sqlSession.selectOne("studyGroupMapper.searchCount", slSearch);
 	}
 
 	/**
@@ -174,12 +174,12 @@ public class StudyGroupDao {
 	 * @param ssSearch
 	 * @return
 	 */
-	public ArrayList<StudyGroup> selectSearchList(PageInfojung pi, String ssSearch) {
+	public ArrayList<StudyGroup> selectSearchList(PageInfojung pi, HashMap<String, String> slSearch) {
 		int offset = (pi.getCurrentPage()-1)*pi.getBoardLimit();
 		
 		RowBounds rowBound = new RowBounds(offset,pi.getBoardLimit());
 		
-		return(ArrayList)sqlSession.selectList("studyGroupMapper.selectSearchList", ssSearch, rowBound);
+		return(ArrayList)sqlSession.selectList("studyGroupMapper.selectSearchList", slSearch, rowBound);
 	}
 
 	/**
@@ -295,6 +295,11 @@ public class StudyGroupDao {
 		
 		return sqlSession.update("studyGroupMapper.sgGroupOutCount", sgNo);
 
+	}
+
+	public Member memberHodu(int mno) {
+		
+		return sqlSession.selectOne("memberMapper.selectHodunum", mno);
 	}
 
 	public int FSGDelete(String[] delList) {

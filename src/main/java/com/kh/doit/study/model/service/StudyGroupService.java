@@ -1,6 +1,7 @@
 package com.kh.doit.study.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.doit.member.model.vo.Member;
 import com.kh.doit.study.model.vo.DailyStudy;
@@ -179,19 +180,23 @@ public interface StudyGroupService {
 	
 	/**
 	 * 검색으로 리스트 카운트 가져오기 Kwon
+	 * Select 옵션으로 검색 조건 추가 정호 수정함
+	 * 2020.04.30 jungho
 	 * 2020.04.23 KH
-	 * @param ssSearch
+	 * @param slSearch
 	 * @return
 	 */
-	int getSearchListCount(String ssSearch);
+	int getSearchListCount(HashMap<String, String> slSearch);
 
 	/**
 	 * 검색으로 리스트 가져오기 Kwon
+	 * Select 옵션으로 검색 조건 추가 정호 수정함
+	 * 2020.04.30 jungho
 	 * @param pi
-	 * @param ssSearch
+	 * @param slSearch
 	 * @return
 	 */
-	ArrayList<StudyGroup> selectSearchList(PageInfojung pi, String ssSearch);
+	ArrayList<StudyGroup> selectSearchList(PageInfojung pi, HashMap<String, String> slSearch);
 
 	/**
 	 * 자료실 추가 Kwon
@@ -278,6 +283,7 @@ public interface StudyGroupService {
 	  */
 	ArrayList<StudyGroup> AdDepositeManager();
 
+
 	/**
 	  * @Method Name : FSGDelete
 	  * @작성일 : May 1, 2020
@@ -288,6 +294,9 @@ public interface StudyGroupService {
 	  * @return
 	  */
 	int FSGDelete(String[] delList);
+
+	Member memberHodu(int mno);
+
 	
 	
 	
