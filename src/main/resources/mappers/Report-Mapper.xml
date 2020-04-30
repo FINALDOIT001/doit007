@@ -17,16 +17,235 @@
 	<result property="rpDate2" column="RP_DATE2" />
 	<result property="rpStatus" column="RP_STATUS" />
 </resultMap>
+
+<resultMap id="memberResultSet" type="Member">
+	<id property="mno" column="M_NO"/>
+	<result property="mId" column="M_ID"/>
+	<result property="mPwd" column="M_PWD" />
+	<result property="mName" column="M_NAME" />
+	<result property="mAddr" column="M_ADDR" />
+	<result property="mPhone" column="M_PHONE" />
+	<result property="mEmail" column="M_EMAIL" />
+	<result property="mOriginalfilename" column="M_ORIGINAL_FILENAME" />
+	<result property="mRenamefilename" column="M_RENAME_FILENAME" />
+	<result property="mEnrolldate" column="M_ENROLL_DATE" />
+	<result property="mUpdatedate" column="M_UPDATE_DATE" />
+	<result property="mhodu" column="M_HODU" />
+	<result property="mUserroles" column="M_USERROLES" />
+	<result property="mStatus" column="M_STATUS" />
+</resultMap>
+
+<!-- 리폿된 회원 조인 테이블 -->
+<resultMap id="ReportMemberResultSet" type="Report">
+	<id property="rpNo" column="RP_NO" />
+	<result property="rpWriter" column="RP_WRITER" />
+	<result property="rpUserID" column="RP_USERID" />
+	<result property="rpTitle" column="RP_TITLE" />
+	<result property="rpBno" column="RP_BNO" />
+	<result property="rpBType" column="RP_BTYPE" />
+	<result property="rpCotext" column="RP_CONTEXT" />
+	<result property="rpDate1" column="RP_DATE1" />
+	<result property="rpDate2" column="RP_DATE2" />
+	<result property="rpStatus" column="RP_STATUS" />
 	
+	<association javaType="Member" property="member">
+		<result property="mId" column="M_ID"/>
+		<result property="mStatus" column="M_STATUS" />
+	</association>
+	
+</resultMap>
+
+<resultMap id="ReportBookShareResultSet" type="Report">
+	<id property="rpNo" column="RP_NO" />
+	<result property="rpWriter" column="RP_WRITER" />
+	<result property="rpUserID" column="RP_USERID" />
+	<result property="rpTitle" column="RP_TITLE" />
+	<result property="rpBno" column="RP_BNO" />
+	<result property="rpBType" column="RP_BTYPE" />
+	<result property="rpCotext" column="RP_CONTEXT" />
+	<result property="rpDate1" column="RP_DATE1" />
+	<result property="rpDate2" column="RP_DATE2" />
+	<result property="rpStatus" column="RP_STATUS" />
+	
+	<association javaType="BookShare" property="bookshare">
+		<result property="bsWriter" column="BS_WRITER"/>
+	</association>
+	
+</resultMap>
+
+<resultMap id="ReportFreeBoardResultSet" type="Report">
+	<id property="rpNo" column="RP_NO" />
+	<result property="rpWriter" column="RP_WRITER" />
+	<result property="rpUserID" column="RP_USERID" />
+	<result property="rpTitle" column="RP_TITLE" />
+	<result property="rpBno" column="RP_BNO" />
+	<result property="rpBType" column="RP_BTYPE" />
+	<result property="rpCotext" column="RP_CONTEXT" />
+	<result property="rpDate1" column="RP_DATE1" />
+	<result property="rpDate2" column="RP_DATE2" />
+	<result property="rpStatus" column="RP_STATUS" />
+	
+	<association javaType="Board" property="board">
+		<result property="b_writer" column="B_WRITER"/>
+	</association>
+	
+</resultMap>
+
+<resultMap id="ReportQnaResultSet" type="Report">
+	<id property="rpNo" column="RP_NO" />
+	<result property="rpWriter" column="RP_WRITER" />
+	<result property="rpUserID" column="RP_USERID" />
+	<result property="rpTitle" column="RP_TITLE" />
+	<result property="rpBno" column="RP_BNO" />
+	<result property="rpBType" column="RP_BTYPE" />
+	<result property="rpCotext" column="RP_CONTEXT" />
+	<result property="rpDate1" column="RP_DATE1" />
+	<result property="rpDate2" column="RP_DATE2" />
+	<result property="rpStatus" column="RP_STATUS" />
+	
+	<association javaType="Qna" property="qna">
+		<result property="qWriter" column="Q_WRITER"/>
+	</association>
+	
+</resultMap>
+
+<resultMap id="ReportStudyGroupResultSet" type="Report">
+	<id property="rpNo" column="RP_NO" />
+	<result property="rpWriter" column="RP_WRITER" />
+	<result property="rpUserID" column="RP_USERID" />
+	<result property="rpTitle" column="RP_TITLE" />
+	<result property="rpBno" column="RP_BNO" />
+	<result property="rpBType" column="RP_BTYPE" />
+	<result property="rpCotext" column="RP_CONTEXT" />
+	<result property="rpDate1" column="RP_DATE1" />
+	<result property="rpDate2" column="RP_DATE2" />
+	<result property="rpStatus" column="RP_STATUS" />
+	
+	<association javaType="StudyGroup" property="studygroup">
+		<id property="sgNo" column="SG_NO" />
+		<result property="sgTitle" column="SG_TITLE" />
+		<result property="sgWriter" column="SG_WRITER" />
+		<result property="sgWriterNo" column="SG_WRITER_NO" />
+		<result property="sgNowPeople" column="SG_NOWPEOPLE" />
+		<result property="sgMaxPeople" column="SG_MAXPEOPLE" />
+		<result property="sgAddr" column="SG_ADDR" />
+		<result property="sgDeposit" column="SG_DEPOSIT" />
+		<result property="sgCreateDate" column="SG_CREATE_DATE" />
+		<result property="sgStartDate" column="SG_START_DATE" />
+		<result property="sgEndDate" column="SG_END_DATE" />
+		<result property="sgLocation" column="SG_LOCATION" />
+		<result property="sgJoin" column="SG_JOIN_YN" />
+		<result property="sgCon" column="SG_CON" />
+		<result property="sgOriginalFileName"
+			column="SG_ORIGINAL_FILENAME" />
+		<result property="sgRenameFileName" column="SG_RENAME_FILENAME" />
+		<result property="sgTag" column="SG_TAG" />
+		<result property="sgPayment" column="SG_PAYMENT_YN" />
+		<result property="sgStatus" column="SG_STATUS_YN" />
+		<result property="sgConfirm" column="SG_CONFIRM_YN" />
+	</association>
+	
+</resultMap>
+
 <insert id="Write" parameterType="Report">
 	INSERT INTO REPORTTABLE
 	VALUES(SEQ_RPNO.NEXTVAL,#{rpWriter},#{rpUserID},#{rpTitle},#{rpBno},#{rpBType},#{rpCotext},DEFAULT,DEFAULT,DEFAULT)
 </insert>
 
 <select id="gogoAdmin" resultMap="ReportResultSet">
-	SELECT * FROM REPORTTABLE
-	WHERE RP_DATE1 = SYSDATE
+	SELECT * 
+	FROM REPORTTABLE
+	WHERE RP_STATUS = 'N'
 	ORDER BY 1
+</select>
+
+<select id="MemberReport" resultMap="ReportMemberResultSet">
+	SELECT *
+	FROM	MEMBER M,
+			REPORTTABLE R
+	WHERE 	M.M_ID = R.RP_USERID
+	AND		M.M_STATUS='Y'
+	ORDER BY 1
+</select>
+
+<select id="BookShareReport" resultMap="ReportBookShareResultSet">
+	SELECT *
+	FROM	BOOK_SHARE BS,
+			REPORTTABLE R
+	WHERE 	BS.BS_WRITER = R.RP_USERID
+	AND		RP_BTYPE = 'SHAREBOARD'
+	AND		RP_STATUS='N'
+</select>
+
+<select id="FreeBoardReport" resultMap="ReportFreeBoardResultSet">
+	SELECT *
+	FROM	BOARD B,
+			REPORTTABLE R
+	WHERE 	B.B_WRITER = R.RP_USERID
+	AND		RP_BTYPE = 'FREEBOARD'
+	AND		RP_STATUS='N'
+</select>
+
+
+<select id="QnaReport" resultMap="ReportQnaResultSet">
+	SELECT *
+	FROM	QNA Q,
+			REPORTTABLE R
+	WHERE 	Q.Q_WRITER = R.RP_USERID
+	AND		RP_BTYPE = 'QNA'
+	AND		RP_STATUS='N'
+</select>
+
+<update id="FBdelete" parameterType="java.util.ArrayList">
+	UPDATE REPORTTABLE
+	SET RP_STATUS='Y',
+		RP_DATE2 = SYSDATE
+	WHERE RP_NO IN (
+	<foreach collection="array" item="item" index="index" separator=",">
+		${item}
+	</foreach>
+	)
+</update>
+
+
+<update id="banUser" parameterType="java.util.ArrayList">
+	UPDATE MEMBER
+	SET M_STATUS='N'
+	WHERE M_ID IN (
+	<foreach collection="array" item="item" index="index" separator=",">
+		'${item}'
+	</foreach>
+	)
+</update>
+
+<update id="salvation" parameterType="java.util.ArrayList">
+	UPDATE MEMBER
+	SET M_STATUS='Y'
+	WHERE M_NO IN (
+	<foreach collection="array" item="item" index="index" separator=",">
+		${item}
+	</foreach>
+	)
+</update>
+
+<delete id="FBdelete2" parameterType="java.util.ArrayList">
+	DELETE REPORTTABLE
+	WHERE RP_NO IN (
+	<foreach collection="array" item="item" index="index" separator=",">
+		${item}
+	</foreach>
+	)
+</delete>
+
+
+<select id="AdDepositeManager" resultMap="ReportStudyGroupResultSet">
+	SELECT	*
+	FROM	REPORTTABLE R,
+			STUDY_GROUP SG
+	WHERE 	SG.SG_NO = R.RP_BNO
+	AND		R.RP_BTYPE = 'STUDYGROUP'
+	AND		R.RP_STATUS = 'N'
+	AND		SG.SG_STATUS_YN = 'Y'
 </select>
 
 

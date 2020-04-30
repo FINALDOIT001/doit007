@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -155,6 +156,30 @@ public class BoardController {
 	}
 	
 	/**
+	  * @Method Name : fboardDetail
+	  * @작성일 : Apr 30, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 자유게시판 미리보기
+	  * @param mv
+	  * @param b_no
+	  * @param currentPage
+	  * @return
+	  */
+	@RequestMapping("fbDetail2.ev")
+	public ModelAndView fboardDetail(ModelAndView mv,int b_no) {
+		
+		Board b = bService.selectBoard(b_no);
+		
+		if(b != null) {
+			mv.addObject("b",b).setViewName("board/freeBoard_view");
+		}else {
+			mv.addObject("msg","게시글 상세조회 실패@@").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	/**
 	 * 현아.자유게시판 수정폼
 	 * @param mv
 	 * @param b_no
@@ -236,6 +261,32 @@ public class BoardController {
 			model.addAttribute("msg","게시글 삭제 실패");
 			return "common/errorPage";
 		}
+	}
+	
+	/**
+	  * @Method Name : BSDelete
+	  * @작성일 : Apr 30, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 신고된 자게 삭제
+	  * @param request
+	  * @param response
+	  * @param delList
+	  * @throws JsonIOException
+	  * @throws IOException
+	  */
+	@RequestMapping(value="fbdelete2.go",method= {RequestMethod.GET, RequestMethod.POST})
+	public void BSDelete(HttpServletRequest request,
+							  HttpServletResponse response,
+							  @RequestParam String[] delList
+							  ) throws JsonIOException, IOException {
+		
+		int result = bService.BSDelete(delList);
+
+		Gson gson = new GsonBuilder().create();
+		
+		gson.toJson(result,response.getWriter());
+			
 	}
 	
 	/**

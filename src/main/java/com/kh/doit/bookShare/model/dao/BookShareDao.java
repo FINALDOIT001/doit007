@@ -113,4 +113,8 @@ public class BookShareDao {
 		return (ArrayList)sqlSession.selectList("msMapper.AdBoardNotice");
 	}
 
+	public int BSDelete(String[] delList) {
+		return sqlSession.update("msMapper.BSDelete", delList);
+	}
+
 }

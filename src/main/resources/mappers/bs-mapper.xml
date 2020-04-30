@@ -167,4 +167,14 @@
     	FROM BOOK_SHARE
     </select>
     
+    <update id="BSDelete" parameterType="java.util.ArrayList">
+		UPDATE BOOK_SHARE
+		SET BS_STATUS='N'
+		WHERE BS_NO IN (
+		<foreach collection="array" item="item" index="index" separator=",">
+			${item}
+		</foreach>
+		)
+	</update>
+    
 </mapper>

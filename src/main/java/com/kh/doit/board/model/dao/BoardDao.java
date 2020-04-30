@@ -65,4 +65,8 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.AdBoardFree");
 	}
 
+	public int BSDelete(String[] delList) {
+		return sqlSession.update("boardMapper.BSDelete",delList);
+	}
+
 }

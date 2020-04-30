@@ -319,7 +319,75 @@ public class StudyGroupController {
 
 		return mv;
 	}
+	
+	/**
+	  * @Method Name : studyDetail2
+	  * @작성일 : May 1, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 어드민에서 접근
+	  * @param mv
+	  * @param sgNo
+	  * @param currentPage
+	  * @return
+	  */
+	@RequestMapping("studyDetail2.go")
+	public ModelAndView studyDetail2(ModelAndView mv, int sgNo,
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+    
+		String mno = "1";
+		
+		int count = 0;
+		
+		StudyGroup sg = sgService.selectSg(sgNo);
 
+		ArrayList<Member> ml = sgService.memberList(sgNo);
+		
+		
+		if(mno != "" && mno !=null) {
+			for(Member m : ml) {
+				if(m.getMno() == Integer.parseInt(mno)) {
+					count++;
+				}
+			}
+		}
+		
+		StudyLike sl = new StudyLike();
+		if(mno != "" && mno !=null) {
+		
+		String slNo= mno+sgNo;
+		System.out.println("유저 넘버 넘어 오는가? "+ slNo);
+		
+			 sl = sgService.studyLikeList(slNo);
+			System.out.println("studyList" + sl);
+		}
+		
+		
+		// 구현 추가 부분
+		ArrayList<Etc> etc = sgService.etcList(sgNo);
+		System.out.println("Servlet Kwon Etc : " + etc);
+		
+		ArrayList<Gallery> galleryList = sgService.GalleryList(sgNo);
+
+		System.out.println("Controller memberList : " + sg);
+		System.out.println("Controller memberList : " + ml);
+
+		if (sg != null) {
+			mv.addObject("sg", sg)
+			.addObject("ml", ml)
+			.addObject("currentPage", currentPage)
+			.addObject("sl",sl)
+			.addObject("etc",etc)
+			.addObject("count",count)
+			.addObject("galleryList",galleryList)
+			.setViewName("study/doitStudyDetail");
+		} else {
+			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
+		}
+
+		return mv;
+	}
+	
 	/**
 	 * 스터디 탈퇴 작성자 : 서정도
 	 * 
@@ -918,24 +986,29 @@ public class StudyGroupController {
 	
 	
 	/**
-	  * @Method Name : 그룹 관리 접근
-	  * @작성일 : Apr 2, 2020
+	  * @Method Name : FSGDelete
+	  * @작성일 : May 1, 2020
 	  * @작성자 : songinseok
 	  * @변경이력 : 
-	  * @Method 설명 :
-	  * @return
+	  * @Method 설명 : 스터디 그룹 정리
+	  * @param request
+	  * @param response
+	  * @param delList
+	  * @throws JsonIOException
+	  * @throws IOException
 	  */
-	@RequestMapping(value ="AdDepositeManager.ad", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView AdDepositeManager(
-					ModelAndView mv
-				) {
+	@RequestMapping(value="SGDelete.ad",method= {RequestMethod.GET, RequestMethod.POST})
+	public void FSGDelete(HttpServletRequest request,
+							  HttpServletResponse response,
+							  @RequestParam String[] delList
+							  ) throws JsonIOException, IOException {
 		
-		ArrayList<StudyGroup> sgList = sgService.AdDepositeManager();
+		int result = sgService.FSGDelete(delList);
+
+		Gson gson = new GsonBuilder().create();
 		
-		mv.setViewName("AdminPage/AdDepositeManager");
-		mv.addObject("sgList", sgList);
-		
-		return mv;
+		gson.toJson(result,response.getWriter());
+			
 	}
 	
 	

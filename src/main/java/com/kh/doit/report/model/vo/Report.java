@@ -5,6 +5,12 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.kh.doit.board.model.vo.Board;
+import com.kh.doit.bookShare.model.vo.BookShare;
+import com.kh.doit.member.model.vo.Member;
+import com.kh.doit.qna.model.vo.Qna;
+import com.kh.doit.study.model.vo.StudyGroup;
+
 @Component
 public class Report implements Serializable{
 
@@ -22,6 +28,12 @@ public class Report implements Serializable{
 	private Date rpDate1;		// 리폿한 날짜
 	private Date rpDate2;		// 리폿 처리날짜
 	private String rpStatus;	// 리폿 처리상태
+	
+	private Member member;		// 조인을 위한 멤버
+	private Board board;		// 조인을 위한 프리보드
+	private Qna qna;			// 조인을 위한 QNA
+	private BookShare bookshare;// 조인을 위한 북쉐어
+	private StudyGroup studygroup;	// 조인을 위한 스터디그룹
 	
 	public Report() {}
 	
@@ -125,6 +137,46 @@ public class Report implements Serializable{
 		return "Report [rpNo=" + rpNo + ", rpWriter=" + rpWriter + ", rpUserID=" + rpUserID + ", rpTitle=" + rpTitle
 				+ ", rpBno=" + rpBno + ", rpBType=" + rpBType + ", rpCotext=" + rpCotext + ", rpDate1=" + rpDate1
 				+ ", rpDate2=" + rpDate2 + ", rpStatus=" + rpStatus + "]";
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	public Qna getQna() {
+		return qna;
+	}
+
+	public void setQna(Qna qna) {
+		this.qna = qna;
+	}
+
+	public BookShare getBookshare() {
+		return bookshare;
+	}
+
+	public void setBookshare(BookShare bookshare) {
+		this.bookshare = bookshare;
+	}
+
+	public StudyGroup getStudygroup() {
+		return studygroup;
+	}
+
+	public void setStudygroup(StudyGroup studygroup) {
+		this.studygroup = studygroup;
 	}
 
 	

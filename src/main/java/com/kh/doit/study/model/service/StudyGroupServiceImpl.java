@@ -407,6 +407,10 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 
 
 	@Override
+	public int FSGDelete(String[] delList) {
+		return sgDao.FSGDelete(delList);
+	}
+
 	public Member memberHodu(int mno) {
 
 		return sgDao.memberHodu(mno);

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 정보 조회</title>
+<title>신고 회원 조회</title>
 
 <link rel="stylesheet" href="${contextPath}/resources/css/MSdatatables_inseok.css">
 
@@ -45,10 +45,10 @@
 <body>
 	<jsp:include page="../AdminPage/sidebar_header_inseok.jsp"/>
 	
-	<h2>회원 관리</h2>
+	<h2>신고회원 처리</h2>
 	
 	<div class="button-group-area mt-40" style="margin-left: 4%;">
-		<a id="deleteBoard" href="#" class="genric-btn primary small">구제</a>
+		<a id="deleteBoard" href="#" class="genric-btn primary small">회원 정지</a>
 	</div>
 	
 	<table id="table">
@@ -56,52 +56,57 @@
 		<thead>
 			<tr style="text-align: center;">
 				
-				<th width="5%" class="th1">
+				<th width="2%" class="th1">
   					<input id="All" type="checkbox">
 					<label for="All" style="vertical-align: middle;"></label>
 				</th>
-				<th width="5%" class="th1">회원번호</th>
-				<th width="8%" class="th1">이름</th>
-				<th width="8%" class="th1">아이디</th>
-				<th width="5%" class="th1">호두</th>
-				<th width="10%" class="th1">가입날짜</th>
-				<th width="10%" class="th1">수정일</th>
-				<th width="5%" class="th1">회원 상태</th>
+				<th width="5%" class="th1">신고 번호</th>
+				<th width="7%" class="th1">리폿한 아이디</th>
+				<th width="7%" class="th1">리폿당한 아이디</th>
+				<th width="10%" class="th1">리폿한 게시물 타입</th>
+				<th width="8%" class="th1">리폿한 날짜</th>
+				<th width="8%" class="th1">처리 날짜</th>
+				<th width="5%" class="th1">게시물 삭제</th>
 				
 			</tr>
 		</thead>
 		
 		<tbody>
-			<c:forEach var="mList" items="${ mList }">
-
+			<c:forEach var="rpList" items="${ rpList }">
+			
+			
+			
+			
 			
 			<tr style="text-align:center;">
-			
 				<td>
-  					<input id="${ mList.mno }" type="checkbox" name="check" value="${ mList.mno }">
-					<label for="${ mList.mno }" style="vertical-align: middle;"></label>
+  					<input id="${ rpList.rpNo }" type="checkbox" name="check" value="${ rpList.rpUserID }">
+					<label for="${ rpList.rpNo }" style="vertical-align: middle;"></label>
   				</td>
-  				
-				<td>${ mList.mno }</td>
-				<td>${ mList.mName }</td>
-				<td>${ mList.mId }</td>
-				<td>${ mList.mhodu }</td>
-				<td>${ mList.mEnrolldate }</td>
-				<td>${ mList.mUpdatedate }</td>
+				<td>${ rpList.rpNo }</td>
+				<td>${ rpList.rpWriter }</td>
+				<td>${ rpList.rpUserID }</td>
+				<td>${ rpList.rpBType }</td>
+				<td>${ rpList.rpDate1 }</td>
 				
 				<c:choose>
-					
-					<c:when test="${ mList.mStatus eq 'N' }">
-						<td><b style="color: #ff3334;">정지</b></td>
+				
+					<c:when test="${ rpList.rpStatus eq 'Y' }">
+						<td>${ rpList.rpDate2 }</td>
+						<td><b style="color: #ff3334;">삭제</b></td>
 					</c:when>
 					<c:otherwise>
-						<td><b style="color: #7983ff;">가능</b></td>
+						<td></td>
+						<td>미처리</td>
 					</c:otherwise>
-					
+				
 				</c:choose>
-
+				
 			</tr>
-
+			
+			
+			
+			
 			
 			
 			</c:forEach>
@@ -173,26 +178,29 @@ $('#table').dataTable( {
 		
 		var deleteCheck = false;
 		
-		/* 구제 회원 아이디 */
+		/* 신고된 회원 아이디 */
 		var delList = new Array();
+		/* 신고 테이블에서 신고 삭제. */
+		var delList2 = new Array();
 		
 		$('input:checkbox[name=check]:checked').each(function() {
 			/* console.log($(this).val()); */
 			deleteCheck = true;
 			delList.push($(this).val());
+			delList2.push($(this).attr('id'));
 		});
 		
 		if(deleteCheck){
 			
-			var check = confirm("정말 구제 하시겠습니까?");
+			var check = confirm("정말 정지 하시겠습니까?");
 			
 			if(check){
-				/* 삭제 ajax *//* 삭제 ajax */
+				/* 정지 ajax *//* 정지 ajax */
 				
 				console.log(delList);
 				
 				$.ajax({
-					url:"salvation.ad",
+					url:"banUser.ad",
 					method:"POST",
 					traditional:true,
 					data:{
@@ -200,7 +208,26 @@ $('#table').dataTable( {
 					},type:"post",
 					success:function(data){
 						
-						alert(data+"명이 구제 되었습니다.");
+						/* 바꾸자 신고번호! *//* 바꾸자 신고번호! */
+						$.ajax({
+							url:"FBdelete2.ad",
+							method:"POST",
+							traditional:true,
+							data:{
+								delList:delList2
+							},type:"post",
+							success:function(data){
+								
+								console.log("신고처리 "+data+"건 삭제 완료!");
+								
+							},error:function(request, status, errorData){
+								alert("error code : " + request.status + "\n"
+										+ "message : " + request.responseText
+										+ "error : " + errorData);
+							}
+						});
+						
+						alert(data+"명의 사용자가 정지되었습니다.");
 						location.reload();
 						
 					},error:function(request, status, errorData){
@@ -214,11 +241,12 @@ $('#table').dataTable( {
 			}
 			
 		}else{
-			alert("구제할 회원을 선택하세요.");
+			alert("정지할 회원을 선택하세요.");
 		}
 		
 	});
 	
 </script>
+
 </body>
 </html>

@@ -55,6 +55,10 @@ public class BookShareServiceImpl implements BookShareService {
 	public ArrayList<BookShare> AdBoardNotice() {
 		return bsDao.AdBoardNotice();
 	}
+	@Override
+	public int BSDelete(String[] delList) {
+		return bsDao.BSDelete(delList);
+	}
 	
 	
 

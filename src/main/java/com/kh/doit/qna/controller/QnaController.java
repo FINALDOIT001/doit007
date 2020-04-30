@@ -1,6 +1,7 @@
 package com.kh.doit.qna.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +19,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.doit.board.model.vo.Board;
 import com.kh.doit.common.CommonFile;
 import com.kh.doit.qna.model.service.QnaService;
@@ -188,6 +193,30 @@ public class QnaController {
 		}
 
 		return mv;
+	}
+	
+	/**
+	  * @Method Name : deleteQna
+	  * @작성일 : Apr 30, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : QNA 삭제
+	  * @param mv
+	  * @param qNo
+	  * @return
+	  */
+	@RequestMapping(value="deleteQna2.do",method= {RequestMethod.GET, RequestMethod.POST})
+	public void QNAdelete(HttpServletRequest request,
+							  HttpServletResponse response,
+							  @RequestParam String[] delList
+							  ) throws JsonIOException, IOException {
+		
+		int result = qService.QNAdelete(delList);
+
+		Gson gson = new GsonBuilder().create();
+		
+		gson.toJson(result,response.getWriter());
+			
 	}
 	
 	@RequestMapping("endQna.do")

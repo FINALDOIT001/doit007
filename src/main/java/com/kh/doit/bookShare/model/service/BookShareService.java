@@ -86,4 +86,15 @@ public interface BookShareService {
 	  */
 	ArrayList<BookShare> AdBoardNotice();
 
+	/**
+	  * @Method Name : BSDelete
+	  * @작성일 : Apr 30, 2020
+	  * @작성자 : songinseok
+	  * @변경이력 : 
+	  * @Method 설명 : 신고 게시판 삭제
+	  * @param delList
+	  * @return
+	  */
+	int BSDelete(String[] delList);
+
 }

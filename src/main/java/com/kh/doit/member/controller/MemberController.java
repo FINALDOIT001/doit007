@@ -117,9 +117,18 @@ public class MemberController {
 		System.out.println(loginUser);
 		
 		if(loginUser != null && bcryptPasswordEncoder.matches(m.getmPwd(), loginUser.getmPwd())) {
-
-			mv.addObject("loginUser", loginUser);
-			mv.setViewName("common/main");
+			
+			if( loginUser.getmStatus().equals("Y") ) {
+				
+				mv.addObject("loginUser", loginUser);
+				mv.setViewName("common/main");
+				
+			}else {
+				
+				mv.addObject("msg","불건전 게시물로 정지조치되었습니다.");
+				mv.setViewName("common/errorPage");
+				
+			}
 
 		}else {
 			

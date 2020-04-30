@@ -294,4 +294,26 @@
 		SELECT *
 		FROM QNA
 	</select>
+	
+	<update id="BSDelete" parameterType="java.util.ArrayList">
+		UPDATE BOARD
+		SET B_STATUS='N'
+		WHERE B_NO IN (
+		<foreach collection="array" item="item" index="index" separator=",">
+			${item}
+		</foreach>
+		)
+	</update>
+	
+	<update id="QNAdelete" parameterType="java.util.ArrayList">
+		UPDATE QNA
+		SET Q_STATUS='N'
+		WHERE Q_NO IN (
+		<foreach collection="array" item="item" index="index" separator=",">
+			${item}
+		</foreach>
+		)
+	</update>
+	
+	
 </mapper>
