@@ -42,7 +42,8 @@
 		<result property="mAddr" column="M_ADDR" />
 		<result property="mPhone" column="M_PHONE" />
 		<result property="mEmail" column="M_EMAIL" />
-		<result property="mOriginalfilename" column="M_ORIGINAL_FILENAME" />
+		<result property="mOriginalfilename"
+			column="M_ORIGINAL_FILENAME" />
 		<result property="mRenamefilename" column="M_RENAME_FILENAME" />
 		<result property="mEnrolldate" column="M_ENROLL_DATE" />
 		<result property="mUpdatedate" column="M_UPDATE_DATE" />
@@ -58,44 +59,45 @@
 	<resultMap id="dailyStudyResultSet" type="DailyStudy">
 		<id property="ssNo" column="SS_NO" />
 		<result property="ssSgNo" column="SS_SG_NO" />
-		<result property="zipcode" column="SS_ZIPCODE"/>
-		<result property="ssTitle" column="SS_TITLE"/>
+		<result property="zipcode" column="SS_ZIPCODE" />
+		<result property="ssTitle" column="SS_TITLE" />
 		<result property="ssDayDate" column="SS_DAY_DATE" />
 		<result property="ssTimeDate" column="SS_TIME_DATE" />
 		<result property="ssAdd" column="SS_ADDRESS" />
 		<result property="ssExAdd" column="SS_EXADDRESS" />
 	</resultMap>
-	
+
 	<resultMap id="galleryResultSet" type="Gallery">
 		<id property="g_No" column="G_NO" />
 		<result property="g_Sg_No" column="G_SG_NO" />
-		<result property="g_Title" column="G_TITLE"/>
+		<result property="g_Title" column="G_TITLE" />
 		<result property="g_Writer" column="G_WRITER" />
 		<result property="g_Writer_No" column="G_WRITER_NO" />
 		<result property="g_Con" column="G_CON" />
 		<result property="g_Date" column="G_DATE" />
-		<result property="g_Original_FileName" column="G_ORGINAL_FILENAME" />
+		<result property="g_Original_FileName"
+			column="G_ORGINAL_FILENAME" />
 		<result property="g_Rename_FileName" column="G_RENAME_FILENAME" />
 	</resultMap>
-	
+
 	<resultMap id="studyLikeResultSet" type="StudyLike">
-		<id property="slNo" column="SL_NO"/>
-		<result property="slmNo" column="M_NO"/>
-		<result property="slsgNo" column="SG_NO"/>
+		<id property="slNo" column="SL_NO" />
+		<result property="slmNo" column="M_NO" />
+		<result property="slsgNo" column="SG_NO" />
 	</resultMap>
-	
+
 	<resultMap id="studyCheckResultSet" type="StudyCheck">
-	<id property="scNo" column="SC_NO"/>
-	<result property="ssNo" column="SS_NO"/>
-	<result property="sgNo" column="SG_NO"/>
-	<result property="scMno" column="SC_MNO"/>
-	<result property="scDate" column="SC_DATE"/>
-	<result property="scCheck" column="SC_CHECK"/>
-	<result property="userId" column="M_ID"/>
-	<result property="userName" column="M_NAME"/>
+		<id property="scNo" column="SC_NO" />
+		<result property="ssNo" column="SS_NO" />
+		<result property="sgNo" column="SG_NO" />
+		<result property="scMno" column="SC_MNO" />
+		<result property="scDate" column="SC_DATE" />
+		<result property="scCheck" column="SC_CHECK" />
+		<result property="userId" column="M_ID" />
+		<result property="userName" column="M_NAME" />
 	</resultMap>
-	
-	
+
+
 
 	<select id="getlistCount" resultType="_int">
 		SELECT COUNT(*)
@@ -111,7 +113,8 @@
 		VALUES(SEQ_SGNO.NEXTVAL,#{sgTitle},#{sgWriter},#{sgWriterNo},1,#{sgMaxPeople},#{sgAddr},#{sgDeposit},SYSDATE,#{sgStartDate},#{sgEndDate},#{sgLocation},#{sgJoin},#{sgCon},#{sgOriginalFileName},#{sgRenameFileName},#{sgTag},DEFAULT,DEFAULT,DEFAULT)
 		INTO GROUP_MEMBER VALUES(SEQ_SGNO.CURRVAL,#{sgWriterNo})
 		SELECT *
-		FROM DUAL
+		FROM
+		DUAL
 	</insert>
 
 	<select id="selectList" resultMap="studyGroupResultSet">
@@ -177,201 +180,256 @@
 		SG_CONFIRM_YN = 'N'
 		WHERE SG_NO = #{sgNo}
 	</update>
-	
-	<select id="sgDailySlist" parameterType="_int" resultMap="dailyStudyResultSet">
+
+	<select id="sgDailySlist" parameterType="_int"
+		resultMap="dailyStudyResultSet">
 		SELECT * FROM STUDY_SCHEDULE
 		WHERE SS_SG_NO= #{sgNo}
 	</select>
-	
+
 	<insert id="photoUpload" parameterType="Gallery">
 		INSERT INTO GALLERY
 		VALUES(SEQ_GNO.NEXTVAL,#{g_Sg_No},#{g_Title},#{g_Writer},#{g_Writer_No},#{g_Con},DEFAULT,#{g_Original_FileName},#{g_Rename_FileName},#{g_Num})
 	</insert>
-	
+
 	<insert id="sgDailyinsert" parameterType="DailyStudy">
-	INSERT INTO STUDY_SCHEDULE
-	VALUES(SEQ_SSNO.NEXTVAL,#{ssSgNo},#{ssDayDate},#{ssTimeDate},#{ssTitle},#{ssAdd},#{ssExAdd},#{zipcode})
+		INSERT INTO
+		STUDY_SCHEDULE
+		VALUES(SEQ_SSNO.NEXTVAL,#{ssSgNo},#{ssDayDate},#{ssTimeDate},#{ssTitle},#{ssAdd},#{ssExAdd},#{zipcode})
 	</insert>
-	
-	<select id="dailyStudyView" parameterType="_int" resultMap="dailyStudyResultSet">
+
+	<select id="dailyStudyView" parameterType="_int"
+		resultMap="dailyStudyResultSet">
 		SELECT * FROM STUDY_SCHEDULE
 		WHERE SS_NO =#{ssNo}
 	</select>
 	<update id="dailyStudyUpdate" parameterType="DailyStudy">
-	UPDATE STUDY_SCHEDULE SET
-	SS_DAY_DATE = #{ssDayDate},
-	SS_TIME_DATE = #{ssTimeDate},
-	SS_TITLE = #{ssTitle},
-	SS_ADDRESS = #{ssAdd},
-	SS_EXADDRESS = #{ssExAdd},
-	SS_ZIPCODE = #{zipcode}
-	WHERE SS_NO = #{ssNo}
+		UPDATE
+		STUDY_SCHEDULE SET
+		SS_DAY_DATE = #{ssDayDate},
+		SS_TIME_DATE =
+		#{ssTimeDate},
+		SS_TITLE = #{ssTitle},
+		SS_ADDRESS = #{ssAdd},
+		SS_EXADDRESS = #{ssExAdd},
+		SS_ZIPCODE = #{zipcode}
+		WHERE SS_NO = #{ssNo}
 	</update>
-	
+
 	<delete id="dailyStudyDelete" parameterType="String">
-	DELETE FROM STUDY_SCHEDULE
-	WHERE SS_NO = #{ssNo}
+		DELETE FROM
+		STUDY_SCHEDULE
+		WHERE SS_NO = #{ssNo}
 	</delete>
-	
+
 	<insert id="studyLikeInsert" parameterType="StudyLike">
-	INSERT INTO STUDY_LIKE
-	VALUES(#{slNo},#{slmNo},#{slsgNo})
+		INSERT INTO
+		STUDY_LIKE
+		VALUES(#{slNo},#{slmNo},#{slsgNo})
 	</insert>
-	
+
 	<delete id="studyLikeDelete" parameterType="_int">
-	DELETE FROM STUDY_LIKE
-	WHERE SL_NO = #{slNo}
+		DELETE FROM
+		STUDY_LIKE
+		WHERE SL_NO = #{slNo}
 	</delete>
-	<select id="studyLikeList" parameterType="String" resultMap="studyLikeResultSet">
-	SELECT * FROM STUDY_LIKE
-	WHERE SL_NO = #{slNo}
-	</select>
-	
-	<select id="GalleryList" resultMap="galleryResultSet">
-		SELECT * 
-		FROM Gallery
-		WHERE G_SG_NO = #{sgNo}
-	</select>
-	
-	<select id="selectGallery" resultMap="galleryResultSet">
-		SELECT * 
-		FROM Gallery
-		WHERE G_NUM = #{g_Num}
-		AND G_NO = #{g_No}
-	</select>
-	
-	<select id="multiFile" resultMap="galleryResultSet">
-		SELECT * 
-		FROM Gallery
-		WHERE G_NUM = #{g_Num}
+	<select id="studyLikeList" parameterType="String"
+		resultMap="studyLikeResultSet">
+		SELECT * FROM STUDY_LIKE
+		WHERE SL_NO = #{slNo}
 	</select>
 
-	<select id="searchCount" parameterType="String" resultType="_int">
-		SELECT 	COUNT(*)
-		FROM	STUDY_GROUP
-		WHERE 	1=1
-		AND		SG_STATUS_YN='Y'
-		AND		SG_TITLE like '%' || #{ssSearch} || '%'
+	<select id="GalleryList" resultMap="galleryResultSet">
+		SELECT *
+		FROM Gallery
+		WHERE
+		G_SG_NO = #{sgNo}
 	</select>
-	
-	<select id="selectSearchList" parameterType="String" resultMap="studyGroupResultSet">
-		SELECT	* 
-		FROM	STUDY_GROUP
-		WHERE	1=1
-		AND		SG_STATUS_YN='Y'
-		AND		SG_TITLE like '%' || #{ssSearch} || '%'
+
+	<select id="selectGallery" resultMap="galleryResultSet">
+		SELECT *
+		FROM Gallery
+		WHERE
+		G_NUM = #{g_Num}
+		AND G_NO = #{g_No}
+	</select>
+
+	<select id="multiFile" resultMap="galleryResultSet">
+		SELECT *
+		FROM Gallery
+		WHERE G_NUM
+		= #{g_Num}
+	</select>
+
+	<select id="searchCount" parameterType="hashmap"
+		resultType="_int">
+		SELECT COUNT(*)
+		FROM STUDY_GROUP
+		WHERE SG_STATUS_YN='Y'
+
+		<if test="selectoption != null">
+			<if test="selectoption == 'title'">
+				AND SG_TITLE LIKE '%' || #{searchName}|| '%'
+			</if>
+			<if test="selectoption == 'city'">
+				AND SG_ADDR LIKE '%' || #{searchName}|| '%'
+			</if>
+
+			<if test="selectoption == 'tag'">
+				AND SG_TAG LIKE '%' || #{searchName}|| '%'
+			</if>
+		</if>
+
+	</select>
+
+	<select id="selectSearchList" parameterType="hashmap"
+		resultMap="studyGroupResultSet">
+		SELECT *
+		FROM STUDY_GROUP
+		WHERE SG_STATUS_YN='Y'
+
+		<if test="selectoption != null">
+			<if test="selectoption == 'title'">
+				AND SG_TITLE LIKE '%' || #{searchName}|| '%'
+			</if>
+			<if test="selectoption == 'city'">
+				AND SG_ADDR LIKE '%' || #{searchName}|| '%'
+			</if>
+
+			<if test="selectoption == 'tag'">
+				AND SG_TAG LIKE '%' || #{searchName}|| '%'
+			</if>
+		</if>
 		ORDER BY SG_NO DESC
 	</select>
-	
-	<insert id="insertEtc" parameterType="com.kh.doit.study.model.vo.Etc">
+
+	<insert id="insertEtc"
+		parameterType="com.kh.doit.study.model.vo.Etc">
 		INSERT INTO STUDY_ETC VALUES(
-			SEQ_ETCNO.NEXTVAL
-			,#{etcSgNo}
-			,#{etcTitle}
-			,#{etcCon}
-			,#{etcWriter}
-			,#{etcWriterNo}
-			,#{etcWriterId}
-			,DEFAULT
-			,DEFAULT
+		SEQ_ETCNO.NEXTVAL
+		,#{etcSgNo}
+		,#{etcTitle}
+		,#{etcCon}
+		,#{etcWriter}
+		,#{etcWriterNo}
+		,#{etcWriterId}
+		,DEFAULT
+		,DEFAULT
 		)
 	</insert>
-	
-	<insert id="insertEtcFile" parameterType="com.kh.doit.study.model.vo.EtcFile">
+
+	<insert id="insertEtcFile"
+		parameterType="com.kh.doit.study.model.vo.EtcFile">
 		INSERT INTO STUDY_ETCFILE VALUES(
-			SEQ_ETCNO.CURRVAL
-			,#{etcfOriginalFileName}
-			,#{etcfRenameFileName}
+		SEQ_ETCNO.CURRVAL
+		,#{etcfOriginalFileName}
+		,#{etcfRenameFileName}
 		)
 	</insert>
-	
-	
-	<resultMap type="com.kh.doit.study.model.vo.Etc" id="etcResultMap">
-		<id property="etcNo" column="ETC_NO"/>
-		<result property="etcSgNo" column="ETC_SG_NO"/>
-		<result property="etcTitle" column="ETC_TITLE"/>
-		<result property="etcCon" column="ETC_CON"/>
-		<result property="etcWriter" column="ETC_WRITER"/>
-		<result property="etcWriterNo" column="ETC_WRITER_NO"/>
-		<result property="etcWriterId" column="ETC_WRITER_ID"/>
-		<result property="etcDate" column="ETC_DATE"/>
-		<result property="etcStatus" column="ETC_STATUS"/>
+
+
+	<resultMap type="com.kh.doit.study.model.vo.Etc"
+		id="etcResultMap">
+		<id property="etcNo" column="ETC_NO" />
+		<result property="etcSgNo" column="ETC_SG_NO" />
+		<result property="etcTitle" column="ETC_TITLE" />
+		<result property="etcCon" column="ETC_CON" />
+		<result property="etcWriter" column="ETC_WRITER" />
+		<result property="etcWriterNo" column="ETC_WRITER_NO" />
+		<result property="etcWriterId" column="ETC_WRITER_ID" />
+		<result property="etcDate" column="ETC_DATE" />
+		<result property="etcStatus" column="ETC_STATUS" />
 	</resultMap>
-	
-	<select id="etcList" parameterType="_int" resultMap="etcResultMap">
-		SELECT	*
-		FROM	STUDY_ETC
-		WHERE	1=1
-		AND		ETC_SG_NO = #{sgNo}
-		AND		ETC_STATUS='Y'
+
+	<select id="etcList" parameterType="_int"
+		resultMap="etcResultMap">
+		SELECT *
+		FROM STUDY_ETC
+		WHERE 1=1
+		AND ETC_SG_NO = #{sgNo}
+		AND
+		ETC_STATUS='Y'
 	</select>
-	
-	<select id="selectEtc" parameterType="_int" resultMap="etcResultMap">
-		SELECT	*
-		FROM	STUDY_ETC
-		WHERE	ETC_NO=#{etcNo}
+
+	<select id="selectEtc" parameterType="_int"
+		resultMap="etcResultMap">
+		SELECT *
+		FROM STUDY_ETC
+		WHERE ETC_NO=#{etcNo}
 	</select>
-	
-	<resultMap type="com.kh.doit.study.model.vo.EtcFile" id="etcFileResultMap">
-      <result property="etcfNo" column="ETCF_NO"/>
-      <result property="etcfOriginalFileName" column="ETC_ORIGINALFILENAME"/>
-      <result property="etcfRenameFileName" column="ETC_RENAMEFILENAME"/>
-   </resultMap>
-	
-	<select id="selectEtcFile" parameterType="_int" resultMap="etcFileResultMap">
-		SELECT	*
-		FROM	STUDY_ETCFILE
-		WHERE	ETCF_NO=#{etcNo}
+
+	<resultMap type="com.kh.doit.study.model.vo.EtcFile"
+		id="etcFileResultMap">
+		<result property="etcfNo" column="ETCF_NO" />
+		<result property="etcfOriginalFileName"
+			column="ETC_ORIGINALFILENAME" />
+		<result property="etcfRenameFileName"
+			column="ETC_RENAMEFILENAME" />
+	</resultMap>
+
+	<select id="selectEtcFile" parameterType="_int"
+		resultMap="etcFileResultMap">
+		SELECT *
+		FROM STUDY_ETCFILE
+		WHERE ETCF_NO=#{etcNo}
 	</select>
-	
+
 	<update id="deleteEtc" parameterType="_int">
 		UPDATE STUDY_ETC SET
 		ETC_STATUS = 'N'
 		WHERE ETC_NO = #{etcNo}
 	</update>
-	
+
 	<insert id="cMemeberInsert" parameterType="StudyCheck">
-	INSERT INTO STUDY_CHECK 
-	VALUES(#{scNo},#{ssNo},#{sgNo},#{scMno},#{scDate},DEFAULT)
+		INSERT INTO
+		STUDY_CHECK
+		VALUES(#{scNo},#{ssNo},#{sgNo},#{scMno},#{scDate},DEFAULT)
 	</insert>
-	
+
 	<update id="studyCheckUpdate" parameterType="_int">
-	UPDATE STUDY_CHECK SET
-	SC_CHECK = 'Y'
-	WHERE SC_NO = #{scNo}
+		UPDATE STUDY_CHECK
+		SET
+		SC_CHECK = 'Y'
+		WHERE SC_NO = #{scNo}
 	</update>
-	
+
 	<select id="studyCheckSearch" parameterType="_int">
-	SELECT * FROM STUDY_CHECK
-	WHERE SC_NO = #{scNo}
+		SELECT * FROM
+		STUDY_CHECK
+		WHERE SC_NO = #{scNo}
 	</select>
-	
-	<select id="studyCheckList" parameterType ="_int" resultMap="studyCheckResultSet">
-	SELECT SC_NO, SS_NO, SG_NO, SC_MNO, SC_DATE, SC_CHECK, M_ID, M_NAME
-	FROM STUDY_CHECK
-	JOIN MEMBER ON SC_MNO = M_NO
-	WHERE SS_NO=#{ssNo}
+
+	<select id="studyCheckList" parameterType="_int"
+		resultMap="studyCheckResultSet">
+		SELECT SC_NO, SS_NO, SG_NO, SC_MNO, SC_DATE, SC_CHECK, M_ID,
+		M_NAME
+		FROM STUDY_CHECK
+		JOIN MEMBER ON SC_MNO = M_NO
+		WHERE SS_NO=#{ssNo}
 	</select>
-	
+
 	<update id="StudyCheckDefault" parameterType="_int">
-	UPDATE STUDY_CHECK SET
-	SC_CHECK = 'N'
-	WHERE SS_NO = #{ssNo}
+		UPDATE STUDY_CHECK
+		SET
+		SC_CHECK = 'N'
+		WHERE SS_NO = #{ssNo}
 	</update>
-	
+
 	<update id="sgDataBoardAndGalleryPayment" parameterType="_int">
-		UPDATE STUDY_GROUP SET
+		UPDATE
+		STUDY_GROUP SET
 		SG_PAYMENT_YN = 'N'
 		WHERE SG_NO = #{sgNo}
 	</update>
-	
+
 	<update id="mDataBoardAndGalleryPayment" parameterType="_int">
-		UPDATE MEMBER SET
+		UPDATE
+		MEMBER SET
 		M_HODU = M_HODU - 2
 		WHERE M_NO = #{mNo}
 	</update>
-	
-		<update id="sgJoinMember">
+
+	<update id="sgJoinMember">
 		UPDATE STUDY_GROUP SET
 		SG_NOWPEOPLE = SG_NOWPEOPLE + 1
 		WHERE SG_NO = #{sgNo}
@@ -380,20 +438,23 @@
 	<update id="sgJoinHodu">
 		UPDATE Member SET
 		M_HODU = M_HODU - #{mhodu}
-		WHERE M_NO = #{mno}
+		WHERE M_NO
+		= #{mno}
 	</update>
-	
+
 	<update id="sgGroupOutCount" parameterType="_int">
-	UPDATE STUDY_GROUP SET
-	SG_NOWPEOPLE = SG_NOWPEOPLE-1
-	WHERE SG_NO = #{sgNo}
+		UPDATE STUDY_GROUP
+		SET
+		SG_NOWPEOPLE = SG_NOWPEOPLE-1
+		WHERE SG_NO = #{sgNo}
 	</update>
-	
+
 	<select id="AdDepositeManager" resultMap="studyGroupResultSet">
 		SELECT *
-		FROM STUDY_GROUP
+		FROM
+		STUDY_GROUP
 	</select>
-	
+
 </mapper>
     
     

@@ -38,28 +38,46 @@
 	<section class="contact-section area-padding">
 		<div class="container">
 			<div class="row">
-
-				<div class="col-lg-3" style="float: left; margin-right: 30px;">
-					<div class="blog_right_sidebar_h" style="width: 300px;">
-						<aside class="single_sidebar_widget search_widget">
-							<form action="studySearch.do">
+				<form id="studySearch">
+					<div class="col-lg-3" style="float: left">
+						<div class="blog_right_sidebar_h">
+							<aside class="single_sidebar_widget search_widget">
 								<div class="form-group">
 									<div class="input-group mb-3">
-										<input type="text" name="studySearch" id="stydySearch" 
+										<select class="form-control" name="selectoption" id="selectoption">
+											<option>-----</option>
+											<option value="title">제목</option>
+											<option value="city">지역</option>
+											<option value="tag">태그</option>
+										</select>
+									</div>
+								</div>
+							</aside>
+						</div>
+					</div>
+
+					<div class="col-lg-3" style="float: left; margin-right: 30px;">
+						<div class="blog_right_sidebar_h" style="width: 300px;">
+							<aside class="single_sidebar_widget search_widget">
+								<div class="form-group">
+									<div class="input-group mb-3">
+										<input type="text" name="searchName" id="searchName"
 											class="form-control placeholder hide-on-focus"
 											placeholder="스터디 이름을 검색하세요.">
 										<div class="input-group-append">
-											<button class="btn" type="button" id="sSearch">
+											<button class="btn" type="button" id="searchBtn">
 												<i class="ti-search"></i>
 											</button>
 										</div>
 									</div>
 								</div>
-							</form>
-						</aside>
+
+
+							</aside>
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-8" style="margin-left: auto;">
+				</form>
+				<div class="col-lg-6">
 					<c:if test="${!empty sessionScope.loginUser}">
 						<input type="button" class="genric-btn danger"
 							style="float: right; width: 120px;" value="스터디 개설"
@@ -100,58 +118,59 @@
 								<c:url var="sgDetail" value="studyDetail.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
 									<c:param name="currentPage" value="${pi.currentPage}" />
-									<c:param name="mno" value="${sessionScope.loginUser.mno}"/>
+									<c:param name="mno" value="${sessionScope.loginUser.mno}" />
 								</c:url>
 								<a href="${sgDetail}" style="display: block;"><label
 									style="font-size: x-large; font-weight: bold;">${sg.sgTitle}</label></a>
-								
+
 								<c:if test="${sg.sgConfirm eq 'Y'}">
 									<h5 class="mb-2 text-primary" style="font-weight: bold;">모집
 										중</h5>
 								</c:if>
-								
-								
+
+
 								<c:if test="${sg.sgJoin eq 'Y'}">
-									<h5 class="mb-1 text-primary" style="font-weight: bold;"> 중간참여 가능
-										</h5>
+									<h5 class="mb-1 text-primary" style="font-weight: bold;">
+										중간참여 가능</h5>
 								</c:if>
-								
+
 
 								<c:if test="${sg.sgConfirm eq 'N'}">
-								<h5 class="mb-1 text-danger"
+									<h5 class="mb-1 text-danger"
 										style="font-weight: bold; color: red;">모집 완료</h5>
-										
+
 								</c:if>
 
 								<c:if test="${sg.sgJoin eq 'N'}">
 									<h5 class="mb-1 text-danger"
 										style="font-weight: bold; color: red;">중간참여 불가</h5>
 								</c:if>
-								
+
 
 
 								<ul class="study_ul">
 									<li class="study_li"><img
 										src="${contextPath}/resources/img/man.png">${sg.sgWriter}</li>
-									
-																	
-									<c:set var="maxPeople" value="${sg.sgMaxPeople}"/>
-									<c:set var="newPeople" value="${sg.sgNowPeople}"/>
+
+
+									<c:set var="maxPeople" value="${sg.sgMaxPeople}" />
+									<c:set var="newPeople" value="${sg.sgNowPeople}" />
 									<c:if test="${sg.sgMaxPeople == sg.sgNowPeople}">
-									<li class="study_li text-danger"><img
-										src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+										<li class="study_li text-danger"><img
+											src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 									</c:if>
 									<c:if test="${sg.sgMaxPeople != sg.sgNowPeople}">
-									<li class="study_li"><img
-										src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
+										<li class="study_li"><img
+											src="${contextPath}/resources/img/classroom.png">${sg.sgNowPeople}/${sg.sgMaxPeople}</li>
 									</c:if>
 									<li class="study_li"><img
 										src="${contextPath}/resources/img/location.png">${sg.sgAddr}</li>
 									<li class="study_li"><img
-										src="${contextPath}/resources/img/hodu.png"><fmt:formatNumber value="${sg.sgDeposit}" groupingUsed="true"/> 개</li>
+										src="${contextPath}/resources/img/hodu.png"> <fmt:formatNumber
+											value="${sg.sgDeposit}" groupingUsed="true" /> 개</li>
 									<c:if test="${sg.sgPayment eq 'N'}">
-									<li class="study_li"><img
-										src="${contextPath}/resources/img/premium.png">Premium</li>
+										<li class="study_li"><img
+											src="${contextPath}/resources/img/premium.png">Premium</li>
 									</c:if>
 								</ul>
 
@@ -223,21 +242,33 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</section>
-	
-	
+
+
 	<!-- ================ contact section end ================= -->
 
 
 	<jsp:include page="../common/footer.jsp" />
 
 	<script>
-		$('#sSearch').on('click',function() {
-			var ssSearch = $('#stydySearch').val();
-			console.log(ssSearch);
+
+		$('#searchBtn').on('click', function() {
+			var searchName = $("#searchName").val();
+			var selectOption = $("#selectoption").val();
+			if(searchName == '' || searchName == null){
+				alert("검색어를 입력해주세요");
+				return;
+			}
+			if(selectOption=='' || selectOption== null){
+				alert("SELETC OPTION 선택해주세요!!");
+				return;
+			}
+			$("#studySearch").attr("action", "studySearch.go");
+			$("#studySearch").attr("method", "POST");
+			$("#studySearch").submit();
 			
-			location.href="studySearch.do?ssSearch="+ssSearch;
-		})
+		});
 	</script>
 </body>
 
