@@ -418,9 +418,9 @@ public class StudyGroupServiceImpl implements StudyGroupService {
 
 
 	@Override
-	public Gallery viewPhoto() {
+	public Gallery viewPhoto(int sgNo) {
 		
-		return sgDao.viewPhoto();
+		return sgDao.viewPhoto(sgNo);
 	}
 
 

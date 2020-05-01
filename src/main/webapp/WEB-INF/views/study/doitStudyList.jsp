@@ -39,7 +39,7 @@
 		<div class="container">
 			<div class="row">
 				<form id="studySearch">
-					<div class="col-lg-3" style="float: left">
+					<div class="col-lg-3" style="float: left;">
 						<div class="blog_right_sidebar_h">
 							<aside class="single_sidebar_widget search_widget">
 								<div class="form-group">
@@ -97,11 +97,11 @@
 
 							<c:if test="${!empty sg.sgRenameFileName}">
 
-								<div class="col-md-2" style="text-align: center;">
+								<div class="col-md-2">
 									<img
 										src="${contextPath}/resources/sgloadFiles/${sg.sgRenameFileName}"
 										class="rounded" alt="Cinque Terre"
-										style="width: 120px; height: 120px;">
+										style="width: 150px; height: 150px; margin-left:10px; margin-top:12px;">
 								</div>
 							</c:if>
 

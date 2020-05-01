@@ -300,7 +300,7 @@ public class StudyGroupController {
 		System.out.println("Controller memberList : " + sg);
 		System.out.println("Controller memberList : " + ml);
 		
-		Gallery gal = sgService.viewPhoto();
+		Gallery gal = sgService.viewPhoto(sgNo);
 
 		if (sg != null) {
 			mv.addObject("sg", sg)

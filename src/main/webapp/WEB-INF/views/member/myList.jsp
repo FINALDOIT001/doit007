@@ -76,7 +76,7 @@
 						<c:forEach var="fb" items="${ fblist }">
 						<tr class="kwon-tr1" style="text-align:center;">
 							<td align="center" class="kwon-td1">${ fb.b_no }</td>
-							<c:url var="fbview" value="fbDetail.go">
+							<c:url var="fbview" value="fbDetail.ev">
 								<c:param name="b_no" value="${fb.b_no}"></c:param>
 							</c:url>
 							<td align="center" class="kwon-td1"><a href="${fbview}">${ fb.b_title }</a></td>
@@ -140,7 +140,7 @@
 						<tr class="kwon-tr1" style="text-align:center;">
 							<td align="center" class="kwon-td1">${ bs.bsNo }</td>
 							<td align="center" class="kwon-td1">${ bs.bsCategory }</td>
-							<c:url var="bsview" value="bsView.go">
+							<c:url var="bsview" value="bsView.ev">
 								<c:param name="bsNo" value="${ bs.bsNo }"></c:param>
 							</c:url>
 							<td align="center" class="kwon-td1"><a href="${bsview}">${ bs.bsTitle }</a></td>

@@ -8,18 +8,18 @@
 <title>Do it ABOUT</title>
 
 <style>
-	.blog_bg_about {
-		 background-image: url("resources/img/study3.jpg");
-    	 background-position: top;
-    	 background-repeat: no-repeat;
-    	 background-size: cover;
-	}
+   .blog_bg_about {
+       background-image: url("resources/img/study3.jpg");
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+   }
 </style>
 </head>
 <body>
-	<jsp:include page="../common/header.jsp"/>
-	
-	<!--::breadcrumb part start::-->
+   <jsp:include page="../common/header.jsp"/>
+   
+   <!--::breadcrumb part start::-->
     <section class="breadcrumb blog_bg_about">
       <div class="container">
          <div class="row">
@@ -34,8 +34,21 @@
       </div>
     </section>
     <!--::breadcrumb part start::-->
+       <section class="about_part section-padding">
+         <div class="container">
+         
+              <div class="row">
+               <div class="col-lg-12 col-md-6">
+                    <div>
+                     <img src="${contextPath}/resources/img/about_page.jpg" alt="">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+    
 
-	<jsp:include page="../common/footer.jsp"/>
+   <jsp:include page="../common/footer.jsp"/>
 
 </body>
 </html>

@@ -461,11 +461,13 @@
 	</select>
 	
 	<select id="viewPhoto" resultMap="galleryResultSet">
-		SELECT (select count(*) from gallery where g_status = 'Y') as COUNT, G_NO, G_SG_NO, G_TITLE, G_WRITER, G_WRITER_NO, G_CON, G_DATE, G_ORGINAL_FILENAME, G_RENAME_FILENAME, G_NUM
+		SELECT (select count(*) from gallery where g_status = 'Y' AND G_SG_NO = #{sgNo}) as COUNT, G_NO, G_SG_NO, G_TITLE, G_WRITER, G_WRITER_NO, G_CON, G_DATE, G_ORGINAL_FILENAME, G_RENAME_FILENAME, G_NUM
 		FROM gallery
 		WHERE g_no = (SELECT MAX(g_no)
-              		  FROM gallery)
+              		  FROM gallery
+              		  WHERE G_SG_NO = #{sgNo})
         AND G_STATUS = 'Y'
+        AND G_SG_NO = #{sgNo}
 	</select>
 	
 	<update id="gDelete" parameterType="_int">

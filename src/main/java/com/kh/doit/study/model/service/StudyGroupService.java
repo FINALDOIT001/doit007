@@ -297,7 +297,7 @@ public interface StudyGroupService {
 
 	Member memberHodu(int mno);
 
-	Gallery viewPhoto();
+	Gallery viewPhoto(int sgNo);
 
 	int gDelete(int gNum);
 
