@@ -192,32 +192,46 @@
 									<c:param name="hodu" value="${sg.sgDeposit}" />
 								</c:url> <c:url var="sgStart" value="sgStart.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
-								</c:url> <c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
+								</c:url> 
+								<c:url var="sgGroupOut" value="sgGroupOut.go">
+									<c:param name="mno" value="${loginUser.mno}" />
+									<c:param name="sgNo" value="${sg.sgNo}"/>
+								</c:url>
+								
+								<c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
 								
 								
-										<c:if test="${count > 0}">
+										<c:if test="${count > 0 && sg.sgConfirm eq 'Y'}">
 										
 										<button class="genric-btn info radius"
 												style="margin-bottom: 10px; width: 130px;"
 												disabled='disabled'> 참여 완료</button>
+										<%-- <c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}"> --%>
+										<button class="genric-btn danger radius" style="width: 130px;"
+											onclick="location.href='${sgGroupOut}'">스터디 탈퇴</button>
+										<%-- </c:if> --%>
 											
 										</c:if>
-										<c:if test="${count== 0}">
+										<c:if test="${count== 0 && sg.sgConfirm eq 'Y'}">
 											<button class="genric-btn info radius"
 												style="margin-bottom: 10px; width: 130px;"
 												<%-- onclick="location.href='${sgJoin}'" --%>
 												onclick="noHodu();">스터디 참여</button>
-												 
-											
+										</c:if>
+										<c:if test="${sg.sgConfirm eq 'N'}">
+											<button class="genric-btn info radius"
+												style="margin-bottom: 10px; width: 130px;"
+												<%-- onclick="location.href='${sgJoin}'" --%>
+												disabled='disabled'>모집 종료</button>
 										</c:if>
 										
 									
 								</c:if>
 										
 										
-								 <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+								 <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo && sg.sgConfirm eq 'Y'}">
 									<button class="genric-btn info radius"
-										style="margin-bottom: 10px; width: 130px;"
+										style="margin-bottom: 3px; width: 130px;"
 										onclick="location.href='${sgStart}'">스터디 시작</button>
 								</c:if> 
 
@@ -226,20 +240,14 @@
 									<c:param name="sgNo" value="${sg.sgNo}" />
 								</c:url> <c:url var="sgDelete" value="sgDelete.go">
 									<c:param name="sgNo" value="${sg.sgNo}" />
-								</c:url> <c:url var="sgGroupOut" value="sgGroupOut.go">
-									<c:param name="mno" value="${loginUser.mno}" />
-									<c:param name="sgNo" value="${sg.sgNo}"/>
-								</c:url> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
-									<button class="genric-btn danger radius" style="width: 130px;"
+								</c:url>  <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
+									<button class="genric-btn danger radius" style="margin-bottom: 3px; width: 130px;"
 										onclick="location.href='${sgUpview}'">스터디 수정</button>
 								</c:if> <c:if test="${sessionScope.loginUser.mno eq sg.sgWriterNo}">
 									<button class="genric-btn danger radius" style="width: 263px;"
 										onclick="location.href='${sgDelete}'">스터디 삭제</button>
-								</c:if> <c:if test="${sessionScope.loginUser.mno ne sg.sgWriterNo}">
-									<button class="genric-btn danger radius" style="width: 130px;"
-										onclick="location.href='${sgGroupOut}'">스터디 탈퇴</button>
-								</c:if>
-								
+								</c:if> 
+
 								<c:if test="${!empty sessionScope.loginUser}">
 								<div class="starRev"
 									style="width: 60px; display: inline; float: right;">
@@ -450,9 +458,10 @@
                                 <c:param name="sgNo" value="${sg.sgNo}" />
                                 <c:param name="mno" value="${loginUser.mno}" />
                             </c:url>
-                            <a class="btn_1" style="float: right;"
-                                href="${galleryInsertFrom}">사진 추가</a>
-
+                            <c:if test="${loginUser.mno ne NULL}">
+	                            <a class="btn_1" style="float: right;"
+	                                href="${galleryInsertFrom}">사진 추가</a>
+							</c:if>
                             <div class="about_part_counter">
                                 <div class="single_counter">
                                     <p style="font-size: 30px; width: 390px;">
