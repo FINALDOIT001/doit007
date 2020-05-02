@@ -1,6 +1,1 @@
-# doit007
-
-import -> git -> clone
-
-general project로 만든 뒤
-
+파이널프로젝트 수고하셨습니다!!!  -Kwon
