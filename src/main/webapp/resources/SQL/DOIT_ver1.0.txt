@@ -1,11 +1,11 @@
- __  __     ____       ____                         _            __     
-/\ \/\ \   /\  _`\    /\  _`\                     /' \         /'__`\   
-\ \ \ \ \  \ \ \L\_\  \ \ \L\ \                  /\_, \       /\ \/\ \  
- \ \ \ \ \  \ \  _\L   \ \ ,  /                  \/_/\ \      \ \ \ \ \ 
-  \ \ \_/ \  \ \ \L\ \  \ \ \\ \   __               \ \ \  __  \ \ \_\ \
-   \ `\___/   \ \____/   \ \_\ \_\/\_\               \ \_\/\_\  \ \____/
-    `\/__/     \/___/     \/_/\/ /\/_/                \/_/\/_/   \/___/ 
-                                                                        
+--  __  __     ____       ____                         _            __     
+-- /\ \/\ \   /\  _`\    /\  _`\                     /' \         /'__`\   
+-- \ \ \ \ \  \ \ \L\_\  \ \ \L\ \                  /\_, \       /\ \/\ \  
+--  \ \ \ \ \  \ \  _\L   \ \ ,  /                  \/_/\ \      \ \ \ \ \ 
+--   \ \ \_/ \  \ \ \L\ \  \ \ \\ \   __               \ \ \  __  \ \ \_\ \
+--    \ `\___/   \ \____/   \ \_\ \_\/\_\               \ \_\/\_\  \ \____/
+--     `\/__/     \/___/     \/_/\/ /\/_/                \/_/\/_/   \/___/ 
+--                                                                         
                                                                         
                                                                         
 
@@ -60,6 +60,7 @@ DROP SEQUENCE SEQ_QNO;
 DROP SEQUENCE SEQ_SGNO;
 DROP SEQUENCE SEQ_SSNO;
 DROP SEQUENCE SEQ_RPNO;
+
 
 
 --------------------------------------------------------
@@ -343,7 +344,10 @@ DROP SEQUENCE SEQ_RPNO;
 	"H_MID" VARCHAR2(100 BYTE), 
 	"HODU" NUMBER DEFAULT 0, 
 	"H_PRICE" NUMBER, 
-	"H_DATE" DATE
+	"H_DATE" DATE, 
+	"H_REFUND_DATE" DATE, 
+	"H_REFUND_YN" VARCHAR2(3 BYTE) DEFAULT 'N', 
+	"H_DISCRIPTION" VARCHAR2(200 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -356,6 +360,28 @@ DROP SEQUENCE SEQ_RPNO;
    COMMENT ON COLUMN "DOIT"."HODU_TABLE"."HODU" IS '호두갯수';
    COMMENT ON COLUMN "DOIT"."HODU_TABLE"."H_PRICE" IS '호두가격';
    COMMENT ON COLUMN "DOIT"."HODU_TABLE"."H_DATE" IS '날짜';
+   COMMENT ON COLUMN "DOIT"."HODU_TABLE"."H_REFUND_DATE" IS '환불 날짜';
+   COMMENT ON COLUMN "DOIT"."HODU_TABLE"."H_REFUND_YN" IS '환불여부';
+   COMMENT ON COLUMN "DOIT"."HODU_TABLE"."H_DISCRIPTION" IS '호두 discription';
+--------------------------------------------------------
+--  DDL for Index SYS_C007785
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "DOIT"."SYS_C007785" ON "DOIT"."HODU_TABLE" ("H_NO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  Constraints for Table HODU_TABLE
+--------------------------------------------------------
+
+  ALTER TABLE "DOIT"."HODU_TABLE" ADD PRIMARY KEY ("H_NO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "DOIT"."HODU_TABLE" ADD CHECK (H_REFUND_YN IN('Y','N')) ENABLE;
 --------------------------------------------------------
 --  DDL for Table MEMBER
 --------------------------------------------------------
@@ -1051,7 +1077,9 @@ CREATE TABLE STUDY_ETCFILE(
 
 -- EVENT 조회수 추가 Kwon 2020.04.25
 ALTER TABLE EVENT ADD(E_COUNT NUMBER);
-'
+
+DROP TABLE STUDY_CHECK;
+
 -- 출석 디비 추가 정호씨꺼 04.27
   CREATE TABLE "DOIT"."STUDY_CHECK" 
    (   "SC_NO" NUMBER, 
@@ -1082,7 +1110,6 @@ ALTER TABLE EVENT ADD(E_COUNT NUMBER);
 
 
 
-=======
 ------------------------------------------------
 ------------- 여기까지 추가해주세요 END --------------
 ------------------------------------------------
